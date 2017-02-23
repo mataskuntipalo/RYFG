@@ -1,0 +1,124 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.finalproject.reachyourfitnessgoals.fragment.fragment_home">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.5"
+        android:background="@drawable/background">
+
+        <TextView
+            android:id="@+id/num_txt"
+            android:layout_width="150dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginBottom="-40dp"
+            android:background="@drawable/text_cicle"
+            android:gravity="center"
+            android:text="19%"
+            android:textColor="@color/colorBlack"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            android:textSize="24dp" />
+
+    </RelativeLayout>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_weight="0.25"
+        android:padding="10dp"
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
+            android:id="@+id/calendar"
+            android:background="@drawable/shadow_layout">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/ic_program"
+                android:layout_centerInParent="true"
+                android:id="@+id/iconProgram"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:textSize="@dimen/default_text"
+                android:text="โปรแกรออกกำลังกาย"
+                android:layout_marginTop="10dp"
+                android:layout_below="@id/iconProgram"/>
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
+            android:id="@+id/VDO"
+            android:background="@drawable/shadow_layout">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/ic_exercise"
+                android:layout_centerInParent="true"
+                android:id="@+id/iconExercise"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:textSize="@dimen/default_text"
+                android:text="ท่าออกกำลังงกาย"
+                android:layout_marginTop="10dp"
+                android:layout_below="@id/iconExercise"/>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_weight="0.25"
+        android:padding="10dp"
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
+            android:background="@drawable/shadow_layout">
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
+            android:background="@drawable/shadow_layout">
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

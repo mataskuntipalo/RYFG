@@ -1,0 +1,62 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/colorDefault_Background"
+    tools:context="com.finalproject.reachyourfitnessgoals.fragment.fragment_goal">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="นํ้าหนักที่ต้องการลด"/>
+
+        <EditText
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            android:id="@+id/weightGoal_EditText_goal"/>
+
+    </LinearLayout>
+
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/group_RadioButton_goal">
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0.2"
+            android:checked="true"
+            android:id="@+id/two_RadioButton_goal"/>
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0.5"
+            android:id="@+id/five_RadioButton_goal"/>
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0.8"
+            android:id="@+id/seven_RadioButton_goal"/>
+
+    </RadioGroup>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:text="เสร็จสิ้น"
+        android:id="@+id/confirm_TextView_goal"/>
+
+</LinearLayout>

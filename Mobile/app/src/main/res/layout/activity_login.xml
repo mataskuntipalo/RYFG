@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_login"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:ignore="MissingPrefix"
+    android:background="@color/colorWhite"
+    tools:context="com.finalproject.reachyourfitnessgoals.activity.LoginActivity">
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/picback"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/logo">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_logo"
+            android:layout_centerHorizontal="true"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:id="@+id/pic_logo"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorBlack"
+            android:layout_marginTop="20dp"
+            android:layout_below="@+id/pic_logo"
+            android:padding="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:textColor="@color/colorWhite"
+                android:textSize="24dp"
+                android:text="Reach Your Fitness Goals"
+
+                />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/logo"
+        android:id="@+id/login_form">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_marginBottom="@dimen/bottom_margin"
+        android:padding="10dp"
+        android:background="@drawable/edittext_conner"
+        android:visibility="gone"
+        tools:visibility="visible"
+        android:id="@+id/content1"
+        >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_username"
+            android:layout_marginRight="10dp"
+            android:id="@+id/iconUser"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:hint="อีเมล"
+            android:textSize="@dimen/default_text"
+            android:layout_toRightOf="@+id/iconUser"
+            android:id="@+id/editEmail"/>
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_marginBottom="@dimen/bottom_margin"
+        android:padding="10dp"
+        android:layout_below="@+id/content1"
+        android:background="@drawable/edittext_conner"
+        android:visibility="gone"
+        tools:visibility="visible"
+        android:id="@+id/content2"
+        >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_pass"
+            android:layout_marginRight="10dp"
+            android:id="@+id/iconPass"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:hint="รหัสผ่าน"
+            android:textSize="@dimen/default_text"
+            android:inputType="textPassword"
+            android:layout_toRightOf="@+id/iconPass"
+            android:id="@+id/editPass"/>
+    </RelativeLayout>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        android:textSize="@dimen/default_text"
+        android:text="เข้าสู่ระบบ"
+        android:textColor="@color/colorWhite"
+        android:background="@color/colorBlack"
+        android:layout_centerHorizontal="true"
+        android:visibility="gone"
+        tools:visibility="visible"
+        android:id="@+id/loginButton"
+        android:layout_below="@id/content2"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ลืมรหัสผ่าน?"
+        android:textSize="16dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/loginButton"
+        android:layout_marginTop="10dp"
+        android:visibility="gone"
+        tools:visibility="visible"
+        android:id="@+id/forgetPass"/>
+    </RelativeLayout>
+
+
+    <ProgressBar
+        android:id="@+id/login_progress"
+        style="@android:style/Widget.Holo.ProgressBar.Large"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:visibility="visible"
+        tools:visibility="visible"/>
+
+</RelativeLayout>
