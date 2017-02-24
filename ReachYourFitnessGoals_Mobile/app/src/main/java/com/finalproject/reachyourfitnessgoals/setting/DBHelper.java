@@ -10,43 +10,45 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DBHelper extends SQLiteOpenHelper {
 
-    public static final String DBTABLE_PERSONAL = "PERSONAL";
+    private static final String DB_NAME = "ReachYourFitnessGoals";
+    private static final int DB_VERSION = 1;
+    private static final String TABLE_PERSONAL = "CREATE TABLE PERSONAL (user_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            "f_name TEXT NOT NULL, " +
+            "l_name TEXT NOT NULL, " +
+            "age INTEGER NOT NULL, " +
+            "gender TEXT NOT NULL, " +
+            "birthday TEXT NOT NULL, " +
+            "weight INTEGER NOT NULL," +
+            "height  INTEGER NOT NULL," +
+            "pressure_min  INTEGER," +
+            "pressure_max INTEGER);";
+
+    private static final String TABLE_PROGRAM = "CREATE TABLE PROGRAM (program_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            "f_name TEXT NOT NULL, " +
+            "l_name TEXT NOT NULL, " +
+            "age INTEGER NOT NULL, " +
+            "gender TEXT NOT NULL, " +
+            "birthday TEXT NOT NULL, " +
+            "weight INTEGER NOT NULL," +
+            "height  INTEGER NOT NULL," +
+            "pressure_min  INTEGER," +
+            "pressure_max INTEGER);";
 
 
-    public static final String USER_ID = "user_id";
-    public static final String FIRST_NAME = "f_name";
-    public static final String LAST_NAME= "l_name";
-    public static final String AGE = "age";
-    public static final String GENDER = "gender";
-    public static final String BIRTHDAY = "birthday";
-    public static final String WEIGHT= "weight";
-    public static final String HEIGHT = "height";
-    public static final String PREESURE_MIN= "pressure_min";
-    public static final String PREESURE_MAX = "pressure_max";
+
 
     public DBHelper(Context context) {
-        super(context, "ReachYourFitnessGoals.db", null, 1);
+        super(context, DB_NAME, null, DB_VERSION);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-
-        db.execSQL("CREATE TABLE " + DBTABLE_PERSONAL +"(" + USER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                FIRST_NAME + " TEXT, " +
-                LAST_NAME + " TEXT, " +
-                AGE + " INTEGER, " +
-                GENDER + " TEXT, " +
-                BIRTHDAY + " TEXT, " +
-                WEIGHT + " INTEGER," +
-                HEIGHT + " INTEGER," +
-                PREESURE_MIN + " INTEGER," +
-                PREESURE_MAX + " INTEGER);");
-
+        db.execSQL(TABLE_PERSONAL);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
-        db.execSQL("DROP TABLE IF EXISTS " + DBTABLE_PERSONAL);
+        db.execSQL("DROP TABLE IF EXISTS PERSONAL");
         onCreate(db);
     }
 }

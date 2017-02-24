@@ -83,17 +83,5 @@ public class fragment_calendar extends Fragment {
         return rootview;
     }
 
-    private HashSet<CalendarDay> getCalendarDaysSet(Calendar cal1, Calendar cal2) {
-        HashSet<CalendarDay> setDays = new HashSet<>();
-        while (cal1.getTime().before(cal2.getTime())) {
-            CalendarDay calDay = CalendarDay.from(cal1);
-            setDays.add(calDay);
-            cal1.add(Calendar.DATE, 1);
-
-        }
-
-        return setDays;
-    }
-
 
 }
