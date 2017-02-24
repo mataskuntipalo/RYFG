@@ -1,0 +1,199 @@
+body{
+	background: url(a7.png) no-repeat center center fixed; 	 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  font-family:'Thai Sans Lite', sans-serif;
+
+}
+
+.head {
+    width: 100%;
+    height: 85px;
+    background: #2E1414;
+	font-family:'destain', sans-serif;
+}
+
+
+a{color:#FFF;text-decoration: none;font-size:18px;}
+a:hover{color:#aaa; }
+.clear-fix{clear:both;}
+div.logo{text-align: center; margin: 20px 20px 30px 20px; fill: #566375;}
+div.logo svg{
+	width:180px;
+	height:100px;
+}
+.logo-active{fill: #44aacc !important;}
+#formWrapper{
+	background: rgba(0,0,0,.09); 
+	width:100%; 
+	height:100%; 
+	position: fixed; 
+	top: 13px;
+	left:0;
+	transition:all .3s ease;}
+.darken-bg{background: rgba(0,0,0,.5) !important; transition:all .3s ease;}
+.center{
+	text-align:center;
+	}
+div#form{
+	position: absolute;
+	width:360px;
+	height:320px;
+	height:auto;
+	background-color: rgba(255, 255, 255, 0.1);
+	margin:auto;
+	border-radius: 45px;
+	padding:20px;
+	left:50%;
+	top:55%;
+	margin-left:-180px;
+	margin-top:-200px;
+}
+div.form-item{position: relative; display: block; margin-bottom: 20px;}
+ input{transition: all .2s ease;}
+ input.form-style{
+	color:#8a8a8a;
+	display: block;
+	width: 90%;
+	height: 44px;
+	padding: 5px 5%;
+	border:1px solid #ccc;
+	-moz-border-radius: 27px;
+	/*-webkit-border-radius: 27px;*/
+	border-radius: 20px;
+	-moz-background-clip: padding;
+	-webkit-background-clip: padding-box;
+	background-clip: padding-box;
+	background-color: #fff;
+	font-family:'Thai Sans Lite', sans-serif;
+	font-size: 105%;
+	letter-spacing: .8px;
+}
+div.form-item .form-style:focus{outline: none; border:1px solid #ccc color:#58bff6; }
+div.form-item p.formLabel {
+	position: absolute;padding-left: 15px;height: 32px;
+	left:26px;
+	top:-6px;
+	transition:all .4s ease;
+	color:#bbb;    font-size: 19px;width:83px;}
+.formTop{top:-35px !important; left:26px; background-color: rgba(81, 67, 67, 0.99); padding:0 5px; font-size: 14px; color:#FFF !important;border-radius: 40px;}
+.formStatus{color:#8a8a8a !important;}
+input[type="submit"].login{
+	width: 50%;
+	height: 40px;
+	margin: 0 auto;
+    display: block;
+	-moz-border-radius: 19px;
+	-webkit-border-radius: 19px;
+	border-radius: 19px;
+	-moz-background-clip: padding;
+	-webkit-background-clip: padding-box;
+	background-clip: padding-box;
+	background-color: #ff700a;
+	border:1px solid #ccc;
+	border:none;
+	color: #fff;
+	font-weight: bold;
+	font-size: 20px;
+	font-family:'Thai Sans Lite', sans-serif;
+}
+input[type="submit"].login:hover{
+	background-color: #ff3500;
+    /* border: 1px solid #FFF; */
+    color: #FFF;; cursor:pointer;}
+input[type="submit"].login:focus{outline: none;}
+ .tdAlignCenter {
+               text-align:center;
+        }
+
+
+
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+    position: relative;
+    background-color: #fefefe;
+    margin: auto;
+    padding: 0;
+    border: 1px solid #888;
+    width: 80%;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.4s;
+    animation-name: animatetop;
+    animation-duration: 0.4s
+}
+
+/* Add Animation */
+@-webkit-keyframes animatetop {
+    from {top:-300px; opacity:0} 
+    to {top:0; opacity:1}
+}
+
+@keyframes animatetop {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+}
+
+/* The Close Button */
+.close {
+    color: white;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-header {
+    padding: 2px 16px;
+    background-color: #5cb85c;
+    color: white;
+}
+
+.modal-body {padding: 2px 16px;}
+
+.modal-footer {
+    padding: 2px 16px;
+    background-color: #5cb85c;
+    color: white;
+}
+
+input[type="submit"].forget{
+	width: 50%;
+	height: 40px;
+	margin: 0 auto;
+    display: block;
+	-moz-border-radius: 19px;
+	-webkit-border-radius: 19px;
+	border-radius: 19px;
+	-moz-background-clip: padding;
+	-webkit-background-clip: padding-box;
+	background-clip: padding-box;
+	background-color: #000;
+	border:1px solid #ccc;
+	border:none;
+	color: #fff;
+	font-size: 20px;
+	font-family:'Thai Sans Lite', sans-serif;
+}
