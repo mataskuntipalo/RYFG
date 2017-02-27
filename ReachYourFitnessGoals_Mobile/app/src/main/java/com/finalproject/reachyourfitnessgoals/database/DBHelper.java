@@ -1,4 +1,4 @@
-package com.finalproject.reachyourfitnessgoals.setting;
+package com.finalproject.reachyourfitnessgoals.database;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -24,15 +24,14 @@ public class DBHelper extends SQLiteOpenHelper {
             "pressure_max INTEGER);";
 
     private static final String TABLE_PROGRAM = "CREATE TABLE PROGRAM (program_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-            "f_name TEXT NOT NULL, " +
-            "l_name TEXT NOT NULL, " +
-            "age INTEGER NOT NULL, " +
-            "gender TEXT NOT NULL, " +
-            "birthday TEXT NOT NULL, " +
-            "weight INTEGER NOT NULL," +
-            "height  INTEGER NOT NULL," +
-            "pressure_min  INTEGER," +
-            "pressure_max INTEGER);";
+            "weightGoal INTEGER NOT NULL, " +
+            "totalDuration INTEGER NOT NULL, " +
+            "year_date_begin INTEGER NOT NULL, " +
+            "month_date_begin INTEGER NOT NULL, " +
+            "day_date_begin INTEGER NOT NULL, " +
+            "year_date_end INTEGER NOT NULL, " +
+            "month_date_end INTEGER NOT NULL, " +
+            "day_date_end INTEGER NOT NULL);";
 
 
 
@@ -44,11 +43,13 @@ public class DBHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(TABLE_PERSONAL);
+        db.execSQL(TABLE_PROGRAM);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
         db.execSQL("DROP TABLE IF EXISTS PERSONAL");
+        db.execSQL("DROP TABLE IF EXISTS PROGRAM");
         onCreate(db);
     }
 }

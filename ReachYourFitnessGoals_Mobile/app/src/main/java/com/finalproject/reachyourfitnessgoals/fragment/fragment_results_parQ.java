@@ -1,6 +1,7 @@
 package com.finalproject.reachyourfitnessgoals.fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -10,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.finalproject.reachyourfitnessgoals.R;
+import com.finalproject.reachyourfitnessgoals.activity.GoalActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -38,14 +40,8 @@ public class fragment_results_parQ extends Fragment {
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                fragment_goal goal = fragment_goal.newInstance();
-                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                fragmentManager
-                        .beginTransaction()
-//                        .setCustomAnimations(R.anim.slide_up,R.anim.slide_down,R.anim.slide_up,R.anim.slide_down)
-                        .replace(R.id.activity_login, goal, "fragment_goal")
-                        .addToBackStack("fragment_goal")
-                        .commit();
+                Intent intent = new Intent(getActivity(), GoalActivity.class);
+                startActivity(intent);
             }
         });
 
