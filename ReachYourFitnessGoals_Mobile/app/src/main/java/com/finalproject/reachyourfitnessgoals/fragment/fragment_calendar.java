@@ -39,8 +39,6 @@ public class fragment_calendar extends Fragment {
     private MaterialCalendarView MCV;
 
 
-
-
     public fragment_calendar() {
         // Required empty public constructor
     }
@@ -56,6 +54,7 @@ public class fragment_calendar extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootview = inflater.inflate(R.layout.fragment_calendar, container, false);
+
 
         MCV = (MaterialCalendarView) rootview.findViewById(R.id.datePicker_DatePicker_calendar);
 
@@ -82,6 +81,7 @@ public class fragment_calendar extends Fragment {
 
         return rootview;
     }
+
 
 
 }

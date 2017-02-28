@@ -2,6 +2,7 @@ package com.finalproject.reachyourfitnessgoals.database;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.finalproject.reachyourfitnessgoals.models.GoalData;
@@ -51,5 +52,22 @@ public class handleTABLE_PROGRAM {
             values.put(COLUMN_DAY_END, data.getDay_date_end());
 
             writeSQLite.insert(TABLE_PROGRAM, null, values);
+        }
+
+
+        public GoalData getDateToCalendar(){
+            GoalData data = new GoalData();
+            Cursor cursor = readSQLite.rawQuery("SELECT * FROM" + TABLE_PROGRAM ,null);
+            cursor.moveToLast();
+
+            data.setWeightGoal(cursor.getFloat(1));
+            data.setTotalDuration(cursor.getInt(2));
+            data.setYear_date_begin(cursor.getInt(3));
+            data.setMonth_date_begin(cursor.getInt(4));
+            data.setYear_date_begin(cursor.getInt(5));
+            data.setYear_date_end(cursor.getInt(6));
+            data.setMonth_date_end(cursor.getInt(7));
+            data.setYear_date_end(cursor.getInt(8));
+            return data;
         }
     }
