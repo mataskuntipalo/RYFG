@@ -1,0 +1,55 @@
+package com.finalproject.reachyourfitnessgoals.adapter;
+
+
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+
+import com.finalproject.reachyourfitnessgoals.fragment.fragment_calendar;
+import com.finalproject.reachyourfitnessgoals.fragment.fragment_home;
+import com.finalproject.reachyourfitnessgoals.fragment.fragment_list;
+
+/**
+ * Created by Papang on 1/3/2560.
+ */
+
+public class PagerAdapter extends FragmentPagerAdapter {
+
+    public final int PAGE_NUM = 3;
+
+    public PagerAdapter(FragmentManager fm) {
+        super(fm);
+    }
+
+    @Override
+    public android.support.v4.app.Fragment getItem(int position) {
+//        if(position == 0)
+//            return new fragment_home();
+//        else if(position == 1)
+//            return new fragment_calendar();
+//        else if(position == 2)
+//            return new fragment_list();
+//        return null;
+        switch (position) {
+            case 0: // Fragment # 0 - This will show FirstFragment
+                return new fragment_home();
+            case 1: // Fragment # 0 - This will show FirstFragment different title
+                return new fragment_calendar();
+            case 2: // Fragment # 1 - This will show SecondFragment
+                return new fragment_list();
+            default:
+                return null;
+        }
+    }
+
+    @Override
+    public int getCount() {
+        return PAGE_NUM;
+    }
+
+    @Override
+    public CharSequence getPageTitle(int position) {
+        return "PAGE#" + (position+1);
+    }
+
+
+}

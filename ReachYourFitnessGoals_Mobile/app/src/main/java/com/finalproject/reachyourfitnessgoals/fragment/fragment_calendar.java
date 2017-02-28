@@ -14,6 +14,8 @@ import android.view.ViewGroup;
 import android.widget.DatePicker;
 
 import com.finalproject.reachyourfitnessgoals.R;
+import com.finalproject.reachyourfitnessgoals.database.handleTABLE_PROGRAM;
+import com.finalproject.reachyourfitnessgoals.models.GoalData;
 import com.finalproject.reachyourfitnessgoals.setting.EventDecorator;
 
 
@@ -37,7 +39,8 @@ import static android.content.ContentValues.TAG;
 public class fragment_calendar extends Fragment {
 
     private MaterialCalendarView MCV;
-
+    private handleTABLE_PROGRAM handleTableProgram;
+    GoalData goalData;
 
     public fragment_calendar() {
         // Required empty public constructor
@@ -55,20 +58,25 @@ public class fragment_calendar extends Fragment {
         // Inflate the layout for this fragment
         View rootview = inflater.inflate(R.layout.fragment_calendar, container, false);
 
-
+        handleTableProgram = new handleTABLE_PROGRAM(getActivity());
+        goalData = handleTableProgram.getDateToCalendar();
         MCV = (MaterialCalendarView) rootview.findViewById(R.id.datePicker_DatePicker_calendar);
+
+//        MCV.state().edit()
+//                .setFirstDayOfWeek(Calendar.MONDAY)
+//                .setMinimumDate(CalendarDay.from(goalData.getYear_date_begin(), goalData.getMonth_date_begin(), goalData.getDay_date_begin()))
+//                .setMaximumDate(CalendarDay.from(goalData.getYear_date_end()+100, 12, 31))
+//                .setCalendarDisplayMode(CalendarMode.MONTHS)
+//                .commit();
 
         MCV.state().edit()
                 .setFirstDayOfWeek(Calendar.MONDAY)
-                .setMinimumDate(CalendarDay.from(2016, 4, 3))
+                .setMinimumDate(CalendarDay.from(2017, 3, 1))
                 .setMaximumDate(CalendarDay.from(2017, 12, 31))
                 .setCalendarDisplayMode(CalendarMode.MONTHS)
                 .commit();
 
-        HashSet<CalendarDay> type2 = new HashSet<CalendarDay>();
-        type2.add(CalendarDay.today());
-        int myColor = R.color.colorRed;
-        MCV.addDecorator(new EventDecorator(myColor, type2));
+
 
         MCV.setOnDateChangedListener(new OnDateSelectedListener() {
             @Override
@@ -80,6 +88,13 @@ public class fragment_calendar extends Fragment {
 
 
         return rootview;
+    }
+
+    public void addEvent(){
+        HashSet<CalendarDay> event = new HashSet<CalendarDay>();
+        event.add(CalendarDay.today());
+        int myColor = R.color.colorRed;
+        MCV.addDecorator(new EventDecorator(myColor, event));
     }
 
 

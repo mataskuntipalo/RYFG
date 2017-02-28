@@ -57,7 +57,7 @@ public class handleTABLE_PROGRAM {
 
         public GoalData getDateToCalendar(){
             GoalData data = new GoalData();
-            Cursor cursor = readSQLite.rawQuery("SELECT * FROM" + TABLE_PROGRAM ,null);
+            Cursor cursor = readSQLite.rawQuery("SELECT * FROM " + TABLE_PROGRAM ,null);
             cursor.moveToLast();
 
             data.setWeightGoal(cursor.getFloat(1));

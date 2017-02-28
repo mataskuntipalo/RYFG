@@ -25,14 +25,14 @@ public class GoalActivity extends Activity {
     TextView confirm;
     GoalData goalData;
     EditText weightGoal;
-    private handleTABLE_PROGRAM tableProgram;
+    private handleTABLE_PROGRAM handleTableProgram;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_goal);
 
-        tableProgram = new handleTABLE_PROGRAM(this);
+        handleTableProgram = new handleTABLE_PROGRAM(this);
         goalData = new GoalData();
         confirm = (TextView) findViewById(R.id.confirm_TextView_goal);
         groupRadio = (RadioGroup)findViewById(R.id.group_RadioButton_goal);
@@ -57,7 +57,7 @@ public class GoalActivity extends Activity {
                 goalData.setWeightGoal(Float.parseFloat(weightGoal.getText().toString()));
                 calDurationOfProgramExe(goalData);
                 calDateOfProgram();
-                tableProgram.addProgram(goalData);
+                handleTableProgram.addProgram(goalData);
             }
         });
     }
