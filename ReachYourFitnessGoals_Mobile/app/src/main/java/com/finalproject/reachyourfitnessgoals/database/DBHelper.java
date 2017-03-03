@@ -18,9 +18,9 @@ public class DBHelper extends SQLiteOpenHelper {
             "age INTEGER NOT NULL, " +
             "gender TEXT NOT NULL, " +
             "birthday TEXT NOT NULL, " +
-            "weight INTEGER NOT NULL," +
-            "height  INTEGER NOT NULL," +
-            "pressure_min  INTEGER," +
+            "weight INTEGER NOT NULL, " +
+            "height  INTEGER NOT NULL, " +
+            "pressure_min  INTEGER, " +
             "pressure_max INTEGER);";
 
     private static final String TABLE_PROGRAM = "CREATE TABLE PROGRAM (program_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -33,7 +33,18 @@ public class DBHelper extends SQLiteOpenHelper {
             "month_date_end INTEGER NOT NULL, " +
             "day_date_end INTEGER NOT NULL);";
 
+    private static final String TABLE_VDO = "CREATE TABLE VDO (vdo_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            "name TEXT NOT NULL, " +
+            "type TEXT NOT NULL, " +
+            "calorie INTEGER NOT NULL);";
 
+    private static final String TABLE_EXERCISE = "CREATE TABLE EXERCISE  (exercise_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            "day INTEGER NOT NULL, " +
+            "month INTEGER NOT NULL, " +
+            "year INTEGER NOT NULL, " +
+            "exercise_id TEXT, " +
+            "calorie INTEGER, " +
+            "time REAL);";
 
 
     public DBHelper(Context context) {

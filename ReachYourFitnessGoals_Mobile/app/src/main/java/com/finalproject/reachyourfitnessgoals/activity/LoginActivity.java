@@ -68,6 +68,7 @@ public class LoginActivity extends AppCompatActivity {
                 fragment_signUp signUp = new fragment_signUp();
                 FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
                 transaction.replace(R.id.activity_login, signUp);
+                transaction.addToBackStack("fragment_signUp");
                 transaction.commit();
             }
         });

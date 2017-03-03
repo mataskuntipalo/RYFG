@@ -4,6 +4,7 @@ package com.finalproject.reachyourfitnessgoals.activity;
 
 import android.app.Activity;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -29,6 +30,7 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
 
     ViewPager pager;
     PagerAdapter adapter;
+    String PageName;
 
 
     @Override
@@ -46,11 +48,19 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
         pager.setAdapter(adapter);
 
         for (int i = 0; i < adapter.PAGE_NUM; i++) {
+            if(i == 0){
+                PageName = "หน้าหลัก";
+            }else if(i == 1){
+                PageName = "การออกกำลังกาย";
+            }else{
+                PageName = "ท่าออกกำลังกาย";
+            }
             actionBar.addTab(actionBar.newTab()
-                    .setText("Tab #" + i)
+                    .setText(PageName)
                     .setTabListener(this));
         }
 
+        // set tab bar change when swipe
         pager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -71,6 +81,8 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
 
     }
 
+
+    // set page change when swipe
     @Override
     public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
         pager.setCurrentItem(tab.getPosition());

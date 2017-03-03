@@ -22,19 +22,12 @@ public class PagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public android.support.v4.app.Fragment getItem(int position) {
-//        if(position == 0)
-//            return new fragment_home();
-//        else if(position == 1)
-//            return new fragment_calendar();
-//        else if(position == 2)
-//            return new fragment_list();
-//        return null;
         switch (position) {
-            case 0: // Fragment # 0 - This will show FirstFragment
+            case 0:
                 return new fragment_home();
-            case 1: // Fragment # 0 - This will show FirstFragment different title
+            case 1:
                 return new fragment_calendar();
-            case 2: // Fragment # 1 - This will show SecondFragment
+            case 2:
                 return new fragment_list();
             default:
                 return null;
@@ -46,10 +39,7 @@ public class PagerAdapter extends FragmentPagerAdapter {
         return PAGE_NUM;
     }
 
-    @Override
-    public CharSequence getPageTitle(int position) {
-        return "PAGE#" + (position+1);
-    }
+
 
 
 }
