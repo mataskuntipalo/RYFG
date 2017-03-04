@@ -9,7 +9,7 @@
     <!-- TODO: Update blank fragment layout -->
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_weight="0.5">
 
         <com.prolificinteractive.materialcalendarview.MaterialCalendarView
@@ -17,6 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:mcv_selectionColor="#00F"
+            app:mcv_tileSize="match_parent"
              />
 
     </RelativeLayout>
@@ -38,7 +39,6 @@
         </ScrollView>
 
     </fragment>
-
 
 
 </LinearLayout>
