@@ -11,9 +11,15 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.DatePicker;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.ScrollView;
+import android.widget.TableLayout;
 
 import com.finalproject.reachyourfitnessgoals.R;
 import com.finalproject.reachyourfitnessgoals.database.handleTABLE_PROGRAM;
@@ -43,6 +49,10 @@ public class fragment_calendar extends Fragment {
     private MaterialCalendarView MCV;
     private handleTABLE_PROGRAM handleTableProgram;
     GoalData goalData;
+    ScrollView scrollView;
+    RelativeLayout layout;
+
+
 
     public fragment_calendar() {
         // Required empty public constructor
@@ -59,7 +69,6 @@ public class fragment_calendar extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootview = inflater.inflate(R.layout.fragment_calendar, container, false);
-
 
 
 
@@ -90,6 +99,9 @@ public class fragment_calendar extends Fragment {
             }
         });
 
+        layout = (RelativeLayout)  rootview.findViewById(R.id.layoutCalendar_RelativeLayout_calendar);
+        scrollView = (ScrollView) rootview.findViewById(R.id.SV_ScrollView_calendar);
+        
 
 
         return rootview;
@@ -101,7 +113,5 @@ public class fragment_calendar extends Fragment {
         int myColor = R.color.colorRed;
         MCV.addDecorator(new EventDecorator(myColor, event));
     }
-
-
 
 }
