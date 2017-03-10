@@ -75,6 +75,8 @@ public class fragment_calendar extends Fragment {
         handleTableProgram = new handleTABLE_PROGRAM(getActivity());
         goalData = handleTableProgram.getDateToCalendar();
         MCV = (MaterialCalendarView) rootview.findViewById(R.id.datePicker_DatePicker_calendar);
+        layout = (RelativeLayout)  rootview.findViewById(R.id.layoutCalendar_RelativeLayout_calendar);
+        scrollView = (ScrollView) rootview.findViewById(R.id.SV_ScrollView_calendar);
 
 //        MCV.state().edit()
 //                .setFirstDayOfWeek(Calendar.MONDAY)
@@ -98,10 +100,6 @@ public class fragment_calendar extends Fragment {
 
             }
         });
-
-        layout = (RelativeLayout)  rootview.findViewById(R.id.layoutCalendar_RelativeLayout_calendar);
-        scrollView = (ScrollView) rootview.findViewById(R.id.SV_ScrollView_calendar);
-        
 
 
         return rootview;
