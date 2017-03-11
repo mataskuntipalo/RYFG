@@ -51,7 +51,8 @@
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/default_text"
                 android:layout_gravity="center"
-                android:text="เพิ่มวันออกกำลังกายประจำสัปดาห์"/>
+                android:text="เพิ่มวันออกกำลังกายประจำสัปดาห์"
+                android:id="@+id/setExd_button_home"/>
 
     </LinearLayout>
 

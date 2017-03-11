@@ -95,8 +95,26 @@ public class fragment_home extends Fragment {
         });
 
 
+        Button setExe = (Button)rootview.findViewById(R.id.setExd_button_home);
+        setExe.setOnClickListener(buttonSetExe);
+
 
         return rootview;
     }
+
+    private View.OnClickListener buttonSetExe = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            fragment_setExercise_inWeek setExe = fragment_setExercise_inWeek.newInstance();
+            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+            fragmentManager
+                    .beginTransaction()
+//                        .setCustomAnimations(R.anim.slide_up,R.anim.slide_down,R.anim.slide_up,R.anim.slide_down)
+                    .replace(R.id.activity_main, setExe, "fragment_setExercise_inWeek")
+                    .addToBackStack("fragment_setExercise_inWeek")
+                    .commit();
+        }
+    };
+
 
 }
