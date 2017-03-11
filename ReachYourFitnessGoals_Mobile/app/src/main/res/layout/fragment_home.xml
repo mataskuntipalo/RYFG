@@ -44,7 +44,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:textSize="@dimen/topic_text"
-                android:text="เพิ่มวันออกกำลังกายประจำสัปดาห์"/>
+                android:text="การออกกำลังกายประจำสัปดาห์"/>
 
             <Button
                 android:layout_width="wrap_content"
