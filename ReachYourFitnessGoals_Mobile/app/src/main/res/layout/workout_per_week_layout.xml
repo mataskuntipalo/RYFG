@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/default_padding"
+        android:background="@drawable/border_bottom"
+        android:id="@+id/day_3">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="@dimen/default_text"
+            android:text="3 วัน/สัปดาห์"
+            android:textColor="@color/colorBlack"
+            android:id="@+id/day"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/default_padding"
+        android:background="@drawable/border_bottom"
+        android:id="@+id/day_4">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="@dimen/default_text"
+            android:text="4 วัน/สัปดาห์"
+            android:textColor="@color/colorBlack"
+            android:id="@+id/day"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/default_padding"
+        android:background="@drawable/border_bottom"
+        android:id="@+id/day_5">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="@dimen/default_text"
+            android:text="5 วัน/สัปดาห์"
+            android:textColor="@color/colorBlack"
+            android:id="@+id/day"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/default_padding"
+        android:background="@drawable/border_bottom"
+        android:id="@+id/day_6">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="@dimen/default_text"
+            android:text="6 วัน/สัปดาห์"
+            android:textColor="@color/colorBlack"
+            android:id="@+id/day"/>
+    </LinearLayout>
+</LinearLayout>
