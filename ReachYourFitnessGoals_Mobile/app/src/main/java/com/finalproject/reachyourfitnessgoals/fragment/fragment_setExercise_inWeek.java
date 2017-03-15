@@ -7,9 +7,7 @@ import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.finalproject.reachyourfitnessgoals.R;
@@ -24,6 +22,7 @@ public class fragment_setExercise_inWeek extends Fragment implements VerticalSte
 
     private VerticalStepperFormLayout verticalStepperForm;
     private LinearLayout daysStepContent;
+    private LinearLayout selectDaysStepContent;
 
 
     public fragment_setExercise_inWeek() {
@@ -48,6 +47,7 @@ public class fragment_setExercise_inWeek extends Fragment implements VerticalSte
         // Finding the view
         verticalStepperForm = (VerticalStepperFormLayout) rootview.findViewById(R.id.stepper_stepView_setExe);
 
+
         // Setting up and initializing the form
         VerticalStepperFormLayout.Builder.newInstance(verticalStepperForm,stepsTitles,this,getActivity())
                 .primaryColor(colorPrimary)
@@ -58,6 +58,7 @@ public class fragment_setExercise_inWeek extends Fragment implements VerticalSte
         return rootview;
     }
 
+
     @Override
     public View createStepContentView(int stepNumber) {
         View view = null;
@@ -66,7 +67,7 @@ public class fragment_setExercise_inWeek extends Fragment implements VerticalSte
                 view = createDayOfWeekStep();
                 break;
             case 1:
-                view = createSeleteDayStep();
+                view = createSelectDayStep();
                 break;
         }
         return view;
@@ -83,7 +84,6 @@ public class fragment_setExercise_inWeek extends Fragment implements VerticalSte
     }
 
     private View createDayOfWeekStep() {
-        View view = null;
         LayoutInflater inflater = LayoutInflater.from(getContext());
         daysStepContent = (LinearLayout) inflater.inflate(R.layout.workout_per_week_layout, null, false);
 
@@ -91,18 +91,7 @@ public class fragment_setExercise_inWeek extends Fragment implements VerticalSte
             LinearLayout dayLayout = getDayLayout(i);
             dayLayout.setOnClickListener(daySet);
         }
-
-
         return daysStepContent;
-    }
-
-    private View createSeleteDayStep() {
-        View view = null;
-        Spinner dropdown = new Spinner(getContext());
-        String[] items = getResources().getStringArray(R.array.workoutPerweek);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_dropdown_item, items);
-        dropdown.setAdapter(adapter);
-        return dropdown;
     }
 
     private LinearLayout getDayLayout(int i) {
@@ -124,6 +113,36 @@ public class fragment_setExercise_inWeek extends Fragment implements VerticalSte
             v.setBackgroundColor(getResources().getColor(R.color.colorBlack));
             TextView dayText = (TextView) v.findViewById(R.id.day);
             dayText.setTextColor(getResources().getColor(R.color.colorWhite));
+            verticalStepperForm.setActiveStepAsCompleted();
+        }
+    };
+    // end step 1
+
+    private View createSelectDayStep() {
+        LayoutInflater inflater = LayoutInflater.from(getContext());
+        selectDaysStepContent = (LinearLayout) inflater.inflate(R.layout.day_of_workout_layout, null, false);
+        for(int i=1 ; i<=7 ; i++){
+            LinearLayout selectDayLayout = getSelectDayLayout(i);
+            selectDayLayout.setOnClickListener(selectDaySet);
+        }
+
+        return selectDaysStepContent;
+    }
+
+    private LinearLayout getSelectDayLayout(int i) {
+        int id = selectDaysStepContent.getResources().getIdentifier(
+                "dayOfWork_" + i, "id",  getContext().getPackageName());
+        return (LinearLayout) selectDaysStepContent.findViewById(id);
+    }
+
+    private View.OnClickListener selectDaySet = new View.OnClickListener(){
+        int tempId;
+        @Override
+        public void onClick(View v) {
+            v.setBackground(getResources().getDrawable(R.drawable.layout_circle));
+            TextView dayText = (TextView) v.findViewById(R.id.day_text_dayOfWork);
+            dayText.setTextColor(getResources().getColor(R.color.colorWhite));
+            verticalStepperForm.setActiveStepAsCompleted();
         }
     };
 }

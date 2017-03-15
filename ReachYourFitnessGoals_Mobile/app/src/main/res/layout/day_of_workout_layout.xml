@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        style="@style/dayOfWorkLayout"
+        android:id="@+id/dayOfWork_1">
+        <TextView
+            style="@style/dayOfWorkText"
+            android:id="@+id/day_text_dayOfWork"
+            android:text="จ" />
+    </LinearLayout>
+
+    <LinearLayout
+        style="@style/dayOfWorkLayout"
+        android:id="@+id/dayOfWork_2">
+        <TextView
+            style="@style/dayOfWorkText"
+            android:id="@+id/day_text_dayOfWork"
+            android:text="อ"/>
+    </LinearLayout>
+
+    <LinearLayout
+        style="@style/dayOfWorkLayout"
+        android:id="@+id/dayOfWork_3">
+        <TextView
+            style="@style/dayOfWorkText"
+            android:id="@+id/day_text_dayOfWork"
+            android:text="พ"/>
+    </LinearLayout>
+
+    <LinearLayout
+        style="@style/dayOfWorkLayout"
+        android:id="@+id/dayOfWork_4">
+        <TextView
+            style="@style/dayOfWorkText"
+            android:id="@+id/day_text_dayOfWork"
+            android:layout_marginLeft="1dp"
+            android:text="พฤ"/>
+    </LinearLayout>
+
+    <LinearLayout
+        style="@style/dayOfWorkLayout"
+        android:id="@+id/dayOfWork_5">
+        <TextView
+            style="@style/dayOfWorkText"
+            android:id="@+id/day_text_dayOfWork"
+            android:text="ศ"/>
+    </LinearLayout>
+
+    <LinearLayout
+        style="@style/dayOfWorkLayout"
+        android:id="@+id/dayOfWork_6">
+        <TextView
+            style="@style/dayOfWorkText"
+            android:id="@+id/day_text_dayOfWork"
+            android:text="ส"/>
+    </LinearLayout>
+
+    <LinearLayout
+        style="@style/dayOfWorkLayout"
+        android:id="@+id/dayOfWork_7">
+        <TextView
+            style="@style/dayOfWorkText"
+            android:id="@+id/day_text_dayOfWork"
+            android:layout_marginLeft="1dp"
+            android:text="อา"/>
+    </LinearLayout>
+
+</LinearLayout>
