@@ -4,6 +4,7 @@ package com.finalproject.reachyourfitnessgoals.fragment;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.finalproject.reachyourfitnessgoals.R;
+import com.finalproject.reachyourfitnessgoals.models.workoutOfWeekData;
 
 import ernestoyaquello.com.verticalstepperform.VerticalStepperFormLayout;
 import ernestoyaquello.com.verticalstepperform.interfaces.VerticalStepperForm;
@@ -23,6 +25,7 @@ public class fragment_setExercise_inWeek extends Fragment implements VerticalSte
     private VerticalStepperFormLayout verticalStepperForm;
     private LinearLayout daysStepContent;
     private LinearLayout selectDaysStepContent;
+    public workoutOfWeekData workoutOfWeekData;
 
 
     public fragment_setExercise_inWeek() {
@@ -39,8 +42,8 @@ public class fragment_setExercise_inWeek extends Fragment implements VerticalSte
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootview = inflater.inflate(R.layout.fragment_set_exercise_in_week, container, false);
-
-        String[] stepsTitles = getResources().getStringArray(R.array.steps_titles);
+        workoutOfWeekData = new workoutOfWeekData();
+        String[] stepsTitles = {getResources().getString(R.string.steps_titles1), getResources().getString(R.string.steps_titles2)};
         int colorPrimary = ContextCompat.getColor(getContext(), R.color.colorPrimary);
         int colorPrimaryDark = ContextCompat.getColor(getContext(), R.color.colorPrimaryDark);
 
@@ -75,7 +78,20 @@ public class fragment_setExercise_inWeek extends Fragment implements VerticalSte
 
     @Override
     public void onStepOpening(int stepNumber) {
-
+        switch (stepNumber) {
+            case 0:
+                break;
+            case 1:
+                checkSelectDayOfWeek();
+                break;
+            case 2:
+                // As soon as the phone number step is open, we mark it as completed in order to show the "Continue"
+                // button (We do it because this field is optional, so the user can skip it without giving any info)
+                verticalStepperForm.setStepAsCompleted(2);
+                // In this case, the instruction above is equivalent to:
+                // verticalStepperForm.setActiveStepAsCompleted();
+                break;
+        }
     }
 
     @Override
@@ -86,7 +102,6 @@ public class fragment_setExercise_inWeek extends Fragment implements VerticalSte
     private View createDayOfWeekStep() {
         LayoutInflater inflater = LayoutInflater.from(getContext());
         daysStepContent = (LinearLayout) inflater.inflate(R.layout.workout_per_week_layout, null, false);
-
         for(int i=3 ; i<=6 ; i++){
             LinearLayout dayLayout = getDayLayout(i);
             dayLayout.setOnClickListener(daySet);
@@ -101,7 +116,8 @@ public class fragment_setExercise_inWeek extends Fragment implements VerticalSte
     }
 
     private View.OnClickListener daySet = new View.OnClickListener(){
-        int tempId;
+        int tempValue;
+        String tempTag;
         @Override
         public void onClick(View v) {
             for(int i=3 ; i<=6 ; i++){
@@ -113,9 +129,17 @@ public class fragment_setExercise_inWeek extends Fragment implements VerticalSte
             v.setBackgroundColor(getResources().getColor(R.color.colorBlack));
             TextView dayText = (TextView) v.findViewById(R.id.day);
             dayText.setTextColor(getResources().getColor(R.color.colorWhite));
+            tempTag = String.valueOf(v.getTag());
+            //Log.i("test",tempTag);
+            tempValue = Integer.parseInt(tempTag);
+            //Log.i("test",workoutOfWeekData.getWorkoutPerWeek()+"");
+            workoutOfWeekData.setWorkoutPerWeek(tempValue);
             verticalStepperForm.setActiveStepAsCompleted();
+            verticalStepperForm.setStepTitle(0, getResources().getString(R.string.steps_titles1)+" : " + dayText.getText());
         }
     };
+
+
     // end step 1
 
     private View createSelectDayStep() {
@@ -127,6 +151,10 @@ public class fragment_setExercise_inWeek extends Fragment implements VerticalSte
         }
 
         return selectDaysStepContent;
+    }
+
+    private void checkSelectDayOfWeek(){
+        Log.i("test",workoutOfWeekData.getWorkoutPerWeek()+"");
     }
 
     private LinearLayout getSelectDayLayout(int i) {

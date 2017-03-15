@@ -8,8 +8,6 @@
     <string name="step_continue">ต่อไป</string>
     <string name="step_finish">เสร็จสิ้น</string>
     <string name="step_cancel">ยกเลิก</string>
-    <string-array name="steps_titles">
-        <item>เลือกจำนวนวัน</item>
-        <item>เลือกวัน</item>
-    </string-array>
+    <string name="steps_titles1">เลือกจำนวนวัน</string>
+    <string name="steps_titles2">เลือกวัน</string>
 </resources>

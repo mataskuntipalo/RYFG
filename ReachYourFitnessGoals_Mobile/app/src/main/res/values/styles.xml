@@ -23,16 +23,17 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:padding">5dp</item>
-        <item name="android:layout_marginRight">12dp</item>
+        <item name="android:layout_marginRight">6dp</item>
+
     </style>
 
     <style name="dayOfWorkText">
-        <item name="android:textSize">@dimen/topic_text</item>
+        <item name="android:textSize">@dimen/default_text</item>
         <item name="android:textColor">@color/colorBlack</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>
-        <item name="android:layout_marginLeft">7dp</item>
-        <item name="android:layout_marginBottom">4dp</item>
+        <item name="android:layout_marginLeft">5dp</item>
+        <item name="android:layout_marginBottom">3dp</item>
     </style>
 
 
