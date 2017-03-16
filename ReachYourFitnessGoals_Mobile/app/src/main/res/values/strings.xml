@@ -10,4 +10,7 @@
     <string name="step_cancel">ยกเลิก</string>
     <string name="steps_titles1">เลือกจำนวนวัน</string>
     <string name="steps_titles2">เลือกวัน</string>
+    <string name="sharedPreferencesName">PREFS</string>
+    <string name="sharedBoolFirstTime">checkFirstTime</string>
+    <string name="sharedBoolSetExe">checkSetExe</string>
 </resources>

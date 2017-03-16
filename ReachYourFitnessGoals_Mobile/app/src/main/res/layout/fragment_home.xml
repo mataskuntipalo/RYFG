@@ -46,13 +46,23 @@
                 android:textSize="@dimen/topic_text"
                 android:text="การออกกำลังกายประจำสัปดาห์"/>
 
-            <Button
+            <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/default_text"
-                android:layout_gravity="center"
-                android:text="เพิ่มวันออกกำลังกายประจำสัปดาห์"
-                android:id="@+id/setExd_button_home"/>
+                android:layout_gravity="center">
+
+                <include layout="@layout/day_of_workout_layout"
+                    android:id="@+id/displayDay_include_home" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/default_text"
+                    android:text="เพิ่มวันออกกำลังกายประจำสัปดาห์"
+                    android:id="@+id/setExd_button_home"/>
+            </RelativeLayout>
+
+
 
     </LinearLayout>
 

@@ -1,7 +1,9 @@
 package com.finalproject.reachyourfitnessgoals.fragment;
 
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.PointF;
 import android.os.Bundle;
@@ -12,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -27,13 +30,14 @@ import com.hookedonplay.decoviewlib.events.DecoEvent;
  */
 public class fragment_home extends Fragment {
 
-
+    public SharedPreferences shared;
+    SharedPreferences.Editor editor;
+    Button setExe;
+    LinearLayout displayDay;
 
     public fragment_home() {
         // Required empty public constructor
     }
-
-
 
 
     @Override
@@ -42,16 +46,29 @@ public class fragment_home extends Fragment {
         // Inflate the layout for this fragment
         View rootview = inflater.inflate(R.layout.fragment_home, container, false);
 
+        //Init value
+        shared = getContext().getSharedPreferences(getResources().getString(R.string.sharedPreferencesName), Context.MODE_PRIVATE);
+        editor = shared.edit();
+        setExe = (Button)rootview.findViewById(R.id.setExd_button_home);
+        displayDay = (LinearLayout) rootview.findViewById(R.id.displayDay_include_home);
+
+        // check first time used
+        boolean tempCheckTime = shared.getBoolean(getResources().getString(R.string.sharedBoolFirstTime), false);
+        if(tempCheckTime == false){
+            firstTimeUsed();
+        }
+
+        // Begin circle process
         DecoView arcView = (DecoView)rootview.findViewById(R.id.dynamicArcView);
 
-// Create background track
+        // Create background track
         arcView.addSeries(new SeriesItem.Builder(Color.argb(255, 218, 218, 218))
                 .setRange(0, 100, 100)
                 .setInitialVisibility(false)
                 .setLineWidth(32f)
                 .build());
 
-//Create data series track
+        //Create data series track
         final SeriesItem seriesItem1 = new SeriesItem.Builder(Color.argb(255, 64, 196, 0))
                 .setRange(0, 25, 0)
                 .setLineWidth(32f)
@@ -93,26 +110,51 @@ public class fragment_home extends Fragment {
 
             }
         });
+        // End circle process
 
 
-        Button setExe = (Button)rootview.findViewById(R.id.setExd_button_home);
-        setExe.setOnClickListener(buttonSetExe);
+        checkSetExe(rootview);
+
 
 
         return rootview;
     }
 
+    private void firstTimeUsed(){
+        editor.putBoolean(getResources().getString(R.string.sharedBoolFirstTime), true);
+        editor.putBoolean(getResources().getString(R.string.sharedBoolSetExe), false);
+        editor.commit();
+    }
+
+    private void checkSetExe(View v){
+
+
+        boolean tempCheckSetExe = shared.getBoolean(getResources().getString(R.string.sharedBoolSetExe), false);
+        if(tempCheckSetExe == false){
+            setExe.setVisibility(View.VISIBLE);
+            displayDay.setVisibility(View.GONE);
+            setExe.setOnClickListener(buttonSetExe);
+            editor.putBoolean(getResources().getString(R.string.sharedBoolSetExe), true);
+            editor.commit();
+        }else {
+            setExe.setVisibility(View.GONE);
+            displayDay.setVisibility(View.VISIBLE);
+        }
+    }
+
     private View.OnClickListener buttonSetExe = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            fragment_setExercise_inWeek setExe = fragment_setExercise_inWeek.newInstance();
-            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-            fragmentManager
-                    .beginTransaction()
-//                        .setCustomAnimations(R.anim.slide_up,R.anim.slide_down,R.anim.slide_up,R.anim.slide_down)
-                    .replace(R.id.activity_main, setExe, "fragment_setExercise_inWeek")
-                    .addToBackStack("fragment_setExercise_inWeek")
-                    .commit();
+//            fragment_setExercise_inWeek setExe = fragment_setExercise_inWeek.newInstance();
+//            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+//            fragmentManager
+//                    .beginTransaction()
+////                        .setCustomAnimations(R.anim.slide_up,R.anim.slide_down,R.anim.slide_up,R.anim.slide_down)
+//                    .replace(R.id.activity_main, setExe, "fragment_setExercise_inWeek")
+//                    .addToBackStack("fragment_setExercise_inWeek")
+//                    .commit();
+            setExe.setVisibility(View.GONE);
+            displayDay.setVisibility(View.VISIBLE);
         }
     };
 
