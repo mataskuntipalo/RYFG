@@ -1,66 +1,131 @@
-package com.finalproject.reachyourfitnessgoals.fragment;
+package com.finalproject.reachyourfitnessgoals.activity;
+
+import android.app.Activity;
 
 
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
+
+import android.content.DialogInterface;
+import android.content.Intent;
+
 import android.support.v4.content.ContextCompat;
+
+
+import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.finalproject.reachyourfitnessgoals.R;
 import com.finalproject.reachyourfitnessgoals.models.workoutOfWeekData;
 
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.TimeZone;
+
 import ernestoyaquello.com.verticalstepperform.VerticalStepperFormLayout;
 import ernestoyaquello.com.verticalstepperform.interfaces.VerticalStepperForm;
 
-/**
- * A simple {@link Fragment} subclass.
- */
-public class fragment_setExercise_inWeek extends Fragment implements VerticalStepperForm  {
+public class SetExerciseInWeekActivity extends AppCompatActivity implements VerticalStepperForm {
 
     private VerticalStepperFormLayout verticalStepperForm;
     private LinearLayout daysStepContent;
     private LinearLayout selectDaysStepContent;
-    public workoutOfWeekData workoutOfWeekData;
-
-
-    public fragment_setExercise_inWeek() {
-        // Required empty public constructor
-    }
-
-    public static fragment_setExercise_inWeek newInstance() {
-        fragment_setExercise_inWeek fragment = new fragment_setExercise_inWeek();
-        return fragment;
-    }
+    private Calendar thaiTime;
+    private int day;
+    int maxDay;
+    int tempDay;
+    public com.finalproject.reachyourfitnessgoals.models.workoutOfWeekData workoutOfWeekData;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View rootview = inflater.inflate(R.layout.fragment_set_exercise_in_week, container, false);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_set_exercise_in_week);
+
         workoutOfWeekData = new workoutOfWeekData();
+        thaiTime = new GregorianCalendar(TimeZone.getTimeZone("GMT+07:00"));
+        //day = thaiTime.get(Calendar.DAY_OF_WEEK);
+        day = Calendar.FRIDAY;
+//        Log.i("test",day+"");
+//        Log.i("test","This is Friday"+Calendar.FRIDAY);
+        checkWeekEndDay(day);
+        maxDay = 4;
+        tempDay = 7 - day;
+
         String[] stepsTitles = {getResources().getString(R.string.steps_titles1), getResources().getString(R.string.steps_titles2)};
-        int colorPrimary = ContextCompat.getColor(getContext(), R.color.colorPrimary);
-        int colorPrimaryDark = ContextCompat.getColor(getContext(), R.color.colorPrimaryDark);
+        int colorPrimary = ContextCompat.getColor(getApplicationContext(), R.color.colorPrimary);
+        int colorPrimaryDark = ContextCompat.getColor(getApplicationContext(), R.color.colorPrimaryDark);
 
         // Finding the view
-        verticalStepperForm = (VerticalStepperFormLayout) rootview.findViewById(R.id.stepper_stepView_setExe);
+        verticalStepperForm = (VerticalStepperFormLayout) findViewById(R.id.stepper_stepView_setExe);
 
 
         // Setting up and initializing the form
-        VerticalStepperFormLayout.Builder.newInstance(verticalStepperForm,stepsTitles,this,getActivity())
+        VerticalStepperFormLayout.Builder.newInstance(verticalStepperForm,stepsTitles, this, this)
                 .primaryColor(colorPrimary)
                 .primaryDarkColor(colorPrimaryDark)
                 .displayBottomNavigation(true) // It is true by default, so in this case this line is not necessary
                 .init();
 
-        return rootview;
+
+
     }
 
+    private void checkWeekEndDay(int day){
+        if(day == Calendar.SATURDAY || day == Calendar.SUNDAY){
+            AlertDialog.Builder builder = new AlertDialog.Builder(SetExerciseInWeekActivity.this,R.style.LightDialogTheme);
+            builder.setMessage("ไม่สามารถเลือกวันออกกำลังกาย เนื่องจากเป็นวันสุดสัปดาห์ กรุณากลับมาใหม่วันจันทร์");
+            builder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    sendData();
+                }
+            });
+            builder.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                @Override
+                public void onDismiss(DialogInterface dialog) {
+                    sendData();
+                }
+            });
+            builder.show();
+        }
+//        switch (day) {
+//            case Calendar.SUNDAY:
+//                currentDay_WeekEnd();
+//                break;
+//
+//            case Calendar.MONDAY:
+//                currentDay_MondayTuesDay(Calendar.MONDAY);
+//                break;
+//
+//            case Calendar.TUESDAY:
+//                currentDay_MondayTuesDay(Calendar.TUESDAY);
+//                break;
+//
+//            case Calendar.WEDNESDAY:
+//                break;
+//
+//            case Calendar.THURSDAY:
+//                break;
+//
+//            case Calendar.FRIDAY:
+//                break;
+//
+//            case Calendar.SATURDAY:
+//                currentDay_WeekEnd();
+//                break;
+//        }
+    }
+
+    private void currentDay_MondayTuesDay(int day){
+        if(day == Calendar.MONDAY){
+
+        }else {
+
+        }
+    }
 
     @Override
     public View createStepContentView(int stepNumber) {
@@ -80,6 +145,7 @@ public class fragment_setExercise_inWeek extends Fragment implements VerticalSte
     public void onStepOpening(int stepNumber) {
         switch (stepNumber) {
             case 0:
+                checkDayOfWeekStep();
                 break;
             case 1:
                 checkSelectDayOfWeek();
@@ -96,22 +162,35 @@ public class fragment_setExercise_inWeek extends Fragment implements VerticalSte
 
     @Override
     public void sendData() {
-
+        Intent intent = new Intent();
+        setResult(Activity.RESULT_OK, intent);
+        finish();
     }
 
     private View createDayOfWeekStep() {
-        LayoutInflater inflater = LayoutInflater.from(getContext());
+        LayoutInflater inflater = LayoutInflater.from(getBaseContext());
         daysStepContent = (LinearLayout) inflater.inflate(R.layout.workout_per_week_layout, null, false);
-        for(int i=3 ; i<=6 ; i++){
+
+        return daysStepContent;
+    }
+
+    private void checkDayOfWeekStep(){
+        if(tempDay < maxDay){
+            maxDay = tempDay;
+        }
+        for(int i=maxDay ; i>=1 ; i--){
             LinearLayout dayLayout = getDayLayout(i);
+            dayLayout.setAlpha(1);
+            TextView dayText = (TextView) dayLayout.findViewById(R.id.day);
+            dayText.setTextColor(getResources().getColor(R.color.colorBlack));
+            dayText.setAlpha(1);
             dayLayout.setOnClickListener(daySet);
         }
-        return daysStepContent;
     }
 
     private LinearLayout getDayLayout(int i) {
         int id = daysStepContent.getResources().getIdentifier(
-                "day_" + i, "id",  getContext().getPackageName());
+                "day_" + i, "id",getPackageName());
         return (LinearLayout) daysStepContent.findViewById(id);
     }
 
@@ -120,7 +199,7 @@ public class fragment_setExercise_inWeek extends Fragment implements VerticalSte
         String tempTag;
         @Override
         public void onClick(View v) {
-            for(int i=3 ; i<=6 ; i++){
+            for(int i=maxDay ; i>=1 ; i--){
                 LinearLayout dayLayout = getDayLayout(i);
                 dayLayout.setBackground(getResources().getDrawable(R.drawable.border_bottom));
                 TextView oldDayText = (TextView) dayLayout.findViewById(R.id.day);
@@ -143,7 +222,7 @@ public class fragment_setExercise_inWeek extends Fragment implements VerticalSte
     // end step 1
 
     private View createSelectDayStep() {
-        LayoutInflater inflater = LayoutInflater.from(getContext());
+        LayoutInflater inflater = LayoutInflater.from(getBaseContext());
         selectDaysStepContent = (LinearLayout) inflater.inflate(R.layout.day_of_workout_layout, null, false);
         for(int i=1 ; i<=7 ; i++){
             LinearLayout selectDayLayout = getSelectDayLayout(i);
@@ -159,12 +238,11 @@ public class fragment_setExercise_inWeek extends Fragment implements VerticalSte
 
     private LinearLayout getSelectDayLayout(int i) {
         int id = selectDaysStepContent.getResources().getIdentifier(
-                "dayOfWork_" + i, "id",  getContext().getPackageName());
+                "dayOfWork_" + i, "id",getPackageName());
         return (LinearLayout) selectDaysStepContent.findViewById(id);
     }
 
     private View.OnClickListener selectDaySet = new View.OnClickListener(){
-        int tempId;
         @Override
         public void onClick(View v) {
             v.setBackground(getResources().getDrawable(R.drawable.layout_circle));

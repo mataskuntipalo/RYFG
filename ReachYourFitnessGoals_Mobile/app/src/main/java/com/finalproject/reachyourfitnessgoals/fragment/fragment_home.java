@@ -1,6 +1,7 @@
 package com.finalproject.reachyourfitnessgoals.fragment;
 
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -10,6 +11,7 @@ import android.os.Bundle;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +23,7 @@ import android.widget.TextView;
 import com.finalproject.reachyourfitnessgoals.R;
 import com.finalproject.reachyourfitnessgoals.activity.LoginActivity;
 import com.finalproject.reachyourfitnessgoals.activity.MainActivity;
+import com.finalproject.reachyourfitnessgoals.activity.SetExerciseInWeekActivity;
 import com.hookedonplay.decoviewlib.DecoView;
 import com.hookedonplay.decoviewlib.charts.SeriesItem;
 import com.hookedonplay.decoviewlib.events.DecoEvent;
@@ -113,7 +116,7 @@ public class fragment_home extends Fragment {
         // End circle process
 
 
-        checkSetExe(rootview);
+        checkSetExe();
 
 
 
@@ -126,37 +129,40 @@ public class fragment_home extends Fragment {
         editor.commit();
     }
 
-    private void checkSetExe(View v){
-
-
+    private void checkSetExe(){
         boolean tempCheckSetExe = shared.getBoolean(getResources().getString(R.string.sharedBoolSetExe), false);
-        if(tempCheckSetExe == false){
-            setExe.setVisibility(View.VISIBLE);
-            displayDay.setVisibility(View.GONE);
-            setExe.setOnClickListener(buttonSetExe);
-            editor.putBoolean(getResources().getString(R.string.sharedBoolSetExe), true);
-            editor.commit();
-        }else {
-            setExe.setVisibility(View.GONE);
-            displayDay.setVisibility(View.VISIBLE);
-        }
+        setExe.setOnClickListener(buttonSetExe);
+//        if(tempCheckSetExe == false){
+//            setExe.setVisibility(View.VISIBLE);
+//            displayDay.setVisibility(View.GONE);
+//            setExe.setOnClickListener(buttonSetExe);
+//            editor.putBoolean(getResources().getString(R.string.sharedBoolSetExe), true);
+//            editor.commit();
+//        }else {
+//            setExe.setVisibility(View.GONE);
+//            displayDay.setVisibility(View.VISIBLE);
+//        }
     }
 
     private View.OnClickListener buttonSetExe = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-//            fragment_setExercise_inWeek setExe = fragment_setExercise_inWeek.newInstance();
-//            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-//            fragmentManager
-//                    .beginTransaction()
-////                        .setCustomAnimations(R.anim.slide_up,R.anim.slide_down,R.anim.slide_up,R.anim.slide_down)
-//                    .replace(R.id.activity_main, setExe, "fragment_setExercise_inWeek")
-//                    .addToBackStack("fragment_setExercise_inWeek")
-//                    .commit();
+            Intent intent = new Intent(getContext(), SetExerciseInWeekActivity.class);
+            startActivityForResult(intent, 12345);
+
+        }
+    };
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == Activity.RESULT_OK && requestCode == 12345 && data != null) {
+            Log.d("onActivityResult", "requestCode = " + requestCode);
             setExe.setVisibility(View.GONE);
             displayDay.setVisibility(View.VISIBLE);
         }
-    };
+    }
 
 
 }

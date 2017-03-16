@@ -1,17 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_set_exercise_in_week_"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorWhite"
-    android:theme="@style/setExe"
-    tools:context="com.finalproject.reachyourfitnessgoals.fragment.fragment_setExercise_inWeek">
+    tools:context="com.finalproject.reachyourfitnessgoals.activity.SetExerciseInWeekActivity">
 
-    <!-- TODO: Update blank fragment layout -->
+
     <ernestoyaquello.com.verticalstepperform.VerticalStepperFormLayout
         android:id="@+id/stepper_stepView_setExe"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentTop="true"/>
-
 
 </RelativeLayout>

@@ -8,46 +8,41 @@
         android:layout_height="wrap_content"
         android:padding="@dimen/default_padding"
         android:background="@drawable/border_bottom"
+        android:alpha="0.38"
         android:tag="3"
+        android:id="@+id/day_1">
+        <TextView
+            style="@style/workoutPerWeekText"
+            android:text="3 วัน/สัปดาห์"
+            android:id="@+id/day"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/default_padding"
+        android:background="@drawable/border_bottom"
+        android:alpha="0.38"
+        android:tag="4"
+        android:id="@+id/day_2">
+        <TextView
+            style="@style/workoutPerWeekText"
+            android:text="4 วัน/สัปดาห์"
+            android:id="@+id/day"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/default_padding"
+        android:background="@drawable/border_bottom"
+        android:alpha="0.38"
+        android:tag="5"
         android:id="@+id/day_3">
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:textSize="@dimen/default_text"
-            android:text="3 วัน/สัปดาห์"
-            android:textColor="@color/colorBlack"
-            android:id="@+id/day"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/default_padding"
-        android:background="@drawable/border_bottom"
-        android:tag="4"
-        android:id="@+id/day_4">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:textSize="@dimen/default_text"
-            android:text="4 วัน/สัปดาห์"
-            android:textColor="@color/colorBlack"
-            android:id="@+id/day"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/default_padding"
-        android:background="@drawable/border_bottom"
-        android:tag="5"
-        android:id="@+id/day_5">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            style="@style/workoutPerWeekText"
             android:textSize="@dimen/default_text"
             android:text="5 วัน/สัปดาห์"
-            android:textColor="@color/colorBlack"
             android:id="@+id/day"/>
     </LinearLayout>
 
@@ -56,14 +51,13 @@
         android:layout_height="wrap_content"
         android:padding="@dimen/default_padding"
         android:background="@drawable/border_bottom"
+        android:alpha="0.38"
         android:tag="6"
-        android:id="@+id/day_6">
+        android:id="@+id/day_4">
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            style="@style/workoutPerWeekText"
             android:textSize="@dimen/default_text"
             android:text="6 วัน/สัปดาห์"
-            android:textColor="@color/colorBlack"
             android:id="@+id/day"/>
     </LinearLayout>
 </LinearLayout>
