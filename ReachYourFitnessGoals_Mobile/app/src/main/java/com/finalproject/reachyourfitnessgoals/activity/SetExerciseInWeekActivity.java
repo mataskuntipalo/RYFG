@@ -36,8 +36,8 @@ public class SetExerciseInWeekActivity extends AppCompatActivity implements Vert
     private LinearLayout selectDaysStepContent;
     private Calendar thaiTime;
     private int day;
-    int maxDay;
-    int tempDay;
+    int maxDay=4;// id layout 1-4
+    int tempDay,tempTotalSelectDay=0;
     public com.finalproject.reachyourfitnessgoals.models.workoutOfWeekData workoutOfWeekData;
 
     @Override
@@ -47,12 +47,12 @@ public class SetExerciseInWeekActivity extends AppCompatActivity implements Vert
 
         workoutOfWeekData = new workoutOfWeekData();
         thaiTime = new GregorianCalendar(TimeZone.getTimeZone("GMT+07:00"));
+        thaiTime.setFirstDayOfWeek(Calendar.MONDAY);
         day = thaiTime.get(Calendar.DAY_OF_WEEK);
         //day = Calendar.FRIDAY;
 //        Log.i("test",day+"");
-//        Log.i("test","This is Friday"+Calendar.FRIDAY);
+//        Log.i("test","This is Friday"+Calendar.SUNDAY);
         checkWeekEndDay(day);
-        maxDay = 4; // id layout 1-4
         tempDay = 7 - day;
 
         String[] stepsTitles = {getResources().getString(R.string.steps_titles1), getResources().getString(R.string.steps_titles2)};
@@ -145,7 +145,6 @@ public class SetExerciseInWeekActivity extends AppCompatActivity implements Vert
     public void onStepOpening(int stepNumber) {
         switch (stepNumber) {
             case 0:
-                checkDayOfWeekStep();
                 break;
             case 1:
                 checkSelectDayStep();
@@ -170,10 +169,6 @@ public class SetExerciseInWeekActivity extends AppCompatActivity implements Vert
     private View createDayOfWeekStep() {
         LayoutInflater inflater = LayoutInflater.from(getBaseContext());
         daysStepContent = (LinearLayout) inflater.inflate(R.layout.workout_per_week_layout, null, false);
-        return daysStepContent;
-    }
-
-    private void checkDayOfWeekStep(){
         if(tempDay < maxDay){
             maxDay = tempDay;
         }
@@ -185,6 +180,7 @@ public class SetExerciseInWeekActivity extends AppCompatActivity implements Vert
             dayText.setAlpha(1);
             dayLayout.setOnClickListener(daySet);
         }
+        return daysStepContent;
     }
 
     private LinearLayout getDayLayout(int i) {
@@ -223,20 +219,28 @@ public class SetExerciseInWeekActivity extends AppCompatActivity implements Vert
     private View createSelectDayStep() {
         LayoutInflater inflater = LayoutInflater.from(getBaseContext());
         selectDaysStepContent = (LinearLayout) inflater.inflate(R.layout.day_of_workout_layout, null, false);
-        return selectDaysStepContent;
-    }
-
-    private void checkSelectDayStep(){
-        for(int i=7 ; i>=day ; i--){
+        int tempSelectDay = day-1;
+        if(day == Calendar.SUNDAY){
+            tempSelectDay = 7;
+        }
+        for(int i=7 ; i>=tempSelectDay ; i--){
             LinearLayout selectDayLayout = getSelectDayLayout(i);
             selectDayLayout.setOnClickListener(selectDaySet);
-            selectDayLayout.setTag("false");
             TextView dayInLayout = (TextView) selectDayLayout.findViewById(R.id.day_text_dayOfWork);
             dayInLayout.setTextColor(getResources().getColor(R.color.colorBlack));
             dayInLayout.setAlpha(1);
         }
-        TextView setTotalDay = getTotalDayID(2);
+
+        return selectDaysStepContent;
+    }
+
+    private void checkSelectDayStep(){
+        TextView setTotalDay = getTotalDayID(1);
         setTotalDay.setText(workoutOfWeekData.getWorkoutPerWeek()+"");
+        if(tempTotalSelectDay == workoutOfWeekData.getWorkoutPerWeek()){
+            verticalStepperForm.setActiveStepAsCompleted();
+        }
+        checkSelectDayAndTotalDay();
     }
 
     private LinearLayout getSelectDayLayout(int i) {
@@ -246,13 +250,20 @@ public class SetExerciseInWeekActivity extends AppCompatActivity implements Vert
     }
 
     private TextView getTotalDayID(int key){
-        int id;
-        if(key == 1){
-            id = selectDaysStepContent.getResources().getIdentifier(
-                    "totalSelectDay_Text_dayOfWork", "id",getPackageName());
-        }else{
-            id = selectDaysStepContent.getResources().getIdentifier(
-                    "totalDay_Text_dayOfWork", "id",getPackageName());
+        int id = 0;
+        switch (key) {
+            case 0:
+                id = selectDaysStepContent.getResources().getIdentifier(
+                        "totalSelectDay_Text_dayOfWork", "id",getPackageName());
+                break;
+            case 1:
+                id = selectDaysStepContent.getResources().getIdentifier(
+                        "totalDay_Text_dayOfWork", "id",getPackageName());
+                break;
+            case 2:
+                id = selectDaysStepContent.getResources().getIdentifier(
+                        "alert_Text_dayOfWork", "id",getPackageName());
+                break;
         }
         return (TextView) selectDaysStepContent.findViewById(id);
     }
@@ -260,16 +271,35 @@ public class SetExerciseInWeekActivity extends AppCompatActivity implements Vert
     private View.OnClickListener selectDaySet = new View.OnClickListener(){
         @Override
         public void onClick(View v) {
-            if(v.getTag() == "false"){
-                v.setBackground(getResources().getDrawable(R.drawable.layout_circle));
-            }else{
-                v.setBackgroundColor(getResources().getColor(R.color.colorWhite));
-                v.setTag("true");
-            }
-
-            TextView dayText = (TextView) v.findViewById(R.id.day_text_dayOfWork);
-            dayText.setTextColor(getResources().getColor(R.color.colorWhite));
-            verticalStepperForm.setActiveStepAsCompleted();
+            addValueSelectDay(v);
+            checkSelectDayAndTotalDay();
         }
     };
+
+    private void addValueSelectDay(View v){
+        TextView dayText = (TextView) v.findViewById(R.id.day_text_dayOfWork);
+        if(v.getTag().toString().equals("false")){
+            v.setBackground(getResources().getDrawable(R.drawable.layout_circle));
+            v.setTag("true");
+            dayText.setTextColor(getResources().getColor(R.color.colorWhite));
+            tempTotalSelectDay++;
+        }else{
+            v.setBackgroundColor(getResources().getColor(R.color.colorWhite));
+            v.setTag("false");
+            dayText.setTextColor(getResources().getColor(R.color.colorBlack));
+            tempTotalSelectDay--;
+        }
+        TextView setTotalSelectDay = getTotalDayID(0);
+        setTotalSelectDay.setText(tempTotalSelectDay+"");
+    }
+
+    private void checkSelectDayAndTotalDay(){
+        TextView alert = getTotalDayID(2);
+        if(tempTotalSelectDay > workoutOfWeekData.getWorkoutPerWeek()){
+            alert.setVisibility(View.VISIBLE);
+        }else{
+            alert.setVisibility(View.INVISIBLE);
+        }
+    }
+
 }

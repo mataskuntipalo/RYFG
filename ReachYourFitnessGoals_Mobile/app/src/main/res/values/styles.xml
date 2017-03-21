@@ -24,7 +24,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:padding">5dp</item>
         <item name="android:layout_marginRight">6dp</item>
-
+        <item name="android:tag">false</item>
     </style>
 
     <style name="dayOfWorkText">
@@ -34,7 +34,7 @@
         <item name="android:layout_height">match_parent</item>
         <item name="android:layout_marginLeft">5dp</item>
         <item name="android:layout_marginBottom">3dp</item>
-        <item name="android:alpha">0.38</item>>
+        <item name="android:alpha">0.38</item>
     </style>
 
     <style name="workoutPerWeekText">
@@ -42,7 +42,7 @@
         <item name="android:textColor">@color/colorBlack</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>
-        <item name="android:alpha">0.38</item>>
+        <item name="android:alpha">0.38</item>
     </style>
 
     <style name="LightDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
