@@ -13,4 +13,5 @@
     <string name="sharedPreferencesName">PREFS</string>
     <string name="sharedBoolFirstTime">checkFirstTime</string>
     <string name="sharedBoolSetExe">checkSetExe</string>
+    <string name="totalDay">จำนวนวันที่ต้องเลือก: </string>
 </resources>

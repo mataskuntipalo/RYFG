@@ -47,12 +47,12 @@ public class SetExerciseInWeekActivity extends AppCompatActivity implements Vert
 
         workoutOfWeekData = new workoutOfWeekData();
         thaiTime = new GregorianCalendar(TimeZone.getTimeZone("GMT+07:00"));
-        //day = thaiTime.get(Calendar.DAY_OF_WEEK);
-        day = Calendar.FRIDAY;
+        day = thaiTime.get(Calendar.DAY_OF_WEEK);
+        //day = Calendar.FRIDAY;
 //        Log.i("test",day+"");
 //        Log.i("test","This is Friday"+Calendar.FRIDAY);
         checkWeekEndDay(day);
-        maxDay = 4;
+        maxDay = 4; // id layout 1-4
         tempDay = 7 - day;
 
         String[] stepsTitles = {getResources().getString(R.string.steps_titles1), getResources().getString(R.string.steps_titles2)};
@@ -148,7 +148,7 @@ public class SetExerciseInWeekActivity extends AppCompatActivity implements Vert
                 checkDayOfWeekStep();
                 break;
             case 1:
-                checkSelectDayOfWeek();
+                checkSelectDayStep();
                 break;
             case 2:
                 // As soon as the phone number step is open, we mark it as completed in order to show the "Continue"
@@ -170,7 +170,6 @@ public class SetExerciseInWeekActivity extends AppCompatActivity implements Vert
     private View createDayOfWeekStep() {
         LayoutInflater inflater = LayoutInflater.from(getBaseContext());
         daysStepContent = (LinearLayout) inflater.inflate(R.layout.workout_per_week_layout, null, false);
-
         return daysStepContent;
     }
 
@@ -224,16 +223,20 @@ public class SetExerciseInWeekActivity extends AppCompatActivity implements Vert
     private View createSelectDayStep() {
         LayoutInflater inflater = LayoutInflater.from(getBaseContext());
         selectDaysStepContent = (LinearLayout) inflater.inflate(R.layout.day_of_workout_layout, null, false);
-        for(int i=1 ; i<=7 ; i++){
-            LinearLayout selectDayLayout = getSelectDayLayout(i);
-            selectDayLayout.setOnClickListener(selectDaySet);
-        }
-
         return selectDaysStepContent;
     }
 
-    private void checkSelectDayOfWeek(){
-        Log.i("test",workoutOfWeekData.getWorkoutPerWeek()+"");
+    private void checkSelectDayStep(){
+        for(int i=7 ; i>=day ; i--){
+            LinearLayout selectDayLayout = getSelectDayLayout(i);
+            selectDayLayout.setOnClickListener(selectDaySet);
+            selectDayLayout.setTag("false");
+            TextView dayInLayout = (TextView) selectDayLayout.findViewById(R.id.day_text_dayOfWork);
+            dayInLayout.setTextColor(getResources().getColor(R.color.colorBlack));
+            dayInLayout.setAlpha(1);
+        }
+        TextView setTotalDay = getTotalDayID(2);
+        setTotalDay.setText(workoutOfWeekData.getWorkoutPerWeek()+"");
     }
 
     private LinearLayout getSelectDayLayout(int i) {
@@ -242,10 +245,28 @@ public class SetExerciseInWeekActivity extends AppCompatActivity implements Vert
         return (LinearLayout) selectDaysStepContent.findViewById(id);
     }
 
+    private TextView getTotalDayID(int key){
+        int id;
+        if(key == 1){
+            id = selectDaysStepContent.getResources().getIdentifier(
+                    "totalSelectDay_Text_dayOfWork", "id",getPackageName());
+        }else{
+            id = selectDaysStepContent.getResources().getIdentifier(
+                    "totalDay_Text_dayOfWork", "id",getPackageName());
+        }
+        return (TextView) selectDaysStepContent.findViewById(id);
+    }
+
     private View.OnClickListener selectDaySet = new View.OnClickListener(){
         @Override
         public void onClick(View v) {
-            v.setBackground(getResources().getDrawable(R.drawable.layout_circle));
+            if(v.getTag() == "false"){
+                v.setBackground(getResources().getDrawable(R.drawable.layout_circle));
+            }else{
+                v.setBackgroundColor(getResources().getColor(R.color.colorWhite));
+                v.setTag("true");
+            }
+
             TextView dayText = (TextView) v.findViewById(R.id.day_text_dayOfWork);
             dayText.setTextColor(getResources().getColor(R.color.colorWhite));
             verticalStepperForm.setActiveStepAsCompleted();
