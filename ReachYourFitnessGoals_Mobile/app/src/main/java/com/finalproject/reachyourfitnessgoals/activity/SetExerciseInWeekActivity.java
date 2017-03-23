@@ -22,6 +22,7 @@ import android.widget.TextView;
 
 import com.finalproject.reachyourfitnessgoals.R;
 import com.finalproject.reachyourfitnessgoals.models.workoutOfWeekData;
+import com.finalproject.reachyourfitnessgoals.setting.handleCalendar;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -35,8 +36,8 @@ public class SetExerciseInWeekActivity extends AppCompatActivity implements Vert
     private VerticalStepperFormLayout verticalStepperForm;
     private LinearLayout daysStepContent;
     private LinearLayout selectDaysStepContent;
-    private Calendar thaiTime;
-    private int day;
+    private handleCalendar thaiTime;
+    int day;
     int maxDay=4;// id layout 1-4
     int tempDay,tempTotalSelectDay=0;
     public workoutOfWeekData workoutOfWeekData;
@@ -51,9 +52,8 @@ public class SetExerciseInWeekActivity extends AppCompatActivity implements Vert
         shared = this.getSharedPreferences(getResources().getString(R.string.sharedPreferencesName), Context.MODE_PRIVATE);
         editor = shared.edit();
         workoutOfWeekData = new workoutOfWeekData();
-        thaiTime = new GregorianCalendar(TimeZone.getTimeZone("GMT+07:00"));
-        thaiTime.setFirstDayOfWeek(Calendar.MONDAY);
-        day = thaiTime.get(Calendar.DAY_OF_WEEK);
+        thaiTime = new handleCalendar();
+        day = thaiTime.getCurrentDay();
         //day = Calendar.FRIDAY;
 //        Log.i("test",day+"");
 //        Log.i("test","This is Friday"+Calendar.SUNDAY);

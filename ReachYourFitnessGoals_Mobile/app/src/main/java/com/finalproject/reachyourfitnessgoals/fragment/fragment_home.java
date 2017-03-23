@@ -24,9 +24,12 @@ import com.finalproject.reachyourfitnessgoals.R;
 import com.finalproject.reachyourfitnessgoals.activity.LoginActivity;
 import com.finalproject.reachyourfitnessgoals.activity.MainActivity;
 import com.finalproject.reachyourfitnessgoals.activity.SetExerciseInWeekActivity;
+import com.finalproject.reachyourfitnessgoals.setting.handleCalendar;
 import com.hookedonplay.decoviewlib.DecoView;
 import com.hookedonplay.decoviewlib.charts.SeriesItem;
 import com.hookedonplay.decoviewlib.events.DecoEvent;
+
+import java.util.Calendar;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -60,10 +63,10 @@ public class fragment_home extends Fragment {
         layout.setVisibility(View.INVISIBLE);
 
         // check first time used
-        boolean tempCheckTime = shared.getBoolean(getResources().getString(R.string.sharedBoolFirstTime), false);
-        if(tempCheckTime == false){
-            firstTimeUsed();
-        }
+//        boolean tempCheckTime = shared.getBoolean(getResources().getString(R.string.sharedBoolFirstTime), false);
+//        if(tempCheckTime == false){
+//            firstTimeUsed();
+//        }
 
         // Begin circle process
         DecoView arcView = (DecoView)rootview.findViewById(R.id.dynamicArcView);
@@ -119,34 +122,54 @@ public class fragment_home extends Fragment {
         });
         // End circle process
 
-
-        checkSetExe();
+        check();
+        checkSetExeWeekly();
 
 
 
         return rootview;
     }
 
-    private void firstTimeUsed(){
-        editor.putBoolean(getResources().getString(R.string.sharedBoolFirstTime), true);
-        editor.putBoolean(getResources().getString(R.string.sharedBoolSetExe), false);
-        editor.commit();
+
+    private void check() {
+        int day = new handleCalendar().getCurrentDay();
+        if(day == Calendar.THURSDAY){
+            Log.i("check","in1");
+            editor.putBoolean(getResources().getString(R.string.sharedBoolFirstTimeOfWeek), false);
+            boolean log = editor.commit();
+        }
+    }
+    private void checkSetExeWeekly(){
+        int day = new handleCalendar().getCurrentDay();
+        boolean tempCheckSetExe = shared.getBoolean(getResources().getString(R.string.sharedBoolSetExe), false);
+        boolean tempCheckFirstTimeOfWeek = shared.getBoolean(getResources().getString(R.string.sharedBoolFirstTimeOfWeek), false);
+        Log.i("check","1" + " " + tempCheckSetExe);
+        Log.i("check","11" + " " + tempCheckFirstTimeOfWeek);
+
+
+        if(day == Calendar.THURSDAY && tempCheckFirstTimeOfWeek == false){
+            Log.i("check","in2");
+            editor.putBoolean(getResources().getString(R.string.sharedBoolSetExe), false);
+            editor.putBoolean(getResources().getString(R.string.sharedBoolFirstTimeOfWeek), true);
+            boolean log = editor.commit();
+        }
+
+        if(tempCheckSetExe == false){
+            displayDay.setVisibility(View.INVISIBLE);
+            setExe.setVisibility(View.VISIBLE);
+            setExe.setOnClickListener(buttonSetExe);
+            editor.putBoolean(getResources().getString(R.string.sharedBoolSetExe), true);
+            editor.commit();
+        }else{
+            setExe.setVisibility(View.INVISIBLE);
+            displayDay.setVisibility(View.VISIBLE);
+            setDayHighLight();
+        }
+
+        Log.i("check","2" + " " + tempCheckSetExe);
+        Log.i("check","22" + " " + tempCheckFirstTimeOfWeek);
     }
 
-    private void checkSetExe(){
-        boolean tempCheckSetExe = shared.getBoolean(getResources().getString(R.string.sharedBoolSetExe), false);
-        setExe.setOnClickListener(buttonSetExe);
-//        if(tempCheckSetExe == false){
-//            setExe.setVisibility(View.VISIBLE);
-//            displayDay.setVisibility(View.GONE);
-//            setExe.setOnClickListener(buttonSetExe);
-//            editor.putBoolean(getResources().getString(R.string.sharedBoolSetExe), true);
-//            editor.commit();
-//        }else {
-//            setExe.setVisibility(View.GONE);
-//            displayDay.setVisibility(View.VISIBLE);
-//        }
-    }
 
     private View.OnClickListener buttonSetExe = new View.OnClickListener() {
         @Override
@@ -163,8 +186,9 @@ public class fragment_home extends Fragment {
 
         if (resultCode == Activity.RESULT_OK && requestCode == 12345 && data != null) {
             Log.d("onActivityResult", "requestCode = " + requestCode);
-            setExe.setVisibility(View.GONE);
             displayDay.setVisibility(View.VISIBLE);
+            setExe.setVisibility(View.INVISIBLE);
+
             setDayHighLight();
         }
     }

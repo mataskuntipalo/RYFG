@@ -11,7 +11,7 @@
     <string name="steps_titles1">เลือกจำนวนวัน</string>
     <string name="steps_titles2">เลือกวัน</string>
     <string name="sharedPreferencesName">PREFS</string>
-    <string name="sharedBoolFirstTime">checkFirstTime</string>
+    <string name="sharedBoolFirstTimeOfWeek">checkFirstTimeOfWeek</string>
     <string name="sharedBoolDayHighLight">day</string>
     <string name="sharedBoolSetExe">checkSetExe</string>
     <string name="totalDay">จำนวนวันที่ต้องเลือก: </string>
