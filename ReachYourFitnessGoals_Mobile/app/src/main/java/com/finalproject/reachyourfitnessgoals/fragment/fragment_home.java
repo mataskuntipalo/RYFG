@@ -55,6 +55,10 @@ public class fragment_home extends Fragment {
         setExe = (Button)rootview.findViewById(R.id.setExd_button_home);
         displayDay = (LinearLayout) rootview.findViewById(R.id.displayDay_include_home);
 
+        // Make layoutTotalSelectDay to invisible
+        LinearLayout layout = (LinearLayout) displayDay.findViewById(R.id.layoutTotalSelectDay_LinearLayout_dayOfWork);
+        layout.setVisibility(View.INVISIBLE);
+
         // check first time used
         boolean tempCheckTime = shared.getBoolean(getResources().getString(R.string.sharedBoolFirstTime), false);
         if(tempCheckTime == false){
@@ -161,7 +165,27 @@ public class fragment_home extends Fragment {
             Log.d("onActivityResult", "requestCode = " + requestCode);
             setExe.setVisibility(View.GONE);
             displayDay.setVisibility(View.VISIBLE);
+            setDayHighLight();
         }
+    }
+
+    private void setDayHighLight(){
+        for(int i = 1 ; i<=7 ; i++){
+            LinearLayout dayOfWorkLayout = getSelectDayLayout(i);
+            boolean temp = shared.getBoolean(getResources().getString(R.string.sharedBoolDayHighLight)+ i, false);
+            Log.i("testReceive",temp + "day"+i);
+            if( shared.getBoolean(getResources().getString(R.string.sharedBoolDayHighLight)+ i, false) == true) {
+                dayOfWorkLayout.setBackground(getResources().getDrawable(R.drawable.layout_circle));
+                TextView dayText = (TextView) dayOfWorkLayout.findViewById(R.id.day_text_dayOfWork);
+                dayText.setAlpha(1);
+            }
+        }
+    }
+
+    private LinearLayout getSelectDayLayout(int i) {
+        int id = displayDay.getResources().getIdentifier(
+                "dayOfWork_" + i, "id",getContext().getPackageName());
+        return (LinearLayout) displayDay.findViewById(id);
     }
 
 

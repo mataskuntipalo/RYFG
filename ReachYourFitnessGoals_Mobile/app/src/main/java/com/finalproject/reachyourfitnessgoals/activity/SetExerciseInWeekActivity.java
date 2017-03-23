@@ -3,10 +3,11 @@ package com.finalproject.reachyourfitnessgoals.activity;
 import android.app.Activity;
 
 
-
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 
+import android.content.SharedPreferences;
 import android.support.v4.content.ContextCompat;
 
 
@@ -38,13 +39,17 @@ public class SetExerciseInWeekActivity extends AppCompatActivity implements Vert
     private int day;
     int maxDay=4;// id layout 1-4
     int tempDay,tempTotalSelectDay=0;
-    public com.finalproject.reachyourfitnessgoals.models.workoutOfWeekData workoutOfWeekData;
+    public workoutOfWeekData workoutOfWeekData;
+    public SharedPreferences shared;
+    public SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_set_exercise_in_week);
 
+        shared = this.getSharedPreferences(getResources().getString(R.string.sharedPreferencesName), Context.MODE_PRIVATE);
+        editor = shared.edit();
         workoutOfWeekData = new workoutOfWeekData();
         thaiTime = new GregorianCalendar(TimeZone.getTimeZone("GMT+07:00"));
         thaiTime.setFirstDayOfWeek(Calendar.MONDAY);
@@ -161,6 +166,7 @@ public class SetExerciseInWeekActivity extends AppCompatActivity implements Vert
 
     @Override
     public void sendData() {
+        dayHighLight();
         Intent intent = new Intent();
         setResult(Activity.RESULT_OK, intent);
         finish();
@@ -237,9 +243,6 @@ public class SetExerciseInWeekActivity extends AppCompatActivity implements Vert
     private void checkSelectDayStep(){
         TextView setTotalDay = getTotalDayID(1);
         setTotalDay.setText(workoutOfWeekData.getWorkoutPerWeek()+"");
-        if(tempTotalSelectDay == workoutOfWeekData.getWorkoutPerWeek()){
-            verticalStepperForm.setActiveStepAsCompleted();
-        }
         checkSelectDayAndTotalDay();
     }
 
@@ -300,6 +303,25 @@ public class SetExerciseInWeekActivity extends AppCompatActivity implements Vert
         }else{
             alert.setVisibility(View.INVISIBLE);
         }
+
+        if(tempTotalSelectDay == workoutOfWeekData.getWorkoutPerWeek()){
+            verticalStepperForm.setActiveStepAsCompleted();
+        }else {
+            verticalStepperForm.setActiveStepAsUncompleted();
+        }
+    }
+
+    private void dayHighLight(){
+        for(int i=1 ; i<=7 ; i++){
+            LinearLayout selectDayLayout = getSelectDayLayout(i);
+            if(selectDayLayout.getTag().toString().equals("true")){
+                Log.i("test","day"+i);
+                editor.putBoolean(getResources().getString(R.string.sharedBoolDayHighLight)+ i , true);
+            }else{
+                editor.putBoolean(getResources().getString(R.string.sharedBoolDayHighLight)+ i , false);
+            }
+        }
+        editor.commit();
     }
 
 }

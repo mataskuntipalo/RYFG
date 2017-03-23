@@ -44,7 +44,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:textSize="@dimen/topic_text"
-                android:text="การออกกำลังกายประจำสัปดาห์"/>
+                android:text="การออกกำลังกายประจำสัปดาห์"
+                android:textColor="@color/colorBlack"/>
 
             <RelativeLayout
                 android:layout_width="wrap_content"
