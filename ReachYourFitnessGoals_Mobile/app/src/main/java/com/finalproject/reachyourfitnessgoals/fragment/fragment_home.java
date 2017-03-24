@@ -122,7 +122,7 @@ public class fragment_home extends Fragment {
         });
         // End circle process
 
-        check();
+
         checkSetExeWeekly();
 
 
@@ -131,43 +131,32 @@ public class fragment_home extends Fragment {
     }
 
 
-    private void check() {
-        int day = new handleCalendar().getCurrentDay();
-        if(day == Calendar.THURSDAY){
-            Log.i("check","in1");
-            editor.putBoolean(getResources().getString(R.string.sharedBoolFirstTimeOfWeek), false);
-            boolean log = editor.commit();
-        }
-    }
     private void checkSetExeWeekly(){
-        int day = new handleCalendar().getCurrentDay();
-        boolean tempCheckSetExe = shared.getBoolean(getResources().getString(R.string.sharedBoolSetExe), false);
-        boolean tempCheckFirstTimeOfWeek = shared.getBoolean(getResources().getString(R.string.sharedBoolFirstTimeOfWeek), false);
-        Log.i("check","1" + " " + tempCheckSetExe);
-        Log.i("check","11" + " " + tempCheckFirstTimeOfWeek);
+//        int day = new handleCalendar().getCurrentDay();
+//        Log.i("check","1" + " " + shared.getBoolean(getResources().getString(R.string.sharedBoolSetExe), false));
+//        Log.i("check","11" + " " +  shared.getBoolean(getResources().getString(R.string.sharedBoolFirstTimeOfWeek), false));
+//        if(day == Calendar.FRIDAY){
+//            editor.putBoolean(getResources().getString(R.string.sharedBoolFirstTimeOfWeek), false);
+//            editor.commit();
+//        }
+//
+//        if(day == Calendar.MONDAY && shared.getBoolean(getResources().getString(R.string.sharedBoolFirstTimeOfWeek), false) == false){
+//            editor.putBoolean(getResources().getString(R.string.sharedBoolSetExe), false);
+//            editor.commit();
+//        }
 
-
-        if(day == Calendar.THURSDAY && tempCheckFirstTimeOfWeek == false){
-            Log.i("check","in2");
-            editor.putBoolean(getResources().getString(R.string.sharedBoolSetExe), false);
-            editor.putBoolean(getResources().getString(R.string.sharedBoolFirstTimeOfWeek), true);
-            boolean log = editor.commit();
-        }
-
-        if(tempCheckSetExe == false){
+        //if(shared.getBoolean(getResources().getString(R.string.sharedBoolSetExe), false) == false){
             displayDay.setVisibility(View.INVISIBLE);
             setExe.setVisibility(View.VISIBLE);
             setExe.setOnClickListener(buttonSetExe);
-            editor.putBoolean(getResources().getString(R.string.sharedBoolSetExe), true);
-            editor.commit();
-        }else{
-            setExe.setVisibility(View.INVISIBLE);
-            displayDay.setVisibility(View.VISIBLE);
-            setDayHighLight();
-        }
+//        }else{
+//            setExe.setVisibility(View.INVISIBLE);
+//            displayDay.setVisibility(View.VISIBLE);
+//            setDayHighLight();
+//        }
 
-        Log.i("check","2" + " " + tempCheckSetExe);
-        Log.i("check","22" + " " + tempCheckFirstTimeOfWeek);
+        Log.i("check","2" + " " + shared.getBoolean(getResources().getString(R.string.sharedBoolSetExe), false));
+        Log.i("check","22" + " " +  shared.getBoolean(getResources().getString(R.string.sharedBoolFirstTimeOfWeek), false));
     }
 
 
@@ -188,7 +177,6 @@ public class fragment_home extends Fragment {
             Log.d("onActivityResult", "requestCode = " + requestCode);
             displayDay.setVisibility(View.VISIBLE);
             setExe.setVisibility(View.INVISIBLE);
-
             setDayHighLight();
         }
     }
@@ -196,8 +184,6 @@ public class fragment_home extends Fragment {
     private void setDayHighLight(){
         for(int i = 1 ; i<=7 ; i++){
             LinearLayout dayOfWorkLayout = getSelectDayLayout(i);
-            boolean temp = shared.getBoolean(getResources().getString(R.string.sharedBoolDayHighLight)+ i, false);
-            Log.i("testReceive",temp + "day"+i);
             if( shared.getBoolean(getResources().getString(R.string.sharedBoolDayHighLight)+ i, false) == true) {
                 dayOfWorkLayout.setBackground(getResources().getDrawable(R.drawable.layout_circle));
                 TextView dayText = (TextView) dayOfWorkLayout.findViewById(R.id.day_text_dayOfWork);

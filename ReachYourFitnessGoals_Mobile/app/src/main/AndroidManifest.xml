@@ -12,7 +12,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".activity.LoginActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,7 +22,12 @@
         </activity>
         <activity android:name=".activity.IntroActivity" />
         <activity android:name=".activity.GoalActivity" />
-        <activity android:name=".activity.SetExerciseInWeekActivity"></activity>
+        <activity android:name=".activity.SetExerciseInWeekActivity" />
+
+        <receiver
+            android:name=".setting.MyReceiver"
+            android:enabled="true"
+            android:exported="true"></receiver>
     </application>
 
 </manifest>

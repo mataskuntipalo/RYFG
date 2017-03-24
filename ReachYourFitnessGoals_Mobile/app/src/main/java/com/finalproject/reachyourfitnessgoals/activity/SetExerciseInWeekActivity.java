@@ -3,6 +3,8 @@ package com.finalproject.reachyourfitnessgoals.activity;
 import android.app.Activity;
 
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -22,10 +24,12 @@ import android.widget.TextView;
 
 import com.finalproject.reachyourfitnessgoals.R;
 import com.finalproject.reachyourfitnessgoals.models.workoutOfWeekData;
+import com.finalproject.reachyourfitnessgoals.setting.MyReceiver;
 import com.finalproject.reachyourfitnessgoals.setting.handleCalendar;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.Locale;
 import java.util.TimeZone;
 
 import ernestoyaquello.com.verticalstepperform.VerticalStepperFormLayout;
@@ -36,8 +40,8 @@ public class SetExerciseInWeekActivity extends AppCompatActivity implements Vert
     private VerticalStepperFormLayout verticalStepperForm;
     private LinearLayout daysStepContent;
     private LinearLayout selectDaysStepContent;
-    private handleCalendar thaiTime;
-    int day;
+    private handleCalendar time;
+    int today;
     int maxDay=4;// id layout 1-4
     int tempDay,tempTotalSelectDay=0;
     public workoutOfWeekData workoutOfWeekData;
@@ -52,13 +56,16 @@ public class SetExerciseInWeekActivity extends AppCompatActivity implements Vert
         shared = this.getSharedPreferences(getResources().getString(R.string.sharedPreferencesName), Context.MODE_PRIVATE);
         editor = shared.edit();
         workoutOfWeekData = new workoutOfWeekData();
-        thaiTime = new handleCalendar();
-        day = thaiTime.getCurrentDay();
+        time = new handleCalendar();
+        today = time.getCurrentDay();
+        //Log.i("testDate",thaiTime.getCurrentTime()+"");
         //day = Calendar.FRIDAY;
 //        Log.i("test",day+"");
 //        Log.i("test","This is Friday"+Calendar.SUNDAY);
-        checkWeekEndDay(day);
-        tempDay = 7 - day;
+        checkWeekEndDay(today);
+        tempDay = 7 - today;
+
+        setDateCheckWeekly();
 
         String[] stepsTitles = {getResources().getString(R.string.steps_titles1), getResources().getString(R.string.steps_titles2)};
         int colorPrimary = ContextCompat.getColor(getApplicationContext(), R.color.colorPrimary);
@@ -166,6 +173,9 @@ public class SetExerciseInWeekActivity extends AppCompatActivity implements Vert
 
     @Override
     public void sendData() {
+        editor.putBoolean(getResources().getString(R.string.sharedBoolSetExe), true);
+        editor.putBoolean(getResources().getString(R.string.sharedBoolFirstTimeOfWeek), true);
+        editor.commit();
         dayHighLight();
         Intent intent = new Intent();
         setResult(Activity.RESULT_OK, intent);
@@ -225,8 +235,8 @@ public class SetExerciseInWeekActivity extends AppCompatActivity implements Vert
     private View createSelectDayStep() {
         LayoutInflater inflater = LayoutInflater.from(getBaseContext());
         selectDaysStepContent = (LinearLayout) inflater.inflate(R.layout.day_of_workout_layout, null, false);
-        int tempSelectDay = day-1;
-        if(day == Calendar.SUNDAY){
+        int tempSelectDay = today-1;
+        if(today == Calendar.SUNDAY){
             tempSelectDay = 7;
         }
         for(int i=7 ; i>=tempSelectDay ; i--){
@@ -311,6 +321,8 @@ public class SetExerciseInWeekActivity extends AppCompatActivity implements Vert
         }
     }
 
+    //end step 2
+
     private void dayHighLight(){
         for(int i=1 ; i<=7 ; i++){
             LinearLayout selectDayLayout = getSelectDayLayout(i);
@@ -324,4 +336,17 @@ public class SetExerciseInWeekActivity extends AppCompatActivity implements Vert
         editor.commit();
     }
 
+
+    private void setDateCheckWeekly(){
+        long midnightTimeNextMonday = (AlarmManager.INTERVAL_DAY - time.getTimeToMidnight())*getNextMonday();
+        Intent intent = new Intent(this, MyReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(),0,intent,PendingIntent.FLAG_UPDATE_CURRENT);
+        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+        alarmManager.set(AlarmManager.RTC_WAKEUP,midnightTimeNextMonday,pendingIntent);
+    }
+
+    private int getNextMonday(){
+            int nextMonday = (Calendar.SATURDAY - today + 2) % 7;
+        return nextMonday;
+    }
 }
