@@ -16,4 +16,5 @@
     <string name="sharedBoolSetExe">checkSetExe</string>
     <string name="totalDay">จำนวนวันที่ต้องเลือก: </string>
     <string name="alertText">โปรดเลือกจำนวนวันให้ตรงกัน</string>
+    <string name="cancelSetExeText">โปรดกลับมาใหม่ในวันจันทร์</string>
 </resources>

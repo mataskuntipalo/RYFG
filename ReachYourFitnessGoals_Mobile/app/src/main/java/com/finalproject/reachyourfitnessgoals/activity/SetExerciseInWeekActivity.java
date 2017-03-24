@@ -65,8 +65,6 @@ public class SetExerciseInWeekActivity extends AppCompatActivity implements Vert
         checkWeekEndDay(today);
         tempDay = 7 - today;
 
-        setDateCheckWeekly();
-
         String[] stepsTitles = {getResources().getString(R.string.steps_titles1), getResources().getString(R.string.steps_titles2)};
         int colorPrimary = ContextCompat.getColor(getApplicationContext(), R.color.colorPrimary);
         int colorPrimaryDark = ContextCompat.getColor(getApplicationContext(), R.color.colorPrimaryDark);
@@ -92,52 +90,25 @@ public class SetExerciseInWeekActivity extends AppCompatActivity implements Vert
             builder.setMessage("ไม่สามารถเลือกวันออกกำลังกาย เนื่องจากเป็นวันสุดสัปดาห์ กรุณากลับมาใหม่วันจันทร์");
             builder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int id) {
-                    sendData();
+                    Intent intent = new Intent();
+                    intent.putExtra("key","weekEnd");
+                    setResult(Activity.RESULT_OK, intent);
+                    finish();
                 }
             });
             builder.setOnDismissListener(new DialogInterface.OnDismissListener() {
                 @Override
                 public void onDismiss(DialogInterface dialog) {
-                    sendData();
+                    Intent intent = new Intent();
+                    intent.putExtra("key","weekEnd");
+                    setResult(Activity.RESULT_OK, intent);
+                    finish();
                 }
             });
             builder.show();
         }
-//        switch (day) {
-//            case Calendar.SUNDAY:
-//                currentDay_WeekEnd();
-//                break;
-//
-//            case Calendar.MONDAY:
-//                currentDay_MondayTuesDay(Calendar.MONDAY);
-//                break;
-//
-//            case Calendar.TUESDAY:
-//                currentDay_MondayTuesDay(Calendar.TUESDAY);
-//                break;
-//
-//            case Calendar.WEDNESDAY:
-//                break;
-//
-//            case Calendar.THURSDAY:
-//                break;
-//
-//            case Calendar.FRIDAY:
-//                break;
-//
-//            case Calendar.SATURDAY:
-//                currentDay_WeekEnd();
-//                break;
-//        }
     }
 
-    private void currentDay_MondayTuesDay(int day){
-        if(day == Calendar.MONDAY){
-
-        }else {
-
-        }
-    }
 
     @Override
     public View createStepContentView(int stepNumber) {
@@ -157,9 +128,11 @@ public class SetExerciseInWeekActivity extends AppCompatActivity implements Vert
     public void onStepOpening(int stepNumber) {
         switch (stepNumber) {
             case 0:
+                verticalStepperForm.setActiveStepAsCompleted();
                 break;
             case 1:
-                checkSelectDayStep();
+                verticalStepperForm.setActiveStepAsCompleted();
+                //checkSelectDayStep();
                 break;
             case 2:
                 // As soon as the phone number step is open, we mark it as completed in order to show the "Continue"
@@ -174,13 +147,16 @@ public class SetExerciseInWeekActivity extends AppCompatActivity implements Vert
     @Override
     public void sendData() {
         editor.putBoolean(getResources().getString(R.string.sharedBoolSetExe), true);
-        editor.putBoolean(getResources().getString(R.string.sharedBoolFirstTimeOfWeek), true);
         editor.commit();
         dayHighLight();
+        setDateCheckWeekly();
         Intent intent = new Intent();
+        intent.putExtra("key","ok");
         setResult(Activity.RESULT_OK, intent);
         finish();
     }
+
+    // Begin step 1
 
     private View createDayOfWeekStep() {
         LayoutInflater inflater = LayoutInflater.from(getBaseContext());
@@ -338,15 +314,24 @@ public class SetExerciseInWeekActivity extends AppCompatActivity implements Vert
 
 
     private void setDateCheckWeekly(){
-        long midnightTimeNextMonday = (AlarmManager.INTERVAL_DAY - time.getTimeToMidnight())*getNextMonday();
+        //long midnightTimeNextMonday = (AlarmManager.INTERVAL_DAY * (getNextMonday()-1))+(AlarmManager.INTERVAL_DAY - time.getTimeToMidnight());
         Intent intent = new Intent(this, MyReceiver.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(),0,intent,PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this.getApplicationContext(),0,intent,PendingIntent.FLAG_UPDATE_CURRENT);
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-        alarmManager.set(AlarmManager.RTC_WAKEUP,midnightTimeNextMonday,pendingIntent);
+        alarmManager.set(AlarmManager.RTC_WAKEUP,System.currentTimeMillis()+10*1000,pendingIntent);
+
+        Log.i("timeINTERVALDAY",""+AlarmManager.INTERVAL_DAY);
+        Log.i("time",""+time.getTimeToMidnight());
     }
 
     private int getNextMonday(){
-            int nextMonday = (Calendar.SATURDAY - today + 2) % 7;
-        return nextMonday;
+        int nextMonday;
+        if(today == Calendar.MONDAY){
+            nextMonday = 7;
+            return  nextMonday;
+        }else {
+            nextMonday = (Calendar.SATURDAY - today + 2) % 7;
+            return nextMonday;
+        }
     }
 }

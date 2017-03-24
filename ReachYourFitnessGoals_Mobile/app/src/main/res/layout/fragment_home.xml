@@ -57,6 +57,17 @@
                     android:visibility="invisible"
                     />
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/dayOfWorkText"
+                    android:textColor="@color/colorRed"
+                    android:layout_centerHorizontal="true"
+                    android:text="@string/cancelSetExeText"
+                    android:id="@+id/cancelSetExe_Text_home"
+                    android:visibility="invisible"
+                    android:alpha="1"/>
+
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

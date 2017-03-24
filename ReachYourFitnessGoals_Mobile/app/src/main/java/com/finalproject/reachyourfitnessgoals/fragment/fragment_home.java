@@ -40,6 +40,7 @@ public class fragment_home extends Fragment {
     SharedPreferences.Editor editor;
     Button setExe;
     LinearLayout displayDay;
+    TextView cancelSetExe;
 
     public fragment_home() {
         // Required empty public constructor
@@ -57,17 +58,12 @@ public class fragment_home extends Fragment {
         editor = shared.edit();
         setExe = (Button)rootview.findViewById(R.id.setExd_button_home);
         displayDay = (LinearLayout) rootview.findViewById(R.id.displayDay_include_home);
-
+        cancelSetExe = (TextView)  rootview.findViewById(R.id.cancelSetExe_Text_home);
         // Make layoutTotalSelectDay to invisible
         LinearLayout layout = (LinearLayout) displayDay.findViewById(R.id.layoutTotalSelectDay_LinearLayout_dayOfWork);
         layout.setVisibility(View.INVISIBLE);
 
-        // check first time used
-//        boolean tempCheckTime = shared.getBoolean(getResources().getString(R.string.sharedBoolFirstTime), false);
-//        if(tempCheckTime == false){
-//            firstTimeUsed();
-//        }
-
+        Log.i("test",shared.getBoolean(getResources().getString(R.string.sharedBoolSetExe), false)+"");
         // Begin circle process
         DecoView arcView = (DecoView)rootview.findViewById(R.id.dynamicArcView);
 
@@ -132,31 +128,17 @@ public class fragment_home extends Fragment {
 
 
     private void checkSetExeWeekly(){
-//        int day = new handleCalendar().getCurrentDay();
-//        Log.i("check","1" + " " + shared.getBoolean(getResources().getString(R.string.sharedBoolSetExe), false));
-//        Log.i("check","11" + " " +  shared.getBoolean(getResources().getString(R.string.sharedBoolFirstTimeOfWeek), false));
-//        if(day == Calendar.FRIDAY){
-//            editor.putBoolean(getResources().getString(R.string.sharedBoolFirstTimeOfWeek), false);
-//            editor.commit();
-//        }
-//
-//        if(day == Calendar.MONDAY && shared.getBoolean(getResources().getString(R.string.sharedBoolFirstTimeOfWeek), false) == false){
-//            editor.putBoolean(getResources().getString(R.string.sharedBoolSetExe), false);
-//            editor.commit();
-//        }
+        Log.i("check","1" + " " + shared.getBoolean(getResources().getString(R.string.sharedBoolSetExe), false));
 
-        //if(shared.getBoolean(getResources().getString(R.string.sharedBoolSetExe), false) == false){
+        if(shared.getBoolean(getResources().getString(R.string.sharedBoolSetExe), false) == false){
             displayDay.setVisibility(View.INVISIBLE);
             setExe.setVisibility(View.VISIBLE);
             setExe.setOnClickListener(buttonSetExe);
-//        }else{
-//            setExe.setVisibility(View.INVISIBLE);
-//            displayDay.setVisibility(View.VISIBLE);
-//            setDayHighLight();
-//        }
-
-        Log.i("check","2" + " " + shared.getBoolean(getResources().getString(R.string.sharedBoolSetExe), false));
-        Log.i("check","22" + " " +  shared.getBoolean(getResources().getString(R.string.sharedBoolFirstTimeOfWeek), false));
+        }else{
+            setExe.setVisibility(View.INVISIBLE);
+            displayDay.setVisibility(View.VISIBLE);
+            setDayHighLight();
+        }
     }
 
 
@@ -174,10 +156,19 @@ public class fragment_home extends Fragment {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (resultCode == Activity.RESULT_OK && requestCode == 12345 && data != null) {
-            Log.d("onActivityResult", "requestCode = " + requestCode);
-            displayDay.setVisibility(View.VISIBLE);
-            setExe.setVisibility(View.INVISIBLE);
-            setDayHighLight();
+            Log.i("onActivityResult", data.getStringExtra("key"));
+            if(data.getStringExtra("key").equals("weekEnd")){
+                displayDay.setVisibility(View.INVISIBLE);
+                setExe.setVisibility(View.INVISIBLE);
+                cancelSetExe.setVisibility(View.VISIBLE);
+            }else{
+                displayDay.setVisibility(View.VISIBLE);
+                setExe.setVisibility(View.INVISIBLE);
+                setDayHighLight();
+            }
+        }else {
+            displayDay.setVisibility(View.INVISIBLE);
+            setExe.setVisibility(View.VISIBLE);
         }
     }
 
