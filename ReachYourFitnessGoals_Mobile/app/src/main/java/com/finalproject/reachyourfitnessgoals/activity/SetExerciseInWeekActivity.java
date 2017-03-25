@@ -23,10 +23,14 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.finalproject.reachyourfitnessgoals.R;
+import com.finalproject.reachyourfitnessgoals.database.handleTABLE_EXERCISE;
+import com.finalproject.reachyourfitnessgoals.models.DateData;
+import com.finalproject.reachyourfitnessgoals.models.ExerciseData;
 import com.finalproject.reachyourfitnessgoals.models.workoutOfWeekData;
 import com.finalproject.reachyourfitnessgoals.setting.MyReceiver;
 import com.finalproject.reachyourfitnessgoals.setting.handleCalendar;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Locale;
@@ -40,13 +44,16 @@ public class SetExerciseInWeekActivity extends AppCompatActivity implements Vert
     private VerticalStepperFormLayout verticalStepperForm;
     private LinearLayout daysStepContent;
     private LinearLayout selectDaysStepContent;
-    private handleCalendar time;
+    private handleCalendar calendar;
+    private handleTABLE_EXERCISE handleTableExercise;
     int today;
     int maxDay=4;// id layout 1-4
     int tempDay,tempTotalSelectDay=0;
     public workoutOfWeekData workoutOfWeekData;
     public SharedPreferences shared;
     public SharedPreferences.Editor editor;
+    public ExerciseData exerciseData;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,8 +63,10 @@ public class SetExerciseInWeekActivity extends AppCompatActivity implements Vert
         shared = this.getSharedPreferences(getResources().getString(R.string.sharedPreferencesName), Context.MODE_PRIVATE);
         editor = shared.edit();
         workoutOfWeekData = new workoutOfWeekData();
-        time = new handleCalendar();
-        today = time.getCurrentDay();
+        calendar = new handleCalendar();
+        today = calendar.getCurrentDay();
+        exerciseData = new ExerciseData();
+        handleTableExercise = new handleTABLE_EXERCISE(this);
         //Log.i("testDate",thaiTime.getCurrentTime()+"");
         //day = Calendar.FRIDAY;
 //        Log.i("test",day+"");
@@ -81,6 +90,7 @@ public class SetExerciseInWeekActivity extends AppCompatActivity implements Vert
                 .init();
 
 
+        calendar.getAllDayInWeek();
 
     }
 
@@ -207,6 +217,8 @@ public class SetExerciseInWeekActivity extends AppCompatActivity implements Vert
 
     // end step 1
 
+    // Begin step 2
+
     private View createSelectDayStep() {
         LayoutInflater inflater = LayoutInflater.from(getBaseContext());
         selectDaysStepContent = (LinearLayout) inflater.inflate(R.layout.day_of_workout_layout, null, false);
@@ -298,11 +310,18 @@ public class SetExerciseInWeekActivity extends AppCompatActivity implements Vert
 
     //end step 2
 
+    // other setting
+
     private void dayHighLight(){
+        ArrayList<DateData> dateList = calendar.getAllDayInWeek();
         for(int i=1 ; i<=7 ; i++){
             LinearLayout selectDayLayout = getSelectDayLayout(i);
             if(selectDayLayout.getTag().toString().equals("true")){
                 editor.putBoolean(getResources().getString(R.string.sharedBoolDayHighLight)+ i , true);
+                addToDataBase(dateList.get(i-1));
+                Log.i("day",calendar.getDay()+"");
+                Log.i("month",calendar.getMonth()+"");
+                Log.i("year",calendar.getYear()+"");
             }else{
                 editor.putBoolean(getResources().getString(R.string.sharedBoolDayHighLight)+ i , false);
             }
@@ -312,7 +331,7 @@ public class SetExerciseInWeekActivity extends AppCompatActivity implements Vert
 
 
     private void setDateCheckWeekly(){
-        long midnightTimeNextMonday = (AlarmManager.INTERVAL_DAY * (getNextMonday()-1))+(AlarmManager.INTERVAL_DAY - time.getTimeToMidnight());
+        long midnightTimeNextMonday = (AlarmManager.INTERVAL_DAY * (getNextMonday()-1))+(AlarmManager.INTERVAL_DAY - calendar.getTimeToMidnight());
         Intent intent = new Intent(this, MyReceiver.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this.getApplicationContext(),0,intent,PendingIntent.FLAG_UPDATE_CURRENT);
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
@@ -320,7 +339,7 @@ public class SetExerciseInWeekActivity extends AppCompatActivity implements Vert
 
         Log.i("timeINTERVALDAY",""+AlarmManager.INTERVAL_DAY);
         Log.i("timeINTERVALDAY",""+System.currentTimeMillis());
-        Log.i("time",""+time.getTimeToMidnight());
+        Log.i("time",""+calendar.getTimeToMidnight());
     }
 
     private int getNextMonday(){
@@ -334,7 +353,7 @@ public class SetExerciseInWeekActivity extends AppCompatActivity implements Vert
         }
     }
 
-    private void addToDataBase(){
-
+    private void addToDataBase(DateData data){
+        handleTableExercise.addExercise(data);
     }
 }

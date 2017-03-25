@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.finalproject.reachyourfitnessgoals.models.DateData;
 import com.finalproject.reachyourfitnessgoals.models.GoalData;
 
 /**
@@ -29,15 +30,15 @@ public class handleTABLE_EXERCISE {
         readSQLite = objDBHelper.getReadableDatabase();
     }
 
-    public void addExercise(GoalData data){
+    public void addExercise(DateData data){
         ContentValues values = new ContentValues();
-        values.put(COLUMN_DAY, data.getWeightGoal());
-        values.put(COLUMN_MONTH, data.getTotalDuration());
-        values.put(COLUMN_YEAR , data.getYear_date_begin());
-        values.put(COLUMN_VDO_ID, data.getMonth_date_begin());
-        values.put(COLUMN_CALORIE, data.getDay_date_begin());
-        values.put(COLUMN_NOTE, data.getYear_date_end());
-        values.put(COLUMN_TIME, data.getMonth_date_end());
+        values.put(COLUMN_DAY, data.getDay());
+        values.put(COLUMN_MONTH, data.getMonth());
+        values.put(COLUMN_YEAR , data.getYear());
+        values.put(COLUMN_VDO_ID,"Not add vdo");
+        values.put(COLUMN_CALORIE, 0);
+        values.put(COLUMN_NOTE, "Not add note");
+        values.put(COLUMN_TIME, 0.0);
 
         writeSQLite.insert(TABLE_EXERCISE, null, values);
     }

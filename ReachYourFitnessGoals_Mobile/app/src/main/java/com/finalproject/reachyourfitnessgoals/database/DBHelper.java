@@ -57,12 +57,14 @@ public class DBHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(TABLE_PERSONAL);
         db.execSQL(TABLE_PROGRAM);
+        db.execSQL(TABLE_EXERCISE);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
         db.execSQL("DROP TABLE IF EXISTS PERSONAL");
         db.execSQL("DROP TABLE IF EXISTS PROGRAM");
+        db.execSQL("DROP TABLE IF EXISTS EXERCISE");
         onCreate(db);
     }
 }
