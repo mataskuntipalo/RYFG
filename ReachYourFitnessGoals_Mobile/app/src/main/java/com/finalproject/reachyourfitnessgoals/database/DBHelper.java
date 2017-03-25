@@ -45,7 +45,7 @@ public class DBHelper extends SQLiteOpenHelper {
             "year INTEGER NOT NULL, " +
             "vdo_id TEXT, " +
             "calorie INTEGER, " +
-            "notw TEXT, " +
+            "note TEXT, " +
             "time REAL);";
 
 

@@ -128,11 +128,10 @@ public class SetExerciseInWeekActivity extends AppCompatActivity implements Vert
     public void onStepOpening(int stepNumber) {
         switch (stepNumber) {
             case 0:
-                verticalStepperForm.setActiveStepAsCompleted();
+
                 break;
             case 1:
-                verticalStepperForm.setActiveStepAsCompleted();
-                //checkSelectDayStep();
+                checkSelectDayStep();
                 break;
             case 2:
                 // As soon as the phone number step is open, we mark it as completed in order to show the "Continue"
@@ -303,7 +302,6 @@ public class SetExerciseInWeekActivity extends AppCompatActivity implements Vert
         for(int i=1 ; i<=7 ; i++){
             LinearLayout selectDayLayout = getSelectDayLayout(i);
             if(selectDayLayout.getTag().toString().equals("true")){
-                Log.i("test","day"+i);
                 editor.putBoolean(getResources().getString(R.string.sharedBoolDayHighLight)+ i , true);
             }else{
                 editor.putBoolean(getResources().getString(R.string.sharedBoolDayHighLight)+ i , false);
@@ -314,13 +312,14 @@ public class SetExerciseInWeekActivity extends AppCompatActivity implements Vert
 
 
     private void setDateCheckWeekly(){
-        //long midnightTimeNextMonday = (AlarmManager.INTERVAL_DAY * (getNextMonday()-1))+(AlarmManager.INTERVAL_DAY - time.getTimeToMidnight());
+        long midnightTimeNextMonday = (AlarmManager.INTERVAL_DAY * (getNextMonday()-1))+(AlarmManager.INTERVAL_DAY - time.getTimeToMidnight());
         Intent intent = new Intent(this, MyReceiver.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this.getApplicationContext(),0,intent,PendingIntent.FLAG_UPDATE_CURRENT);
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-        alarmManager.set(AlarmManager.RTC_WAKEUP,System.currentTimeMillis()+10*1000,pendingIntent);
+        alarmManager.set(AlarmManager.RTC_WAKEUP,System.currentTimeMillis()+midnightTimeNextMonday,pendingIntent);
 
         Log.i("timeINTERVALDAY",""+AlarmManager.INTERVAL_DAY);
+        Log.i("timeINTERVALDAY",""+System.currentTimeMillis());
         Log.i("time",""+time.getTimeToMidnight());
     }
 
@@ -333,5 +332,9 @@ public class SetExerciseInWeekActivity extends AppCompatActivity implements Vert
             nextMonday = (Calendar.SATURDAY - today + 2) % 7;
             return nextMonday;
         }
+    }
+
+    private void addToDataBase(){
+
     }
 }
