@@ -2,12 +2,14 @@ package com.finalproject.reachyourfitnessgoals.fragment;
 
 
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -112,19 +114,19 @@ public class fragment_calendar extends Fragment {
         });
 
 
-        addEvent(handleTableExercise.getDateExerciseToCalendar());
+        addEvent(handleTableExercise.getDateExerciseToCalendar(),getResources().getColor(R.color.colorPrimary));
 
         return rootview;
     }
 
 
-    public void addEvent(ArrayList<DateData> dateDatas){
+    public void addEvent(ArrayList<DateData> dateDatas,int color){
             HashSet<CalendarDay> event = new HashSet<CalendarDay>();
             for(DateData date : dateDatas){
                 event.add(CalendarDay.from(date.getYear(),date.getMonth(),date.getDay()));
             }
-            int myColor = getResources().getColor(R.color.colorPrimary);
-            MCV.addDecorator(new EventDecorator(myColor, event));
+
+            MCV.addDecorator(new EventDecorator(color, event));
     }
 
     private void checkExeInDay(CalendarDay date){
@@ -141,7 +143,9 @@ public class fragment_calendar extends Fragment {
 
         @Override
         public void onClick(View v) {
-
+            FragmentManager fm = getFragmentManager();
+            fragment_dialog_inFragment_calendar dialogFragment = new fragment_dialog_inFragment_calendar ();
+            dialogFragment.show(fm, "Sample Fragment");
         }
     };
 

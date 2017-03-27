@@ -330,7 +330,7 @@ public class SetExerciseInWeekActivity extends AppCompatActivity implements Vert
                 editor.putBoolean(getResources().getString(R.string.sharedBoolDayHighLight)+ i , false);
             }
         }
-        fragmentCalendar.addEvent(data);
+        fragmentCalendar.addEvent(data,getResources().getColor(R.color.colorPrimary));
         editor.commit();
     }
 

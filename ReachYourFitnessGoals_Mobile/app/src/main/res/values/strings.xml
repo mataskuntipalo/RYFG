@@ -26,5 +26,8 @@
     <string name="selectExerciseOfDay_text">ท่าออกกำลังกายประจำวัน</string>
     <string name="selectExerciseOfDay_buttonText">เลือกท่าออกกำลังกายประจำวัน</string>
 
+    <!-- dialog_setExercise_inDay -->
+    <string name="customSelect">เลือกท่าเอง</string>
+    <string name="autoSelect">เลือกท่าอัตโนมัติ</string>
 
 </resources>

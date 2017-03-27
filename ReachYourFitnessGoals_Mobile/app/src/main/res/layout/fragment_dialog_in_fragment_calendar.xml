@@ -1,0 +1,40 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:padding="@dimen/default_padding"
+    tools:context="com.finalproject.reachyourfitnessgoals.fragment.fragment_dialog_inFragment_calendar">
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        android:layout_weight="0.5"
+        android:background="@color/colorBlack"
+        android:layout_marginRight="5dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/customSelect"
+            android:textColor="@color/colorWhite"
+            android:layout_centerInParent="true"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        android:layout_weight="0.5"
+        android:background="@color/colorBlack">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/autoSelect"
+            android:textColor="@color/colorWhite"
+            android:layout_centerInParent="true"/>
+
+    </RelativeLayout>
+
+</LinearLayout>
