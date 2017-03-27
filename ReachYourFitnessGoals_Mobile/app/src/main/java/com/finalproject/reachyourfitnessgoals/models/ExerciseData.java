@@ -9,6 +9,12 @@ public class ExerciseData {
     String vdo_id,note;
     float time;
 
+    public ExerciseData(String vdo_id, int calorie, String note, float time) {
+        this.vdo_id = vdo_id;
+        this.calorie = calorie;
+        this.note = note;
+        this.time = time;
+    }
 
     public int getCalorie() {
         return calorie;

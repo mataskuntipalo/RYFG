@@ -24,15 +24,19 @@ import android.widget.TextView;
 
 import com.finalproject.reachyourfitnessgoals.R;
 import com.finalproject.reachyourfitnessgoals.database.handleTABLE_EXERCISE;
+import com.finalproject.reachyourfitnessgoals.fragment.fragment_calendar;
 import com.finalproject.reachyourfitnessgoals.models.DateData;
 import com.finalproject.reachyourfitnessgoals.models.ExerciseData;
 import com.finalproject.reachyourfitnessgoals.models.workoutOfWeekData;
+import com.finalproject.reachyourfitnessgoals.setting.EventDecorator;
 import com.finalproject.reachyourfitnessgoals.setting.MyReceiver;
 import com.finalproject.reachyourfitnessgoals.setting.handleCalendar;
+import com.prolificinteractive.materialcalendarview.CalendarDay;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.HashSet;
 import java.util.Locale;
 import java.util.TimeZone;
 
@@ -46,13 +50,14 @@ public class SetExerciseInWeekActivity extends AppCompatActivity implements Vert
     private LinearLayout selectDaysStepContent;
     private handleCalendar calendar;
     private handleTABLE_EXERCISE handleTableExercise;
+    private fragment_calendar fragmentCalendar;
     int today;
     int maxDay=4;// id layout 1-4
     int tempDay,tempTotalSelectDay=0;
     public workoutOfWeekData workoutOfWeekData;
     public SharedPreferences shared;
     public SharedPreferences.Editor editor;
-    public ExerciseData exerciseData;
+
 
 
     @Override
@@ -65,8 +70,8 @@ public class SetExerciseInWeekActivity extends AppCompatActivity implements Vert
         workoutOfWeekData = new workoutOfWeekData();
         calendar = new handleCalendar();
         today = calendar.getCurrentDay();
-        exerciseData = new ExerciseData();
         handleTableExercise = new handleTABLE_EXERCISE(this);
+        fragmentCalendar = fragment_calendar.newInstance();
         //Log.i("testDate",thaiTime.getCurrentTime()+"");
         //day = Calendar.FRIDAY;
 //        Log.i("test",day+"");
@@ -314,18 +319,18 @@ public class SetExerciseInWeekActivity extends AppCompatActivity implements Vert
 
     private void dayHighLight(){
         ArrayList<DateData> dateList = calendar.getAllDayInWeek();
+        ArrayList<DateData> data = new ArrayList<>();
         for(int i=1 ; i<=7 ; i++){
             LinearLayout selectDayLayout = getSelectDayLayout(i);
             if(selectDayLayout.getTag().toString().equals("true")){
                 editor.putBoolean(getResources().getString(R.string.sharedBoolDayHighLight)+ i , true);
                 addToDataBase(dateList.get(i-1));
-                Log.i("day",calendar.getDay()+"");
-                Log.i("month",calendar.getMonth()+"");
-                Log.i("year",calendar.getYear()+"");
+                data.add(dateList.get(i-1));
             }else{
                 editor.putBoolean(getResources().getString(R.string.sharedBoolDayHighLight)+ i , false);
             }
         }
+        fragmentCalendar.addEvent(data);
         editor.commit();
     }
 

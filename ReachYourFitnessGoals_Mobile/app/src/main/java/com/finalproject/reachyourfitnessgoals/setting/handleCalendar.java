@@ -63,10 +63,7 @@ public class handleCalendar {
         tempCalendar.add(Calendar.DAY_OF_MONTH, delta);
         for (int i = 1; i <= 7; i++)
         {
-            DateData dateData = new DateData();
-            dateData.setDay(tempCalendar.get(Calendar.DAY_OF_MONTH));
-            dateData.setMonth(tempCalendar.get(Calendar.MONTH)+1);
-            dateData.setYear(tempCalendar.get(Calendar.YEAR));
+            DateData dateData = new DateData(tempCalendar.get(Calendar.DAY_OF_MONTH),tempCalendar.get(Calendar.MONTH),tempCalendar.get(Calendar.YEAR));
             dateDataArrayList.add(dateData);
             tempCalendar.add(Calendar.DAY_OF_MONTH, 1);
         }

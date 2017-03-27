@@ -60,14 +60,14 @@ public class handleTABLE_PROGRAM {
             Cursor cursor = readSQLite.rawQuery("SELECT * FROM " + TABLE_PROGRAM ,null);
             cursor.moveToLast();
 
-            data.setWeightGoal(cursor.getFloat(1));
-            data.setTotalDuration(cursor.getInt(2));
-            data.setYear_date_begin(cursor.getInt(3));
-            data.setMonth_date_begin(cursor.getInt(4));
-            data.setYear_date_begin(cursor.getInt(5));
-            data.setYear_date_end(cursor.getInt(6));
-            data.setMonth_date_end(cursor.getInt(7));
-            data.setYear_date_end(cursor.getInt(8));
+            data.setWeightGoal(cursor.getFloat(2));
+            data.setTotalDuration(cursor.getInt(3));
+            data.setYear_date_begin(cursor.getInt(4));
+            data.setMonth_date_begin(cursor.getInt(5));
+            data.setYear_date_begin(cursor.getInt(6));
+            data.setYear_date_end(cursor.getInt(7));
+            data.setMonth_date_end(cursor.getInt(8));
+            data.setYear_date_end(cursor.getInt(9));
             return data;
         }
     }
