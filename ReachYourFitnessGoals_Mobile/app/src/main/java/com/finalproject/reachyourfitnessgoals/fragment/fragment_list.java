@@ -1,17 +1,34 @@
 package com.finalproject.reachyourfitnessgoals.fragment;
 
 
+import android.app.DownloadManager;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.finalproject.reachyourfitnessgoals.R;
 import com.finalproject.reachyourfitnessgoals.adapter.CustomListVDO_Adapter;
+import com.finalproject.reachyourfitnessgoals.models.vdoData;
+import com.google.gson.Gson;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -19,13 +36,11 @@ import com.finalproject.reachyourfitnessgoals.adapter.CustomListVDO_Adapter;
 public class fragment_list extends Fragment {
 
     int[] resId = { R.drawable.pic};
+    String[] list = {"Camel"};
 
-    String[] list = { "Aerith Gainsborough"};
 
     public static fragment_list newInstance() {
         fragment_list fragment = new fragment_list();
-        //fragment.setArguments(args);
-        //fragment.setHasOptionsMenu(true);
         return fragment;
     }
 
@@ -39,9 +54,7 @@ public class fragment_list extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-
         View rootview = inflater.inflate(R.layout.fragment_list, container, false);
-
         CustomListVDO_Adapter adapter = new CustomListVDO_Adapter(getActivity(), list, resId);
         ListView listView = (ListView)rootview.findViewById(R.id.listview);
         listView.setAdapter(adapter);
@@ -58,7 +71,6 @@ public class fragment_list extends Fragment {
 
             }
         });
-
         return rootview;
     }
 

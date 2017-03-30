@@ -37,6 +37,7 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String TABLE_VDO = "CREATE TABLE VDO (vdo_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
             "name TEXT NOT NULL, " +
             "type TEXT NOT NULL, " +
+            "position TEXT NOT NULL, " +
             "calorie INTEGER NOT NULL);";
 
     private static final String TABLE_EXERCISE = "CREATE TABLE EXERCISE  (exercise_id INTEGER PRIMARY KEY AUTOINCREMENT, " +

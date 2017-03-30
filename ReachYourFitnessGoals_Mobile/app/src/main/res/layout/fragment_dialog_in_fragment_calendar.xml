@@ -6,35 +6,23 @@
     android:padding="@dimen/default_padding"
     tools:context="com.finalproject.reachyourfitnessgoals.fragment.fragment_dialog_inFragment_calendar">
 
-    <RelativeLayout
+    <Button
         android:layout_width="0dp"
         android:layout_height="100dp"
         android:layout_weight="0.5"
         android:background="@color/colorBlack"
-        android:layout_marginRight="5dp">
+        android:layout_marginRight="5dp"
+        android:text="@string/customSelect"
+        android:textColor="@color/colorWhite"
+        android:id="@+id/customSetExe_Button_dialog"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/customSelect"
-            android:textColor="@color/colorWhite"
-            android:layout_centerInParent="true"/>
-
-    </RelativeLayout>
-
-    <RelativeLayout
+    <Button
         android:layout_width="0dp"
         android:layout_height="100dp"
         android:layout_weight="0.5"
-        android:background="@color/colorBlack">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/autoSelect"
-            android:textColor="@color/colorWhite"
-            android:layout_centerInParent="true"/>
-
-    </RelativeLayout>
+        android:background="@color/colorBlack"
+        android:text="@string/autoSelect"
+        android:textColor="@color/colorWhite"
+        android:id="@+id/autoSetExe_Button_dialog"/>
 
 </LinearLayout>

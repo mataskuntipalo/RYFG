@@ -73,7 +73,12 @@ public class handleTABLE_EXERCISE {
                 + " WHERE " + COLUMN_DAY + "=" + date.getDay() + " AND "
                 + COLUMN_MONTH + "=" + date.getMonth() + " AND "
                 + COLUMN_YEAR + "=" + date.getYear(), null);
-        cursor.moveToFirst();
-         return new ExerciseData(cursor.getString(0),cursor.getInt(1),cursor.getString(2),cursor.getFloat(3));
+        Log.i("cursor",cursor.getCount()+"");
+        if(cursor.getCount() == 0){
+            return null;
+        }else{
+            cursor.moveToFirst();
+            return new ExerciseData(cursor.getString(0),cursor.getInt(1),cursor.getString(2),cursor.getFloat(3));
+        }
     }
 }

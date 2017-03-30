@@ -1,16 +1,13 @@
 package com.finalproject.reachyourfitnessgoals.fragment;
 
 
-import android.app.DatePickerDialog;
-import android.app.Dialog;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.view.menu.MenuView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -18,12 +15,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
-import android.widget.TableLayout;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.Volley;
 import com.finalproject.reachyourfitnessgoals.R;
 import com.finalproject.reachyourfitnessgoals.database.handleTABLE_EXERCISE;
 import com.finalproject.reachyourfitnessgoals.database.handleTABLE_PROGRAM;
@@ -37,6 +38,10 @@ import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.CalendarMode;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 import com.prolificinteractive.materialcalendarview.OnDateSelectedListener;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -105,7 +110,7 @@ public class fragment_calendar extends Fragment {
                 .setCalendarDisplayMode(CalendarMode.MONTHS)
                 .commit();
 
-
+        MCV.setDateSelected(CalendarDay.today(),true);
         MCV.setOnDateChangedListener(new OnDateSelectedListener() {
             @Override
             public void onDateSelected(@NonNull MaterialCalendarView widget, @NonNull CalendarDay date, boolean selected) {
@@ -131,12 +136,19 @@ public class fragment_calendar extends Fragment {
 
     private void checkExeInDay(CalendarDay date){
         ExerciseData exerciseData = handleTableExercise.getDetailExercise(date);
-        if(exerciseData.getVdo_id().equals("ยังไม่ได้เลือกท่าออกกำลังกาย")){
-            setExeButton.setVisibility(View.VISIBLE);
-            setExeButton.setOnClickListener(setExe);
-        }else {
-            setExeButton.setVisibility(View.INVISIBLE);
+        Log.i("exerciseData",exerciseData+"");
+        if(exerciseData != null){
+            if(exerciseData.getVdo_id().equals("ยังไม่ได้เลือกท่าออกกำลังกาย")){
+                setExeButton.setVisibility(View.VISIBLE);
+                setExeButton.setOnClickListener(setExe);
+            }else {
+                setExeButton.setVisibility(View.INVISIBLE);
+            }
+
+        }else{
+
         }
+
     }
 
     private View.OnClickListener setExe = new View.OnClickListener(){
@@ -148,6 +160,43 @@ public class fragment_calendar extends Fragment {
             dialogFragment.show(fm, "Sample Fragment");
         }
     };
+
+    private View.OnClickListener syn = new View.OnClickListener(){
+
+        @Override
+        public void onClick(View v) {
+            String url = "http://192.168.1.35/ryfg/getJSON.php";
+
+            JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
+
+                @Override
+                public void onResponse(JSONArray response) {
+                    try {
+                        String[] list = new String[response.length()];
+                        for(int i = 0; i < response.length(); i++){
+                            JSONObject jsonObject = response.getJSONObject(i);
+                            list[i] = jsonObject.getString("name");
+                            // vdoDatas.add(new vdoData(jsonObject.getString("name"),jsonObject.getString("type"),jsonObject.getString("position"),jsonObject.getInt("calorie")));
+                        }
+
+                    }catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+
+                }
+            });
+
+            RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
+            requestQueue.add(jsonArrayRequest);
+        }
+    };
+
+
+
 
 
 }

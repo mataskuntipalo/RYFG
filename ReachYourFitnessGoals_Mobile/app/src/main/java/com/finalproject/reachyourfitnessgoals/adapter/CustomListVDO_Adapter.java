@@ -9,6 +9,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.finalproject.reachyourfitnessgoals.R;
+import com.finalproject.reachyourfitnessgoals.models.vdoData;
+
+import java.util.ArrayList;
 
 /**
  * Created by Papang on 18/12/2559.
@@ -19,11 +22,12 @@ public class CustomListVDO_Adapter extends BaseAdapter{
     String[] strName;
     int[] id;
 
-    public CustomListVDO_Adapter(Context context, String[] strName, int[] resId) {
-        this.mContext= context;
+    public CustomListVDO_Adapter(Context mContext, String[] strName, int[] id) {
+        this.mContext = mContext;
         this.strName = strName;
-        this.id = resId;
+        this.id = id;
     }
+
     @Override
     public int getCount() {
         return strName.length;
