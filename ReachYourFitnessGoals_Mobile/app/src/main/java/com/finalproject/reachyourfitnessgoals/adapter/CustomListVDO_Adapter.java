@@ -13,11 +13,13 @@ import com.finalproject.reachyourfitnessgoals.models.vdoData;
 
 import java.util.ArrayList;
 
+import se.emilsjolander.stickylistheaders.StickyListHeadersAdapter;
+
 /**
  * Created by Papang on 18/12/2559.
  */
 
-public class CustomListVDO_Adapter extends BaseAdapter{
+public class CustomListVDO_Adapter extends BaseAdapter implements StickyListHeadersAdapter {
     Context mContext;
     String[] strName;
     int[] id;
@@ -58,5 +60,15 @@ public class CustomListVDO_Adapter extends BaseAdapter{
         imageView.setBackgroundResource(id[position]);
 
         return view;
+    }
+
+    @Override
+    public View getHeaderView(int position, View convertView, ViewGroup parent) {
+        return null;
+    }
+
+    @Override
+    public long getHeaderId(int position) {
+        return 0;
     }
 }

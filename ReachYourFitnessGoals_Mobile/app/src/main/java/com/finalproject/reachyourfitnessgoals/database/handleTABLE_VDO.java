@@ -19,6 +19,7 @@ public class handleTABLE_VDO {
     public static final String COLUMN_NAME = "name";
     public static final String COLUMN_TYPE = "type";
     public static final String COLUMN_POSITION = "position";
+    public static final String COLUMN_DURATION = "duration";
     public static final String COLUMN_CALORIE = "calorie";
 
     public handleTABLE_VDO(Context context) {
@@ -32,6 +33,7 @@ public class handleTABLE_VDO {
         values.put(COLUMN_NAME, vdoData.getName());
         values.put(COLUMN_TYPE, vdoData.getType());
         values.put(COLUMN_POSITION , vdoData.getPosition());
+        values.put(COLUMN_DURATION , vdoData.getDuration());
         values.put(COLUMN_CALORIE, vdoData.getPosition());
 
         writeSQLite.insert(TABLE_VDO, null, values);

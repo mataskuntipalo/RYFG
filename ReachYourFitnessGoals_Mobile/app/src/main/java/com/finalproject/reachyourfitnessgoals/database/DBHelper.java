@@ -38,6 +38,7 @@ public class DBHelper extends SQLiteOpenHelper {
             "name TEXT NOT NULL, " +
             "type TEXT NOT NULL, " +
             "position TEXT NOT NULL, " +
+            "duration TEXT NOT NULL, " +
             "calorie INTEGER NOT NULL);";
 
     private static final String TABLE_EXERCISE = "CREATE TABLE EXERCISE  (exercise_id INTEGER PRIMARY KEY AUTOINCREMENT, " +

@@ -48,5 +48,6 @@ dependencies {
     compile 'com.github.bmarrdev:android-DecoView-charting:v0.9.3'
     compile 'com.android.support:support-v13:24.2.1'
     compile 'com.ernestoyaquello.stepperform:vertical-stepper-form:0.9.9'
+    compile 'se.emilsjolander:stickylistheaders:2.7.0'
     testCompile 'junit:junit:4.12'
 }

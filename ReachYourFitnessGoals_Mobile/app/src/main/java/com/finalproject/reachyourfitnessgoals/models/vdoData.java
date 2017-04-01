@@ -5,15 +5,9 @@ package com.finalproject.reachyourfitnessgoals.models;
  */
 
 public class vdoData {
-    String name,type,position;
+    String name,type,position,duration;
     int calorie;
 
-    public vdoData(String name, String type, String position, int calorie) {
-        this.name = name;
-        this.type = type;
-        this.position = position;
-        this.calorie = calorie;
-    }
 
     public String getName() {
         return name;
@@ -37,6 +31,14 @@ public class vdoData {
 
     public void setPosition(String position) {
         this.position = position;
+    }
+
+    public String getDuration() {
+        return duration;
+    }
+
+    public void setDuration(String duration) {
+        this.duration = duration;
     }
 
     public int getCalorie() {
