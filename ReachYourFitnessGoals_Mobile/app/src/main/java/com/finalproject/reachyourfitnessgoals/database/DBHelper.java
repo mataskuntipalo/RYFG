@@ -59,6 +59,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(TABLE_PERSONAL);
         db.execSQL(TABLE_PROGRAM);
+        db.execSQL(TABLE_VDO);
         db.execSQL(TABLE_EXERCISE);
     }
 

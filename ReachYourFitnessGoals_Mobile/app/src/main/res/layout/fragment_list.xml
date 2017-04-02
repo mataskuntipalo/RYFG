@@ -6,9 +6,9 @@
 
     <!-- TODO: Update blank fragment layout -->
 
-    <ListView
+    <se.emilsjolander.stickylistheaders.StickyListHeadersListView
+        android:id="@+id/list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/listview"/>
+        android:layout_height="match_parent"/>
 
 </FrameLayout>

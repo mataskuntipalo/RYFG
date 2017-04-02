@@ -165,33 +165,7 @@ public class fragment_calendar extends Fragment {
 
         @Override
         public void onClick(View v) {
-            String url = "http://192.168.1.35/ryfg/getJSON.php";
 
-            JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
-
-                @Override
-                public void onResponse(JSONArray response) {
-                    try {
-                        String[] list = new String[response.length()];
-                        for(int i = 0; i < response.length(); i++){
-                            JSONObject jsonObject = response.getJSONObject(i);
-                            list[i] = jsonObject.getString("name");
-                            // vdoDatas.add(new vdoData(jsonObject.getString("name"),jsonObject.getString("type"),jsonObject.getString("position"),jsonObject.getInt("calorie")));
-                        }
-
-                    }catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-
-                }
-            });
-
-            RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
-            requestQueue.add(jsonArrayRequest);
         }
     };
 

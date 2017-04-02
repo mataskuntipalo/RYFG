@@ -30,13 +30,15 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
+
 /**
  * A simple {@link Fragment} subclass.
  */
 public class fragment_list extends Fragment {
 
     int[] resId = { R.drawable.pic};
-    String[] list = {"Camel"};
+    String[] list = { "text1", "text2", "text3", "text4" };
 
 
     public static fragment_list newInstance() {
@@ -55,22 +57,27 @@ public class fragment_list extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootview = inflater.inflate(R.layout.fragment_list, container, false);
-        CustomListVDO_Adapter adapter = new CustomListVDO_Adapter(getActivity(), list, resId);
-        ListView listView = (ListView)rootview.findViewById(R.id.listview);
-        listView.setAdapter(adapter);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-                fragment_VDO vdo = fragment_VDO.newInstance();
-                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                fragmentManager
-                        .beginTransaction()
-//                        .setCustomAnimations(R.anim.slide_up,R.anim.slide_down,R.anim.slide_up,R.anim.slide_down)
-                        .replace(R.id.activity_main, vdo, "fragment_list")
-                        .addToBackStack("fragment_list")
-                        .commit();
 
-            }
-        });
+        StickyListHeadersListView stickyList = (StickyListHeadersListView) rootview.findViewById(R.id.list);
+        CustomListVDO_Adapter adapter = new CustomListVDO_Adapter(getActivity(), list, resId);
+        stickyList.setAdapter(adapter);
+
+//        CustomListVDO_Adapter adapter = new CustomListVDO_Adapter(getActivity(), list, resId);
+//        ListView listView = (ListView)rootview.findViewById(R.id.listview);
+//        listView.setAdapter(adapter);
+//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+//                fragment_VDO vdo = fragment_VDO.newInstance();
+//                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+//                fragmentManager
+//                        .beginTransaction()
+////                        .setCustomAnimations(R.anim.slide_up,R.anim.slide_down,R.anim.slide_up,R.anim.slide_down)
+//                        .replace(R.id.activity_main, vdo, "fragment_list")
+//                        .addToBackStack("fragment_list")
+//                        .commit();
+//
+//            }
+//        });
         return rootview;
     }
 

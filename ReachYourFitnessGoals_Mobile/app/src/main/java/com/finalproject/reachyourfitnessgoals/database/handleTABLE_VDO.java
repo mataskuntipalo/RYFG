@@ -7,6 +7,8 @@ import android.database.sqlite.SQLiteDatabase;
 import com.finalproject.reachyourfitnessgoals.models.DateData;
 import com.finalproject.reachyourfitnessgoals.models.vdoData;
 
+import java.util.ArrayList;
+
 /**
  * Created by Papang on 31/3/2560.
  */
@@ -28,14 +30,15 @@ public class handleTABLE_VDO {
         readSQLite = objDBHelper.getReadableDatabase();
     }
 
-    public void addExercise(vdoData vdoData){
+    public void addExercise(ArrayList<vdoData> vdoDataList){
         ContentValues values = new ContentValues();
-        values.put(COLUMN_NAME, vdoData.getName());
-        values.put(COLUMN_TYPE, vdoData.getType());
-        values.put(COLUMN_POSITION , vdoData.getPosition());
-        values.put(COLUMN_DURATION , vdoData.getDuration());
-        values.put(COLUMN_CALORIE, vdoData.getPosition());
-
+        for (vdoData data: vdoDataList) {
+            values.put(COLUMN_NAME, data.getName());
+            values.put(COLUMN_TYPE, data.getType());
+            values.put(COLUMN_POSITION , data.getPosition());
+            values.put(COLUMN_DURATION , data.getDuration());
+            values.put(COLUMN_CALORIE, data.getPosition());
+        }
         writeSQLite.insert(TABLE_VDO, null, values);
     }
 

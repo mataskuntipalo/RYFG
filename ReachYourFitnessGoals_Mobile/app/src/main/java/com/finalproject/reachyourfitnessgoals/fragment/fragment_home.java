@@ -36,7 +36,7 @@ import java.util.Calendar;
  */
 public class fragment_home extends Fragment {
 
-    public SharedPreferences shared;
+    SharedPreferences shared;
     SharedPreferences.Editor editor;
     Button setExe;
     LinearLayout displayDay;

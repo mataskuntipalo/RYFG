@@ -63,8 +63,18 @@ public class CustomListVDO_Adapter extends BaseAdapter implements StickyListHead
     }
 
     @Override
-    public View getHeaderView(int position, View convertView, ViewGroup parent) {
-        return null;
+    public View getHeaderView(int position, View view, ViewGroup viewGroup) {
+        LayoutInflater mInflater =
+                (LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+        if (view == null) {
+            view = mInflater.inflate(R.layout.header_listview_row, viewGroup, false);
+        }
+
+        //set header text as first char in name
+        TextView textView = (TextView)view.findViewById(R.id.header_listView);
+        textView.setText(strName[position]);
+        return view;
     }
 
     @Override

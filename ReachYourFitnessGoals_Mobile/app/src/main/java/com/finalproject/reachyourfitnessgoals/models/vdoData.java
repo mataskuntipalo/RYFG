@@ -8,6 +8,13 @@ public class vdoData {
     String name,type,position,duration;
     int calorie;
 
+    public vdoData(String name, String type, String position, String duration, int calorie) {
+        this.name = name;
+        this.type = type;
+        this.position = position;
+        this.duration = duration;
+        this.calorie = calorie;
+    }
 
     public String getName() {
         return name;

@@ -35,6 +35,8 @@ dependencies {
     // connect server
     // calendar view
     // circle process
+    // vertical stepper
+    // StickyListHeaders
 
 
     compile 'com.android.support:appcompat-v7:24.2.1'
