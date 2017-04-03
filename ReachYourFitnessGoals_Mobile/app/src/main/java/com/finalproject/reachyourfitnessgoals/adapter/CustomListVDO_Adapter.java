@@ -1,6 +1,7 @@
 package com.finalproject.reachyourfitnessgoals.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.finalproject.reachyourfitnessgoals.R;
+import com.finalproject.reachyourfitnessgoals.database.handleTABLE_VDO;
 import com.finalproject.reachyourfitnessgoals.models.vdoData;
 
 import java.util.ArrayList;
@@ -22,17 +24,17 @@ import se.emilsjolander.stickylistheaders.StickyListHeadersAdapter;
 public class CustomListVDO_Adapter extends BaseAdapter implements StickyListHeadersAdapter {
     Context mContext;
     String[] strName;
-    int[] id;
+    ArrayList<vdoData> vdoDataArrayList;
+    int id = R.drawable.pic;
 
-    public CustomListVDO_Adapter(Context mContext, String[] strName, int[] id) {
+    public CustomListVDO_Adapter(Context mContext) {
         this.mContext = mContext;
-        this.strName = strName;
-        this.id = id;
+        vdoDataArrayList = new handleTABLE_VDO(mContext).getVdoExercise();
     }
 
     @Override
     public int getCount() {
-        return strName.length;
+        return vdoDataArrayList.size();
     }
 
     @Override
@@ -47,6 +49,7 @@ public class CustomListVDO_Adapter extends BaseAdapter implements StickyListHead
 
     @Override
     public View getView(int position, View view, ViewGroup viewGroup) {
+        Log.i("inGetView",position+"");
         LayoutInflater mInflater =
                 (LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
@@ -54,16 +57,20 @@ public class CustomListVDO_Adapter extends BaseAdapter implements StickyListHead
             view = mInflater.inflate(R.layout.listview_row, viewGroup, false);
 
         TextView textView = (TextView)view.findViewById(R.id.textView1);
-        textView.setText(strName[position]);
+        textView.setText(vdoDataArrayList.get(position).getName());
+
+        TextView textView1 = (TextView)view.findViewById(R.id.number);
+        textView1.setText(position+"");
 
         ImageView imageView = (ImageView)view.findViewById(R.id.imageView1);
-        imageView.setBackgroundResource(id[position]);
+        imageView.setBackgroundResource(id);
 
         return view;
     }
 
     @Override
     public View getHeaderView(int position, View view, ViewGroup viewGroup) {
+        Log.i("inGetViewHead",position+"");
         LayoutInflater mInflater =
                 (LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
@@ -73,12 +80,12 @@ public class CustomListVDO_Adapter extends BaseAdapter implements StickyListHead
 
         //set header text as first char in name
         TextView textView = (TextView)view.findViewById(R.id.header_listView);
-        textView.setText(strName[position]);
+        textView.setText(vdoDataArrayList.get(position).getType());
         return view;
     }
 
     @Override
     public long getHeaderId(int position) {
-        return 0;
+        return vdoDataArrayList.get(position).getType().charAt(0);
     }
 }

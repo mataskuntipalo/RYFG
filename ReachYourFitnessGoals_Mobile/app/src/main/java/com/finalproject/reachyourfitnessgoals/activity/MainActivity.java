@@ -116,11 +116,12 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
             public void onResponse(JSONArray response) {
                 try {
                     ArrayList<vdoData> dataArrayList = new ArrayList<>();
+                    Log.i("download",response.length()+"");
                     for(int i = 0; i < response.length(); i++){
                         JSONObject jsonObject = response.getJSONObject(i);
                         dataArrayList.add(new vdoData(jsonObject.getString("name"),jsonObject.getString("type"),jsonObject.getString("position"),jsonObject.getString("duration"),jsonObject.getInt("calorie")));
                     }
-                    handleTABLE_vdo.addExercise(dataArrayList);
+                    handleTABLE_vdo.addVdoExercise(dataArrayList);
                     editor.putBoolean("firstTimeUsed", true);
                     editor.commit();
                     Log.i("download","downloadFinish");
@@ -132,7 +133,7 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.i("download",error.getMessage());
+//                Log.i("download",error.getMessage());
             }
         });
 

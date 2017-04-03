@@ -2,7 +2,9 @@ package com.finalproject.reachyourfitnessgoals.database;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.finalproject.reachyourfitnessgoals.models.DateData;
 import com.finalproject.reachyourfitnessgoals.models.vdoData;
@@ -30,7 +32,7 @@ public class handleTABLE_VDO {
         readSQLite = objDBHelper.getReadableDatabase();
     }
 
-    public void addExercise(ArrayList<vdoData> vdoDataList){
+    public void addVdoExercise(ArrayList<vdoData> vdoDataList){
         ContentValues values = new ContentValues();
         for (vdoData data: vdoDataList) {
             values.put(COLUMN_NAME, data.getName());
@@ -38,8 +40,26 @@ public class handleTABLE_VDO {
             values.put(COLUMN_POSITION , data.getPosition());
             values.put(COLUMN_DURATION , data.getDuration());
             values.put(COLUMN_CALORIE, data.getPosition());
+            writeSQLite.insert(TABLE_VDO, null, values);
         }
-        writeSQLite.insert(TABLE_VDO, null, values);
+
+    }
+
+    public ArrayList<vdoData> getVdoExercise(){
+        ArrayList<vdoData> vdoDataArrayListt = new ArrayList<>();
+        Cursor cursor = readSQLite.rawQuery("SELECT * FROM " + TABLE_VDO ,null);
+
+        if (cursor != null) {
+            cursor.moveToFirst();
+            while(!cursor.isAfterLast()) {
+                vdoDataArrayListt.add(new vdoData(cursor.getString(1),cursor.getString(2),cursor.getString(3),cursor.getString(4),cursor.getInt(4)));
+
+                cursor.moveToNext();
+            }
+            return vdoDataArrayListt;
+        }else {
+            return null;
+        }
     }
 
 }

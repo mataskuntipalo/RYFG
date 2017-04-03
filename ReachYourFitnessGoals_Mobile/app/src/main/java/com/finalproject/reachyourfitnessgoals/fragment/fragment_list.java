@@ -37,9 +37,6 @@ import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
  */
 public class fragment_list extends Fragment {
 
-    int[] resId = { R.drawable.pic};
-    String[] list = { "text1", "text2", "text3", "text4" };
-
 
     public static fragment_list newInstance() {
         fragment_list fragment = new fragment_list();
@@ -59,8 +56,9 @@ public class fragment_list extends Fragment {
         View rootview = inflater.inflate(R.layout.fragment_list, container, false);
 
         StickyListHeadersListView stickyList = (StickyListHeadersListView) rootview.findViewById(R.id.list);
-        CustomListVDO_Adapter adapter = new CustomListVDO_Adapter(getActivity(), list, resId);
+        CustomListVDO_Adapter adapter = new CustomListVDO_Adapter(getContext());
         stickyList.setAdapter(adapter);
+
 
 //        CustomListVDO_Adapter adapter = new CustomListVDO_Adapter(getActivity(), list, resId);
 //        ListView listView = (ListView)rootview.findViewById(R.id.listview);
