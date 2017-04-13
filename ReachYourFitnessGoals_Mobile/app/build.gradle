@@ -29,6 +29,10 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
 
+    compile('com.mikepenz:fastadapter:2.5.1@aar') {
+        transitive = true
+    }
+
     // fonts
     // image circle
     // intro app
@@ -37,6 +41,8 @@ dependencies {
     // circle process
     // vertical stepper
     // StickyListHeaders
+    // FastAdapter
+    // helper classes for FastAdapter
 
 
     compile 'com.android.support:appcompat-v7:24.2.1'
@@ -51,5 +57,8 @@ dependencies {
     compile 'com.android.support:support-v13:24.2.1'
     compile 'com.ernestoyaquello.stepperform:vertical-stepper-form:0.9.9'
     compile 'se.emilsjolander:stickylistheaders:2.7.0'
+    compile 'com.mikepenz:fastadapter-extensions:2.5.0@aar'
+    compile 'com.mikepenz:materialize:1.0.1@aar'
+    compile 'com.android.support:recyclerview-v7:+'
     testCompile 'junit:junit:4.12'
 }
