@@ -118,7 +118,7 @@ public class fragment_calendar extends Fragment {
             }
         });
 
-
+        setExeButton.setOnClickListener(setExe);
         addEvent(handleTableExercise.getDateExerciseToCalendar(),getResources().getColor(R.color.colorPrimary));
 
         return rootview;

@@ -6,7 +6,7 @@ repositories {
 
 android {
     compileSdkVersion 24
-    buildToolsVersion "24.0.1"
+    buildToolsVersion '25.0.0'
     defaultConfig {
         applicationId "com.finalproject.reachyourfitnessgoals"
         minSdkVersion 16
@@ -28,10 +28,6 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-
-    compile('com.mikepenz:fastadapter:2.5.1@aar') {
-        transitive = true
-    }
 
     // fonts
     // image circle
@@ -57,8 +53,6 @@ dependencies {
     compile 'com.android.support:support-v13:24.2.1'
     compile 'com.ernestoyaquello.stepperform:vertical-stepper-form:0.9.9'
     compile 'se.emilsjolander:stickylistheaders:2.7.0'
-    compile 'com.mikepenz:fastadapter-extensions:2.5.0@aar'
-    compile 'com.mikepenz:materialize:1.0.1@aar'
-    compile 'com.android.support:recyclerview-v7:+'
+    compile 'com.android.support:recyclerview-v7:24.2.1'
     testCompile 'junit:junit:4.12'
 }
