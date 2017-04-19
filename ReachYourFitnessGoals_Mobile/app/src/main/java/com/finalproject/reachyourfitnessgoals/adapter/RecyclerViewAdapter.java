@@ -26,15 +26,16 @@ import java.util.Random;
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private int type;
     private ArrayList<vdoData> vdoDataArrayList;
+    private Context context;
 
 
     public RecyclerViewAdapter(Context mContext, int type) {
         this.vdoDataArrayList = new handleTABLE_VDO(mContext).getVdoExercise();
-        if(type == ListType.TYPE_RANDOM_EXERCISE){
-            Log.i("randomNumberC: ",this.vdoDataArrayList.size()+"");
-            randomExe(new handleTABLE_VDO(mContext).getVdoExercise(),1);
-        }
+        this.context = mContext;
         this.type = type;
+        if(type == ListType.TYPE_RANDOM_EXERCISE){
+            randomExe();
+        }
     }
 
     @Override
@@ -78,13 +79,11 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         return vdoDataArrayList.size();
     }
 
-    public void randomExe(ArrayList<vdoData> data,int count){
+    public void randomExe(){
+        ArrayList<vdoData> data = new handleTABLE_VDO(context).getVdoExercise();
         Random r = new Random();
         int r_int;
-        Log.i("randomNumber: ",data.size()+"");
-        if(count == 1){
-            this.vdoDataArrayList.clear();
-        }
+        this.vdoDataArrayList.clear();
         for(int i = 0 ; i < 20 ; i++){
             r_int = r.nextInt(data.size());
             Log.i("randomNumber: ",i+": " + r_int);

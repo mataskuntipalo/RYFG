@@ -52,8 +52,7 @@ public class fragment_randomExe extends Fragment {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ArrayList<vdoData> vdoDataArrayList = new handleTABLE_VDO(getContext()).getVdoExercise();
-                recyclerViewAdapter.randomExe(vdoDataArrayList,1);
+                recyclerViewAdapter.randomExe();
             }
         });
 
