@@ -11,6 +11,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.finalproject.reachyourfitnessgoals.R;
+import com.finalproject.reachyourfitnessgoals.adapter.RecyclerViewAdapter;
+import com.finalproject.reachyourfitnessgoals.database.handleTABLE_VDO;
+import com.finalproject.reachyourfitnessgoals.models.vdoData;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -18,7 +23,8 @@ import com.finalproject.reachyourfitnessgoals.R;
 public class fragment_custom extends Fragment {
 
 
-    String[] str = {"a","b","c","d"};
+    private RecyclerView recyclerView;
+    private RecyclerViewAdapter recyclerViewAdapter;
 
 
     public fragment_custom() {
@@ -38,6 +44,10 @@ public class fragment_custom extends Fragment {
         View rootview = inflater.inflate(R.layout.fragment_custom_exe, container, false);
 
 
+        recyclerView = (RecyclerView)rootview.findViewById(R.id.recyclerView_customExe);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerViewAdapter = new RecyclerViewAdapter(getContext(),1);
+        recyclerView.setAdapter(recyclerViewAdapter);
 
 
         return rootview;

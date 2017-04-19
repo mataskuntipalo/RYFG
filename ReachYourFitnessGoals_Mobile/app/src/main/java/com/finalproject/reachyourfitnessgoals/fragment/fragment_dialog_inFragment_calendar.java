@@ -40,6 +40,23 @@ public class fragment_dialog_inFragment_calendar extends DialogFragment {
                         .replace(R.id.activity_main, custom, "fragment_custom")
                         .addToBackStack("fragment_custom")
                         .commit();
+
+                getDialog().dismiss();
+            }
+        });
+
+        autoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fragment_randomExe custom = fragment_randomExe.newInstance();
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                fragmentManager
+                        .beginTransaction()
+//                        .setCustomAnimations(R.anim.slide_up,R.anim.slide_down,R.anim.slide_up,R.anim.slide_down)
+                        .replace(R.id.activity_main, custom, "fragment_randomExe")
+                        .addToBackStack("fragment_randomExe")
+                        .commit();
+                getDialog().dismiss();
             }
         });
 

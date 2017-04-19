@@ -19,7 +19,7 @@ public class MyReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        Log.i("receive","in");
+        Log.i("receiveHello","in");
         shared = context.getSharedPreferences(context.getString(R.string.sharedPreferencesName), Context.MODE_PRIVATE);
         editor = shared.edit();
         editor.putBoolean(context.getString(R.string.sharedBoolSetExe), false);

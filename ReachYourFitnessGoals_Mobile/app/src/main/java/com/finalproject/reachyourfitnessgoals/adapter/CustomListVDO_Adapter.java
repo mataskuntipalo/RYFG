@@ -54,15 +54,13 @@ public class CustomListVDO_Adapter extends BaseAdapter implements StickyListHead
                 (LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         if(view == null)
-            view = mInflater.inflate(R.layout.listview_row, viewGroup, false);
+            view = mInflater.inflate(R.layout.itemview_show_all, viewGroup, false);
 
-        TextView textView = (TextView)view.findViewById(R.id.textView1);
+        TextView textView = (TextView)view.findViewById(R.id.name_text_showAll);
         textView.setText(vdoDataArrayList.get(position).getName());
 
-        TextView textView1 = (TextView)view.findViewById(R.id.number);
-        textView1.setText(position+"");
 
-        ImageView imageView = (ImageView)view.findViewById(R.id.imageView1);
+        ImageView imageView = (ImageView)view.findViewById(R.id.pic_showAll);
         imageView.setBackgroundResource(id);
 
         return view;
