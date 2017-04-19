@@ -5,6 +5,8 @@ import android.app.DownloadManager;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,8 +23,10 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.finalproject.reachyourfitnessgoals.R;
 import com.finalproject.reachyourfitnessgoals.adapter.CustomListVDO_Adapter;
+import com.finalproject.reachyourfitnessgoals.adapter.RecyclerViewAdapter;
 import com.finalproject.reachyourfitnessgoals.models.vdoData;
 import com.google.gson.Gson;
+import com.timehop.stickyheadersrecyclerview.StickyRecyclerHeadersDecoration;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -37,6 +41,8 @@ import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
  */
 public class fragment_list extends Fragment {
 
+    private RecyclerView recyclerView;
+    private RecyclerViewAdapter recyclerViewAdapter;
 
     public static fragment_list newInstance() {
         fragment_list fragment = new fragment_list();
@@ -55,9 +61,13 @@ public class fragment_list extends Fragment {
         // Inflate the layout for this fragment
         View rootview = inflater.inflate(R.layout.fragment_list, container, false);
 
-        StickyListHeadersListView stickyList = (StickyListHeadersListView) rootview.findViewById(R.id.list);
-        CustomListVDO_Adapter adapter = new CustomListVDO_Adapter(getContext());
-        stickyList.setAdapter(adapter);
+
+
+        recyclerView = (RecyclerView)rootview.findViewById(R.id.recyclerView_showAll);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerViewAdapter = new RecyclerViewAdapter(getContext(),0);
+        recyclerView.setAdapter(recyclerViewAdapter);
+        recyclerView.addItemDecoration(new StickyRecyclerHeadersDecoration(recyclerViewAdapter));
 
 
 //        CustomListVDO_Adapter adapter = new CustomListVDO_Adapter(getActivity(), list, resId);

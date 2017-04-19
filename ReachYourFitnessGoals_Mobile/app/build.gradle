@@ -37,8 +37,7 @@ dependencies {
     // circle process
     // vertical stepper
     // StickyListHeaders
-    // FastAdapter
-    // helper classes for FastAdapter
+
 
 
     compile 'com.android.support:appcompat-v7:24.2.1'
@@ -54,5 +53,6 @@ dependencies {
     compile 'com.ernestoyaquello.stepperform:vertical-stepper-form:0.9.9'
     compile 'se.emilsjolander:stickylistheaders:2.7.0'
     compile 'com.android.support:recyclerview-v7:24.2.1'
+    compile 'com.timehop.stickyheadersrecyclerview:library:[0.4.3]@aar'
     testCompile 'junit:junit:4.12'
 }

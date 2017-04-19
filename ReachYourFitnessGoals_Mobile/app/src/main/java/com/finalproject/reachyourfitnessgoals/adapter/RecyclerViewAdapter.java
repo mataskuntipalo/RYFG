@@ -7,14 +7,17 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.finalproject.reachyourfitnessgoals.R;
 import com.finalproject.reachyourfitnessgoals.ViewHolder.customExeViewHolder;
+import com.finalproject.reachyourfitnessgoals.ViewHolder.headerExeViewHolder;
 import com.finalproject.reachyourfitnessgoals.ViewHolder.randomExeViewHolder;
 import com.finalproject.reachyourfitnessgoals.ViewHolder.showAllExeViewHolder;
 import com.finalproject.reachyourfitnessgoals.database.handleTABLE_VDO;
 import com.finalproject.reachyourfitnessgoals.models.vdoData;
 import com.finalproject.reachyourfitnessgoals.setting.ListType;
+import com.timehop.stickyheadersrecyclerview.StickyRecyclerHeadersAdapter;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -23,7 +26,7 @@ import java.util.Random;
  * Created by Papang on 18/4/2560.
  */
 
-public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements StickyRecyclerHeadersAdapter {
     private int type;
     private ArrayList<vdoData> vdoDataArrayList;
     private Context context;
@@ -75,6 +78,23 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
 
     @Override
+    public long getHeaderId(int position) {
+            return vdoDataArrayList.get(position).getType().charAt(4);
+    }
+
+    @Override
+    public RecyclerView.ViewHolder onCreateHeaderViewHolder(ViewGroup parent) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.header_listview_row, parent, false);
+        return new headerExeViewHolder(view);
+    }
+
+    @Override
+    public void onBindHeaderViewHolder(RecyclerView.ViewHolder holder, int position) {
+        headerExeViewHolder headerExeViewHolder = (headerExeViewHolder) holder;
+        headerExeViewHolder.headerExe.setText(vdoDataArrayList.get(position).getType());
+    }
+
+    @Override
     public int getItemCount() {
         return vdoDataArrayList.size();
     }
@@ -94,7 +114,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
 
     private void setupShowAllExe (showAllExeViewHolder showAllExeViewHolder , vdoData vdoData){
-        showAllExeViewHolder.exePic_all.setBackground(Drawable.createFromPath(vdoData.getName()));
+        showAllExeViewHolder.exePic_all.setBackgroundResource(R.drawable.pic);
+        showAllExeViewHolder.exeName_all.setText(vdoData.getName());
 
     }
 
