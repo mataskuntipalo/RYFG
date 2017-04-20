@@ -1,13 +1,11 @@
 package com.finalproject.reachyourfitnessgoals.adapter;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.finalproject.reachyourfitnessgoals.R;
 import com.finalproject.reachyourfitnessgoals.ViewHolder.customExeViewHolder;
@@ -15,9 +13,8 @@ import com.finalproject.reachyourfitnessgoals.ViewHolder.headerExeViewHolder;
 import com.finalproject.reachyourfitnessgoals.ViewHolder.randomExeViewHolder;
 import com.finalproject.reachyourfitnessgoals.ViewHolder.showAllExeViewHolder;
 import com.finalproject.reachyourfitnessgoals.database.handleTABLE_VDO;
-import com.finalproject.reachyourfitnessgoals.fragment.fragment_custom;
 import com.finalproject.reachyourfitnessgoals.models.vdoData;
-import com.finalproject.reachyourfitnessgoals.setting.ListType;
+import com.finalproject.reachyourfitnessgoals.models.ListType;
 import com.timehop.stickyheadersrecyclerview.StickyRecyclerHeadersAdapter;
 
 import java.util.ArrayList;
@@ -41,6 +38,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         if(type == ListType.TYPE_RANDOM_EXERCISE){
             randomExe();
         }
+    }
+
+    public RecyclerViewAdapter(Context mContext , String type) {
+        Log.i("typeExe",type);
+        this.vdoDataArrayList = new handleTABLE_VDO(mContext).getCustomVdoExercise(type);
+        this.type = 1;
     }
 
     @Override

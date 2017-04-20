@@ -2,13 +2,20 @@ package com.finalproject.reachyourfitnessgoals.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.finalproject.reachyourfitnessgoals.R;
+import com.finalproject.reachyourfitnessgoals.fragment.fragment_custom;
+import com.finalproject.reachyourfitnessgoals.models.ExeType;
 
-public class CustomSetExerciseInDayActivity extends Activity {
+public class CustomSetExerciseInDayActivity extends FragmentActivity {
 
     private LinearLayout typeExeLayout;
 
@@ -17,6 +24,7 @@ public class CustomSetExerciseInDayActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_custom_set_exercise_in_day);
 
+        typeExeLayout = (LinearLayout)findViewById(R.id.typeExeLayout_LinearLayout_customSetExe);
         setLayout();
 
 
@@ -24,10 +32,12 @@ public class CustomSetExerciseInDayActivity extends Activity {
 
     private void setLayout(){
         String[] typeExe = getResources().getStringArray(R.array.type_exe);
-        for(int i = 1 ; i<typeExe.length ; i++){
+        for(int i = 0 ; i<typeExe.length ; i++){
             LinearLayout typeLayout = getTypeLayout(i);
+            typeLayout.setTag(ExeType.TYPE[i]);
             TextView typeText = (TextView) typeLayout.findViewById(R.id.typeName_text_itemView_typeExe);
             typeText.setText(typeExe[i]);
+            typeLayout.setOnClickListener(selectExe);
         }
     }
 
@@ -36,4 +46,15 @@ public class CustomSetExerciseInDayActivity extends Activity {
                 "type_" + number, "id",getPackageName());
         return (LinearLayout) typeExeLayout.findViewById(id);
     }
+
+    private View.OnClickListener selectExe = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            fragment_custom custom = fragment_custom.newInstance(v.getTag()+"");
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.activity_set_exercise_in_day, custom);
+            transaction.addToBackStack(null);
+            transaction.commit();
+        }
+    };
 }

@@ -62,4 +62,21 @@ public class handleTABLE_VDO {
         }
     }
 
+    public ArrayList<vdoData> getCustomVdoExercise(String type){
+        ArrayList<vdoData> vdoDataArrayListt = new ArrayList<>();
+        Cursor cursor = readSQLite.rawQuery("SELECT * FROM " + TABLE_VDO + " WHERE type = ?", new String[] {type} ,null);
+
+        if (cursor != null) {
+            cursor.moveToFirst();
+            while(!cursor.isAfterLast()) {
+                vdoDataArrayListt.add(new vdoData(cursor.getString(1),cursor.getString(2),cursor.getString(3),cursor.getString(4),cursor.getInt(4)));
+
+                cursor.moveToNext();
+            }
+            return vdoDataArrayListt;
+        }else {
+            return null;
+        }
+    }
+
 }

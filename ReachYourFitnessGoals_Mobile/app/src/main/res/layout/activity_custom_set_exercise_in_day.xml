@@ -13,13 +13,14 @@
 
         <LinearLayout
             android:orientation="vertical" android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:id="@+id/typeExeLayout_LinearLayout_customSetExe">
 
+            <include layout="@layout/itemview_type_exe" android:id="@+id/type_0" />
             <include layout="@layout/itemview_type_exe" android:id="@+id/type_1" />
             <include layout="@layout/itemview_type_exe" android:id="@+id/type_2" />
             <include layout="@layout/itemview_type_exe" android:id="@+id/type_3" />
             <include layout="@layout/itemview_type_exe" android:id="@+id/type_4" />
-            <include layout="@layout/itemview_type_exe" android:id="@+id/type_5" />
 
 
         </LinearLayout>

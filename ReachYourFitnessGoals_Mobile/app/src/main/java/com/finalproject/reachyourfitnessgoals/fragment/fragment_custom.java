@@ -28,16 +28,21 @@ import java.util.ArrayList;
 public class fragment_custom extends Fragment {
 
 
+    private static String KEY_TYPE;
     private RecyclerView recyclerView;
     private RecyclerViewAdapter recyclerViewAdapter;
+
 
 
     public fragment_custom() {
         // Required empty public constructor
     }
 
-    public static fragment_custom newInstance() {
+    public static fragment_custom newInstance(String type) {
         fragment_custom fragment = new fragment_custom();
+        Bundle bundle = new Bundle();
+        bundle.putString(KEY_TYPE, type);
+        fragment.setArguments(bundle);
         return fragment;
     }
 
@@ -47,11 +52,11 @@ public class fragment_custom extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootview = inflater.inflate(R.layout.fragment_custom_exe, container, false);
-
+        Log.i("getTag",getArguments().getString(KEY_TYPE));
         final LinearLayout layout = (LinearLayout) rootview.findViewById(R.id.showExe_customExe);
         recyclerView = (RecyclerView)rootview.findViewById(R.id.recyclerView_customExe);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerViewAdapter = new RecyclerViewAdapter(getContext(),1);
+        recyclerViewAdapter = new RecyclerViewAdapter(getContext(),getArguments().getString(KEY_TYPE));
         recyclerView.setAdapter(recyclerViewAdapter);
         recyclerViewAdapter.SetOnItemClickListener(new RecyclerViewAdapter.OnItemClickListener() {
             @Override
@@ -59,10 +64,6 @@ public class fragment_custom extends Fragment {
                 layout.addView(createNewTextView(name));
             }
         });
-
-
-
-
 
         return rootview;
     }

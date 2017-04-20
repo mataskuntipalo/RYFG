@@ -1,4 +1,4 @@
-package com.finalproject.reachyourfitnessgoals.setting;
+package com.finalproject.reachyourfitnessgoals.models;
 
 /**
  * Created by Papang on 18/4/2560.
