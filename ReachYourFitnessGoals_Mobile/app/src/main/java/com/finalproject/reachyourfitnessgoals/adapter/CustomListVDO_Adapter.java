@@ -15,13 +15,13 @@ import com.finalproject.reachyourfitnessgoals.models.vdoData;
 
 import java.util.ArrayList;
 
-import se.emilsjolander.stickylistheaders.StickyListHeadersAdapter;
+
 
 /**
  * Created by Papang on 18/12/2559.
  */
 
-public class CustomListVDO_Adapter extends BaseAdapter implements StickyListHeadersAdapter {
+public class CustomListVDO_Adapter extends BaseAdapter {
     Context mContext;
     String[] strName;
     ArrayList<vdoData> vdoDataArrayList;
@@ -66,24 +66,4 @@ public class CustomListVDO_Adapter extends BaseAdapter implements StickyListHead
         return view;
     }
 
-    @Override
-    public View getHeaderView(int position, View view, ViewGroup viewGroup) {
-        Log.i("inGetViewHead",position+"");
-        LayoutInflater mInflater =
-                (LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-        if (view == null) {
-            view = mInflater.inflate(R.layout.header_listview_row, viewGroup, false);
-        }
-
-        //set header text as first char in name
-        TextView textView = (TextView)view.findViewById(R.id.header_listView);
-        textView.setText(vdoDataArrayList.get(position).getType());
-        return view;
-    }
-
-    @Override
-    public long getHeaderId(int position) {
-        return vdoDataArrayList.get(position).getType().charAt(0);
-    }
 }

@@ -22,7 +22,6 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.finalproject.reachyourfitnessgoals.R;
-import com.finalproject.reachyourfitnessgoals.adapter.CustomListVDO_Adapter;
 import com.finalproject.reachyourfitnessgoals.adapter.RecyclerViewAdapter;
 import com.finalproject.reachyourfitnessgoals.models.vdoData;
 import com.google.gson.Gson;
@@ -34,7 +33,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
+
 
 /**
  * A simple {@link Fragment} subclass.

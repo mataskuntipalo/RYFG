@@ -15,6 +15,7 @@ import com.finalproject.reachyourfitnessgoals.ViewHolder.headerExeViewHolder;
 import com.finalproject.reachyourfitnessgoals.ViewHolder.randomExeViewHolder;
 import com.finalproject.reachyourfitnessgoals.ViewHolder.showAllExeViewHolder;
 import com.finalproject.reachyourfitnessgoals.database.handleTABLE_VDO;
+import com.finalproject.reachyourfitnessgoals.fragment.fragment_custom;
 import com.finalproject.reachyourfitnessgoals.models.vdoData;
 import com.finalproject.reachyourfitnessgoals.setting.ListType;
 import com.timehop.stickyheadersrecyclerview.StickyRecyclerHeadersAdapter;
@@ -30,6 +31,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     private int type;
     private ArrayList<vdoData> vdoDataArrayList;
     private Context context;
+    OnItemClickListener mItemClickListener;
 
 
     public RecyclerViewAdapter(Context mContext, int type) {
@@ -48,7 +50,21 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             return new showAllExeViewHolder(view);
         }else if(type == ListType.TYPE_CUSTOM_EXERCISE){
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.itemview_custom_exe, parent, false);
-            return new customExeViewHolder(view);
+            customExeViewHolder customExeViewHolder = new customExeViewHolder(view, new customExeViewHolder.customViewHolderClicks() {
+                @Override
+                public void select(View caller) {
+                    if (mItemClickListener != null) {
+                        mItemClickListener.onItemClick(caller, caller.getTag()+"");
+                    }
+                }
+
+                @Override
+                public void longSelect() {
+                    Log.d("selectLong", "Poh-tah-tos");
+                }
+
+            });
+            return customExeViewHolder;
         }else if(type == ListType.TYPE_RANDOM_EXERCISE){
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.itemview_show_all, parent, false);
             return  new randomExeViewHolder(view);
@@ -67,6 +83,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         }else if(holder instanceof customExeViewHolder){
 
             customExeViewHolder customExeViewHolder = (customExeViewHolder) holder;
+            customExeViewHolder.itemView.setTag(vdoDataArrayList.get(position).getName());
             setupCustomExe(customExeViewHolder, vdoDataArrayList.get(position));
 
         }else if(holder instanceof randomExeViewHolder){
@@ -131,4 +148,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         randomExeViewHolder.exeName_all.setText(vdoData.getName());
         randomExeViewHolder.exeNumber_all.setText(position+"");
     }
+
+    public interface OnItemClickListener {
+        public void onItemClick(View view , String name);
+    }
+
+    public void SetOnItemClickListener(final OnItemClickListener mItemClickListener) {
+        this.mItemClickListener = mItemClickListener;
+    }
+
 }

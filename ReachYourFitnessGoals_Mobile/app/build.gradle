@@ -36,6 +36,7 @@ dependencies {
     // calendar view
     // circle process
     // vertical stepper
+    // recyclerview
     // StickyListHeaders
 
 
@@ -51,8 +52,8 @@ dependencies {
     compile 'com.github.bmarrdev:android-DecoView-charting:v0.9.3'
     compile 'com.android.support:support-v13:24.2.1'
     compile 'com.ernestoyaquello.stepperform:vertical-stepper-form:0.9.9'
-    compile 'se.emilsjolander:stickylistheaders:2.7.0'
     compile 'com.android.support:recyclerview-v7:24.2.1'
     compile 'com.timehop.stickyheadersrecyclerview:library:[0.4.3]@aar'
+    compile 'com.android.support:design:24.2.1'
     testCompile 'junit:junit:4.12'
 }

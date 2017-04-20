@@ -29,7 +29,10 @@
             android:enabled="true"
             android:exported="true" />
 
-        <activity android:name=".activity.SetExerciseInDayActivity"></activity>
+        <activity android:name=".activity.CustomSetExerciseInDayActivity"
+            android:theme="@style/AppTheme">
+
+        </activity>
     </application>
 
 </manifest>

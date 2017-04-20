@@ -30,4 +30,13 @@
     <string name="customSelect">เลือกท่าเอง</string>
     <string name="autoSelect">เลือกท่าอัตโนมัติ</string>
 
+
+    <string-array name="type_exe">
+        <item>Stretching</item>
+        <item>Warm Up</item>
+        <item>Strength</item>
+        <item>Cardio</item>
+        <item>Cool Down</item>
+    </string-array>
+
 </resources>

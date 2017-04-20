@@ -1,6 +1,7 @@
 package com.finalproject.reachyourfitnessgoals.fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
@@ -11,6 +12,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.finalproject.reachyourfitnessgoals.R;
+import com.finalproject.reachyourfitnessgoals.activity.CustomSetExerciseInDayActivity;
+import com.finalproject.reachyourfitnessgoals.activity.SetExerciseInWeekActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -32,16 +35,8 @@ public class fragment_dialog_inFragment_calendar extends DialogFragment {
         customButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                fragment_custom custom = fragment_custom.newInstance();
-                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                fragmentManager
-                        .beginTransaction()
-//                        .setCustomAnimations(R.anim.slide_up,R.anim.slide_down,R.anim.slide_up,R.anim.slide_down)
-                        .replace(R.id.activity_main, custom, "fragment_custom")
-                        .addToBackStack("fragment_custom")
-                        .commit();
-
-                getDialog().dismiss();
+                Intent intent = new Intent(getContext(), CustomSetExerciseInDayActivity.class);
+                startActivityForResult(intent, 12345);
             }
         });
 

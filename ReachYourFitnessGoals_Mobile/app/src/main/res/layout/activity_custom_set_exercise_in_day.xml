@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_set_exercise_in_day"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.finalproject.reachyourfitnessgoals.activity.CustomSetExerciseInDayActivity">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:orientation="vertical" android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <include layout="@layout/itemview_type_exe" android:id="@+id/type_1" />
+            <include layout="@layout/itemview_type_exe" android:id="@+id/type_2" />
+            <include layout="@layout/itemview_type_exe" android:id="@+id/type_3" />
+            <include layout="@layout/itemview_type_exe" android:id="@+id/type_4" />
+            <include layout="@layout/itemview_type_exe" android:id="@+id/type_5" />
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</RelativeLayout>
