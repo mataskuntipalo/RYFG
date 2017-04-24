@@ -8,13 +8,16 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 
 
@@ -29,7 +32,9 @@ import com.finalproject.reachyourfitnessgoals.adapter.PagerAdapter;
 import com.finalproject.reachyourfitnessgoals.database.handleTABLE_VDO;
 import com.finalproject.reachyourfitnessgoals.fragment.fragment_calendar;
 import com.finalproject.reachyourfitnessgoals.fragment.fragment_home;
+import com.finalproject.reachyourfitnessgoals.fragment.fragment_list;
 import com.finalproject.reachyourfitnessgoals.models.vdoData;
+import com.github.florent37.materialviewpager.MaterialViewPager;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -42,14 +47,16 @@ import static android.R.attr.id;
 
 
 
-public class MainActivity extends AppCompatActivity implements ActionBar.TabListener {
+public class MainActivity extends AppCompatActivity {
 
+    private MaterialViewPager mViewPager;
     ViewPager pager;
     PagerAdapter adapter;
     String PageName;
     SharedPreferences shared;
     SharedPreferences.Editor editor;
     handleTABLE_VDO handleTABLE_vdo;
+    public final int PAGE_NUM = 3;
 
 
     @Override
@@ -61,48 +68,114 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
         editor = shared.edit();
         handleTABLE_vdo = new handleTABLE_VDO(this);
 
+        mViewPager = (MaterialViewPager) findViewById(R.id.materialViewPager_main);
+
+        Toolbar toolbar = mViewPager.getToolbar();
+
+        if (toolbar != null) {
+            setSupportActionBar(toolbar);
+
+            ActionBar actionBar = getSupportActionBar();
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setDisplayShowHomeEnabled(true);
+            actionBar.setDisplayShowTitleEnabled(true);
+            actionBar.setDisplayUseLogoEnabled(false);
+            actionBar.setHomeButtonEnabled(true);
+        }
+
+        //pager = mViewPager.getViewPager();
+        //pager.setAdapter(new RecyclerViewMaterialAdapter(new PagerAdapter(getSupportFragmentManager())));
+
+
+
+        mViewPager.getViewPager().setAdapter(new FragmentStatePagerAdapter(getSupportFragmentManager()){
+
+            @Override
+            public int getCount() {
+                return PAGE_NUM;
+            }
+
+            @Override
+            public Fragment getItem(int position) {
+
+                switch (position) {
+                    case 0:
+                        return new fragment_home().newInstance();
+                    case 1:
+                        return new fragment_calendar().newInstance();
+                    case 2:
+                        return new fragment_list().newInstance();
+                    default:
+                        return null;
+                }
+
+            }
+
+            @Override
+            public CharSequence getPageTitle(int position) {
+                switch (position % PAGE_NUM) {
+                    case 0:
+                        return "หน้าหลัก";
+                    case 1:
+                        return "การออกกำลังกาย";
+                    case 2:
+                        return "ท่าออกกำลังกาย";
+                }
+                return "";
+            }
+        });
+
+
+
         if(shared.getBoolean("firstTimeUsed", false) == false){
             downloadVDO();
         }
 
-        final ActionBar actionBar = getSupportActionBar();
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+
+        mViewPager.getViewPager().setOffscreenPageLimit(mViewPager.getViewPager().getAdapter().getCount());
+        mViewPager.getPagerTitleStrip().setViewPager(mViewPager.getViewPager());
 
 
-        adapter = new PagerAdapter(getSupportFragmentManager());
-        pager = (ViewPager) findViewById(R.id.pager_ViewPager_main);
-        pager.setAdapter(adapter);
+//        final ActionBar actionBar = getSupportActionBar();
+//        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
-        for (int i = 0; i < adapter.PAGE_NUM; i++) {
-            if(i == 0){
-                PageName = "หน้าหลัก";
-            }else if(i == 1){
-                PageName = "การออกกำลังกาย";
-            }else{
-                PageName = "ท่าออกกำลังกาย";
-            }
-            actionBar.addTab(actionBar.newTab()
-                    .setText(PageName)
-                    .setTabListener(this));
-        }
+
+//        adapter = new PagerAdapter(getSupportFragmentManager());
+//        //pager = (ViewPager) findViewById(R.id.pager_ViewPager_main);
+//        pager = mViewPager.getViewPager();
+//        pager.setAdapter(adapter);
+//        mViewPager.getPagerTitleStrip().setViewPager(mViewPager.getViewPager());
+
+//        for (int i = 0; i < adapter.PAGE_NUM; i++) {
+//            if(i == 0){
+//                PageName = "หน้าหลัก";
+//            }else if(i == 1){
+//                PageName = "การออกกำลังกาย";
+//            }else{
+//                PageName = "ท่าออกกำลังกาย";
+//            }
+//            actionBar.addTab(actionBar.newTab()
+//                    .setText(PageName)
+//                    .setTabListener(this));
+//        }
 
         // set tab bar change when swipe
-        pager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-                getSupportActionBar().setSelectedNavigationItem(position);
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        });
+//        pager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+//            @Override
+//            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+//
+//            }
+//
+//            @Override
+//            public void onPageSelected(int position) {
+//                getSupportActionBar().setSelectedNavigationItem(position);
+//            }
+//
+//            @Override
+//            public void onPageScrollStateChanged(int state) {
+//
+//            }
+//        });
 
 
     }
@@ -143,21 +216,21 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
 
 
 
-    // set page change when swipe
-    @Override
-    public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
-        pager.setCurrentItem(tab.getPosition());
-    }
-
-    @Override
-    public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction ft) {
-
-    }
-
-    @Override
-    public void onTabReselected(ActionBar.Tab tab, FragmentTransaction ft) {
-
-    }
+//    // set page change when swipe
+//    @Override
+//    public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
+//        pager.setCurrentItem(tab.getPosition());
+//    }
+//
+//    @Override
+//    public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction ft) {
+//
+//    }
+//
+//    @Override
+//    public void onTabReselected(ActionBar.Tab tab, FragmentTransaction ft) {
+//
+//    }
 
 
 }

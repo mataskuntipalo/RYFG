@@ -24,6 +24,7 @@ import com.android.volley.toolbox.Volley;
 import com.finalproject.reachyourfitnessgoals.R;
 import com.finalproject.reachyourfitnessgoals.adapter.RecyclerViewAdapter;
 import com.finalproject.reachyourfitnessgoals.models.vdoData;
+import com.github.florent37.materialviewpager.header.MaterialViewPagerHeaderDecorator;
 import com.google.gson.Gson;
 import com.timehop.stickyheadersrecyclerview.StickyRecyclerHeadersDecoration;
 
@@ -65,8 +66,10 @@ public class fragment_list extends Fragment {
         recyclerView = (RecyclerView)rootview.findViewById(R.id.recyclerView_showAll);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerViewAdapter = new RecyclerViewAdapter(getContext(),0);
+        recyclerView.addItemDecoration(new MaterialViewPagerHeaderDecorator());
         recyclerView.setAdapter(recyclerViewAdapter);
         recyclerView.addItemDecoration(new StickyRecyclerHeadersDecoration(recyclerViewAdapter));
+
 
 
 //        CustomListVDO_Adapter adapter = new CustomListVDO_Adapter(getActivity(), list, resId);

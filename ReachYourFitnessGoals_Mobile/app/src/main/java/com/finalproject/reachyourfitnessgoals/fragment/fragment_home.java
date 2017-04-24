@@ -11,6 +11,7 @@ import android.os.Bundle;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.widget.NestedScrollView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,6 +26,7 @@ import com.finalproject.reachyourfitnessgoals.activity.LoginActivity;
 import com.finalproject.reachyourfitnessgoals.activity.MainActivity;
 import com.finalproject.reachyourfitnessgoals.activity.SetExerciseInWeekActivity;
 import com.finalproject.reachyourfitnessgoals.setting.handleCalendar;
+import com.github.florent37.materialviewpager.MaterialViewPagerHelper;
 import com.hookedonplay.decoviewlib.DecoView;
 import com.hookedonplay.decoviewlib.charts.SeriesItem;
 import com.hookedonplay.decoviewlib.events.DecoEvent;
@@ -41,9 +43,15 @@ public class fragment_home extends Fragment {
     Button setExe;
     LinearLayout displayDay;
     TextView cancelSetExe;
+    NestedScrollView main;
 
     public fragment_home() {
         // Required empty public constructor
+    }
+
+    public static fragment_home newInstance() {
+        fragment_home fragment = new fragment_home();
+        return fragment;
     }
 
 
@@ -54,6 +62,8 @@ public class fragment_home extends Fragment {
         View rootview = inflater.inflate(R.layout.fragment_home, container, false);
 
         //Init value
+        main = (NestedScrollView)rootview.findViewById(R.id.main_content);
+        MaterialViewPagerHelper.registerScrollView(getActivity(), main);
         shared = getContext().getSharedPreferences(getResources().getString(R.string.sharedPreferencesName), Context.MODE_PRIVATE);
         editor = shared.edit();
         setExe = (Button)rootview.findViewById(R.id.setExd_button_home);

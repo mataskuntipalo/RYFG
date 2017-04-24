@@ -1,16 +1,21 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_content"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context="com.finalproject.reachyourfitnessgoals.fragment.fragment_home">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.5"
-        android:background="@drawable/background">
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        >
 
         <TextView
             android:layout_width="wrap_content"
@@ -24,7 +29,7 @@
 
         <com.hookedonplay.decoviewlib.DecoView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="100dp"
             android:id="@+id/dynamicArcView"/>
 
     </RelativeLayout>
@@ -32,8 +37,7 @@
 
     <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.1"
+            android:layout_height="wrap_content"
             android:layout_margin="@dimen/activity_horizontal_margin"
             android:orientation="vertical"
             android:id="@+id/manageProgram_RelativeLayout_home"
@@ -76,11 +80,9 @@
 
                     android:id="@+id/setExd_button_home"/>
             </RelativeLayout>
-
-
-
+    </LinearLayout>
     </LinearLayout>
 
-</LinearLayout>
+</android.support.v4.widget.NestedScrollView>
 
 
