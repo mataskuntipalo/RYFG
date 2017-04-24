@@ -27,15 +27,15 @@ public class RecyclerViewAdapter_userSelect extends RecyclerView.Adapter<Recycle
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.itemview_show_all, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.itemview_bottom_sheet, parent, false);
         return new userSelectExeViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         userSelectExeViewHolder userSelectExeViewHolder = (userSelectExeViewHolder) holder;
-        userSelectExeViewHolder.exePic_all.setBackgroundResource(R.drawable.pic);
-        userSelectExeViewHolder.exeName_all.setText(userSelectDataList.get(position).getName());
+        userSelectExeViewHolder.exePic_bottomSheet.setBackgroundResource(R.drawable.pic);
+        userSelectExeViewHolder.exeName_bottomSheet.setText(userSelectDataList.get(position).getName());
     }
 
     @Override

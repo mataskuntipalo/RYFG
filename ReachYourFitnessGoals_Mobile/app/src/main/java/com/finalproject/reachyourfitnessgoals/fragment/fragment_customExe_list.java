@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -37,6 +38,7 @@ public class fragment_customExe_list extends Fragment{
     private BottomSheetBehavior bottomSheetBehavior;
     private TextView maxCalorie;
     private TextView calorie;
+    private Button comfimButton;
     private int tempMaxCalorie;
     private int tempCalorie;
 
@@ -74,8 +76,9 @@ public class fragment_customExe_list extends Fragment{
         recyclerViewAdapter.SetOnItemClickListener(new RecyclerViewAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, String name, String calorie) {
-                if(tempCalorie == tempMaxCalorie){
-                    bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+
+                if(tempCalorie >= tempMaxCalorie){
+                    check();
                 }else {
                     selectExe(name);
                     addCalorie(calorie);
@@ -86,7 +89,7 @@ public class fragment_customExe_list extends Fragment{
 
             @Override
             public void onItemLongClick() {
-                bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+                //bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
             }
         });
 
@@ -124,6 +127,7 @@ public class fragment_customExe_list extends Fragment{
 
     private void selectExe(String name) {
         recyclerViewAdapterBottomSheet.addExe(name);
+        //bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
     }
 
     private void initBottomSheet(View rootview){
@@ -131,6 +135,7 @@ public class fragment_customExe_list extends Fragment{
         bottomSheetBehavior = BottomSheetBehavior.from(rootview.findViewById(R.id.layout_bottomSheet));
         calorie = (TextView)rootview.findViewById(R.id.calorie_TextView_bottomSheet);
         maxCalorie = (TextView)rootview.findViewById(R.id.maxCalorie_TextView_bottomSheet);
+        comfimButton = (Button)rootview.findViewById(R.id.confirm_Button_bottomSheet);
         recyclerViewBottomSheet = (RecyclerView)rootview.findViewById(R.id.recyclerView_bottomSheet);
         recyclerViewBottomSheet.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerViewAdapterBottomSheet = new RecyclerViewAdapter_userSelect(userSelectDataArrayList);
@@ -139,13 +144,22 @@ public class fragment_customExe_list extends Fragment{
     }
 
     private void setMaxCalorie(){
-        tempMaxCalorie = 10;
-        maxCalorie.setText("10");
+        tempMaxCalorie = 20;
+        maxCalorie.setText("20");
     }
 
     private void addCalorie(String calorie){
         tempCalorie = tempCalorie + Integer.parseInt(calorie);
+        if(tempCalorie >= tempMaxCalorie){
+            check();
+        }else {
+            //tempCalorie = tempCalorie + Integer.parseInt(calorie);
+        }
         this.calorie.setText(tempCalorie+"");
+    }
+
+    private void check(){
+        comfimButton.setVisibility(View.VISIBLE);
     }
 
 }

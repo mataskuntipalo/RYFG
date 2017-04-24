@@ -8,6 +8,7 @@
     <string name="step_continue">ต่อไป</string>
     <string name="step_finish">เสร็จสิ้น</string>
     <string name="step_cancel">ยกเลิก</string>
+    <string name="step_confirm">ยืนยัน</string>
 
     <!-- sharedPreferences -->
     <string name="sharedPreferencesName">PREFS</string>

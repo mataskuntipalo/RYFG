@@ -14,13 +14,15 @@ import com.finalproject.reachyourfitnessgoals.R;
 
 public class userSelectExeViewHolder extends RecyclerView.ViewHolder{
 
-    public ImageView exePic_all;
-    public TextView exeName_all;
+    public ImageView exePic_bottomSheet;
+    public TextView exeName_bottomSheet;
+    public TextView exeCalorie_bottomSheet;
 
     public userSelectExeViewHolder(View itemView) {
         super(itemView);
-        exePic_all = (ImageView) itemView.findViewById(R.id.pic_showAll);
-        exeName_all = (TextView) itemView.findViewById(R.id.name_text_showAll);
+        exePic_bottomSheet = (ImageView) itemView.findViewById(R.id.pic_bottomSheet);
+        exeName_bottomSheet = (TextView) itemView.findViewById(R.id.name_TextView_bottomSheet);
+        exeCalorie_bottomSheet = (TextView) itemView.findViewById(R.id.calorie_TextView_bottomSheet);
     }
 
 }
