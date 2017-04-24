@@ -1,18 +1,14 @@
 package com.finalproject.reachyourfitnessgoals.activity;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.finalproject.reachyourfitnessgoals.R;
-import com.finalproject.reachyourfitnessgoals.fragment.fragment_custom;
+import com.finalproject.reachyourfitnessgoals.fragment.fragment_customExe_list;
 import com.finalproject.reachyourfitnessgoals.models.ExeType;
 
 public class CustomSetExerciseInDayActivity extends FragmentActivity {
@@ -50,7 +46,7 @@ public class CustomSetExerciseInDayActivity extends FragmentActivity {
     private View.OnClickListener selectExe = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            fragment_custom custom = fragment_custom.newInstance(v.getTag()+"");
+            fragment_customExe_list custom = fragment_customExe_list.newInstance(v.getTag()+"");
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             transaction.replace(R.id.activity_set_exercise_in_day, custom);
             transaction.addToBackStack(null);

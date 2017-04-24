@@ -57,13 +57,16 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 @Override
                 public void select(View caller) {
                     if (mItemClickListener != null) {
-                        mItemClickListener.onItemClick(caller, caller.getTag()+"");
+                        mItemClickListener.onItemClick(caller, caller.getTag(R.id.name)+"" , caller.getTag(R.id.calorie)+"");
                     }
                 }
 
                 @Override
                 public void longSelect() {
-                    Log.d("selectLong", "Poh-tah-tos");
+
+                    if (mItemClickListener != null) {
+                        mItemClickListener.onItemLongClick();
+                    }
                 }
 
             });
@@ -86,7 +89,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         }else if(holder instanceof customExeViewHolder){
 
             customExeViewHolder customExeViewHolder = (customExeViewHolder) holder;
-            customExeViewHolder.itemView.setTag(vdoDataArrayList.get(position).getName());
+            customExeViewHolder.itemView.setTag(R.id.name,vdoDataArrayList.get(position).getName());
+            customExeViewHolder.itemView.setTag(R.id.calorie,"5");
             setupCustomExe(customExeViewHolder, vdoDataArrayList.get(position));
 
         }else if(holder instanceof randomExeViewHolder){
@@ -153,7 +157,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     }
 
     public interface OnItemClickListener {
-        public void onItemClick(View view , String name);
+        public void onItemClick(View view , String name,String calorie);
+        public void onItemLongClick();
     }
 
     public void SetOnItemClickListener(final OnItemClickListener mItemClickListener) {

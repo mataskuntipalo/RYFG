@@ -39,4 +39,7 @@
         <item>Cool Down</item>
     </string-array>
 
+    <!-- fragment_customExe_list -->
+    <string name="totalCalorie">จำนวนแคลอรี่ทั้งหมด</string>
+
 </resources>
