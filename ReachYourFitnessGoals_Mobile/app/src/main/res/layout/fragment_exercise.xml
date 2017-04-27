@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:EMVideoView="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context="com.finalproject.reachyourfitnessgoals.fragment.fragment_exercise">
 
@@ -33,6 +34,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="start"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp">
+
+        <com.devbrackets.android.exomedia.ui.widget.EMVideoView
+            android:id="@+id/video_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            EMVideoView:useDefaultControls="true"/>
+
+    </LinearLayout>
 
 
     <LinearLayout
