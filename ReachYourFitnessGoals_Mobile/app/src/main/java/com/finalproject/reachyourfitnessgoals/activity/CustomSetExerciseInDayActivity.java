@@ -3,6 +3,7 @@ package com.finalproject.reachyourfitnessgoals.activity;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -11,7 +12,7 @@ import com.finalproject.reachyourfitnessgoals.R;
 import com.finalproject.reachyourfitnessgoals.fragment.fragment_customExe_list;
 import com.finalproject.reachyourfitnessgoals.models.ExeType;
 
-public class CustomSetExerciseInDayActivity extends FragmentActivity {
+public class CustomSetExerciseInDayActivity extends AppCompatActivity {
 
     private LinearLayout typeExeLayout;
 

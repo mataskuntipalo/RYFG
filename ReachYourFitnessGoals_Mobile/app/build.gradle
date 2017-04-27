@@ -39,6 +39,7 @@ dependencies {
     // recyclerview
     // StickyListHeaders
 
+    // MaterialViewPager pack
 
     compile 'com.android.support:appcompat-v7:24.2.1'
     compile 'com.android.support:support-v4:24.2.1'
@@ -54,12 +55,10 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:24.2.1'
     compile 'com.timehop.stickyheadersrecyclerview:library:[0.4.3]@aar'
     compile 'com.android.support:design:24.2.1'
-
-    // MaterialViewPager pack
     compile 'com.github.florent37:materialviewpager:1.2.1'
     compile 'com.flaviofaria:kenburnsview:1.0.7'
     compile 'com.jpardogo.materialtabstrip:library:1.1.0'
     compile 'com.github.bumptech.glide:glide:3.7.0'
-
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
     testCompile 'junit:junit:4.12'
 }

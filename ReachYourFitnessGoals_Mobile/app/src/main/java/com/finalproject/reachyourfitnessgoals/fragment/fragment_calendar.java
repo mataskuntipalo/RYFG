@@ -1,11 +1,13 @@
 package com.finalproject.reachyourfitnessgoals.fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.view.menu.MenuView;
 import android.util.Log;
@@ -26,6 +28,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.finalproject.reachyourfitnessgoals.R;
+import com.finalproject.reachyourfitnessgoals.activity.ExerciseActivity;
 import com.finalproject.reachyourfitnessgoals.database.handleTABLE_EXERCISE;
 import com.finalproject.reachyourfitnessgoals.database.handleTABLE_PROGRAM;
 import com.finalproject.reachyourfitnessgoals.models.DateData;
@@ -34,6 +37,7 @@ import com.finalproject.reachyourfitnessgoals.models.GoalData;
 import com.finalproject.reachyourfitnessgoals.setting.EventDecorator;
 
 
+import com.github.florent37.materialviewpager.MaterialViewPagerHelper;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.CalendarMode;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
@@ -66,6 +70,8 @@ public class fragment_calendar extends Fragment {
     private ScrollView scrollView;
     private RelativeLayout layout;
     private Button setExeButton;
+    private Button exeButton;
+    NestedScrollView nestedScrollView;
 
 
 
@@ -85,15 +91,22 @@ public class fragment_calendar extends Fragment {
         // Inflate the layout for this fragment
         View rootview = inflater.inflate(R.layout.fragment_calendar, container, false);
 
-
-
+        nestedScrollView = (NestedScrollView)rootview.findViewById(R.id.scrollView_calendar);
+        MaterialViewPagerHelper.registerScrollView(getActivity(), nestedScrollView);
         handleTableProgram = new handleTABLE_PROGRAM(getActivity());
         handleTableExercise = new handleTABLE_EXERCISE(getActivity());
         //goalData = handleTableProgram.getDateToCalendar();
         MCV = (MaterialCalendarView) rootview.findViewById(R.id.datePicker_DatePicker_calendar);
         layout = (RelativeLayout)  rootview.findViewById(R.id.layoutCalendar_RelativeLayout_calendar);
-        scrollView = (ScrollView) rootview.findViewById(R.id.SV_ScrollView_calendar);
         setExeButton = (Button) rootview.findViewById(R.id.setExeOfDay_button_calendar);
+        exeButton = (Button) rootview.findViewById(R.id.Exe_button_calendar);
+        exeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ExerciseActivity.class);
+                startActivity(intent);
+            }
+        });
 //        MCV.state().edit()
 //                .setFirstDayOfWeek(Calendar.MONDAY)
 //                .setMinimumDate(CalendarDay.from(goalData.getYear_date_begin(), goalData.getMonth_date_begin(), goalData.getDay_date_begin()))

@@ -43,7 +43,7 @@ public class fragment_home extends Fragment {
     Button setExe;
     LinearLayout displayDay;
     TextView cancelSetExe;
-    NestedScrollView main;
+    NestedScrollView nestedScrollView;
 
     public fragment_home() {
         // Required empty public constructor
@@ -62,8 +62,8 @@ public class fragment_home extends Fragment {
         View rootview = inflater.inflate(R.layout.fragment_home, container, false);
 
         //Init value
-        main = (NestedScrollView)rootview.findViewById(R.id.main_content);
-        MaterialViewPagerHelper.registerScrollView(getActivity(), main);
+        nestedScrollView = (NestedScrollView)rootview.findViewById(R.id.scrollView_home);
+        MaterialViewPagerHelper.registerScrollView(getActivity(), nestedScrollView);
         shared = getContext().getSharedPreferences(getResources().getString(R.string.sharedPreferencesName), Context.MODE_PRIVATE);
         editor = shared.edit();
         setExe = (Button)rootview.findViewById(R.id.setExd_button_home);

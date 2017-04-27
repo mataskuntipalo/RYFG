@@ -14,10 +14,12 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.util.Log;
 
 
@@ -57,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
     SharedPreferences.Editor editor;
     handleTABLE_VDO handleTABLE_vdo;
     public final int PAGE_NUM = 3;
+    private DrawerLayout mDrawerLayout;
 
 
     @Override
@@ -68,13 +71,16 @@ public class MainActivity extends AppCompatActivity {
         editor = shared.edit();
         handleTABLE_vdo = new handleTABLE_VDO(this);
 
+        if(shared.getBoolean("firstTimeUsed", false) == false){
+            downloadVDO();
+        }
+
         mViewPager = (MaterialViewPager) findViewById(R.id.materialViewPager_main);
 
         Toolbar toolbar = mViewPager.getToolbar();
-
         if (toolbar != null) {
             setSupportActionBar(toolbar);
-
+            toolbar.setNavigationIcon(R.drawable.ic_menu_white_24dp);
             ActionBar actionBar = getSupportActionBar();
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setDisplayShowHomeEnabled(true);
@@ -104,6 +110,7 @@ public class MainActivity extends AppCompatActivity {
                     case 1:
                         return new fragment_calendar().newInstance();
                     case 2:
+                        Log.i("download","downloadFinish1");
                         return new fragment_list().newInstance();
                     default:
                         return null;
@@ -127,9 +134,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        if(shared.getBoolean("firstTimeUsed", false) == false){
-            downloadVDO();
-        }
+
 
 
         mViewPager.getViewPager().setOffscreenPageLimit(mViewPager.getViewPager().getAdapter().getCount());

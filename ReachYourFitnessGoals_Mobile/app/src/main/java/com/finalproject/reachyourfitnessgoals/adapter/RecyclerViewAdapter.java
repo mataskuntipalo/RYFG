@@ -50,6 +50,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if(type == ListType.TYPE_SHOW_ALL){
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.itemview_show_all, parent, false);
+            Log.i("inShowAll","inShowAll");
             return new showAllExeViewHolder(view);
         }else if(type == ListType.TYPE_CUSTOM_EXERCISE){
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.itemview_custom_exe, parent, false);

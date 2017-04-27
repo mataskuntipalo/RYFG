@@ -1,17 +1,23 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView  xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:id="@+id/scrollView_calendar"
     tools:context="com.finalproject.reachyourfitnessgoals.fragment.fragment_calendar">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+    <include layout="@layout/material_view_pager_placeholder"/>
     <!-- TODO: Update blank fragment layout -->
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.5"
-        android:padding="2dp"
+        android:layout_height="wrap_content"
+        android:padding="25dp"
         android:id="@+id/layoutCalendar_RelativeLayout_calendar">
 
         <com.prolificinteractive.materialcalendarview.MaterialCalendarView
@@ -23,14 +29,6 @@
              />
 
     </RelativeLayout>
-
-    <ScrollView
-        android:id="@+id/SV_ScrollView_calendar"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.5"
-        android:scrollbars="vertical"
-        >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -68,44 +66,42 @@
                     android:id="@+id/setExeOfDay_button_calendar"/>
             </RelativeLayout>
 
-        </LinearLayout>
 
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/default_padding"
-            android:layout_margin="@dimen/activity_horizontal_margin"
-            android:orientation="vertical"
-            android:id="@+id/manageProgram_RelativeLayout_home"
-            android:background="@drawable/shadow_layout">
-
-            <TextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:textSize="@dimen/topic_text"
-                android:text="@string/selectExerciseOfDay_text"
-                android:textColor="@color/colorBlack"/>
+                android:padding="@dimen/default_padding"
+                android:layout_margin="@dimen/activity_horizontal_margin"
+                android:orientation="vertical"
+                android:id="@+id/manageProgram_RelativeLayout_home"
+                android:background="@drawable/shadow_layout">
 
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center">
-
-                <Button
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/default_text"
-                    android:text="ซิ้งข้อมูล"
-                    android:id="@+id/syn_button_calendar"/>
-            </RelativeLayout>
+                    android:layout_gravity="center"
+                    android:textSize="@dimen/topic_text"
+                    android:text="@string/selectExerciseOfDay_text"
+                    android:textColor="@color/colorBlack"/>
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center">
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/default_text"
+                        android:text="ออกกำลังกาย"
+                        android:id="@+id/Exe_button_calendar"/>
+                </RelativeLayout>
+
+            </LinearLayout>
 
         </LinearLayout>
 
-
     </LinearLayout>
-    </ScrollView>
+    </LinearLayout>
 
-
-</LinearLayout>
+</android.support.v4.widget.NestedScrollView >

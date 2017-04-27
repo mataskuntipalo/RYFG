@@ -13,7 +13,8 @@
         <activity
             android:name=".activity.LoginActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".activity.MainActivity"
+        <activity
+            android:name=".activity.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,12 +29,15 @@
         <receiver
             android:name=".setting.MyReceiver"
             android:enabled="true"
-            android:exported="true" />
-
-        <activity android:name=".activity.CustomSetExerciseInDayActivity"
-            android:theme="@style/AppTheme">
-
-        </activity>
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.finalproject.reachyourfitnessgoals.activity"></action>
+            </intent-filter>
+        </receiver>
+        >
+        <activity
+            android:name=".activity.CustomSetExerciseInDayActivity"></activity>
+        <activity android:name=".activity.ExerciseActivity"></activity>
     </application>
 
 </manifest>
