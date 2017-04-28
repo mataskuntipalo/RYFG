@@ -1,16 +1,21 @@
 package com.finalproject.reachyourfitnessgoals.fragment;
 
 
+import android.app.ProgressDialog;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.ImageButton;
+import android.widget.MediaController;
+import android.widget.VideoView;
 
 import com.devbrackets.android.exomedia.listener.OnPreparedListener;
 import com.devbrackets.android.exomedia.ui.widget.EMVideoView;
@@ -24,6 +29,8 @@ public class fragment_exercise extends Fragment  {
     Chronometer chronometer;
     long lastPause;
     EMVideoView emVideoView;
+    ProgressDialog pd;
+
 
     public fragment_exercise() {
         // Required empty public constructor
@@ -68,6 +75,9 @@ public class fragment_exercise extends Fragment  {
             }
         });
 
+
+
+
         return rootview;
     }
 
@@ -82,7 +92,7 @@ public class fragment_exercise extends Fragment  {
 
         //For now we just picked an arbitrary item to play.  More can be found at
         //https://archive.org/details/more_animation
-        emVideoView.setVideoURI(Uri.parse("http://192.168.1.35:8080"));
+        emVideoView.setVideoURI(Uri.parse("http://:1234@192.168.1.35:8080"));
     }
 
 

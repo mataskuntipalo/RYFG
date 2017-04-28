@@ -38,6 +38,9 @@
         <activity
             android:name=".activity.CustomSetExerciseInDayActivity"></activity>
         <activity android:name=".activity.ExerciseActivity"></activity>
+
+        <application android:name =".GlobalDate"/>
+
     </application>
 
 </manifest>

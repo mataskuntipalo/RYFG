@@ -16,8 +16,10 @@ public class handleTABLE_PROGRAM {
         private SQLiteDatabase writeSQLite, readSQLite;
 
         public static final String TABLE_PROGRAM = "PROGRAM";
+        public static final String COLUMN_TYPE_GOAL = "typeGoal";
         public static final String COLUMN_WEIGHT_GOAL = "weightGoal";
         public static final String COLUMN_TOTAL_DURATION = "totalDuration";
+        public static final String COLUMN_KG_PER_WEEK = "kg_per_week";
 
 
         public static final String COLUMN_YEAR_BEGIN = "year_date_begin";
@@ -38,8 +40,10 @@ public class handleTABLE_PROGRAM {
 
         public void addProgram(GoalData data){
             ContentValues values = new ContentValues();
+            values.put(COLUMN_TYPE_GOAL, 0);
             values.put(COLUMN_WEIGHT_GOAL, data.getWeightGoal());
             values.put(COLUMN_TOTAL_DURATION, data.getTotalDuration());
+            values.put(COLUMN_KG_PER_WEEK, data.getKgPerWeek());
 
 
             values.put(COLUMN_YEAR_BEGIN , data.getYear_date_begin());
@@ -55,19 +59,20 @@ public class handleTABLE_PROGRAM {
         }
 
 
-        public GoalData getDateToCalendar(){
+        public GoalData getProgramDate(){
             GoalData data = new GoalData();
             Cursor cursor = readSQLite.rawQuery("SELECT * FROM " + TABLE_PROGRAM ,null);
             cursor.moveToLast();
 
             data.setWeightGoal(cursor.getFloat(2));
             data.setTotalDuration(cursor.getInt(3));
-            data.setYear_date_begin(cursor.getInt(4));
-            data.setMonth_date_begin(cursor.getInt(5));
-            data.setYear_date_begin(cursor.getInt(6));
-            data.setYear_date_end(cursor.getInt(7));
-            data.setMonth_date_end(cursor.getInt(8));
-            data.setYear_date_end(cursor.getInt(9));
+            data.setKgPerWeek(cursor.getInt(4));
+            data.setYear_date_begin(cursor.getInt(5));
+            data.setMonth_date_begin(cursor.getInt(6));
+            data.setYear_date_begin(cursor.getInt(7));
+            data.setYear_date_end(cursor.getInt(8));
+            data.setMonth_date_end(cursor.getInt(9));
+            data.setYear_date_end(cursor.getInt(10));
             return data;
         }
     }

@@ -45,6 +45,7 @@
             android:layout_height="match_parent"
             EMVideoView:useDefaultControls="true"/>
 
+
     </LinearLayout>
 
 

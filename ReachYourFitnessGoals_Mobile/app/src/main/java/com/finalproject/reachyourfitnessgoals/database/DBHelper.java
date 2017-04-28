@@ -25,8 +25,9 @@ public class DBHelper extends SQLiteOpenHelper {
 
     private static final String TABLE_PROGRAM = "CREATE TABLE PROGRAM (program_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
             "typeGoal INTEGER NOT NULL, " +
-            "weightGoal INTEGER , " +
-            "totalDuration INTEGER , " +
+            "weigh_goal INTEGER , " +
+            "total_duration INTEGER , " +
+            "kg_per_week INTEGER, " +
             "year_date_begin INTEGER NOT NULL, " +
             "month_date_begin INTEGER NOT NULL, " +
             "day_date_begin INTEGER NOT NULL, " +
@@ -46,7 +47,8 @@ public class DBHelper extends SQLiteOpenHelper {
             "month INTEGER NOT NULL, " +
             "year INTEGER NOT NULL, " +
             "vdo_id TEXT, " +
-            "calorie INTEGER, " +
+            "calorie_in_day INTEGER, " +
+            "calorie_total INTEGER, " +
             "note TEXT, " +
             "time REAL);";
 

@@ -24,8 +24,10 @@ import android.widget.TextView;
 
 import com.finalproject.reachyourfitnessgoals.R;
 import com.finalproject.reachyourfitnessgoals.database.handleTABLE_EXERCISE;
+import com.finalproject.reachyourfitnessgoals.database.handleTABLE_PROGRAM;
 import com.finalproject.reachyourfitnessgoals.fragment.fragment_calendar;
 import com.finalproject.reachyourfitnessgoals.models.DateData;
+import com.finalproject.reachyourfitnessgoals.models.ExeInWeekData;
 import com.finalproject.reachyourfitnessgoals.models.ExerciseData;
 import com.finalproject.reachyourfitnessgoals.models.workoutOfWeekData;
 import com.finalproject.reachyourfitnessgoals.setting.EventDecorator;
@@ -73,9 +75,6 @@ public class SetExerciseInWeekActivity extends AppCompatActivity implements Vert
         handleTableExercise = new handleTABLE_EXERCISE(this);
         fragmentCalendar = fragment_calendar.newInstance();
         //Log.i("testDate",thaiTime.getCurrentTime()+"");
-        //day = Calendar.FRIDAY;
-//        Log.i("test",day+"");
-//        Log.i("test","This is Friday"+Calendar.SUNDAY);
         checkWeekEndDay(today);
         tempDay = 7 - today;
 
@@ -359,6 +358,9 @@ public class SetExerciseInWeekActivity extends AppCompatActivity implements Vert
     }
 
     private void addToDataBase(DateData data){
-        handleTableExercise.addExercise(data);
+        ExeInWeekData exeInWeekData = new ExeInWeekData(data.getDay(),data.getMonth(),data.getYear());
+        handleTABLE_PROGRAM handleTABLEProgram = new handleTABLE_PROGRAM(this);
+        exeInWeekData.setCalorieTotal(handleTABLEProgram.getProgramDate().getKgPerWeek()/workoutOfWeekData.getWorkoutPerWeek());
+        handleTableExercise.addExercise(exeInWeekData);
     }
 }

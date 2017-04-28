@@ -38,9 +38,11 @@ public class fragment_customExe_list extends Fragment{
     private BottomSheetBehavior bottomSheetBehavior;
     private TextView maxCalorie;
     private TextView calorie;
-    private Button comfimButton;
+    private Button confirmButton;
     private int tempMaxCalorie;
     private int tempCalorie;
+
+    private handleTABLE_E
 
 
 
@@ -135,7 +137,7 @@ public class fragment_customExe_list extends Fragment{
         bottomSheetBehavior = BottomSheetBehavior.from(rootview.findViewById(R.id.layout_bottomSheet));
         calorie = (TextView)rootview.findViewById(R.id.calorie_TextView_bottomSheet);
         maxCalorie = (TextView)rootview.findViewById(R.id.maxCalorie_TextView_bottomSheet);
-        comfimButton = (Button)rootview.findViewById(R.id.confirm_Button_bottomSheet);
+        confirmButton = (Button)rootview.findViewById(R.id.confirm_Button_bottomSheet);
         recyclerViewBottomSheet = (RecyclerView)rootview.findViewById(R.id.recyclerView_bottomSheet);
         recyclerViewBottomSheet.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerViewAdapterBottomSheet = new RecyclerViewAdapter_userSelect(userSelectDataArrayList);
@@ -159,7 +161,7 @@ public class fragment_customExe_list extends Fragment{
     }
 
     private void check(){
-        comfimButton.setVisibility(View.VISIBLE);
+        confirmButton.setVisibility(View.VISIBLE);
     }
 
 }

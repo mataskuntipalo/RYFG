@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.finalproject.reachyourfitnessgoals.models.DateData;
+import com.finalproject.reachyourfitnessgoals.models.ExeInWeekData;
 import com.finalproject.reachyourfitnessgoals.models.ExerciseData;
 import com.finalproject.reachyourfitnessgoals.models.GoalData;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
@@ -26,7 +27,8 @@ public class handleTABLE_EXERCISE {
     public static final String COLUMN_MONTH = "month";
     public static final String COLUMN_YEAR = "year";
     public static final String COLUMN_VDO_ID = "vdo_id";
-    public static final String COLUMN_CALORIE = "calorie";
+    public static final String COLUMN_CALORIE_IN_DAY = "calorie_in_day";
+    public static final String COLUMN_CALORIE_TOTAL= "calorie_total";
     public static final String COLUMN_NOTE = "note";
     public static final String COLUMN_TIME = "time";
 
@@ -36,13 +38,14 @@ public class handleTABLE_EXERCISE {
         readSQLite = objDBHelper.getReadableDatabase();
     }
 
-    public void addExercise(DateData data){
+    public void addExercise(ExeInWeekData data){
         ContentValues values = new ContentValues();
         values.put(COLUMN_DAY, data.getDay());
         values.put(COLUMN_MONTH, data.getMonth());
         values.put(COLUMN_YEAR , data.getYear());
         values.put(COLUMN_VDO_ID,"ยังไม่ได้เลือกท่าออกกำลังกาย");
-        values.put(COLUMN_CALORIE, 0);
+        values.put(COLUMN_CALORIE_IN_DAY, 0);
+        values.put(COLUMN_CALORIE_TOTAL, data.getCalorieTotal());
         values.put(COLUMN_NOTE, "Not add note");
         values.put(COLUMN_TIME, 0.0);
 
@@ -69,7 +72,21 @@ public class handleTABLE_EXERCISE {
     }
 
     public ExerciseData getDetailExercise(CalendarDay date){
-        Cursor cursor = readSQLite.rawQuery("SELECT " + COLUMN_VDO_ID + "," + COLUMN_CALORIE+ "," + COLUMN_NOTE + "," + COLUMN_TIME + " FROM " + TABLE_EXERCISE
+        Cursor cursor = readSQLite.rawQuery("SELECT " + COLUMN_VDO_ID + "," + COLUMN_CALORIE_IN_DAY+ "," + COLUMN_NOTE + "," + COLUMN_TIME + " FROM " + TABLE_EXERCISE
+                + " WHERE " + COLUMN_DAY + "=" + date.getDay() + " AND "
+                + COLUMN_MONTH + "=" + date.getMonth() + " AND "
+                + COLUMN_YEAR + "=" + date.getYear(), null);
+        Log.i("cursor",cursor.getCount()+"");
+        if(cursor.getCount() == 0){
+            return null;
+        }else{
+            cursor.moveToFirst();
+            return new ExerciseData(cursor.getString(0),cursor.getInt(1),cursor.getString(2),cursor.getFloat(3));
+        }
+    }
+
+    public ExerciseData getTotalCalorieInDay(CalendarDay date){
+        Cursor cursor = readSQLite.rawQuery("SELECT " + COLUMN_CALORIE_TOTAL  + " FROM " + TABLE_EXERCISE
                 + " WHERE " + COLUMN_DAY + "=" + date.getDay() + " AND "
                 + COLUMN_MONTH + "=" + date.getMonth() + " AND "
                 + COLUMN_YEAR + "=" + date.getYear(), null);
