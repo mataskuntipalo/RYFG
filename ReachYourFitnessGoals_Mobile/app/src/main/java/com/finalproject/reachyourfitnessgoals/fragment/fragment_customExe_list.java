@@ -18,7 +18,11 @@ import android.widget.TextView;
 import com.finalproject.reachyourfitnessgoals.R;
 import com.finalproject.reachyourfitnessgoals.adapter.RecyclerViewAdapter;
 import com.finalproject.reachyourfitnessgoals.adapter.RecyclerViewAdapter_userSelect;
+import com.finalproject.reachyourfitnessgoals.database.handleTABLE_EXERCISE;
+import com.finalproject.reachyourfitnessgoals.models.DateData;
+import com.finalproject.reachyourfitnessgoals.models.ExeType;
 import com.finalproject.reachyourfitnessgoals.models.userSelectData;
+import com.finalproject.reachyourfitnessgoals.setting.GlobalDate;
 
 import java.util.ArrayList;
 
@@ -28,7 +32,8 @@ import java.util.ArrayList;
 public class fragment_customExe_list extends Fragment{
 
 
-    private static String KEY_TYPE;
+    private static String KEY_TYPE = "type";
+    private static String KEY_ID = "id";
     private RecyclerView recyclerView;
     private RecyclerViewAdapter recyclerViewAdapter;
 
@@ -42,19 +47,19 @@ public class fragment_customExe_list extends Fragment{
     private int tempMaxCalorie;
     private int tempCalorie;
 
-    private handleTABLE_E
 
-
+    private handleTABLE_EXERCISE handleTABLE_exercise;
 
 
     public fragment_customExe_list() {
         // Required empty public constructor
     }
 
-    public static fragment_customExe_list newInstance(String type) {
+    public static fragment_customExe_list newInstance(String type , int id) {
         fragment_customExe_list fragment = new fragment_customExe_list();
         Bundle bundle = new Bundle();
         bundle.putString(KEY_TYPE, type);
+        bundle.putInt(KEY_ID, id);
         fragment.setArguments(bundle);
         return fragment;
     }
@@ -68,7 +73,9 @@ public class fragment_customExe_list extends Fragment{
 
         initBottomSheet(rootview);
 
-
+        handleTABLE_exercise = new handleTABLE_EXERCISE(getContext());
+        tempMaxCalorie = handleTABLE_exercise.getTotalCalorieInDay(((GlobalDate)getActivity().getApplication()).getDateData());
+        setMaxCalorie();
 
         //final LinearLayout layout = (LinearLayout) rootview.findViewById(R.id.showExe_customExe);
         recyclerView = (RecyclerView)rootview.findViewById(R.id.recyclerView_customExe);
@@ -142,12 +149,25 @@ public class fragment_customExe_list extends Fragment{
         recyclerViewBottomSheet.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerViewAdapterBottomSheet = new RecyclerViewAdapter_userSelect(userSelectDataArrayList);
         recyclerViewBottomSheet.setAdapter(recyclerViewAdapterBottomSheet);
-        setMaxCalorie();
     }
 
     private void setMaxCalorie(){
-        tempMaxCalorie = 20;
-        maxCalorie.setText("20");
+        switch (getArguments().getString(KEY_TYPE)){
+            case ExeType.TYPE_STRETCHING :
+                tempMaxCalorie = (tempMaxCalorie*10)/100;
+                break;
+            case ExeType.TYPE_WARMUP :
+                if(getArguments().getInt(KEY_ID) == R.id.type_1){
+                    tempMaxCalorie = (tempMaxCalorie*20)/100;
+                }else{
+                    tempMaxCalorie = (tempMaxCalorie*30)/100;
+                }
+                break;
+            case ExeType.TYPE_STRENGTH :
+                tempMaxCalorie = (tempMaxCalorie*30)/100;
+                break;
+        }
+        maxCalorie.setText(tempMaxCalorie+"");
     }
 
     private void addCalorie(String calorie){

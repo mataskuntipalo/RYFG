@@ -37,6 +37,7 @@ import com.finalproject.reachyourfitnessgoals.models.GoalData;
 import com.finalproject.reachyourfitnessgoals.setting.EventDecorator;
 
 
+import com.finalproject.reachyourfitnessgoals.setting.GlobalDate;
 import com.github.florent37.materialviewpager.MaterialViewPagerHelper;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.CalendarMode;
@@ -161,6 +162,13 @@ public class fragment_calendar extends Fragment {
         }else{
 
         }
+        addGlobalDate(date);
+
+    }
+
+    private void addGlobalDate(CalendarDay date){
+
+        ((GlobalDate) getActivity().getApplication()).setDateData(new DateData(date.getDay(),date.getMonth(),date.getYear()));
 
     }
 

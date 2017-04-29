@@ -47,7 +47,7 @@ public class CustomSetExerciseInDayActivity extends AppCompatActivity {
     private View.OnClickListener selectExe = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            fragment_customExe_list custom = fragment_customExe_list.newInstance(v.getTag()+"");
+            fragment_customExe_list custom = fragment_customExe_list.newInstance(v.getTag()+"",v.getId());
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             transaction.replace(R.id.activity_set_exercise_in_day, custom);
             transaction.addToBackStack(null);

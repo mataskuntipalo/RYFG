@@ -61,6 +61,11 @@ public class DBHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(TABLE_PERSONAL);
         db.execSQL(TABLE_PROGRAM);
+        db.execSQL("INSERT INTO PROGRAM (typeGoal, weigh_goal, kg_per_week, year_date_begin, month_date_begin, " +
+                "day_date_begin, " +
+                "year_date_end, " +
+                "month_date_end, " +
+                "day_date_end) VALUES (0, 5, 1540, 2017, 4, 29, 2016, 9, 29);");
         db.execSQL(TABLE_VDO);
         db.execSQL(TABLE_EXERCISE);
     }

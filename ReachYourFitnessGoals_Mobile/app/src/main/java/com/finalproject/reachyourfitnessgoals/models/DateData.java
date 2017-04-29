@@ -1,5 +1,7 @@
 package com.finalproject.reachyourfitnessgoals.models;
 
+import com.finalproject.reachyourfitnessgoals.setting.GlobalDate;
+
 /**
  * Created by Papang on 25/3/2560.
  */
@@ -12,6 +14,8 @@ public class DateData {
         this.month = month;
         this.year = year;
     }
+
+
 
     public int getDay() {
         return day;

@@ -85,17 +85,21 @@ public class handleTABLE_EXERCISE {
         }
     }
 
-    public ExerciseData getTotalCalorieInDay(CalendarDay date){
+    public int getTotalCalorieInDay(DateData date){
         Cursor cursor = readSQLite.rawQuery("SELECT " + COLUMN_CALORIE_TOTAL  + " FROM " + TABLE_EXERCISE
                 + " WHERE " + COLUMN_DAY + "=" + date.getDay() + " AND "
                 + COLUMN_MONTH + "=" + date.getMonth() + " AND "
                 + COLUMN_YEAR + "=" + date.getYear(), null);
         Log.i("cursor",cursor.getCount()+"");
         if(cursor.getCount() == 0){
-            return null;
+            return Integer.parseInt(null);
         }else{
             cursor.moveToFirst();
-            return new ExerciseData(cursor.getString(0),cursor.getInt(1),cursor.getString(2),cursor.getFloat(3));
+            Log.i("cursor",cursor.getInt(0)+"");
+            Log.i("cursor1",date.getDay()+"");
+            Log.i("cursor1",date.getMonth()+"");
+            Log.i("cursor1",date.getYear()+"");
+            return cursor.getInt(0);
         }
     }
 }
