@@ -47,4 +47,11 @@ public class RecyclerViewAdapter_userSelect extends RecyclerView.Adapter<Recycle
         this.userSelectDataList.add(new userSelectData(name,5));
         notifyDataSetChanged();
     }
+
+    public ArrayList<userSelectData> getData(){
+        for (int i = 0 ;i < this.userSelectDataList.size() ; i++) {
+            this.userSelectDataList.get(i).setId(i);
+        }
+        return this.userSelectDataList;
+    }
 }

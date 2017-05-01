@@ -10,11 +10,13 @@ import android.widget.TextView;
 
 import com.finalproject.reachyourfitnessgoals.R;
 import com.finalproject.reachyourfitnessgoals.fragment.fragment_customExe_list;
+import com.finalproject.reachyourfitnessgoals.fragment.fragment_exeSummary_ExpandView;
 import com.finalproject.reachyourfitnessgoals.models.ExeType;
 
 public class CustomSetExerciseInDayActivity extends AppCompatActivity {
 
     private LinearLayout typeExeLayout;
+    private LinearLayout exeSummary_layout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,8 +24,9 @@ public class CustomSetExerciseInDayActivity extends AppCompatActivity {
         setContentView(R.layout.activity_custom_set_exercise_in_day);
 
         typeExeLayout = (LinearLayout)findViewById(R.id.typeExeLayout_LinearLayout_customSetExe);
+        exeSummary_layout = (LinearLayout)findViewById(R.id.exeSummary_layout);
         setLayout();
-
+        
 
     }
 
@@ -52,6 +55,8 @@ public class CustomSetExerciseInDayActivity extends AppCompatActivity {
             transaction.replace(R.id.activity_set_exercise_in_day, custom);
             transaction.addToBackStack(null);
             transaction.commit();
+
+            exeSummary_layout.setVisibility(View.VISIBLE);
         }
     };
 }

@@ -16,6 +16,11 @@ public class ExerciseData {
         this.time = time;
     }
 
+    public ExerciseData(int calorie, String vdo_id) {
+        this.calorie = calorie;
+        this.vdo_id = vdo_id;
+    }
+
     public int getCalorie() {
         return calorie;
     }

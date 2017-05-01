@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -12,17 +13,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.finalproject.reachyourfitnessgoals.R;
 import com.finalproject.reachyourfitnessgoals.adapter.RecyclerViewAdapter;
 import com.finalproject.reachyourfitnessgoals.adapter.RecyclerViewAdapter_userSelect;
 import com.finalproject.reachyourfitnessgoals.database.handleTABLE_EXERCISE;
-import com.finalproject.reachyourfitnessgoals.models.DateData;
+import com.finalproject.reachyourfitnessgoals.models.ExeForGlobalData;
 import com.finalproject.reachyourfitnessgoals.models.ExeType;
 import com.finalproject.reachyourfitnessgoals.models.userSelectData;
-import com.finalproject.reachyourfitnessgoals.setting.GlobalDate;
+import com.finalproject.reachyourfitnessgoals.models.GlobalData;
 
 import java.util.ArrayList;
 
@@ -74,7 +74,7 @@ public class fragment_customExe_list extends Fragment{
         initBottomSheet(rootview);
 
         handleTABLE_exercise = new handleTABLE_EXERCISE(getContext());
-        tempMaxCalorie = handleTABLE_exercise.getTotalCalorieInDay(((GlobalDate)getActivity().getApplication()).getDateData());
+        tempMaxCalorie = handleTABLE_exercise.getTotalCalorieInDay(((GlobalData)getActivity().getApplication()).getDateData());
         setMaxCalorie();
 
         //final LinearLayout layout = (LinearLayout) rootview.findViewById(R.id.showExe_customExe);
@@ -83,17 +83,15 @@ public class fragment_customExe_list extends Fragment{
         recyclerViewAdapter = new RecyclerViewAdapter(getContext(),getArguments().getString(KEY_TYPE));
         recyclerView.setAdapter(recyclerViewAdapter);
         recyclerViewAdapter.SetOnItemClickListener(new RecyclerViewAdapter.OnItemClickListener() {
+
             @Override
             public void onItemClick(View view, String name, String calorie) {
-
                 if(tempCalorie >= tempMaxCalorie){
                     check();
                 }else {
                     selectExe(name);
                     addCalorie(calorie);
                 }
-
-                //new fragment_bottomSheet().show(getFragmentManager(), "dialog");
             }
 
             @Override
@@ -182,6 +180,19 @@ public class fragment_customExe_list extends Fragment{
 
     private void check(){
         confirmButton.setVisibility(View.VISIBLE);
+        confirmButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ExeForGlobalData data = new ExeForGlobalData(getArguments().getString(KEY_TYPE),recyclerViewAdapterBottomSheet.getData());
+                ((GlobalData)getActivity().getApplication()).addExeForGlobalData(data);
+                new fragment_exeSummary_ExpandView.MyAdapter().notifyDataSetChanged();
+
+                fragment_exeSummary_ExpandView expandView = fragment_exeSummary_ExpandView.newInstance(getActivity());
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.replace(R.id.exeSummary_layout, expandView);
+                transaction.commit();
+            }
+        });
     }
 
 }

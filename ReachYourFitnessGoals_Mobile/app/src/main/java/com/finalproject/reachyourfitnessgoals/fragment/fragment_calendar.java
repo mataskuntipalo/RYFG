@@ -6,27 +6,15 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.NestedScrollView;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.view.menu.MenuView;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AbsListView;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.Volley;
 import com.finalproject.reachyourfitnessgoals.R;
 import com.finalproject.reachyourfitnessgoals.activity.ExerciseActivity;
 import com.finalproject.reachyourfitnessgoals.database.handleTABLE_EXERCISE;
@@ -37,25 +25,16 @@ import com.finalproject.reachyourfitnessgoals.models.GoalData;
 import com.finalproject.reachyourfitnessgoals.setting.EventDecorator;
 
 
-import com.finalproject.reachyourfitnessgoals.setting.GlobalDate;
+import com.finalproject.reachyourfitnessgoals.models.GlobalData;
 import com.github.florent37.materialviewpager.MaterialViewPagerHelper;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.CalendarMode;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 import com.prolificinteractive.materialcalendarview.OnDateSelectedListener;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collection;
-import java.util.Date;
 import java.util.HashSet;
-import java.util.List;
-
-import static android.content.ContentValues.TAG;
 
 
 /**
@@ -168,7 +147,7 @@ public class fragment_calendar extends Fragment {
 
     private void addGlobalDate(CalendarDay date){
 
-        ((GlobalDate) getActivity().getApplication()).setDateData(new DateData(date.getDay(),date.getMonth(),date.getYear()));
+        ((GlobalData) getActivity().getApplication()).setDateData(new DateData(date.getDay(),date.getMonth(),date.getYear()));
 
     }
 

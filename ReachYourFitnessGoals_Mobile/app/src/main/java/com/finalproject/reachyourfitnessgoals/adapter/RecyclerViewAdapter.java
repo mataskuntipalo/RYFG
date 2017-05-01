@@ -47,7 +47,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     }
 
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, final int viewType) {
         if(type == ListType.TYPE_SHOW_ALL){
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.itemview_show_all, parent, false);
             Log.i("inShowAll","inShowAll");
