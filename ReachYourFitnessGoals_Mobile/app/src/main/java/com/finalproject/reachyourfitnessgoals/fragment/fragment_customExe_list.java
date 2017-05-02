@@ -46,6 +46,7 @@ public class fragment_customExe_list extends Fragment{
     private Button confirmButton;
     private int tempMaxCalorie;
     private int tempCalorie;
+    private int ExeForGlobalData_id;
 
 
     private handleTABLE_EXERCISE handleTABLE_exercise;
@@ -72,6 +73,7 @@ public class fragment_customExe_list extends Fragment{
         View rootview = inflater.inflate(R.layout.fragment_custom_exe_list, container, false);
 
         initBottomSheet(rootview);
+        getExeForGlobalDataId();
 
         handleTABLE_exercise = new handleTABLE_EXERCISE(getContext());
         tempMaxCalorie = handleTABLE_exercise.getTotalCalorieInDay(((GlobalData)getActivity().getApplication()).getDateData());
@@ -183,16 +185,33 @@ public class fragment_customExe_list extends Fragment{
         confirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ExeForGlobalData data = new ExeForGlobalData(getArguments().getString(KEY_TYPE),recyclerViewAdapterBottomSheet.getData());
-                ((GlobalData)getActivity().getApplication()).addExeForGlobalData(data);
-                new fragment_exeSummary_ExpandView.MyAdapter().notifyDataSetChanged();
-
-                fragment_exeSummary_ExpandView expandView = fragment_exeSummary_ExpandView.newInstance(getActivity());
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.replace(R.id.exeSummary_layout, expandView);
-                transaction.commit();
+                //ExeForGlobalData data = new ExeForGlobalData(getArguments().getString(KEY_TYPE),recyclerViewAdapterBottomSheet.getData());
+                ((GlobalData)getActivity().getApplication()).updataData(ExeForGlobalData_id,userSelectDataArrayList,tempMaxCalorie,tempCalorie);
+                getActivity().onBackPressed();
             }
         });
     }
+
+    private void getExeForGlobalDataId(){
+        switch (getArguments().getInt(KEY_ID)) {
+            case R.id.type_0:
+                ExeForGlobalData_id = 0;
+                break;
+            case R.id.type_1:
+                ExeForGlobalData_id = 1;
+                break;
+            case R.id.type_2:
+                ExeForGlobalData_id = 2;
+                break;
+            case R.id.type_3:
+                ExeForGlobalData_id = 3;
+                break;
+            case R.id.type_4:
+                ExeForGlobalData_id = 4;
+                break;
+        }
+    }
+
+
 
 }

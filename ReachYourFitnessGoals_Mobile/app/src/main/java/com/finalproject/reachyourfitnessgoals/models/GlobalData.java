@@ -14,11 +14,22 @@ public class GlobalData extends Application {
 
     private DateData dateData;
     private ArrayList<ExeForGlobalData> exeForGlobalData;
+    private String[] type = {"Stretching","Warm Up","Strength","Cardio","Cool Down"};
 
     @Override
     public void onCreate() {
         super.onCreate();
         exeForGlobalData = new ArrayList<>();
+        for (int i = 0; i < type.length; i++) {
+            //MyGroupItem group = new MyGroupItem(i, type[i]);
+            addExeForGlobalData(new ExeForGlobalData(type[i], new ArrayList<userSelectData>()));
+            exeForGlobalData.get(i).setId(i);
+            int tempSize = exeForGlobalData.get(i).getUserSelectDatas().size();
+            for (int j = 0; j < tempSize; j++) {
+                exeForGlobalData.get(i).getUserSelectDatas().get(j).setId(j);
+                //group.children.add(new MyChildItem(j, "child " + j));
+            }
+        }
     }
 
 
@@ -36,6 +47,12 @@ public class GlobalData extends Application {
 
     public void addExeForGlobalData(ExeForGlobalData exeForGlobalData) {
         this.exeForGlobalData.add(exeForGlobalData);
+    }
+
+    public void updataData(int id , ArrayList<userSelectData> dataArrayList , int maxCalorie , int calorie){
+        exeForGlobalData.get(id).setUserSelectDatas(dataArrayList);
+        exeForGlobalData.get(id).setMaxCalorie(maxCalorie);
+        exeForGlobalData.get(id).setCalorie(calorie);
     }
 }
 
