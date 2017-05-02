@@ -43,15 +43,10 @@ public class RecyclerViewAdapter_userSelect extends RecyclerView.Adapter<Recycle
         return userSelectDataList.size();
     }
 
-    public void addExe(String name){
-        this.userSelectDataList.add(new userSelectData(name,5));
+    public void addExe(String name , String vdo_id){
+        this.userSelectDataList.add(new userSelectData(name,5,vdo_id));
         notifyDataSetChanged();
     }
 
-    public ArrayList<userSelectData> getData(){
-        for (int i = 0 ;i < this.userSelectDataList.size() ; i++) {
-            this.userSelectDataList.get(i).setId(i);
-        }
-        return this.userSelectDataList;
-    }
+
 }

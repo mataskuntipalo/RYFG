@@ -61,7 +61,7 @@
         android:id="@+id/confirm_Button_bottomSheet_customSetExe"
         android:layout_centerHorizontal="true"
         android:visibility="gone"
-        android:layout_below="@+id/calorie_TextView_exeSummary_layout"/>
+        android:layout_below="@+id/exeSummary_layout"/>
 
     <ScrollView
         android:layout_width="match_parent"

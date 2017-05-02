@@ -110,11 +110,13 @@ public class CustomSetExerciseInDayActivity extends AppCompatActivity {
 
     public void checkConfirm(){
         if(totalCalorie >= tempMaxCalorie){
+        String a = ((GlobalData)this.getApplication()).getVdoID();
+        Log.i("vdo_id",a);
             confirmButton.setVisibility(View.VISIBLE);
             confirmButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                   // handleTABLE_exercise.update();
                 }
             });
         }

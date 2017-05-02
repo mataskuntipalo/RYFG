@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.finalproject.reachyourfitnessgoals.BuildConfig;
 import com.finalproject.reachyourfitnessgoals.R;
 import com.finalproject.reachyourfitnessgoals.ViewHolder.customExeViewHolder;
 import com.finalproject.reachyourfitnessgoals.ViewHolder.headerExeViewHolder;
@@ -58,7 +59,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 @Override
                 public void select(View caller) {
                     if (mItemClickListener != null) {
-                        mItemClickListener.onItemClick(caller, caller.getTag(R.id.name)+"" , caller.getTag(R.id.calorie)+"");
+                        mItemClickListener.onItemClick(caller, caller.getTag(R.id.name)+"" , caller.getTag(R.id.calorie)+"" , caller.getTag(R.id.vdo_id)+"");
                     }
                 }
 
@@ -92,6 +93,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             customExeViewHolder customExeViewHolder = (customExeViewHolder) holder;
             customExeViewHolder.itemView.setTag(R.id.name,vdoDataArrayList.get(position).getName());
             customExeViewHolder.itemView.setTag(R.id.calorie,"5");
+            customExeViewHolder.itemView.setTag(R.id.vdo_id,vdoDataArrayList.get(position).getVdo_id());
             setupCustomExe(customExeViewHolder, vdoDataArrayList.get(position));
 
         }else if(holder instanceof randomExeViewHolder){
@@ -148,6 +150,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         //customExeViewHolder.exePic_custom.setBackground(Drawable.createFromPath(vdoData.getName()));
         customExeViewHolder.exePic_custom.setBackgroundResource(R.drawable.pic);
         customExeViewHolder.exeName_custom.setText(vdoData.getName());
+        Log.d("RecyclerViewAdapter", vdoData.getName());
     }
 
     private void setupRandomExe (randomExeViewHolder randomExeViewHolder , vdoData vdoData,int position){
@@ -158,7 +161,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     }
 
     public interface OnItemClickListener {
-        public void onItemClick(View view , String name,String calorie);
+        public void onItemClick(View view , String name,String calorie,String  vdo_id);
         public void onItemLongClick();
     }
 

@@ -54,5 +54,15 @@ public class GlobalData extends Application {
         exeForGlobalData.get(id).setMaxCalorie(maxCalorie);
         exeForGlobalData.get(id).setCalorie(calorie);
     }
+
+    public String getVdoID(){
+        String id = "";
+        for (int i = 0 ; i<exeForGlobalData.size(); i++){
+            for(int j = 0 ; j < exeForGlobalData.get(i).getUserSelectDatas().size() ; j++){
+                id = id + exeForGlobalData.get(i).getUserSelectDatas().get(j).vdo_id;
+            }
+        }
+        return id;
+    }
 }
 

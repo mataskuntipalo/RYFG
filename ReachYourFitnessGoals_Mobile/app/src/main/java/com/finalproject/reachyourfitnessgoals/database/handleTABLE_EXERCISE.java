@@ -102,4 +102,20 @@ public class handleTABLE_EXERCISE {
             return cursor.getInt(0);
         }
     }
+
+    public void update(String vdo_id , int calorie , ExeInWeekData data){
+        ContentValues args = new ContentValues();
+        args.put(COLUMN_VDO_ID, vdo_id);
+        args.put(COLUMN_CALORIE_IN_DAY, calorie);
+        writeSQLite.update(TABLE_EXERCISE, args, COLUMN_DAY + "=" + data.getDay()
+                + " AND " + COLUMN_MONTH + "=" + data.getMonth()
+                + " AND " + COLUMN_YEAR + "=" + data.getYear() , null);
+
+//        Cursor cursor = readSQLite.rawQuery("UPDATE " + TABLE_EXERCISE + " SET "
+//                + COLUMN_VDO_ID + " = " + vdo_id + " , "
+//                + COLUMN_CALORIE_IN_DAY + "=" + calorie
+//                + " WHERE " + COLUMN_DAY + "=" + data.getDay()
+//                + " AND " + COLUMN_MONTH + "=" + data.getMonth()
+//                + " AND " + COLUMN_YEAR + "=" + data.getYear() + ";");
+    }
 }

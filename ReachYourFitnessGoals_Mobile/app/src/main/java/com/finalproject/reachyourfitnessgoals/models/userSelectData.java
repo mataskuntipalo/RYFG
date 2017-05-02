@@ -5,14 +5,22 @@ package com.finalproject.reachyourfitnessgoals.models;
  */
 
 public class userSelectData {
-    String name;
+    String vdo_id,name;
     int calories;
-    int vdo_id,id;
+    int id;
 
-    public userSelectData(String name, int calories) {
+    public userSelectData(String name, int calories , String vdo_id) {
         this.name = name;
         this.calories = calories;
+        this.vdo_id = vdo_id;
+    }
 
+    public String getVdo_id() {
+        return vdo_id;
+    }
+
+    public void setVdo_id(String vdo_id) {
+        this.vdo_id = vdo_id;
     }
 
     public String getName() {
@@ -31,13 +39,6 @@ public class userSelectData {
         this.calories = calories;
     }
 
-    public int getVdo_id() {
-        return vdo_id;
-    }
-
-    public void setVdo_id(int vdo_id) {
-        this.vdo_id = vdo_id;
-    }
 
     public int getId() {
         return id;

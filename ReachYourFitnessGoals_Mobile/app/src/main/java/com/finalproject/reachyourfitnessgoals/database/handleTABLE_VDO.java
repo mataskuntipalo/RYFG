@@ -52,7 +52,7 @@ public class handleTABLE_VDO {
         if (cursor != null) {
             cursor.moveToFirst();
             while(!cursor.isAfterLast()) {
-                vdoDataArrayListt.add(new vdoData(cursor.getString(1),cursor.getString(2),cursor.getString(3),cursor.getString(4),cursor.getInt(4)));
+                vdoDataArrayListt.add(new vdoData(cursor.getInt(0),cursor.getString(1),cursor.getString(2),cursor.getString(3),cursor.getString(4),cursor.getInt(4)));
 
                 cursor.moveToNext();
             }
@@ -69,7 +69,7 @@ public class handleTABLE_VDO {
         if (cursor != null) {
             cursor.moveToFirst();
             while(!cursor.isAfterLast()) {
-                vdoDataArrayListt.add(new vdoData(cursor.getString(1),cursor.getString(2),cursor.getString(3),cursor.getString(4),cursor.getInt(4)));
+                vdoDataArrayListt.add(new vdoData(cursor.getInt(0),cursor.getString(1),cursor.getString(2),cursor.getString(3),cursor.getString(4),cursor.getInt(4)));
 
                 cursor.moveToNext();
             }

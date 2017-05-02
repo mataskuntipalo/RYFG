@@ -87,11 +87,11 @@ public class fragment_customExe_list extends Fragment{
         recyclerViewAdapter.SetOnItemClickListener(new RecyclerViewAdapter.OnItemClickListener() {
 
             @Override
-            public void onItemClick(View view, String name, String calorie) {
+            public void onItemClick(View view, String name, String calorie , String vdo_id) {
                 if(tempCalorie >= tempMaxCalorie){
                     check();
                 }else {
-                    selectExe(name);
+                    selectExe(name,vdo_id);
                     addCalorie(calorie);
                 }
             }
@@ -134,8 +134,8 @@ public class fragment_customExe_list extends Fragment{
         return rootview;
     }
 
-    private void selectExe(String name) {
-        recyclerViewAdapterBottomSheet.addExe(name);
+    private void selectExe(String name,String vdo_id) {
+        recyclerViewAdapterBottomSheet.addExe(name,vdo_id);
         //bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
     }
 

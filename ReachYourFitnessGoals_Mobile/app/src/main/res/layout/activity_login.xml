@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -7,14 +7,58 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:ignore="MissingPrefix"
+    android:orientation="vertical"
     android:background="@color/colorBG"
     tools:context="com.finalproject.reachyourfitnessgoals.activity.LoginActivity">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/colorWhite"
+        android:layout_marginTop="80dp"
+        android:textSize="60dp"
+        android:text="RYFG"
+        android:gravity="center_horizontal"
+        android:id="@+id/logoText"
+        />
 
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/logo"
+        android:id="@+id/logo"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorฺฺBlueDark"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="40dp"
+            android:padding="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:textColor="@color/colorWhite"
+                android:textSize="24dp"
+                android:text="Reach Your Fitness Goals"
+
+                />
+
+        </RelativeLayout>
+
+
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
         android:id="@+id/login_form">
 
     <RelativeLayout
@@ -56,7 +100,6 @@
         android:layout_marginRight="@dimen/activity_horizontal_margin"
         android:layout_marginBottom="@dimen/bottom_margin"
         android:padding="10dp"
-        android:layout_below="@+id/content1"
         android:background="@drawable/edittext_conner"
         android:visibility="gone"
         tools:visibility="visible"
@@ -93,8 +136,9 @@
         android:layout_centerHorizontal="true"
         android:visibility="gone"
         tools:visibility="visible"
+        android:layout_gravity="center_horizontal"
         android:id="@+id/loginButton"
-        android:layout_below="@id/content2"/>
+        />
 
     <TextView
         android:layout_width="wrap_content"
@@ -103,12 +147,12 @@
         android:textSize="16dp"
         android:textColor="@color/colorWhite"
         android:layout_centerHorizontal="true"
-        android:layout_below="@id/loginButton"
         android:layout_marginTop="10dp"
         android:visibility="gone"
         tools:visibility="visible"
+        android:layout_gravity="center_horizontal"
         android:id="@+id/forgetPass"/>
-    </RelativeLayout>
+    </LinearLayout>
 
 
     <ProgressBar
@@ -119,48 +163,9 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:visibility="visible"
+        android:layout_gravity="center_horizontal"
         tools:visibility="visible"/>
 
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/logo"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/colorฺฺBlueDark"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="40dp"
-            android:layout_below="@+id/logotext"
-            android:padding="10dp">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:textColor="@color/colorWhite"
-                android:textSize="24dp"
-                android:text="Reach Your Fitness Goals"
-
-                />
-
-        </RelativeLayout>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:textColor="@color/colorWhite"
-            android:layout_marginTop="80dp"
-            android:textSize="60dp"
-            android:text="RYFG"
-            android:id="@+id/logotext"
-            />
-
-    </RelativeLayout>
-
-</RelativeLayout>
+</LinearLayout>

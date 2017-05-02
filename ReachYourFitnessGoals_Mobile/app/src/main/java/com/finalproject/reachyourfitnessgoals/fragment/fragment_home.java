@@ -16,6 +16,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -85,20 +87,13 @@ public class fragment_home extends Fragment {
                 .build());
 
         //Create data series track
-        final SeriesItem seriesItem1 = new SeriesItem.Builder(Color.argb(255, 64, 196, 0))
+        final SeriesItem seriesItem1 = new SeriesItem.Builder(Color.argb(255, 0, 0, 0))
                 .setRange(0, 25, 0)
                 .setLineWidth(32f)
                 .build();
 
         final int series1Index = arcView.addSeries(seriesItem1);
 
-        final SeriesItem seriesItem2 = new SeriesItem.Builder(Color.argb(255, 0, 0, 0))
-                .setRange(0, 25, 0)
-                .setLineWidth(32f)
-                .setInset(new PointF(20f, 20f))
-                .build();
-
-        int series2Index = arcView.addSeries(seriesItem2);
 
         arcView.addEvent(new DecoEvent.Builder(DecoEvent.EventType.EVENT_SHOW, true)
                 .setDelay(1000)
@@ -106,10 +101,13 @@ public class fragment_home extends Fragment {
                 .build());
 
         arcView.addEvent(new DecoEvent.Builder(25).setIndex(series1Index).setDelay(4000).build());
-        arcView.addEvent(new DecoEvent.Builder(25).setIndex(series2Index).setDelay(6000).build());
 
+
+        final Animation in = new AlphaAnimation(0.0f, 1.0f);
+        in.setDuration(3000);
         final String format = "%.0f%%";
         final TextView view = (TextView) rootview.findViewById(R.id.test);
+        view.startAnimation(in);
         seriesItem1.addArcSeriesItemListener(new SeriesItem.SeriesItemListener() {
             @Override
             public void onSeriesItemAnimationProgress(float percentComplete, float currentPosition) {
