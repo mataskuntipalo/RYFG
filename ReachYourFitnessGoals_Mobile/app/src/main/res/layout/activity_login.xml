@@ -7,49 +7,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:ignore="MissingPrefix"
-    android:background="@color/colorWhite"
+    android:background="@color/colorBG"
     tools:context="com.finalproject.reachyourfitnessgoals.activity.LoginActivity">
-
-
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/picback"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/logo">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_logo"
-            android:layout_centerHorizontal="true"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp"
-            android:id="@+id/pic_logo"/>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/colorBlack"
-            android:layout_marginTop="20dp"
-            android:layout_below="@+id/pic_logo"
-            android:padding="10dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:textColor="@color/colorWhite"
-                android:textSize="24dp"
-                android:text="Reach Your Fitness Goals"
-
-                />
-
-        </RelativeLayout>
-
-    </RelativeLayout>
-
 
 
     <RelativeLayout
@@ -74,7 +33,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/ic_username"
+            android:src="@drawable/ic_username"
             android:layout_marginRight="10dp"
             android:id="@+id/iconUser"/>
 
@@ -107,9 +66,10 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/ic_pass"
+            android:src="@drawable/ic_pass"
             android:layout_marginRight="10dp"
             android:id="@+id/iconPass"/>
+
 
         <EditText
             android:layout_width="match_parent"
@@ -129,7 +89,7 @@
         android:textSize="@dimen/default_text"
         android:text="เข้าสู่ระบบ"
         android:textColor="@color/colorWhite"
-        android:background="@color/colorBlack"
+        android:background="@color/colorฺฺGley"
         android:layout_centerHorizontal="true"
         android:visibility="gone"
         tools:visibility="visible"
@@ -141,6 +101,7 @@
         android:layout_height="wrap_content"
         android:text="ลืมรหัสผ่าน?"
         android:textSize="16dp"
+        android:textColor="@color/colorWhite"
         android:layout_centerHorizontal="true"
         android:layout_below="@id/loginButton"
         android:layout_marginTop="10dp"
@@ -159,5 +120,47 @@
         android:layout_centerHorizontal="true"
         android:visibility="visible"
         tools:visibility="visible"/>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/logo"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorฺฺBlueDark"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="40dp"
+            android:layout_below="@+id/logotext"
+            android:padding="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:textColor="@color/colorWhite"
+                android:textSize="24dp"
+                android:text="Reach Your Fitness Goals"
+
+                />
+
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/colorWhite"
+            android:layout_marginTop="80dp"
+            android:textSize="60dp"
+            android:text="RYFG"
+            android:id="@+id/logotext"
+            />
+
+    </RelativeLayout>
 
 </RelativeLayout>

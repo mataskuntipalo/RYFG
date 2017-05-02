@@ -7,6 +7,10 @@
     <color name="colorBlack">#000000</color>
     <color name="colorDefault_Background">#fff3f3f3</color>
     <color name="colorRed">#ff0000</color>
+    <color name="colorBG">#181717</color>
+    <color name="colorฺฺBlueDark">#3F454E</color>
+    <color name="colorฺฺGley">#262626</color>
+
     <color name="colorBackground_transparent">#00000000</color>
 
 </resources>
