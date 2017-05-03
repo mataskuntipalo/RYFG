@@ -57,7 +57,7 @@ public class GoalActivity extends Activity {
                 goalData.setWeightGoal(Float.parseFloat(weightGoal.getText().toString()));
                 calDurationOfProgramExe(goalData);
                 calDateOfProgram();
-                handleTableProgram.addProgram(goalData);
+                //handleTableProgram.addProgram(goalData);
             }
         });
     }

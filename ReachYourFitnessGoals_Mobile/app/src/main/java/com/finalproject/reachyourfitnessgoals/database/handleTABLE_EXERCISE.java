@@ -118,4 +118,8 @@ public class handleTABLE_EXERCISE {
 //                + " AND " + COLUMN_MONTH + "=" + data.getMonth()
 //                + " AND " + COLUMN_YEAR + "=" + data.getYear() + ";");
     }
+
+    public void delete(){
+        writeSQLite.execSQL("delete from "+ TABLE_EXERCISE);
+    }
 }

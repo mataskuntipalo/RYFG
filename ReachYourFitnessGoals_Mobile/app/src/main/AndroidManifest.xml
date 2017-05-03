@@ -11,19 +11,31 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:name =".models.GlobalData">
+
+        <meta-data android:name="com.finalproject.reachyourfitnessgoals.setting.GlideConfiguration"
+            android:value="GlideModule"/>
+
+
         <activity
             android:name=".activity.LoginActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".activity.MainActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar" >
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
-        <activity android:name=".activity.IntroActivity" />
+        <activity
+            android:name=".activity.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+
+
+
+        </activity>
+        <activity android:name=".activity.IntroActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name=".activity.GoalActivity" />
         <activity android:name=".activity.SetExerciseInWeekActivity" />
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -11,6 +11,23 @@
     android:background="@color/colorBG"
     tools:context="com.finalproject.reachyourfitnessgoals.activity.LoginActivity">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="bottom">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/background_login"
+            android:layout_marginBottom="-220dp"/>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -88,6 +105,7 @@
             android:hint="อีเมล"
             android:textSize="@dimen/default_text"
             android:layout_toRightOf="@+id/iconUser"
+            android:textColor="@color/colorBlack"
             android:id="@+id/editEmail"/>
 
     </RelativeLayout>
@@ -122,17 +140,20 @@
             android:textSize="@dimen/default_text"
             android:inputType="textPassword"
             android:layout_toRightOf="@+id/iconPass"
+            android:textColor="@color/colorBlack"
             android:id="@+id/editPass"/>
     </RelativeLayout>
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="64dp"
+        android:layout_marginRight="64dp"
         android:padding="20dp"
         android:textSize="@dimen/default_text"
         android:text="เข้าสู่ระบบ"
         android:textColor="@color/colorWhite"
-        android:background="@color/colorฺฺGley"
+        android:background="@drawable/button_round"
         android:layout_centerHorizontal="true"
         android:visibility="gone"
         tools:visibility="visible"
@@ -140,18 +161,43 @@
         android:id="@+id/loginButton"
         />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="ลืมรหัสผ่าน?"
-        android:textSize="16dp"
-        android:textColor="@color/colorWhite"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:visibility="gone"
-        tools:visibility="visible"
-        android:layout_gravity="center_horizontal"
-        android:id="@+id/forgetPass"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="สมัครสมาชิก"
+                android:textSize="16dp"
+                android:textColor="@color/colorWhite"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:visibility="gone"
+                tools:visibility="visible"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginRight="20dp"
+                android:id="@+id/signUp_text"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ลืมรหัสผ่าน?"
+                android:textSize="16dp"
+                android:textColor="@color/colorWhite"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:visibility="gone"
+                tools:visibility="visible"
+                android:layout_gravity="center_horizontal"
+                android:id="@+id/forgetPass"/>
+
+        </LinearLayout>
+
+
     </LinearLayout>
 
 
@@ -166,6 +212,8 @@
         android:layout_gravity="center_horizontal"
         tools:visibility="visible"/>
 
+    </LinearLayout>
 
 
-</LinearLayout>
+
+</RelativeLayout>

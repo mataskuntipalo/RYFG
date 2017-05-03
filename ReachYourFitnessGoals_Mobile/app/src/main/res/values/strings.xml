@@ -43,4 +43,7 @@
     <!-- fragment_customExe_list -->
     <string name="totalCalorie">จำนวนแคลอรี่ทั้งหมด</string>
 
+    <string name="textUnderLine"><u>เข้าสู่ระบบที่นี่</u></string>
+
+
 </resources>

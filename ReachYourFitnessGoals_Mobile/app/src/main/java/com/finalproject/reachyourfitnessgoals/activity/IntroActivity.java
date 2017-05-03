@@ -2,6 +2,7 @@ package com.finalproject.reachyourfitnessgoals.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 
 import com.finalproject.reachyourfitnessgoals.R;
 import com.finalproject.reachyourfitnessgoals.fragment.fragment_intro_slideEnd;
@@ -17,21 +18,26 @@ public class IntroActivity extends AppIntro {
         // Add your slide's fragments here
         // AppIntro will automatically generate the dots indicator and buttons.
         fragment_intro_slideEnd slideEnd = new fragment_intro_slideEnd();
-        addSlide(SampleSlide.newInstance(R.layout.intro_slide1));
-        addSlide(SampleSlide.newInstance(R.layout.fragment_intro_slide_end));
+        addSlide(slideEnd);
 
 
 
 
         // SHOW or HIDE the statusbar
-        showStatusBar(true);
+
 
         // Hide Skip/Done button
         showSkipButton(false);
 
+        showDoneButton(true);
 
 
 
+    }
+
+    @Override
+    public void setDoneText(@Nullable CharSequence text) {
+        super.setDoneText(text);
     }
 
     @Override
@@ -55,5 +61,8 @@ public class IntroActivity extends AppIntro {
     public void onSlideChanged() {
         // Do something when slide is changed
     }
+
+
 }
+
 

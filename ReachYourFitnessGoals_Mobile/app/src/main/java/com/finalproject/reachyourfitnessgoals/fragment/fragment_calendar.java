@@ -98,7 +98,7 @@ public class fragment_calendar extends Fragment {
         // Month begin 0 = january
         MCV.state().edit()
                 .setFirstDayOfWeek(Calendar.MONDAY)
-                .setMinimumDate(CalendarDay.from(2017, 2, 1))
+                .setMinimumDate(CalendarDay.from(2017, 3, 1))
                 .setMaximumDate(CalendarDay.from(2017, 11, 31))
                 .setCalendarDisplayMode(CalendarMode.MONTHS)
                 .commit();

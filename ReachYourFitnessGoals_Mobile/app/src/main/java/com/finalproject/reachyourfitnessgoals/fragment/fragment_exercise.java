@@ -92,7 +92,8 @@ public class fragment_exercise extends Fragment  {
 
         //For now we just picked an arbitrary item to play.  More can be found at
         //https://archive.org/details/more_animation
-        emVideoView.setVideoURI(Uri.parse("http://:1234@192.168.1.35:8080"));
+        String part = "android.resource://" + getActivity().getPackageName() + "/" + R.raw.vdo;
+        emVideoView.setVideoURI(Uri.parse(part));
     }
 
 

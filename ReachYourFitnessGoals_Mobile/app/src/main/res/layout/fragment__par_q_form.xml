@@ -13,70 +13,88 @@
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
        android:orientation="vertical">
-   <TableRow
-       android:id="@+id/tableRow1"
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content"
-       android:gravity="center"
-       >
+   <!--<TableRow-->
+       <!--android:id="@+id/tableRow1"-->
+       <!--android:layout_width="wrap_content"-->
+       <!--android:layout_height="wrap_content"-->
+       <!--android:gravity="center"-->
+       <!--&gt;-->
 
-      <TextView
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_weight="0.5"
-          android:text="แพทย์ที่ตรวจรักษาเคยบอกหรือไม่ว่า ท่านมีความผิดปรกติของหัวใจ และควรออกกำลังกายภายใต้คำแนะนำของแพทย์เท่านั้น"/>
+      <!--<TextView-->
+          <!--android:layout_width="wrap_content"-->
+          <!--android:layout_height="wrap_content"-->
+          <!--android:layout_weight="0.5"-->
+          <!--android:text="แพทย์ที่ตรวจรักษาเคยบอกหรือไม่ว่า ท่านมีความผิดปรกติของหัวใจ และควรออกกำลังกายภายใต้คำแนะนำของแพทย์เท่านั้น"/>-->
 
-      <Button
-          android:id="@+id/btn_menu1"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:text="1"
-          android:layout_weight="0.5"
-          />
+      <!--<Button-->
+          <!--android:id="@+id/btn_menu1"-->
+          <!--android:layout_width="wrap_content"-->
+          <!--android:layout_height="wrap_content"-->
+          <!--android:text="1"-->
+          <!--android:layout_weight="0.5"-->
+          <!--/>-->
 
-   </TableRow>
+   <!--</TableRow>-->
 
 
-   <TextView
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content"
-       android:text="ท่านมีความรู้สึกเจ็บปวดหรือแน่นบริเวณหน้าอก ขณะที่ออกกำลังกายหรือไม่"/>
+   <!--<TextView-->
+       <!--android:layout_width="wrap_content"-->
+       <!--android:layout_height="wrap_content"-->
+       <!--android:text="ท่านมีความรู้สึกเจ็บปวดหรือแน่นบริเวณหน้าอก ขณะที่ออกกำลังกายหรือไม่"/>-->
 
-   <TextView
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content"
-       android:text="ในเดือนที่ผ่านมา ท่านมีอาการเจ็บหน้าอก ขณะที่อยู่เฉยๆโดยไม่ได้ออกกำลังกายหรือไม่"/>
+   <!--<TextView-->
+       <!--android:layout_width="wrap_content"-->
+       <!--android:layout_height="wrap_content"-->
+       <!--android:text="ในเดือนที่ผ่านมา ท่านมีอาการเจ็บหน้าอก ขณะที่อยู่เฉยๆโดยไม่ได้ออกกำลังกายหรือไม่"/>-->
 
-   <TextView
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content"
-       android:text="ท่านมีอาการสูญเสียการทรงตัว (ยืนหรือเดินเซ) เนื่องจากอาการวิงเวียนศีรษะหรือไม่  หรือท่านเคยเป็นลมหมดสิตหรือไม่"/>
+   <!--<TextView-->
+       <!--android:layout_width="wrap_content"-->
+       <!--android:layout_height="wrap_content"-->
+       <!--android:text="ท่านมีอาการสูญเสียการทรงตัว (ยืนหรือเดินเซ) เนื่องจากอาการวิงเวียนศีรษะหรือไม่  หรือท่านเคยเป็นลมหมดสิตหรือไม่"/>-->
 
-   <TextView
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content"
-       android:text="ท่านมีปัญหากระดูกหรือข้อต่อ  ซึ่งจะมีอาการแย่ลง ถ้าออกกำลังกายหรือไม่"/>
+   <!--<TextView-->
+       <!--android:layout_width="wrap_content"-->
+       <!--android:layout_height="wrap_content"-->
+       <!--android:text="ท่านมีปัญหากระดูกหรือข้อต่อ  ซึ่งจะมีอาการแย่ลง ถ้าออกกำลังกายหรือไม่"/>-->
 
-   <TextView
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content"
-       android:text="แพทย์ที่ตรวจรักษามีการสั่งยารักษาความดันโลหิต หรือความผิดปรกติของหัวใจให้ท่านหรือไม่"/>
+   <!--<TextView-->
+       <!--android:layout_width="wrap_content"-->
+       <!--android:layout_height="wrap_content"-->
+       <!--android:text="แพทย์ที่ตรวจรักษามีการสั่งยารักษาความดันโลหิต หรือความผิดปรกติของหัวใจให้ท่านหรือไม่"/>-->
 
-   <TextView
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content"
-       android:text="เท่าที่ท่านทราบ ยังมีเหตุผลอื่นๆอีกหรือไม่ ที่ทำให้ท่านสามารถออกกำลังกายได้"/>
+   <!--<TextView-->
+       <!--android:layout_width="wrap_content"-->
+       <!--android:layout_height="wrap_content"-->
+       <!--android:text="เท่าที่ท่านทราบ ยังมีเหตุผลอื่นๆอีกหรือไม่ ที่ทำให้ท่านสามารถออกกำลังกายได้"/>-->
 
-   <Button
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content"
-       android:text="ยืนยัน"
-       android:id="@+id/process_Button_parQ"
-       />
+   <!--<Button-->
+       <!--android:layout_width="wrap_content"-->
+       <!--android:layout_height="wrap_content"-->
+       <!--android:text="ยืนยัน"-->
+       <!--android:id="@+id/process_Button_parQ"-->
+       <!--/>-->
 
    <LinearLayout
        android:layout_width="match_parent"
-       android:layout_height="wrap_content"></LinearLayout>
+       android:layout_height="wrap_content"
+       android:orientation="vertical"
+       android:gravity="center_horizontal">
+
+      <TextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:text="Par Q Form"
+          android:gravity="center_horizontal"
+          android:textColor="@color/colorBlack"
+          android:textSize="24sp"/>
+
+      <Button
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="ยืนยัน"
+          android:id="@+id/process_Button_parQ"
+          />
+   </LinearLayout>
 
    </LinearLayout>
 

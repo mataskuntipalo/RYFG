@@ -58,6 +58,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="right"
         android:text="เสร็จสิ้น"
+        android:textSize="22sp"
         android:id="@+id/confirm_TextView_goal"/>
 
 </LinearLayout>

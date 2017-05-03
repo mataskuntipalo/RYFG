@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import com.finalproject.reachyourfitnessgoals.R;
 import com.finalproject.reachyourfitnessgoals.fragment.fragment_home;
+import com.finalproject.reachyourfitnessgoals.fragment.fragment_intro_slideEnd;
 import com.finalproject.reachyourfitnessgoals.fragment.fragment_list;
 import com.finalproject.reachyourfitnessgoals.fragment.fragment_signUp;
 
@@ -31,15 +32,15 @@ public class LoginActivity extends AppCompatActivity {
     Button buttonAbout;
     ProgressBar progress;
     TextView forgot;
+    TextView signUp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        showIntro();
-
-
+        //showIntro();
+        signUp = (TextView)findViewById(R.id.signUp_text);
         forgot = (TextView)findViewById(R.id.forgetPass);
         progress = ( ProgressBar ) this.findViewById ( R.id.login_progress );
         content1 = (RelativeLayout)findViewById ( R.id.content1 );
@@ -53,6 +54,12 @@ public class LoginActivity extends AppCompatActivity {
 //        transaction.replace(R.id.layout_fragment, myFragment);
 //        transaction.commit();
 
+        fragment_intro_slideEnd intro = fragment_intro_slideEnd.newInstance();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.activity_login, intro);
+        transaction.addToBackStack("fragment_signUp");
+        transaction.commit();
+
 
         buttonAbout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,7 +69,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        forgot.setOnClickListener(new View.OnClickListener() {
+        signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 fragment_signUp signUp = new fragment_signUp();
@@ -87,6 +94,7 @@ public class LoginActivity extends AppCompatActivity {
                 content1.setVisibility(View.VISIBLE);
                 content2.setVisibility(View.VISIBLE);
                 buttonAbout.setVisibility(View.VISIBLE);
+                signUp.setVisibility(View.VISIBLE);
                 forgot.setVisibility(View.VISIBLE);
                 progress.setVisibility(View.GONE);
             }
@@ -94,40 +102,42 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    private void showIntro(){
-        //  Declare a new thread to do a preference check
-//        Thread t = new Thread(new Runnable() {
-//            @Override
-//            public void run() {
-//                //  Initialize SharedPreferences
-//                SharedPreferences getPrefs = PreferenceManager
-//                        .getDefaultSharedPreferences(getBaseContext());
+//    private void showIntro(){
+//        //  Declare a new thread to do a preference check
+////        Thread t = new Thread(new Runnable() {
+////            @Override
+////            public void run() {
+////                //  Initialize SharedPreferences
+////                SharedPreferences getPrefs = PreferenceManager
+////                        .getDefaultSharedPreferences(getBaseContext());
+////
+////                //  Create a new boolean and preference and set it to true
+////                boolean isFirstStart = getPrefs.getBoolean("firstStart", true);
+////
+////                //  If the activity has never started before...
+////                if (isFirstStart) {
 //
-//                //  Create a new boolean and preference and set it to true
-//                boolean isFirstStart = getPrefs.getBoolean("firstStart", true);
+//        //  Launch app intro
+//        Intent i = new Intent(this, IntroActivity.class);
+//        startActivity(i);
 //
-//                //  If the activity has never started before...
-//                if (isFirstStart) {
+//                 /*   //  Make a new preferences editor
+//                    SharedPreferences.Editor e = getPrefs.edit();
+//
+//                    //  Edit preference to make it false because we don't want this to run again
+//                    e.putBoolean("firstStart", false);
+//
+//                    //  Apply changes
+//                    e.apply();
+//                }
+//            }
+//        });
+//
+//        // Start the thread
+//        t.start();*/
+//    }
 
-                    //  Launch app intro
-                    Intent i = new Intent(LoginActivity.this, IntroActivity.class);
-                    startActivity(i);
 
-                 /*   //  Make a new preferences editor
-                    SharedPreferences.Editor e = getPrefs.edit();
-
-                    //  Edit preference to make it false because we don't want this to run again
-                    e.putBoolean("firstStart", false);
-
-                    //  Apply changes
-                    e.apply();
-                }
-            }
-        });
-
-        // Start the thread
-        t.start();*/
-    }
 
     @Override // ต้องใส่อันนี้ถึงจะเปลี่ยนฟ้อน
     protected void attachBaseContext(Context newBase) {

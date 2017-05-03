@@ -19,14 +19,18 @@ import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DecodeFormat;
 import com.finalproject.reachyourfitnessgoals.R;
 import com.finalproject.reachyourfitnessgoals.activity.LoginActivity;
 import com.finalproject.reachyourfitnessgoals.activity.MainActivity;
 import com.finalproject.reachyourfitnessgoals.activity.SetExerciseInWeekActivity;
+import com.finalproject.reachyourfitnessgoals.database.handleTABLE_EXERCISE;
 import com.finalproject.reachyourfitnessgoals.setting.handleCalendar;
 import com.github.florent37.materialviewpager.MaterialViewPagerHelper;
 import com.hookedonplay.decoviewlib.DecoView;
@@ -46,6 +50,7 @@ public class fragment_home extends Fragment {
     LinearLayout displayDay;
     TextView cancelSetExe;
     NestedScrollView nestedScrollView;
+    ImageView bgPic;
 
     public fragment_home() {
         // Required empty public constructor
@@ -71,6 +76,8 @@ public class fragment_home extends Fragment {
         setExe = (Button)rootview.findViewById(R.id.setExd_button_home);
         displayDay = (LinearLayout) rootview.findViewById(R.id.displayDay_include_home);
         cancelSetExe = (TextView)  rootview.findViewById(R.id.cancelSetExe_Text_home);
+        bgPic = (ImageView)rootview.findViewById(R.id.bg_ImageView_home);
+        Glide.with(this).load(R.drawable.background_home).into(bgPic);
         // Make layoutTotalSelectDay to invisible
         LinearLayout layout = (LinearLayout) displayDay.findViewById(R.id.layoutTotalSelectDay_LinearLayout_dayOfWork);
         layout.setVisibility(View.INVISIBLE);
@@ -129,7 +136,17 @@ public class fragment_home extends Fragment {
 
         checkSetExeWeekly();
 
+        Button reset = (Button)rootview.findViewById(R.id.reset_button_home);
+        reset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                shared = getActivity().getSharedPreferences(getResources().getString(R.string.sharedPreferencesName), Context.MODE_PRIVATE);
+                editor.putBoolean(getResources().getString(R.string.sharedBoolSetExe), false);
+                editor.commit();
 
+                new handleTABLE_EXERCISE(getContext()).delete();
+            }
+        });
 
         return rootview;
     }

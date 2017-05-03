@@ -5,6 +5,7 @@ package com.finalproject.reachyourfitnessgoals.activity;
 import android.app.Activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -21,6 +22,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.util.Log;
+import android.view.View;
 
 
 import com.android.volley.Request;
@@ -37,6 +39,7 @@ import com.finalproject.reachyourfitnessgoals.fragment.fragment_home;
 import com.finalproject.reachyourfitnessgoals.fragment.fragment_list;
 import com.finalproject.reachyourfitnessgoals.models.vdoData;
 import com.github.florent37.materialviewpager.MaterialViewPager;
+import com.github.florent37.materialviewpager.header.HeaderDesign;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -46,26 +49,25 @@ import java.util.ArrayList;
 
 import static android.R.attr.fragment;
 import static android.R.attr.id;
-
+import static com.github.florent37.materialviewpager.R.attr.viewpager_hideToolbarAndTitle;
 
 
 public class MainActivity extends AppCompatActivity {
 
     private MaterialViewPager mViewPager;
-    ViewPager pager;
-    PagerAdapter adapter;
-    String PageName;
     SharedPreferences shared;
     SharedPreferences.Editor editor;
     handleTABLE_VDO handleTABLE_vdo;
     public final int PAGE_NUM = 3;
-    private DrawerLayout mDrawerLayout;
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
 
         shared = this.getSharedPreferences(getResources().getString(R.string.sharedPreferencesName), Context.MODE_PRIVATE);
         editor = shared.edit();
@@ -92,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
         //pager = mViewPager.getViewPager();
         //pager.setAdapter(new RecyclerViewMaterialAdapter(new PagerAdapter(getSupportFragmentManager())));
 
-
+//        mViewPager.getToolbar().setVisibility(View.GONE);
 
         mViewPager.getViewPager().setAdapter(new FragmentStatePagerAdapter(getSupportFragmentManager()){
 
@@ -182,6 +184,30 @@ public class MainActivity extends AppCompatActivity {
 //            }
 //        });
 
+        mViewPager.setMaterialViewPagerListener(new MaterialViewPager.Listener() {
+            @Override
+            public HeaderDesign getHeaderDesign(int page) {
+                switch (page) {
+                    case 0:
+                        return HeaderDesign.fromColorResAndUrl(
+                                R.color.colorBlack,
+                                "http://cdn1.tnwcdn.com/wp-content/blogs.dir/1/files/2014/06/wallpaper_51.jpg");
+                    case 1:
+                        return HeaderDesign.fromColorResAndUrl(
+                                R.color.colorBlack,
+                                "https://fs01.androidpit.info/a/63/0e/android-l-wallpapers-630ea6-h900.jpg");
+                    case 2:
+                        return HeaderDesign.fromColorResAndUrl(
+                                R.color.colorBlack,
+                                "http://www.droid-life.com/wp-content/uploads/2014/10/lollipop-wallpapers10.jpg");
+                }
+
+                //execute others actions if needed (ex : modify your header logo)
+
+                return null;
+            }
+        });
+
 
     }
 
@@ -218,6 +244,8 @@ public class MainActivity extends AppCompatActivity {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(jsonArrayRequest);
     }
+
+
 
 
 
