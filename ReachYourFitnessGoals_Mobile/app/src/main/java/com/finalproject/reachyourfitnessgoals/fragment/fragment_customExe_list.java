@@ -23,6 +23,7 @@ import com.finalproject.reachyourfitnessgoals.models.ExeForGlobalData;
 import com.finalproject.reachyourfitnessgoals.models.ExeType;
 import com.finalproject.reachyourfitnessgoals.models.userSelectData;
 import com.finalproject.reachyourfitnessgoals.models.GlobalData;
+import com.finalproject.reachyourfitnessgoals.setting.SetUpCalorieAndExe;
 
 import java.util.ArrayList;
 
@@ -41,15 +42,15 @@ public class fragment_customExe_list extends Fragment{
     private RecyclerViewAdapter_userSelect recyclerViewAdapterBottomSheet;
     private ArrayList<userSelectData> userSelectDataArrayList;
     private BottomSheetBehavior bottomSheetBehavior;
-    private TextView maxCalorie;
-    private TextView calorie;
+    private TextView maxCalorieText;
+    private TextView calorieText;
     private Button confirmButton;
     private int tempMaxCalorie;
     private int tempCalorie;
     private int ExeForGlobalData_id;
+    private SetUpCalorieAndExe setUpCalorieAndExe;
 
 
-    private handleTABLE_EXERCISE handleTABLE_exercise;
 
 
     public fragment_customExe_list() {
@@ -72,12 +73,13 @@ public class fragment_customExe_list extends Fragment{
         // Inflate the layout for this fragment
         View rootview = inflater.inflate(R.layout.fragment_custom_exe_list, container, false);
 
-        initBottomSheet(rootview);
-        getExeForGlobalDataId();
 
-        handleTABLE_exercise = new handleTABLE_EXERCISE(getContext());
-        tempMaxCalorie = handleTABLE_exercise.getTotalCalorieInDay(((GlobalData)getActivity().getApplication()).getDateData());
-        setMaxCalorie();
+        setUpCalorieAndExe = new SetUpCalorieAndExe(getActivity());
+        initBottomSheet(rootview);
+        ExeForGlobalData_id = setUpCalorieAndExe.getExeForGlobalDataId(getArguments().getInt(KEY_ID));
+
+
+
 
         //final LinearLayout layout = (LinearLayout) rootview.findViewById(R.id.showExe_customExe);
         recyclerView = (RecyclerView)rootview.findViewById(R.id.recyclerView_customExe);
@@ -142,8 +144,10 @@ public class fragment_customExe_list extends Fragment{
     private void initBottomSheet(View rootview){
         userSelectDataArrayList = new ArrayList<>();
         bottomSheetBehavior = BottomSheetBehavior.from(rootview.findViewById(R.id.layout_bottomSheet));
-        calorie = (TextView)rootview.findViewById(R.id.calorie_TextView_bottomSheet);
-        maxCalorie = (TextView)rootview.findViewById(R.id.maxCalorie_TextView_bottomSheet);
+        calorieText = (TextView)rootview.findViewById(R.id.calorie_TextView_bottomSheet);
+        maxCalorieText = (TextView)rootview.findViewById(R.id.maxCalorie_TextView_bottomSheet);
+        maxCalorieText.setText(setUpCalorieAndExe.setMaxCalorie(getArguments().getString(KEY_TYPE))+"");
+        tempMaxCalorie = setUpCalorieAndExe.getMaxCalorie();
         confirmButton = (Button)rootview.findViewById(R.id.confirm_Button_bottomSheet);
         recyclerViewBottomSheet = (RecyclerView)rootview.findViewById(R.id.recyclerView_bottomSheet);
         recyclerViewBottomSheet.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -151,33 +155,15 @@ public class fragment_customExe_list extends Fragment{
         recyclerViewBottomSheet.setAdapter(recyclerViewAdapterBottomSheet);
     }
 
-    private void setMaxCalorie(){
-        switch (getArguments().getString(KEY_TYPE)){
-            case ExeType.TYPE_STRETCHING :
-                tempMaxCalorie = (tempMaxCalorie*10)/100;
-                break;
-            case ExeType.TYPE_WARMUP :
-                if(getArguments().getInt(KEY_ID) == R.id.type_1){
-                    tempMaxCalorie = (tempMaxCalorie*20)/100;
-                }else{
-                    tempMaxCalorie = (tempMaxCalorie*30)/100;
-                }
-                break;
-            case ExeType.TYPE_STRENGTH :
-                tempMaxCalorie = (tempMaxCalorie*30)/100;
-                break;
-        }
-        maxCalorie.setText(tempMaxCalorie+"");
-    }
 
     private void addCalorie(String calorie){
         tempCalorie = tempCalorie + Integer.parseInt(calorie);
         if(tempCalorie >= tempMaxCalorie){
             check();
         }else {
-            //tempCalorie = tempCalorie + Integer.parseInt(calorie);
+
         }
-        this.calorie.setText(tempCalorie+"");
+        this.calorieText.setText(tempCalorie+"");
     }
 
     private void check(){
@@ -192,25 +178,7 @@ public class fragment_customExe_list extends Fragment{
         });
     }
 
-    private void getExeForGlobalDataId(){
-        switch (getArguments().getInt(KEY_ID)) {
-            case R.id.type_0:
-                ExeForGlobalData_id = 0;
-                break;
-            case R.id.type_1:
-                ExeForGlobalData_id = 1;
-                break;
-            case R.id.type_2:
-                ExeForGlobalData_id = 2;
-                break;
-            case R.id.type_3:
-                ExeForGlobalData_id = 3;
-                break;
-            case R.id.type_4:
-                ExeForGlobalData_id = 4;
-                break;
-        }
-    }
+
 
 
 
