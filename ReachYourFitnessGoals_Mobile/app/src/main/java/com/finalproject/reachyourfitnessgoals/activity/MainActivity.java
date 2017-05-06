@@ -47,6 +47,8 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
+
 import static android.R.attr.fragment;
 import static android.R.attr.id;
 import static com.github.florent37.materialviewpager.R.attr.viewpager_hideToolbarAndTitle;
@@ -244,8 +246,12 @@ public class MainActivity extends AppCompatActivity {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(jsonArrayRequest);
     }
+    
 
-
+    @Override // ต้องใส่อันนี้ถึงจะเปลี่ยนฟ้อน
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+    }
 
 
 

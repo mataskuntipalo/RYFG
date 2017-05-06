@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,6 +31,7 @@ public class fragment_exercise extends Fragment  {
     long lastPause;
     EMVideoView emVideoView;
     ProgressDialog pd;
+    ImageButton doneButton;
 
 
     public fragment_exercise() {
@@ -54,6 +56,7 @@ public class fragment_exercise extends Fragment  {
         Button start = (Button) rootview.findViewById(R.id.start);
         ImageButton stop = (ImageButton) rootview.findViewById(R.id.stop);
 
+        doneButton = (ImageButton) rootview.findViewById(R.id.done_ImageButton_exe);
         start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -72,6 +75,21 @@ public class fragment_exercise extends Fragment  {
                 lastPause = SystemClock.elapsedRealtime();
                 chronometer.stop();
                 //chronometer.setBase(SystemClock.elapsedRealtime());
+            }
+        });
+
+        doneButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fragment_sumExe parQ = new fragment_sumExe();
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                fragmentManager
+                        .beginTransaction()
+//                        .setCustomAnimations(R.anim.slide_up,R.anim.slide_down,R.anim.slide_up,R.anim.slide_down)
+                        .replace(R.id.activity_exercise
+                                , parQ, "fragment_parQ")
+                        .addToBackStack("fragment_parQ")
+                        .commit();
             }
         });
 

@@ -2,9 +2,12 @@ package com.finalproject.reachyourfitnessgoals.models;
 
 import android.app.Application;
 
+import com.finalproject.reachyourfitnessgoals.R;
 import com.finalproject.reachyourfitnessgoals.models.DateData;
 
 import java.util.ArrayList;
+
+import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 
 /**
  * Created by Papang on 28/4/2560.
@@ -19,6 +22,15 @@ public class GlobalData extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+
+        //init Font
+        CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
+                .setDefaultFontPath("fonts/thaisanslite.ttf")
+                .setFontAttrId(R.attr.fontPath)
+                .build()
+        );
+
+
         exeForGlobalData = new ArrayList<>();
         for (int i = 0; i < type.length; i++) {
             //MyGroupItem group = new MyGroupItem(i, type[i]);

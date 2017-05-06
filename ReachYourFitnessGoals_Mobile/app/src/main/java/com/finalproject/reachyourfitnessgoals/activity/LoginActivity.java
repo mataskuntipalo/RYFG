@@ -23,6 +23,7 @@ import com.finalproject.reachyourfitnessgoals.fragment.fragment_list;
 import com.finalproject.reachyourfitnessgoals.fragment.fragment_signUp;
 
 
+import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class LoginActivity extends AppCompatActivity {
@@ -38,6 +39,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
 
         //showIntro();
         signUp = (TextView)findViewById(R.id.signUp_text);

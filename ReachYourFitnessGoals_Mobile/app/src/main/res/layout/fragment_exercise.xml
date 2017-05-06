@@ -53,20 +53,44 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/margin_padding"
-        android:orientation="horizontal">
+        android:orientation="vertical">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Run"/>
+            android:textSize="22sp"
+            android:textColor="@color/colorBlack"
+            android:text="ท่าออกกำลังกาย : Mountain Climber"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="22sp"
+            android:textColor="@color/colorBlack"
+            android:text="จำนวนแคลอรี่ : 5 แคลอรี่"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="22sp"
+            android:textColor="@color/colorBlack"
+            android:text="จำนวนครั้ง : 5 รอบ"/>
 
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:id="@+id/done_ImageButton_exe"
             android:background="@drawable/ic_done"/>
 
+
+
     </LinearLayout>
+
+
 
 
 </LinearLayout>
