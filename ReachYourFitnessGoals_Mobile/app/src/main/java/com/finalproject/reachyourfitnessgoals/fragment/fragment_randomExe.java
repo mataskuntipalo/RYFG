@@ -14,6 +14,7 @@ import com.finalproject.reachyourfitnessgoals.R;
 import com.finalproject.reachyourfitnessgoals.adapter.RecyclerViewAdapter;
 import com.finalproject.reachyourfitnessgoals.database.handleTABLE_VDO;
 import com.finalproject.reachyourfitnessgoals.models.vdoData;
+import com.timehop.stickyheadersrecyclerview.StickyRecyclerHeadersDecoration;
 
 import java.util.ArrayList;
 
@@ -45,7 +46,7 @@ public class fragment_randomExe extends Fragment {
 
         recyclerView = (RecyclerView)rootview.findViewById(R.id.recyclerView_randomExe);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerViewAdapter = new RecyclerViewAdapter(getContext(),2);
+        recyclerViewAdapter = new RecyclerViewAdapter(getActivity(),2);
         recyclerView.setAdapter(recyclerViewAdapter);
 
         button = (Button)rootview.findViewById(R.id.randomAgain_Button_randomExe);

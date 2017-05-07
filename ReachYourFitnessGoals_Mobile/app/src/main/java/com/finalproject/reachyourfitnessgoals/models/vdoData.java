@@ -7,6 +7,11 @@ package com.finalproject.reachyourfitnessgoals.models;
 public class vdoData {
     String vdo_id,name,type,position,duration;
     int calorie;
+    boolean isHead;
+
+
+
+
 
     public vdoData(String name, String type, String position, String duration, int calorie) {
         this.name = name;
@@ -14,6 +19,7 @@ public class vdoData {
         this.position = position;
         this.duration = duration;
         this.calorie = calorie;
+        isHead = false;
     }
 
     public vdoData(int vdo_id,String name, String type, String position, String duration, int calorie) {
@@ -71,5 +77,13 @@ public class vdoData {
 
     public void setCalorie(int calorie) {
         this.calorie = calorie;
+    }
+
+    public boolean isHead() {
+        return isHead;
+    }
+
+    public void setHead(boolean head) {
+        isHead = head;
     }
 }

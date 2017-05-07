@@ -146,7 +146,7 @@ public class fragment_customExe_list extends Fragment{
         bottomSheetBehavior = BottomSheetBehavior.from(rootview.findViewById(R.id.layout_bottomSheet));
         calorieText = (TextView)rootview.findViewById(R.id.calorie_TextView_bottomSheet);
         maxCalorieText = (TextView)rootview.findViewById(R.id.maxCalorie_TextView_bottomSheet);
-        maxCalorieText.setText(setUpCalorieAndExe.setMaxCalorie(getArguments().getString(KEY_TYPE))+"");
+        maxCalorieText.setText(setUpCalorieAndExe.getMaxCalorieForEachStep(getArguments().getString(KEY_TYPE),getArguments().getInt(KEY_ID))+"");
         tempMaxCalorie = setUpCalorieAndExe.getMaxCalorie();
         confirmButton = (Button)rootview.findViewById(R.id.confirm_Button_bottomSheet);
         recyclerViewBottomSheet = (RecyclerView)rootview.findViewById(R.id.recyclerView_bottomSheet);

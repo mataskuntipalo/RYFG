@@ -22,23 +22,24 @@ public class SetUpCalorieAndExe {
         maxCalorie = handleTABLE_exercise.getTotalCalorieInDay(((GlobalData)activity.getApplication()).getDateData());
     }
 
-    public int setMaxCalorie(String keyType) {
+    public int getMaxCalorieForEachStep(String keyType , int id) {
+        int tempMaxCalorie = maxCalorie;
         switch (keyType){
-            case ExeType.TYPE_STRETCHING :
-                maxCalorie = (maxCalorie*10)/100;
+            case ExeType.TYPE_STRETCHING:
+                tempMaxCalorie = (maxCalorie*10)/100;
                 break;
             case ExeType.TYPE_WARMUP :
-                if(id == R.id.type_1){
-                    maxCalorie = (maxCalorie*20)/100;
+                if(id == R.id.type_1 || id == 1){
+                    tempMaxCalorie = (maxCalorie*20)/100;
                 }else{
-                    maxCalorie = (maxCalorie*30)/100;
+                    tempMaxCalorie = (maxCalorie*30)/100;
                 }
                 break;
             case ExeType.TYPE_STRENGTH :
-                maxCalorie = (maxCalorie*30)/100;
+                tempMaxCalorie = (maxCalorie*30)/100;
                 break;
         }
-        return maxCalorie;
+        return tempMaxCalorie;
     }
 
     public int getExeForGlobalDataId(int keyId){

@@ -1,5 +1,6 @@
 package com.finalproject.reachyourfitnessgoals.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -14,8 +15,11 @@ import com.finalproject.reachyourfitnessgoals.ViewHolder.headerExeViewHolder;
 import com.finalproject.reachyourfitnessgoals.ViewHolder.randomExeViewHolder;
 import com.finalproject.reachyourfitnessgoals.ViewHolder.showAllExeViewHolder;
 import com.finalproject.reachyourfitnessgoals.database.handleTABLE_VDO;
+import com.finalproject.reachyourfitnessgoals.models.ExeType;
+import com.finalproject.reachyourfitnessgoals.models.GlobalData;
 import com.finalproject.reachyourfitnessgoals.models.vdoData;
 import com.finalproject.reachyourfitnessgoals.models.ListType;
+import com.finalproject.reachyourfitnessgoals.setting.SetUpCalorieAndExe;
 import com.timehop.stickyheadersrecyclerview.StickyRecyclerHeadersAdapter;
 
 import java.util.ArrayList;
@@ -29,14 +33,17 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     private int type;
     private ArrayList<vdoData> vdoDataArrayList;
     private Context context;
+    private Activity activity;
+    private SetUpCalorieAndExe setUpCalorieAndExe;
     OnItemClickListener mItemClickListener;
 
 
-    public RecyclerViewAdapter(Context mContext, int type) {
-        this.vdoDataArrayList = new handleTABLE_VDO(mContext).getVdoExercise();
-        this.context = mContext;
+    public RecyclerViewAdapter(Activity activity, int type) {
+        this.vdoDataArrayList = new handleTABLE_VDO(activity).getVdoExercise();
+        this.activity = activity;
         this.type = type;
         if(type == ListType.TYPE_RANDOM_EXERCISE){
+            setUpCalorieAndExe = new SetUpCalorieAndExe(activity);
             randomExe();
         }
     }
@@ -44,7 +51,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     public RecyclerViewAdapter(Context mContext , String type) {
         Log.i("typeExe",type);
         this.vdoDataArrayList = new handleTABLE_VDO(mContext).getCustomVdoExercise(type);
-        this.type = 1;
+        this.type = ListType.TYPE_CUSTOM_EXERCISE;
     }
 
     @Override
@@ -74,8 +81,14 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             });
             return customExeViewHolder;
         }else if(type == ListType.TYPE_RANDOM_EXERCISE){
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.itemview_show_all, parent, false);
-            return  new randomExeViewHolder(view);
+            if(this.vdoDataArrayList.get(viewType).isHead()){
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.header_listview_row, parent, false);
+                return new headerExeViewHolder(view);
+            }else {
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.itemview_show_all, parent, false);
+                return  new randomExeViewHolder(view);
+            }
+
         }
         throw new NullPointerException("View Type " + viewType + " doesn't match with any existing type");
     }
@@ -97,16 +110,20 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             setupCustomExe(customExeViewHolder, vdoDataArrayList.get(position));
 
         }else if(holder instanceof randomExeViewHolder){
-
             randomExeViewHolder randomExeViewHolder = (randomExeViewHolder) holder;
             setupRandomExe(randomExeViewHolder, vdoDataArrayList.get(position),position);
+
+        }else if(holder instanceof headerExeViewHolder){
+            //Custom header (Add blank header data to vdoDataArrayList)
+            headerExeViewHolder headerExeViewHolder = (headerExeViewHolder) holder;
+            headerExeViewHolder.headerExe.setText(this.vdoDataArrayList.get(position).getType());
         }
     }
 
-
+    // Sticky Header lib
     @Override
     public long getHeaderId(int position) {
-            return vdoDataArrayList.get(position).getType().charAt(4);
+        return vdoDataArrayList.get(position).getType().charAt(4);
     }
 
     @Override
@@ -126,18 +143,39 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         return vdoDataArrayList.size();
     }
 
+    @Override
+    public int getItemViewType(int position) {
+        return position;
+    }
+
     public void randomExe(){
-        ArrayList<vdoData> data = new handleTABLE_VDO(context).getVdoExercise();
-        Random r = new Random();
-        int r_int;
         this.vdoDataArrayList.clear();
-        for(int i = 0 ; i < 20 ; i++){
-            r_int = r.nextInt(data.size());
-            Log.i("randomNumber: ",i+": " + r_int);
-            this.vdoDataArrayList.add(data.get(r_int));
+        for(int i = 0 ; i < 5 ; i++){
+            ArrayList<vdoData> data = new handleTABLE_VDO(activity).getCustomVdoExercise(ExeType.TYPE[i]);
+            vdoData vdoData = new vdoData("",((GlobalData) activity.getApplication()).getExeForGlobalData().get(i).getType(),"","",0);
+            vdoData.setHead(true);
+            this.vdoDataArrayList.add(vdoData);
+            random(setUpCalorieAndExe.getMaxCalorieForEachStep(ExeType.TYPE[i],i),data);
         }
         notifyDataSetChanged();
     }
+
+    private void random(int maxCalorie,ArrayList<vdoData> data){
+        Random r = new Random();
+        int tempRandom = 0;
+        int numRandom;
+        while (tempRandom<maxCalorie){
+            Log.d("RecyclerViewAdapter", "tempRandom:" + tempRandom);
+
+            numRandom = r.nextInt(data.size());
+            //data.get(numRandom).getCalorie();
+            tempRandom = tempRandom + 5;
+            this.vdoDataArrayList.add(data.get(numRandom));
+        }
+
+    }
+
+
 
 
     private void setupShowAllExe (showAllExeViewHolder showAllExeViewHolder , vdoData vdoData){
@@ -158,6 +196,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         randomExeViewHolder.exePic_all.setBackgroundResource(R.drawable.pic);
         randomExeViewHolder.exeName_all.setText(vdoData.getName());
         randomExeViewHolder.exeNumber_all.setText(position+"");
+
     }
 
     public interface OnItemClickListener {

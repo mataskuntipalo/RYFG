@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.finalproject.reachyourfitnessgoals.R;
 import com.finalproject.reachyourfitnessgoals.models.GlobalData;
+import com.finalproject.reachyourfitnessgoals.setting.SetUpCalorieAndExe;
 import com.h6ah4i.android.widget.advrecyclerview.utils.AbstractExpandableItemAdapter;
 import com.h6ah4i.android.widget.advrecyclerview.utils.AbstractExpandableItemViewHolder;
 
@@ -35,7 +36,7 @@ public class RecyclerViewAdapter_exeSummary extends AbstractExpandableItemAdapte
         TextView name_textView_child;
         TextView calorie_textView_child;
 
-        public MyBaseViewHolder(View itemView) {
+        public MyBaseViewHolder(View itemView ) {
             super(itemView);
             type_textView = (TextView) itemView.findViewById(R.id.typeName_TextView_exe_sum);
             calorie_textView = (TextView) itemView.findViewById(R.id.calorie_TextView_exe_sum);
