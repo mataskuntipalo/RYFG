@@ -13,6 +13,14 @@
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
        android:orientation="vertical">
+
+      <TextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:textColor="@color/colorBlack"
+          android:gravity="center"
+          android:id="@+id/question_TextView_parQ"
+          />
    <!--<TableRow-->
        <!--android:id="@+id/tableRow1"-->
        <!--android:layout_width="wrap_content"-->
@@ -77,16 +85,23 @@
    <LinearLayout
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
-       android:orientation="vertical"
+       android:orientation="horizontal"
        android:gravity="center_horizontal">
 
-      <TextView
-          android:layout_width="match_parent"
+
+      <Button
+          android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:text="Par Q Form"
-          android:gravity="center_horizontal"
-          android:textColor="@color/colorBlack"
-          android:textSize="24sp"/>
+          android:text="ไม่เคย"
+          android:id="@+id/no_Button_parQ"
+          />
+      <Button
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="เคย"
+          android:id="@+id/yes_Button_parQ"
+          />
+   </LinearLayout>
 
       <Button
           android:layout_width="wrap_content"
@@ -94,7 +109,6 @@
           android:text="ยืนยัน"
           android:id="@+id/process_Button_parQ"
           />
-   </LinearLayout>
 
    </LinearLayout>
 

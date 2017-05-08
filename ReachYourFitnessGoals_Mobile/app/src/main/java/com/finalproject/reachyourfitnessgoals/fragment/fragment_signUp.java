@@ -4,6 +4,7 @@ package com.finalproject.reachyourfitnessgoals.fragment;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -15,6 +16,7 @@ import android.widget.DatePicker;
 import android.widget.TextView;
 
 import com.finalproject.reachyourfitnessgoals.R;
+import com.finalproject.reachyourfitnessgoals.activity.ParQActivity;
 
 import org.w3c.dom.Text;
 
@@ -54,14 +56,8 @@ public class fragment_signUp extends Fragment {
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                fragment_ParQ_form parQ = fragment_ParQ_form.newInstance();
-                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                fragmentManager
-                        .beginTransaction()
-//                        .setCustomAnimations(R.anim.slide_up,R.anim.slide_down,R.anim.slide_up,R.anim.slide_down)
-                        .replace(R.id.activity_login, parQ, "fragment_parQ")
-                        .addToBackStack("fragment_parQ")
-                        .commit();
+                Intent intent = new Intent(getActivity(), ParQActivity.class);
+                startActivity(intent);
             }
         });
 

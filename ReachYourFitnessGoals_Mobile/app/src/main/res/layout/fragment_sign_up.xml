@@ -31,6 +31,7 @@
             android:layout_height="wrap_content"
             android:singleLine="true"
             android:textSize="@dimen/default_text"
+            android:textColor="@color/colorBlack"
             android:id="@+id/editEmail_EditText_signUP"/>
     </RelativeLayout>
 
@@ -59,6 +60,7 @@
             android:layout_height="wrap_content"
             android:singleLine="true"
             android:textSize="@dimen/default_text"
+            android:textColor="@color/colorBlack"
             android:id="@+id/editPass_EditText_signUP"
              />
     </RelativeLayout>
@@ -88,6 +90,7 @@
             android:layout_height="wrap_content"
             android:singleLine="true"
             android:textSize="@dimen/default_text"
+            android:textColor="@color/colorBlack"
             android:id="@+id/editName_EditText_signUP"/>
     </RelativeLayout>
 
@@ -100,6 +103,7 @@
         android:id="@+id/surName_text_signUP"
         android:layout_marginLeft="@dimen/activity_horizontal_margin"
         />
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -117,6 +121,7 @@
             android:layout_height="wrap_content"
             android:singleLine="true"
             android:textSize="@dimen/default_text"
+            android:textColor="@color/colorBlack"
             android:id="@+id/editSurname_EditText_signUP"
              />
     </RelativeLayout>
