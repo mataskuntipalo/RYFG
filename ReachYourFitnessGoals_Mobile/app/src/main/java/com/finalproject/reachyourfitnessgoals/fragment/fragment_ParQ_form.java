@@ -1,6 +1,7 @@
 package com.finalproject.reachyourfitnessgoals.fragment;
 
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -10,11 +11,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.finalproject.reachyourfitnessgoals.BuildConfig;
 import com.finalproject.reachyourfitnessgoals.R;
+import com.finalproject.reachyourfitnessgoals.interfaces.AnswerParQDataManager;
+import com.stepstone.stepper.BlockingStep;
 import com.stepstone.stepper.Step;
+import com.stepstone.stepper.StepperLayout;
 import com.stepstone.stepper.VerificationError;
 
 import static android.R.attr.fragment;
@@ -22,11 +29,12 @@ import static android.R.attr.fragment;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class fragment_ParQ_form extends Fragment implements Step {
+public class fragment_ParQ_form extends Fragment implements BlockingStep {
 
-    Button process,yesButton,noButton;
     TextView questionText;
-
+    RadioGroup groupRadio;
+    boolean ans;
+    private AnswerParQDataManager ansManager;
 
     public fragment_ParQ_form() {
         // Required empty public constructor
@@ -37,30 +45,32 @@ public class fragment_ParQ_form extends Fragment implements Step {
         return fragment;
     }
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof AnswerParQDataManager) {
+            ansManager = (AnswerParQDataManager) context;
+        } else {
+            throw new IllegalStateException("Activity must implement DataManager interface!");
+        }
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootview =  inflater.inflate(R.layout.fragment__par_q_form, container, false);
-        
-        process = (Button) rootview.findViewById(R.id.process_Button_parQ);
-        questionText = (TextView)rootview.findViewById(R.id.question_TextView_parQ);
-        yesButton = (Button) rootview.findViewById(R.id.yes_Button_parQ);
-        noButton = (Button) rootview.findViewById(R.id.no_Button_parQ);
+        final View rootview =  inflater.inflate(R.layout.fragment__par_q_form, container, false);
 
-        process.setOnClickListener(new View.OnClickListener() {
+        String[] questionArray = getResources().getStringArray(R.array.parQ);
+        questionText = (TextView)rootview.findViewById(R.id.question_TextView_parQ);
+        questionText.setText(questionArray[getArguments().getInt("step")]);
+        groupRadio = (RadioGroup)rootview.findViewById(R.id.group_RadioButton_parQ);
+
+        groupRadio.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
-            public void onClick(View view) {
-                Log.d("fragment_ParQ_form", "ss");
-                fragment_results_parQ resultParQ = fragment_results_parQ.newInstance();
-                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                fragmentManager
-                        .beginTransaction()
-//                        .setCustomAnimations(R.anim.slide_up,R.anim.slide_down,R.anim.slide_up,R.anim.slide_down)
-                        .replace(R.id.activity_parQ, resultParQ, "fragment_results_parQ")
-                        .addToBackStack("fragment_results_parQ")
-                        .commit();
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                RadioButton radioButton = (RadioButton)rootview.findViewById(i);
+                selectAns(radioButton);
             }
         });
 
@@ -68,16 +78,27 @@ public class fragment_ParQ_form extends Fragment implements Step {
         return rootview;
     }
 
-    private void runQuestion(){
-        String[] questionArray = getResources().getStringArray(R.array.parQ);
-        for (int i = 0 ; i < 7 ; i++){
-            questionText.setText(questionArray[i]);
+    public void selectAns(View v){
+        switch (v.getId()){
+            case R.id.no_RadioButton_parQ :
+                ans = false;
+                break;
+            case R.id.yes_RadioButton_parQ :
+                ans = true;
+                break;
         }
     }
 
+
     @Override
     public VerificationError verifyStep() {
-        return null;
+        if(groupRadio.getCheckedRadioButtonId() == -1){
+            VerificationError error = new VerificationError("error");
+            Toast.makeText(this.getContext(), error.getErrorMessage(), Toast.LENGTH_SHORT).show();
+            return error;
+        }else {
+            return null;
+        }
     }
 
     @Override
@@ -87,6 +108,31 @@ public class fragment_ParQ_form extends Fragment implements Step {
 
     @Override
     public void onError(@NonNull VerificationError error) {
+
+    }
+
+    @Override
+    public void onNextClicked(StepperLayout.OnNextClickedCallback callback) {
+        Toast.makeText(this.getContext(), "complete", Toast.LENGTH_SHORT).show();
+            ansManager.saveAnswer(ans, (int) getArguments().getInt("step"));
+            callback.goToNextStep();
+    }
+
+    @Override
+    public void onCompleteClicked(StepperLayout.OnCompleteClickedCallback callback) {
+        fragment_results_parQ resultParQ = fragment_results_parQ.newInstance(ansManager.getAnswer());
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        fragmentManager
+                .beginTransaction()
+//                        .setCustomAnimations(R.anim.slide_up,R.anim.slide_down,R.anim.slide_up,R.anim.slide_down)
+                .replace(R.id.activity_parQ, resultParQ, "fragment_results_parQ")
+                .addToBackStack("fragment_results_parQ")
+                .commit();
+
+    }
+
+    @Override
+    public void onBackClicked(StepperLayout.OnBackClickedCallback callback) {
 
     }
 }

@@ -2,6 +2,7 @@ package com.finalproject.reachyourfitnessgoals.adapter;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.annotation.IntRange;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
@@ -18,15 +19,17 @@ import com.stepstone.stepper.viewmodel.StepViewModel;
 
 public class ParQStepperAdapter extends AbstractFragmentStepAdapter {
 
+    Context context;
     public ParQStepperAdapter(@NonNull FragmentManager fm, @NonNull Context context) {
         super(fm, context);
+        this.context = context;
     }
 
     @Override
     public Step createStep(int position) {
         final fragment_ParQ_form step = fragment_ParQ_form.newInstance();
         Bundle b = new Bundle();
-        b.putInt("key", position);
+        b.putInt("step", position);
         step.setArguments(b);
         return step;
     }

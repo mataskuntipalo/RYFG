@@ -86,29 +86,33 @@
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
        android:orientation="horizontal"
-       android:gravity="center_horizontal">
+       android:gravity="center_horizontal"
+       >
 
 
-      <Button
-          android:layout_width="wrap_content"
+      <RadioGroup
+          android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:text="ไม่เคย"
-          android:id="@+id/no_Button_parQ"
-          />
-      <Button
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:text="เคย"
-          android:id="@+id/yes_Button_parQ"
-          />
+          android:orientation="horizontal"
+          android:gravity="center"
+          android:id="@+id/group_RadioButton_parQ">
+
+         <RadioButton
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:text="ไม่เคย"
+             android:buttonTint="@color/colorPrimary"
+             android:id="@+id/no_RadioButton_parQ"/>
+
+         <RadioButton
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:text="เคย"
+             android:buttonTint="@color/colorPrimary"
+             android:id="@+id/yes_RadioButton_parQ"/>
+      </RadioGroup>
    </LinearLayout>
 
-      <Button
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:text="ยืนยัน"
-          android:id="@+id/process_Button_parQ"
-          />
 
    </LinearLayout>
 

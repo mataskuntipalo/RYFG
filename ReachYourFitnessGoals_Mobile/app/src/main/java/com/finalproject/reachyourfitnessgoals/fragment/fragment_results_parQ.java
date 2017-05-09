@@ -23,8 +23,11 @@ public class fragment_results_parQ extends Fragment {
         // Required empty public constructor
     }
 
-    public static fragment_results_parQ newInstance() {
+    public static fragment_results_parQ newInstance(boolean[] ans) {
         fragment_results_parQ fragment = new fragment_results_parQ();
+        Bundle bundle = new Bundle();
+        bundle.putBooleanArray("ansArray",ans);
+        fragment.setArguments(bundle);
         return fragment;
     }
 
