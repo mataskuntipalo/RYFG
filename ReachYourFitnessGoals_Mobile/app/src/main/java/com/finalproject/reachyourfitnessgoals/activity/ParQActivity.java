@@ -22,7 +22,7 @@ public class ParQActivity extends AppCompatActivity implements AnswerParQDataMan
         ansArray = new boolean[7];
         mStepperLayout = (StepperLayout) findViewById(R.id.stepperLayout);
         mStepperLayout.setAdapter(new ParQStepperAdapter(getSupportFragmentManager(), this));
-
+//        mStepperLayout.setListener((StepperLayout.StepperListener) this);
     }
 
 
@@ -34,5 +34,10 @@ public class ParQActivity extends AppCompatActivity implements AnswerParQDataMan
     @Override
     public boolean[] getAnswer() {
         return ansArray;
+    }
+
+    @Override
+    public void onProceed() {
+        mStepperLayout.proceed();
     }
 }

@@ -2,16 +2,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:background="@color/colorDefault_Background"
     tools:context="com.finalproject.reachyourfitnessgoals.fragment.fragment_ParQ_form">
 
-   <ScrollView
-       android:layout_width="match_parent"
-       android:layout_height="match_parent">
 
    <LinearLayout
        android:layout_width="match_parent"
-       android:layout_height="wrap_content"
+       android:layout_height="0dp"
+       android:layout_weight="0.8"
+       android:gravity="center"
        android:orientation="vertical">
 
       <TextView
@@ -19,72 +19,16 @@
           android:layout_height="wrap_content"
           android:textColor="@color/colorBlack"
           android:gravity="center"
+          android:textSize="24dp"
           android:id="@+id/question_TextView_parQ"
           />
-   <!--<TableRow-->
-       <!--android:id="@+id/tableRow1"-->
-       <!--android:layout_width="wrap_content"-->
-       <!--android:layout_height="wrap_content"-->
-       <!--android:gravity="center"-->
-       <!--&gt;-->
+   </LinearLayout>
 
-      <!--<TextView-->
-          <!--android:layout_width="wrap_content"-->
-          <!--android:layout_height="wrap_content"-->
-          <!--android:layout_weight="0.5"-->
-          <!--android:text="แพทย์ที่ตรวจรักษาเคยบอกหรือไม่ว่า ท่านมีความผิดปรกติของหัวใจ และควรออกกำลังกายภายใต้คำแนะนำของแพทย์เท่านั้น"/>-->
-
-      <!--<Button-->
-          <!--android:id="@+id/btn_menu1"-->
-          <!--android:layout_width="wrap_content"-->
-          <!--android:layout_height="wrap_content"-->
-          <!--android:text="1"-->
-          <!--android:layout_weight="0.5"-->
-          <!--/>-->
-
-   <!--</TableRow>-->
-
-
-   <!--<TextView-->
-       <!--android:layout_width="wrap_content"-->
-       <!--android:layout_height="wrap_content"-->
-       <!--android:text="ท่านมีความรู้สึกเจ็บปวดหรือแน่นบริเวณหน้าอก ขณะที่ออกกำลังกายหรือไม่"/>-->
-
-   <!--<TextView-->
-       <!--android:layout_width="wrap_content"-->
-       <!--android:layout_height="wrap_content"-->
-       <!--android:text="ในเดือนที่ผ่านมา ท่านมีอาการเจ็บหน้าอก ขณะที่อยู่เฉยๆโดยไม่ได้ออกกำลังกายหรือไม่"/>-->
-
-   <!--<TextView-->
-       <!--android:layout_width="wrap_content"-->
-       <!--android:layout_height="wrap_content"-->
-       <!--android:text="ท่านมีอาการสูญเสียการทรงตัว (ยืนหรือเดินเซ) เนื่องจากอาการวิงเวียนศีรษะหรือไม่  หรือท่านเคยเป็นลมหมดสิตหรือไม่"/>-->
-
-   <!--<TextView-->
-       <!--android:layout_width="wrap_content"-->
-       <!--android:layout_height="wrap_content"-->
-       <!--android:text="ท่านมีปัญหากระดูกหรือข้อต่อ  ซึ่งจะมีอาการแย่ลง ถ้าออกกำลังกายหรือไม่"/>-->
-
-   <!--<TextView-->
-       <!--android:layout_width="wrap_content"-->
-       <!--android:layout_height="wrap_content"-->
-       <!--android:text="แพทย์ที่ตรวจรักษามีการสั่งยารักษาความดันโลหิต หรือความผิดปรกติของหัวใจให้ท่านหรือไม่"/>-->
-
-   <!--<TextView-->
-       <!--android:layout_width="wrap_content"-->
-       <!--android:layout_height="wrap_content"-->
-       <!--android:text="เท่าที่ท่านทราบ ยังมีเหตุผลอื่นๆอีกหรือไม่ ที่ทำให้ท่านสามารถออกกำลังกายได้"/>-->
-
-   <!--<Button-->
-       <!--android:layout_width="wrap_content"-->
-       <!--android:layout_height="wrap_content"-->
-       <!--android:text="ยืนยัน"-->
-       <!--android:id="@+id/process_Button_parQ"-->
-       <!--/>-->
 
    <LinearLayout
        android:layout_width="match_parent"
-       android:layout_height="wrap_content"
+       android:layout_height="0dp"
+       android:layout_weight="0.2"
        android:orientation="horizontal"
        android:gravity="center_horizontal"
        >
@@ -92,7 +36,7 @@
 
       <RadioGroup
           android:layout_width="match_parent"
-          android:layout_height="wrap_content"
+          android:layout_height="match_parent"
           android:orientation="horizontal"
           android:gravity="center"
           android:id="@+id/group_RadioButton_parQ">
@@ -102,6 +46,7 @@
              android:layout_height="wrap_content"
              android:text="ไม่เคย"
              android:buttonTint="@color/colorPrimary"
+             android:textSize="@dimen/big_text_20"
              android:id="@+id/no_RadioButton_parQ"/>
 
          <RadioButton
@@ -109,15 +54,10 @@
              android:layout_height="wrap_content"
              android:text="เคย"
              android:buttonTint="@color/colorPrimary"
+             android:textSize="@dimen/big_text_20"
              android:id="@+id/yes_RadioButton_parQ"/>
       </RadioGroup>
    </LinearLayout>
-
-
-   </LinearLayout>
-
-   </ScrollView>
-
 
 
 </LinearLayout>

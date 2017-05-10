@@ -7,4 +7,5 @@ package com.finalproject.reachyourfitnessgoals.interfaces;
 public interface AnswerParQDataManager {
         void saveAnswer(boolean ans,int position);
         boolean[] getAnswer();
+        void onProceed();
 }

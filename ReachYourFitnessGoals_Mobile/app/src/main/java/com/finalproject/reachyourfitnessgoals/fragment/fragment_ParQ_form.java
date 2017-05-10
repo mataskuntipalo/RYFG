@@ -1,7 +1,9 @@
 package com.finalproject.reachyourfitnessgoals.fragment;
 
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -18,6 +20,7 @@ import android.widget.Toast;
 
 import com.finalproject.reachyourfitnessgoals.BuildConfig;
 import com.finalproject.reachyourfitnessgoals.R;
+import com.finalproject.reachyourfitnessgoals.activity.MainActivity;
 import com.finalproject.reachyourfitnessgoals.interfaces.AnswerParQDataManager;
 import com.stepstone.stepper.BlockingStep;
 import com.stepstone.stepper.Step;
@@ -70,7 +73,14 @@ public class fragment_ParQ_form extends Fragment implements BlockingStep {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 RadioButton radioButton = (RadioButton)rootview.findViewById(i);
-                selectAns(radioButton);
+                radioButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        selectAns(v);
+                        ansManager.onProceed();
+                    }
+                });
+
             }
         });
 
@@ -120,16 +130,13 @@ public class fragment_ParQ_form extends Fragment implements BlockingStep {
 
     @Override
     public void onCompleteClicked(StepperLayout.OnCompleteClickedCallback callback) {
-        fragment_results_parQ resultParQ = fragment_results_parQ.newInstance(ansManager.getAnswer());
-        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-        fragmentManager
-                .beginTransaction()
-//                        .setCustomAnimations(R.anim.slide_up,R.anim.slide_down,R.anim.slide_up,R.anim.slide_down)
-                .replace(R.id.activity_parQ, resultParQ, "fragment_results_parQ")
-                .addToBackStack("fragment_results_parQ")
-                .commit();
-
+        callback.complete();
+        Intent intent = new Intent();
+        intent.putExtra("ansArray",ansManager.getAnswer());
+        getActivity().setResult(Activity.RESULT_OK, intent);
+        getActivity().onBackPressed();
     }
+
 
     @Override
     public void onBackClicked(StepperLayout.OnBackClickedCallback callback) {
