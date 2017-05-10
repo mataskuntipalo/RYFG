@@ -17,6 +17,7 @@ import com.finalproject.reachyourfitnessgoals.fragment.fragment_customExe_list;
 import com.finalproject.reachyourfitnessgoals.fragment.fragment_exeSummary_ExpandView;
 import com.finalproject.reachyourfitnessgoals.models.ExeType;
 import com.finalproject.reachyourfitnessgoals.models.GlobalData;
+import com.finalproject.reachyourfitnessgoals.setting.SetUpCalorieAndExe;
 
 import static android.R.attr.fragment;
 import static android.R.attr.visibility;
@@ -29,24 +30,24 @@ public class CustomSetExerciseInDayActivity extends AppCompatActivity {
     private final static String TAG_FRAGMENT = "TAG_FRAGMENT";
     private TextView calorie;
     private TextView maxCalorie;
-    private handleTABLE_EXERCISE handleTABLE_exercise;
     private int totalCalorie;
     private int tempMaxCalorie;
     private Button confirmButton;
+    private SetUpCalorieAndExe setUpCalorieAndExe;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_custom_set_exercise_in_day);
 
+        setUpCalorieAndExe = new SetUpCalorieAndExe(this);
         typeExeLayout = (LinearLayout)findViewById(R.id.typeExeLayout_LinearLayout_customSetExe);
         exeSummary_layout = (LinearLayout)findViewById(R.id.exeSummary_layout);
         calorie = (TextView)findViewById(R.id.calorie_TextView_customSetExe);
         maxCalorie = (TextView)findViewById(R.id.maxCalorieInDay_TextView_customSetExe);
         confirmButton = (Button) findViewById(R.id.confirm_Button_bottomSheet_customSetExe);
         setLayout();
-        handleTABLE_exercise = new handleTABLE_EXERCISE(this);
-        tempMaxCalorie = handleTABLE_exercise.getTotalCalorieInDay(((GlobalData)this.getApplication()).getDateData());
+        tempMaxCalorie = setUpCalorieAndExe.getMaxCalorieInDay();
         maxCalorie.setText(tempMaxCalorie+"");
 
        expandView = fragment_exeSummary_ExpandView.newInstance();
@@ -100,23 +101,21 @@ public class CustomSetExerciseInDayActivity extends AppCompatActivity {
 
 
     public void getTotalCalorie(){
-        int size = ((GlobalData)this.getApplication()).getExeForGlobalData().size();
+        int size = setUpCalorieAndExe.getExeDataList().size();
         totalCalorie = 0;
         for(int i = 0 ; i<size ; i++){
-            totalCalorie = totalCalorie + ((GlobalData)this.getApplication()).getExeForGlobalData().get(i).getCalorie();
+            totalCalorie = totalCalorie + setUpCalorieAndExe.getExeDataList().get(i).getCalorieInType();
         }
         checkConfirm();
     }
 
     public void checkConfirm(){
         if(totalCalorie >= tempMaxCalorie){
-        String a = ((GlobalData)this.getApplication()).getVdoID();
-        Log.i("vdo_id",a);
             confirmButton.setVisibility(View.VISIBLE);
             confirmButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                   // handleTABLE_exercise.update();
+                    setUpCalorieAndExe.addExeInDay(totalCalorie);
                 }
             });
         }

@@ -9,14 +9,14 @@ import java.util.ArrayList;
 public class ExeForGlobalData {
     int id;
     String type;
-    int calorie , maxCalorie;
+    int calorieInType , maxCalorieInType;
     ArrayList<userSelectData> userSelectDatas;
 
     public ExeForGlobalData(String type, ArrayList<userSelectData> userSelectDatas) {
         this.type = type;
         this.userSelectDatas = userSelectDatas;
-        this.calorie = 0;
-        this.maxCalorie = 0;
+        this.calorieInType = 0;
+        this.maxCalorieInType = 0;
     }
 
     public int getId() {
@@ -35,20 +35,20 @@ public class ExeForGlobalData {
         this.type = type;
     }
 
-    public int getCalorie() {
-        return calorie;
+    public int getCalorieInType() {
+        return calorieInType;
     }
 
-    public void setCalorie(int calorie) {
-        this.calorie = calorie;
+    public void setCalorieInType(int calorieInDay) {
+        this.calorieInType = calorieInDay;
     }
 
-    public int getMaxCalorie() {
-        return maxCalorie;
+    public int getMaxCalorieInType() {
+        return maxCalorieInType;
     }
 
-    public void setMaxCalorie(int maxCalorie) {
-        this.maxCalorie = maxCalorie;
+    public void setMaxCalorieInType(int maxCalorieInType) {
+        this.maxCalorieInType = maxCalorieInType;
     }
 
     public ArrayList<userSelectData> getUserSelectDatas() {

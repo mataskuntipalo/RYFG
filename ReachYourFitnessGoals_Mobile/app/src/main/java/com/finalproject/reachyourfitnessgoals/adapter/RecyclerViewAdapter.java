@@ -17,6 +17,7 @@ import com.finalproject.reachyourfitnessgoals.ViewHolder.showAllExeViewHolder;
 import com.finalproject.reachyourfitnessgoals.database.handleTABLE_VDO;
 import com.finalproject.reachyourfitnessgoals.models.ExeType;
 import com.finalproject.reachyourfitnessgoals.models.GlobalData;
+import com.finalproject.reachyourfitnessgoals.models.userSelectData;
 import com.finalproject.reachyourfitnessgoals.models.vdoData;
 import com.finalproject.reachyourfitnessgoals.models.ListType;
 import com.finalproject.reachyourfitnessgoals.setting.SetUpCalorieAndExe;
@@ -36,6 +37,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     private Activity activity;
     private SetUpCalorieAndExe setUpCalorieAndExe;
     OnItemClickListener mItemClickListener;
+    private int sumCalorieRandom;
 
 
     public RecyclerViewAdapter(Activity activity, int type) {
@@ -152,30 +154,37 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         this.vdoDataArrayList.clear();
         for(int i = 0 ; i < 5 ; i++){
             ArrayList<vdoData> data = new handleTABLE_VDO(activity).getCustomVdoExercise(ExeType.TYPE[i]);
+
+            // add Head in vdoDataArrayList
             vdoData vdoData = new vdoData("",((GlobalData) activity.getApplication()).getExeForGlobalData().get(i).getType(),"","",0);
             vdoData.setHead(true);
+            // end add Head
+
             this.vdoDataArrayList.add(vdoData);
-            random(setUpCalorieAndExe.getMaxCalorieForEachStep(ExeType.TYPE[i],i),data);
+            random(i,setUpCalorieAndExe.getMaxCalorieForEachStep(ExeType.TYPE[i],i),data);
         }
         notifyDataSetChanged();
     }
 
-    private void random(int maxCalorie,ArrayList<vdoData> data){
+    private void random(int id,int maxCalorie,ArrayList<vdoData> data){
+        ArrayList<userSelectData> list = new ArrayList<>();
         Random r = new Random();
-        int tempRandom = 0;
         int numRandom;
-        while (tempRandom<maxCalorie){
-            Log.d("RecyclerViewAdapter", "tempRandom:" + tempRandom);
+        while (sumCalorieRandom<maxCalorie){
+            Log.d("RecyclerViewAdapter", "tempRandom:" + sumCalorieRandom);
 
             numRandom = r.nextInt(data.size());
             //data.get(numRandom).getCalorie();
-            tempRandom = tempRandom + 5;
+            sumCalorieRandom = sumCalorieRandom + 5;
+            list.add(new userSelectData(data.get(numRandom).getName(),5,data.get(numRandom).getVdo_id()));
             this.vdoDataArrayList.add(data.get(numRandom));
         }
-
+        ((GlobalData)activity.getApplication()).updataData(id,list,maxCalorie,sumCalorieRandom);
     }
 
-
+    public void addToDataBaseRandomStep(){
+        setUpCalorieAndExe.addExeInDay(sumCalorieRandom);
+    }
 
 
     private void setupShowAllExe (showAllExeViewHolder showAllExeViewHolder , vdoData vdoData){

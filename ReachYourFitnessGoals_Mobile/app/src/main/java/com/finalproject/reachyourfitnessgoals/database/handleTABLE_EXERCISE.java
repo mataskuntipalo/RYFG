@@ -103,7 +103,7 @@ public class handleTABLE_EXERCISE {
         }
     }
 
-    public void update(String vdo_id , int calorie , ExeInWeekData data){
+    public void addExeInDay(String vdo_id , int calorie , DateData data){
         ContentValues args = new ContentValues();
         args.put(COLUMN_VDO_ID, vdo_id);
         args.put(COLUMN_CALORIE_IN_DAY, calorie);

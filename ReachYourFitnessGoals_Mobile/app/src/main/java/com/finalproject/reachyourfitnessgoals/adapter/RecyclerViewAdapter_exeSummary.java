@@ -110,8 +110,8 @@ public class RecyclerViewAdapter_exeSummary extends AbstractExpandableItemAdapte
             //MyGroupItem group = mItems.get(groupPosition);
             //holder.textView.setText(group.text);
             holder.type_textView.setText(((GlobalData) mActivity.getApplication()).getExeForGlobalData().get(groupPosition).getType());
-            holder.calorie_textView.setText(((GlobalData) mActivity.getApplication()).getExeForGlobalData().get(groupPosition).getCalorie()+"");
-            holder.maxCalorie_textView.setText(((GlobalData) mActivity.getApplication()).getExeForGlobalData().get(groupPosition).getMaxCalorie()+"");
+            holder.calorie_textView.setText(((GlobalData) mActivity.getApplication()).getExeForGlobalData().get(groupPosition).getCalorieInType()+"");
+            holder.maxCalorie_textView.setText(((GlobalData) mActivity.getApplication()).getExeForGlobalData().get(groupPosition).getMaxCalorieInType()+"");
         }
 
         @Override

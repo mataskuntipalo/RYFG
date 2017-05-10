@@ -33,13 +33,11 @@ public class GlobalData extends Application {
 
         exeForGlobalData = new ArrayList<>();
         for (int i = 0; i < type.length; i++) {
-            //MyGroupItem group = new MyGroupItem(i, type[i]);
             addExeForGlobalData(new ExeForGlobalData(type[i], new ArrayList<userSelectData>()));
             exeForGlobalData.get(i).setId(i);
             int tempSize = exeForGlobalData.get(i).getUserSelectDatas().size();
             for (int j = 0; j < tempSize; j++) {
                 exeForGlobalData.get(i).getUserSelectDatas().get(j).setId(j);
-                //group.children.add(new MyChildItem(j, "child " + j));
             }
         }
     }
@@ -63,18 +61,9 @@ public class GlobalData extends Application {
 
     public void updataData(int id , ArrayList<userSelectData> dataArrayList , int maxCalorie , int calorie){
         exeForGlobalData.get(id).setUserSelectDatas(dataArrayList);
-        exeForGlobalData.get(id).setMaxCalorie(maxCalorie);
-        exeForGlobalData.get(id).setCalorie(calorie);
+        exeForGlobalData.get(id).setMaxCalorieInType(maxCalorie);
+        exeForGlobalData.get(id).setCalorieInType(calorie);
     }
 
-    public String getVdoID(){
-        String id = "";
-        for (int i = 0 ; i<exeForGlobalData.size(); i++){
-            for(int j = 0 ; j < exeForGlobalData.get(i).getUserSelectDatas().size() ; j++){
-                id = id + exeForGlobalData.get(i).getUserSelectDatas().get(j).vdo_id;
-            }
-        }
-        return id;
-    }
 }
 

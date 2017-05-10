@@ -147,7 +147,7 @@ public class fragment_customExe_list extends Fragment{
         calorieText = (TextView)rootview.findViewById(R.id.calorie_TextView_bottomSheet);
         maxCalorieText = (TextView)rootview.findViewById(R.id.maxCalorie_TextView_bottomSheet);
         maxCalorieText.setText(setUpCalorieAndExe.getMaxCalorieForEachStep(getArguments().getString(KEY_TYPE),getArguments().getInt(KEY_ID))+"");
-        tempMaxCalorie = setUpCalorieAndExe.getMaxCalorie();
+        tempMaxCalorie = setUpCalorieAndExe.getMaxCalorieForEachStep(getArguments().getString(KEY_TYPE),getArguments().getInt(KEY_ID));
         confirmButton = (Button)rootview.findViewById(R.id.confirm_Button_bottomSheet);
         recyclerViewBottomSheet = (RecyclerView)rootview.findViewById(R.id.recyclerView_bottomSheet);
         recyclerViewBottomSheet.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -171,7 +171,6 @@ public class fragment_customExe_list extends Fragment{
         confirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //ExeForGlobalData data = new ExeForGlobalData(getArguments().getString(KEY_TYPE),recyclerViewAdapterBottomSheet.getData());
                 ((GlobalData)getActivity().getApplication()).updataData(ExeForGlobalData_id,userSelectDataArrayList,tempMaxCalorie,tempCalorie);
                 getActivity().onBackPressed();
             }

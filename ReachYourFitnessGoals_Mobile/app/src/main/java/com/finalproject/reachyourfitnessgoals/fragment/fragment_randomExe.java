@@ -26,6 +26,7 @@ public class fragment_randomExe extends Fragment {
     private RecyclerView recyclerView;
     private RecyclerViewAdapter recyclerViewAdapter;
     private Button button;
+    private Button confirmButton;
 
     public fragment_randomExe() {
         // Required empty public constructor
@@ -57,6 +58,13 @@ public class fragment_randomExe extends Fragment {
             }
         });
 
+        confirmButton = (Button) rootview.findViewById(R.id.confirm_Button_randomExe);
+        confirmButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                recyclerViewAdapter.addToDataBaseRandomStep();
+            }
+        });
 
 
         return rootview;
