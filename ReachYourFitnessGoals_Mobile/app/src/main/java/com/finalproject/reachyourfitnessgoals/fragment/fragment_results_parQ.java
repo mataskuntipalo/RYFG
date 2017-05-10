@@ -51,7 +51,6 @@ public class fragment_results_parQ extends Fragment {
         checkBox = (CheckBox)rootview.findViewById(R.id.check_CheckBox_parQ);
         Button confirm = (Button) rootview.findViewById(R.id.confirm_Button_resultParQ);
         boole = getArguments().getBooleanArray("ansArray");
-        resultText.setTypeface(null, Typeface.BOLD);
         resultText.setText(checkResult());
 
 

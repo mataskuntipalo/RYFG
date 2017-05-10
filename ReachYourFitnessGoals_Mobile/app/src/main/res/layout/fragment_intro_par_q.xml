@@ -1,0 +1,29 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="@color/colorWhite"
+    tools:context="com.finalproject.reachyourfitnessgoals.fragment.fragment_intro_parQ">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <TextView
+        style="@style/text_header"
+        android:text="@string/parQ_head"
+        android:textColor="@color/green_teal"
+        android:gravity="center"
+        android:textStyle="bold"/>
+
+    <TextView
+        style="@style/text_16sp"
+        android:text="@string/parQ_meaning"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ต่อไป"
+        android:id="@+id/next_Button_introParQ"/>
+
+</LinearLayout>

@@ -59,30 +59,20 @@ public class fragment_signUp extends Fragment {
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), ParQActivity.class);
-                startActivityForResult(intent, 12345);
+                fragment_intro_parQ intro_parQ = fragment_intro_parQ.newInstance();
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                fragmentManager
+                        .beginTransaction()
+//                        .setCustomAnimations(R.anim.slide_up,R.anim.slide_down,R.anim.slide_up,R.anim.slide_down)
+                        .replace(R.id.activity_login, intro_parQ, "fragment_intro_parQ")
+                        .commit();
             }
         });
 
         return rootview;
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == Activity.RESULT_OK && requestCode == 12345 && data != null) {
-            Toast.makeText(this.getContext(), "completeEnd111", Toast.LENGTH_SHORT).show();
-                fragment_results_parQ resultParQ = fragment_results_parQ.newInstance(data.getBooleanArrayExtra("ansArray"));
-                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                fragmentManager
-                .beginTransaction()
-//                        .setCustomAnimations(R.anim.slide_up,R.anim.slide_down,R.anim.slide_up,R.anim.slide_down)
-                .replace(R.id.activity_login, resultParQ, "fragment_results_parQ")
-                .commit();
-        }else {
 
-        }
-    }
 
 
     public void setDate(){

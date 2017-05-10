@@ -18,7 +18,7 @@
             android:orientation="vertical">
             <TextView
                 style="@style/text_header"
-
+                android:textStyle="bold"
                 android:id="@+id/result_TextView_resultParQ" />
 
             <TextView
