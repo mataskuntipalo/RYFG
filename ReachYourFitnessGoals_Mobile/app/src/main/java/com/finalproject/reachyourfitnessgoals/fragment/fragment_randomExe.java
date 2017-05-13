@@ -13,6 +13,8 @@ import android.widget.Button;
 import com.finalproject.reachyourfitnessgoals.R;
 import com.finalproject.reachyourfitnessgoals.adapter.RecyclerViewAdapter;
 import com.finalproject.reachyourfitnessgoals.database.handleTABLE_VDO;
+import com.finalproject.reachyourfitnessgoals.models.ExeType;
+import com.finalproject.reachyourfitnessgoals.models.ListType;
 import com.finalproject.reachyourfitnessgoals.models.vdoData;
 import com.timehop.stickyheadersrecyclerview.StickyRecyclerHeadersDecoration;
 
@@ -47,13 +49,14 @@ public class fragment_randomExe extends Fragment {
 
         recyclerView = (RecyclerView)rootview.findViewById(R.id.recyclerView_randomExe);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerViewAdapter = new RecyclerViewAdapter(getActivity(),2);
+        recyclerViewAdapter = new RecyclerViewAdapter(getActivity(), ListType.TYPE_RANDOM_EXERCISE);
         recyclerView.setAdapter(recyclerViewAdapter);
 
         button = (Button)rootview.findViewById(R.id.randomAgain_Button_randomExe);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                recyclerViewAdapter.sumCalorieInDay = 0;
                 recyclerViewAdapter.randomExe();
             }
         });

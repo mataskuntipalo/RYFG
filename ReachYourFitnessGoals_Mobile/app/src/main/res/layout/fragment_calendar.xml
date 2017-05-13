@@ -48,7 +48,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:id="@+id/detailLayout_LinearLayout_calendar">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -57,6 +58,7 @@
                 android:textSize="@dimen/topic_text"
                 android:text="@string/selectExerciseOfDay_text"
                 android:textColor="@color/colorBlack"/>
+
 
             <RelativeLayout
                 android:layout_width="wrap_content"

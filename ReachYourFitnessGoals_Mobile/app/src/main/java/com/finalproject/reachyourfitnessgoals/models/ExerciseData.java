@@ -1,14 +1,18 @@
 package com.finalproject.reachyourfitnessgoals.models;
 
+import org.parceler.Parcel;
+import org.parceler.ParcelConstructor;
+
 /**
  * Created by Papang on 25/3/2560.
  */
-
+@Parcel
 public class ExerciseData {
     int calorie;
     String vdo_id,note;
     float time;
 
+    @ParcelConstructor
     public ExerciseData(String vdo_id, int calorie, String note, float time) {
         this.vdo_id = vdo_id;
         this.calorie = calorie;

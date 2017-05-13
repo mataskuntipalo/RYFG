@@ -26,7 +26,7 @@
         </activity>
         <activity
             android:name=".activity.MainActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activity.IntroActivity"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -44,7 +44,8 @@
         >
         <activity android:name=".activity.CustomSetExerciseInDayActivity" />
         <activity android:name=".activity.ExerciseActivity" />
-        <activity android:name=".activity.ParQActivity"></activity>
+        <activity android:name=".activity.ParQActivity" />
+        <activity android:name=".activity.VideoVLCActivity"></activity>
     </application>
 
 </manifest>

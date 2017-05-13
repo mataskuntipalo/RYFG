@@ -23,6 +23,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.finalproject.reachyourfitnessgoals.R;
 import com.finalproject.reachyourfitnessgoals.adapter.RecyclerViewAdapter;
+import com.finalproject.reachyourfitnessgoals.models.ListType;
 import com.finalproject.reachyourfitnessgoals.models.vdoData;
 import com.github.florent37.materialviewpager.header.MaterialViewPagerHeaderDecorator;
 import com.google.gson.Gson;
@@ -65,7 +66,7 @@ public class fragment_list extends Fragment {
 
         recyclerView = (RecyclerView)rootview.findViewById(R.id.recyclerView_showAll);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerViewAdapter = new RecyclerViewAdapter(getActivity(),0);
+        recyclerViewAdapter = new RecyclerViewAdapter(getActivity(), ListType.TYPE_SHOW_ALL);
         recyclerView.addItemDecoration(new MaterialViewPagerHeaderDecorator());
         recyclerView.setAdapter(recyclerViewAdapter);
         recyclerView.addItemDecoration(new StickyRecyclerHeadersDecoration(recyclerViewAdapter));

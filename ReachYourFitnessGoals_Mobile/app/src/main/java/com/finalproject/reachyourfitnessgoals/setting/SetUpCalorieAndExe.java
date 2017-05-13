@@ -1,14 +1,18 @@
 package com.finalproject.reachyourfitnessgoals.setting;
 
 import android.app.Activity;
+import android.util.Log;
 
 import com.finalproject.reachyourfitnessgoals.R;
 import com.finalproject.reachyourfitnessgoals.database.handleTABLE_EXERCISE;
+import com.finalproject.reachyourfitnessgoals.database.handleTABLE_VDO;
 import com.finalproject.reachyourfitnessgoals.models.DateData;
 import com.finalproject.reachyourfitnessgoals.models.ExeForGlobalData;
 import com.finalproject.reachyourfitnessgoals.models.ExeInWeekData;
 import com.finalproject.reachyourfitnessgoals.models.ExeType;
+import com.finalproject.reachyourfitnessgoals.models.ExerciseData;
 import com.finalproject.reachyourfitnessgoals.models.GlobalData;
+import com.finalproject.reachyourfitnessgoals.models.vdoData;
 
 import java.util.ArrayList;
 
@@ -22,11 +26,13 @@ public class SetUpCalorieAndExe {
     int calorie;
     DateData date;
     private handleTABLE_EXERCISE handleTABLE_exercise;
+    private handleTABLE_VDO handleTABLE_vdo;
     private ArrayList<ExeForGlobalData> exeDataList;
 
     public SetUpCalorieAndExe(Activity activity) {
         date = ((GlobalData)activity.getApplication()).getDateData();
         handleTABLE_exercise = new handleTABLE_EXERCISE(activity);
+        handleTABLE_vdo = new handleTABLE_VDO(activity);
         maxCalorieInDay = handleTABLE_exercise.getTotalCalorieInDay(((GlobalData)activity.getApplication()).getDateData());
         exeDataList = ((GlobalData)activity.getApplication()).getExeForGlobalData();
     }
@@ -83,8 +89,12 @@ public class SetUpCalorieAndExe {
     public String getVdoID(){
         String id = "";
         for (int i = 0 ; i<exeDataList.size(); i++){
-            for(int j = 0 ; j < exeDataList.get(i).getUserSelectDatas().size() ; j++){
-                id = id + exeDataList.get(i).getUserSelectDatas().get(j).getVdo_id();
+            for(int j = 0 ; j < exeDataList.get(i).getUserSelectDatas().size(); j++){
+                if(i == 0 & j == 0){
+                    id = exeDataList.get(i).getUserSelectDatas().get(j).getVdo_id();
+                }
+                id = id + " " + exeDataList.get(i).getUserSelectDatas().get(j).getVdo_id();
+                Log.i("ListDada0",id);
             }
         }
         return id;
@@ -93,4 +103,6 @@ public class SetUpCalorieAndExe {
     public void addExeInDay(int calorie){
         handleTABLE_exercise.addExeInDay(getVdoID(),calorie,date);
     }
+
+
 }

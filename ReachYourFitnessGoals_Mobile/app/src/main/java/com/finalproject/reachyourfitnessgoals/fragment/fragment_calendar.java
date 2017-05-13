@@ -7,16 +7,20 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.NestedScrollView;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 
 import com.finalproject.reachyourfitnessgoals.R;
 import com.finalproject.reachyourfitnessgoals.activity.ExerciseActivity;
+import com.finalproject.reachyourfitnessgoals.adapter.RecyclerViewAdapter;
 import com.finalproject.reachyourfitnessgoals.database.handleTABLE_EXERCISE;
 import com.finalproject.reachyourfitnessgoals.database.handleTABLE_PROGRAM;
 import com.finalproject.reachyourfitnessgoals.models.DateData;
@@ -31,6 +35,8 @@ import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.CalendarMode;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 import com.prolificinteractive.materialcalendarview.OnDateSelectedListener;
+
+import org.parceler.Parcels;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -52,7 +58,6 @@ public class fragment_calendar extends Fragment {
     private Button setExeButton;
     private Button exeButton;
     NestedScrollView nestedScrollView;
-
 
 
     public fragment_calendar() {
@@ -104,6 +109,7 @@ public class fragment_calendar extends Fragment {
                 .commit();
 
         MCV.setDateSelected(CalendarDay.today(),true);
+        checkExeInDay(CalendarDay.today());
         MCV.setOnDateChangedListener(new OnDateSelectedListener() {
             @Override
             public void onDateSelected(@NonNull MaterialCalendarView widget, @NonNull CalendarDay date, boolean selected) {
@@ -135,7 +141,14 @@ public class fragment_calendar extends Fragment {
                 setExeButton.setVisibility(View.VISIBLE);
                 setExeButton.setOnClickListener(setExe);
             }else {
-                setExeButton.setVisibility(View.INVISIBLE);
+                setExeButton.setVisibility(View.GONE);
+                fragment_detailExe_inCalendar detail = fragment_detailExe_inCalendar.newInstance(exerciseData);
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                fragmentManager
+                        .beginTransaction()
+//                        .setCustomAnimations(R.anim.slide_up,R.anim.slide_down,R.anim.slide_up,R.anim.slide_down)
+                        .replace(R.id.detailLayout_LinearLayout_calendar, detail, "fragment_detailExe_inCalendar")
+                        .commit();
             }
 
         }else{

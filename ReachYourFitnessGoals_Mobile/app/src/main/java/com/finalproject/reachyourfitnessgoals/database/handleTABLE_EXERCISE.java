@@ -92,7 +92,7 @@ public class handleTABLE_EXERCISE {
                 + COLUMN_YEAR + "=" + date.getYear(), null);
         Log.i("cursor",cursor.getCount()+"");
         if(cursor.getCount() == 0){
-            return Integer.parseInt(null);
+            return -1;
         }else{
             cursor.moveToFirst();
             Log.i("cursor",cursor.getInt(0)+"");

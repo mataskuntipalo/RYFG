@@ -2,6 +2,7 @@ package com.finalproject.reachyourfitnessgoals.adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,6 +17,7 @@ import com.finalproject.reachyourfitnessgoals.ViewHolder.randomExeViewHolder;
 import com.finalproject.reachyourfitnessgoals.ViewHolder.showAllExeViewHolder;
 import com.finalproject.reachyourfitnessgoals.database.handleTABLE_VDO;
 import com.finalproject.reachyourfitnessgoals.models.ExeType;
+import com.finalproject.reachyourfitnessgoals.models.ExerciseData;
 import com.finalproject.reachyourfitnessgoals.models.GlobalData;
 import com.finalproject.reachyourfitnessgoals.models.userSelectData;
 import com.finalproject.reachyourfitnessgoals.models.vdoData;
@@ -37,10 +39,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     private Activity activity;
     private SetUpCalorieAndExe setUpCalorieAndExe;
     OnItemClickListener mItemClickListener;
-    private int sumCalorieRandom;
+    private int sumCalorieInType;
+    public static int sumCalorieInDay;
 
 
     public RecyclerViewAdapter(Activity activity, int type) {
+        Log.i("typeExe",type+"");
         this.vdoDataArrayList = new handleTABLE_VDO(activity).getVdoExercise();
         this.activity = activity;
         this.type = type;
@@ -50,11 +54,15 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         }
     }
 
+
     public RecyclerViewAdapter(Context mContext , String type) {
         Log.i("typeExe",type);
         this.vdoDataArrayList = new handleTABLE_VDO(mContext).getCustomVdoExercise(type);
         this.type = ListType.TYPE_CUSTOM_EXERCISE;
     }
+
+
+
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, final int viewType) {
@@ -99,12 +107,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
 
         if (holder instanceof showAllExeViewHolder) {
-
             showAllExeViewHolder showAllExeViewHolder = (showAllExeViewHolder) holder;
-            setupShowAllExe(showAllExeViewHolder,vdoDataArrayList.get(position));
+            setupShowAllExe(showAllExeViewHolder,vdoDataArrayList.get(position),position);
 
         }else if(holder instanceof customExeViewHolder){
-
             customExeViewHolder customExeViewHolder = (customExeViewHolder) holder;
             customExeViewHolder.itemView.setTag(R.id.name,vdoDataArrayList.get(position).getName());
             customExeViewHolder.itemView.setTag(R.id.calorie,"5");
@@ -154,6 +160,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         this.vdoDataArrayList.clear();
         for(int i = 0 ; i < 5 ; i++){
             ArrayList<vdoData> data = new handleTABLE_VDO(activity).getCustomVdoExercise(ExeType.TYPE[i]);
+            int maxCalorieEachStep = setUpCalorieAndExe.getMaxCalorieForEachStep(ExeType.TYPE[i],i);
 
             // add Head in vdoDataArrayList
             vdoData vdoData = new vdoData("",((GlobalData) activity.getApplication()).getExeForGlobalData().get(i).getType(),"","",0);
@@ -161,7 +168,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             // end add Head
 
             this.vdoDataArrayList.add(vdoData);
-            random(i,setUpCalorieAndExe.getMaxCalorieForEachStep(ExeType.TYPE[i],i),data);
+            random(i,maxCalorieEachStep,data);
         }
         notifyDataSetChanged();
     }
@@ -170,27 +177,31 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         ArrayList<userSelectData> list = new ArrayList<>();
         Random r = new Random();
         int numRandom;
-        while (sumCalorieRandom<maxCalorie){
-            Log.d("RecyclerViewAdapter", "tempRandom:" + sumCalorieRandom);
+        sumCalorieInType = 0;
+        while (sumCalorieInType<maxCalorie){
+           // Log.d("RecyclerViewAdapter", "tempRandom:" + sumCalorieRandom);
 
             numRandom = r.nextInt(data.size());
             //data.get(numRandom).getCalorie();
-            sumCalorieRandom = sumCalorieRandom + 5;
+            sumCalorieInType = sumCalorieInType + 5;
             list.add(new userSelectData(data.get(numRandom).getName(),5,data.get(numRandom).getVdo_id()));
+            Log.i("nameList",data.get(numRandom).getName());
             this.vdoDataArrayList.add(data.get(numRandom));
         }
-        ((GlobalData)activity.getApplication()).updataData(id,list,maxCalorie,sumCalorieRandom);
+        sumCalorieInDay = sumCalorieInDay + sumCalorieInType;
+        ((GlobalData)activity.getApplication()).updataData(id,list,maxCalorie,sumCalorieInType);
     }
 
     public void addToDataBaseRandomStep(){
-        setUpCalorieAndExe.addExeInDay(sumCalorieRandom);
+        setUpCalorieAndExe.addExeInDay(sumCalorieInDay);
     }
 
 
-    private void setupShowAllExe (showAllExeViewHolder showAllExeViewHolder , vdoData vdoData){
+    private void setupShowAllExe (showAllExeViewHolder showAllExeViewHolder , vdoData vdoData,int position){
+        Log.i("dataVDO",position+"");
         showAllExeViewHolder.exePic_all.setBackgroundResource(R.drawable.pic);
         showAllExeViewHolder.exeName_all.setText(vdoData.getName());
-
+        //showAllExeViewHolder.exeName_all.setText("ss");
     }
 
     private void setupCustomExe (customExeViewHolder customExeViewHolder , vdoData vdoData){

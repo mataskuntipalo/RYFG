@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.finalproject.reachyourfitnessgoals.models.DateData;
+import com.finalproject.reachyourfitnessgoals.models.ExerciseData;
 import com.finalproject.reachyourfitnessgoals.models.vdoData;
 
 import java.util.ArrayList;
@@ -74,6 +75,18 @@ public class handleTABLE_VDO {
                 cursor.moveToNext();
             }
             return vdoDataArrayListt;
+        }else {
+            return null;
+        }
+    }
+
+    public vdoData getVdoFromID(String id){
+        Log.i("cursorVDO0",id);
+        Cursor cursor = readSQLite.rawQuery("SELECT * FROM " + TABLE_VDO + " WHERE vdo_id = ?", new String[] {id} ,null);
+        if (cursor.getCount() > 0) {
+            cursor.moveToFirst();
+            Log.i("cursorVDO",cursor.getString(1));
+            return new vdoData(cursor.getInt(0),cursor.getString(1),cursor.getString(2),cursor.getString(3),cursor.getString(4),cursor.getInt(4));
         }else {
             return null;
         }
