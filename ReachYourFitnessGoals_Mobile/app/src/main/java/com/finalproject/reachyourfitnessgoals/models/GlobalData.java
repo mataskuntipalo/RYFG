@@ -65,5 +65,13 @@ public class GlobalData extends Application {
         exeForGlobalData.get(id).setCalorieInType(calorie);
     }
 
+    public void resetData(){
+        for (int i = 0 ; i < type.length ; i++){
+            exeForGlobalData.get(i).getUserSelectDatas().clear();
+            exeForGlobalData.get(i).setMaxCalorieInType(0);
+            exeForGlobalData.get(i).setCalorieInType(0);
+        }
+    }
+
 }
 

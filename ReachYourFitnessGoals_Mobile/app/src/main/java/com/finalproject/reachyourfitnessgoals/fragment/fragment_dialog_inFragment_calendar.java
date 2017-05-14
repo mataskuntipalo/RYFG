@@ -37,6 +37,7 @@ public class fragment_dialog_inFragment_calendar extends DialogFragment {
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), CustomSetExerciseInDayActivity.class);
                 startActivityForResult(intent, 12345);
+                getDialog().dismiss();
             }
         });
 
@@ -54,9 +55,6 @@ public class fragment_dialog_inFragment_calendar extends DialogFragment {
                 getDialog().dismiss();
             }
         });
-
-
-
 
 
         return rootview;

@@ -172,13 +172,11 @@ public class fragment_customExe_list extends Fragment{
             @Override
             public void onClick(View v) {
                 ((GlobalData)getActivity().getApplication()).updataData(ExeForGlobalData_id,userSelectDataArrayList,tempMaxCalorie,tempCalorie);
-                getActivity().onBackPressed();
+                //getActivity().onBackPressed();
+                getActivity().getSupportFragmentManager().popBackStack();
             }
         });
     }
-
-
-
 
 
 }

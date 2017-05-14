@@ -3,6 +3,7 @@ package com.finalproject.reachyourfitnessgoals.activity;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.finalproject.reachyourfitnessgoals.R;
 import com.finalproject.reachyourfitnessgoals.database.handleTABLE_EXERCISE;
@@ -20,6 +22,7 @@ import com.finalproject.reachyourfitnessgoals.models.GlobalData;
 import com.finalproject.reachyourfitnessgoals.setting.SetUpCalorieAndExe;
 
 import static android.R.attr.fragment;
+import static android.R.attr.theme;
 import static android.R.attr.visibility;
 
 public class CustomSetExerciseInDayActivity extends AppCompatActivity {
@@ -55,6 +58,7 @@ public class CustomSetExerciseInDayActivity extends AppCompatActivity {
         transaction.replace(R.id.exeSummary_layout, expandView,TAG_FRAGMENT);
         transaction.commit();
 
+        getSupportFragmentManager().addOnBackStackChangedListener(getListener());
 
     }
 
@@ -89,14 +93,32 @@ public class CustomSetExerciseInDayActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        expandView = (fragment_exeSummary_ExpandView) getSupportFragmentManager().findFragmentByTag(TAG_FRAGMENT);
-
-        if (expandView.allowBackPressed()) {
-            super.onBackPressed();
-            expandView.updateView();
-            getTotalCalorie();
-            calorie.setText(totalCalorie+"");
+        if(getSupportFragmentManager().getBackStackEntryCount() == 0){
+            Toast.makeText(this, "Back", Toast.LENGTH_SHORT).show();
+            ((GlobalData)getApplication()).resetData();
         }
+        super.onBackPressed();
+    }
+
+
+    private FragmentManager.OnBackStackChangedListener getListener()
+    {
+        FragmentManager.OnBackStackChangedListener result = new FragmentManager.OnBackStackChangedListener()
+        {
+            public void onBackStackChanged()
+            {
+                FragmentManager manager = getSupportFragmentManager();
+
+                if (manager != null)
+                {
+                    expandView.updateView();
+                    getTotalCalorie();
+                    calorie.setText(totalCalorie+"");
+                }
+            }
+        };
+
+        return result;
     }
 
 
@@ -116,9 +138,12 @@ public class CustomSetExerciseInDayActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     setUpCalorieAndExe.addExeInDay(totalCalorie);
+                    ((GlobalData)getApplication()).resetData();
                 }
             });
         }
     }
+
+
 
 }

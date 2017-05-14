@@ -73,8 +73,5 @@ public class fragment_exeSummary_ExpandView extends Fragment  {
         exeSummaryAdapter.notifyDataSetChanged();
     }
 
-    public boolean allowBackPressed(){
-        return true;
-    }
 
 }

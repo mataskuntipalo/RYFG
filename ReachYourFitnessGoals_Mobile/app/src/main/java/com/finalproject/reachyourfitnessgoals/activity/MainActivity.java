@@ -23,6 +23,7 @@ import android.support.v7.widget.Toolbar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 
 import com.android.volley.Request;
@@ -37,6 +38,7 @@ import com.finalproject.reachyourfitnessgoals.database.handleTABLE_VDO;
 import com.finalproject.reachyourfitnessgoals.fragment.fragment_calendar;
 import com.finalproject.reachyourfitnessgoals.fragment.fragment_home;
 import com.finalproject.reachyourfitnessgoals.fragment.fragment_list;
+import com.finalproject.reachyourfitnessgoals.models.GlobalData;
 import com.finalproject.reachyourfitnessgoals.models.vdoData;
 import com.github.florent37.materialviewpager.MaterialViewPager;
 import com.github.florent37.materialviewpager.header.HeaderDesign;
@@ -210,7 +212,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
+        Toast.makeText(this,getSupportFragmentManager().getBackStackEntryCount()+"", Toast.LENGTH_SHORT).show();
     }
 
     private void downloadVDO() {
@@ -272,4 +274,12 @@ public class MainActivity extends AppCompatActivity {
 //    }
 
 
+    @Override
+    public void onBackPressed() {
+        if(getSupportFragmentManager().getBackStackEntryCount() == 1){
+            Toast.makeText(this, "Back", Toast.LENGTH_SHORT).show();
+            ((GlobalData)getApplication()).resetData();
+        }
+        super.onBackPressed();
+    }
 }
