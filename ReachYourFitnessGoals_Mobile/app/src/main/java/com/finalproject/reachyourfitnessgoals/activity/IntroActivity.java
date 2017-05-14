@@ -1,6 +1,7 @@
 package com.finalproject.reachyourfitnessgoals.activity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
@@ -8,6 +9,8 @@ import com.finalproject.reachyourfitnessgoals.R;
 import com.finalproject.reachyourfitnessgoals.fragment.fragment_intro_slideEnd;
 import com.finalproject.reachyourfitnessgoals.setting.SampleSlide;
 import com.github.paolorotolo.appintro.AppIntro;
+
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class IntroActivity extends AppIntro {
 
@@ -62,7 +65,10 @@ public class IntroActivity extends AppIntro {
         // Do something when slide is changed
     }
 
-
+    @Override // ต้องใส่อันนี้ถึงจะเปลี่ยนฟ้อน
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+    }
 }
 
 

@@ -27,11 +27,10 @@ android {
 
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-
     // fonts
     // image circle
     // intro app
@@ -41,13 +40,12 @@ dependencies {
     // vertical stepper
     // recyclerview
     // StickyListHeaders
-
     // MaterialViewPager pack
     // Expandable recycleView
-
     compile('com.h6ah4i.android.widget.advrecyclerview:advrecyclerview:0.10.5@aar') {
         transitive = true
     }
+    compile files('libs/YouTubeAndroidPlayerApi.jar')
     compile 'com.android.support:appcompat-v7:24.2.1'
     compile 'com.android.support:support-v4:24.2.1'
     compile 'uk.co.chrisjenx:calligraphy:2.2.0'

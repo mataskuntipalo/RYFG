@@ -1,5 +1,6 @@
 package com.finalproject.reachyourfitnessgoals.activity;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -20,6 +21,8 @@ import com.finalproject.reachyourfitnessgoals.fragment.fragment_exeSummary_Expan
 import com.finalproject.reachyourfitnessgoals.models.ExeType;
 import com.finalproject.reachyourfitnessgoals.models.GlobalData;
 import com.finalproject.reachyourfitnessgoals.setting.SetUpCalorieAndExe;
+
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 import static android.R.attr.fragment;
 import static android.R.attr.theme;
@@ -144,6 +147,9 @@ public class CustomSetExerciseInDayActivity extends AppCompatActivity {
         }
     }
 
-
+    @Override // ต้องใส่อันนี้ถึงจะเปลี่ยนฟ้อน
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+    }
 
 }

@@ -58,6 +58,7 @@ public class fragment_calendar extends Fragment {
     private Button setExeButton;
     private Button exeButton;
     NestedScrollView nestedScrollView;
+    LinearLayout layoutExe;
 
 
     public fragment_calendar() {
@@ -75,6 +76,8 @@ public class fragment_calendar extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootview = inflater.inflate(R.layout.fragment_calendar, container, false);
+
+        layoutExe =(LinearLayout)rootview.findViewById(R.id.detailExe_LinearLayout_calendar);
 
         nestedScrollView = (NestedScrollView)rootview.findViewById(R.id.scrollView_calendar);
         MaterialViewPagerHelper.registerScrollView(getActivity(), nestedScrollView);
@@ -140,15 +143,18 @@ public class fragment_calendar extends Fragment {
             if(exerciseData.getVdo_id().equals("ยังไม่ได้เลือกท่าออกกำลังกาย")){
                 setExeButton.setVisibility(View.VISIBLE);
                 setExeButton.setOnClickListener(setExe);
+                layoutExe.setVisibility(View.GONE);
             }else {
                 setExeButton.setVisibility(View.GONE);
+                layoutExe.setVisibility(View.VISIBLE);
                 fragment_detailExe_inCalendar detail = fragment_detailExe_inCalendar.newInstance(exerciseData);
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 fragmentManager
                         .beginTransaction()
 //                        .setCustomAnimations(R.anim.slide_up,R.anim.slide_down,R.anim.slide_up,R.anim.slide_down)
-                        .replace(R.id.detailLayout_LinearLayout_calendar, detail, "fragment_detailExe_inCalendar")
+                        .replace(R.id.detailExe_LinearLayout_calendar, detail, "fragment_detailExe_inCalendar")
                         .commit();
+
             }
 
         }else{

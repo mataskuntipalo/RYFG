@@ -59,12 +59,12 @@ public class fragment_signUp extends Fragment {
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                fragment_intro_parQ intro_parQ = fragment_intro_parQ.newInstance();
+                fragment_selectGoal selectGoal = fragment_selectGoal.newInstance();
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 fragmentManager
                         .beginTransaction()
 //                        .setCustomAnimations(R.anim.slide_up,R.anim.slide_down,R.anim.slide_up,R.anim.slide_down)
-                        .replace(R.id.activity_login, intro_parQ, "fragment_intro_parQ")
+                        .replace(R.id.activity_login, selectGoal, "fragment_intro_parQ")
                         .commit();
             }
         });

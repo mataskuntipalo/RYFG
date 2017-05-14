@@ -39,11 +39,19 @@
         android:layout_width="match_parent"
         android:layout_height="200dp">
 
-        <com.devbrackets.android.exomedia.ui.widget.EMVideoView
-            android:id="@+id/video_view"
+        <!--<com.devbrackets.android.exomedia.ui.widget.EMVideoView-->
+            <!--android:id="@+id/video_view"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:id="@+id/video_view"/>-->
+
+        <com.google.android.youtube.player.YouTubePlayerView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            EMVideoView:useDefaultControls="true"/>
+            android:id="@+id/video_view">
+
+
+        </com.google.android.youtube.player.YouTubePlayerView>
 
 
     </LinearLayout>

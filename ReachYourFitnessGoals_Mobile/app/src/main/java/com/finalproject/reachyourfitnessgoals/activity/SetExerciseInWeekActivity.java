@@ -44,6 +44,7 @@ import java.util.TimeZone;
 
 import ernestoyaquello.com.verticalstepperform.VerticalStepperFormLayout;
 import ernestoyaquello.com.verticalstepperform.interfaces.VerticalStepperForm;
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class SetExerciseInWeekActivity extends AppCompatActivity implements VerticalStepperForm {
 
@@ -362,5 +363,10 @@ public class SetExerciseInWeekActivity extends AppCompatActivity implements Vert
         handleTABLE_PROGRAM handleTABLEProgram = new handleTABLE_PROGRAM(this);
         exeInWeekData.setCalorieTotal(handleTABLEProgram.getProgramDate().getKgPerWeek()/workoutOfWeekData.getWorkoutPerWeek());
         handleTableExercise.addExercise(exeInWeekData);
+    }
+
+    @Override // ต้องใส่อันนี้ถึงจะเปลี่ยนฟ้อน
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
 }

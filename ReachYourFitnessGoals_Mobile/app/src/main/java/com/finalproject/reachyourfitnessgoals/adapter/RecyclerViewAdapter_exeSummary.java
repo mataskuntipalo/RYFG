@@ -140,6 +140,8 @@ public class RecyclerViewAdapter_exeSummary extends AbstractExpandableItemAdapte
                 holder.maxCalorie_textView.setText(((GlobalData) mActivity.getApplication()).getExeForGlobalData().get(groupPosition).getMaxCalorieInType()+"");
             }else {
                 holder.type_textView.setText(detailExeListData.get(groupPosition).getType());
+                holder.calorie_textView.setText("");
+                holder.maxCalorie_textView.setText("");
             }
 
         }

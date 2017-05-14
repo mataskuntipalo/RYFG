@@ -1,0 +1,70 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/colorWhite"
+    tools:context="com.finalproject.reachyourfitnessgoals.fragment.fragment_selectGoal">
+
+    <!-- TODO: Update blank fragment layout -->
+    <TextView
+        style="@style/text_header"
+        android:textSize="50sp"
+        android:textColor="@color/colorBlack"
+        android:text="@string/goalText"
+        android:gravity="center"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/background_goal">
+
+    <TextView
+        style="@style/text_header"
+        android:textSize="24sp"
+        android:textColor="@color/colorBlack"
+        android:text="@string/expandDetail"
+        android:gravity="center"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:gravity="center"
+        android:background="@color/colorBlack"
+        android:alpha="0.8"
+        >
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/loseWeightGoal"
+            android:textSize="22sp"
+            android:textColor="@color/colorBlack"
+            android:padding="20dp"
+            android:id="@+id/loseWeight_Button_selectGoal"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:gravity="center"
+        android:background="@color/red"
+        android:alpha="0.8">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/muscleBuilding"
+            android:textColor="@color/colorWhite"
+            android:padding="20dp"
+            android:textSize="22sp"
+            android:background="@color/colorฺฺBlueDark"/>
+
+    </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

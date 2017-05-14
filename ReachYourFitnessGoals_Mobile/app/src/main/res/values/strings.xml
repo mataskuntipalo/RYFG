@@ -31,6 +31,12 @@
     <string name="customSelect">เลือกท่าเอง</string>
     <string name="autoSelect">เลือกท่าอัตโนมัติ</string>
 
+    <!-- fragment_selectGoal -->
+    <string name="goalText">เลือกเป้าหมาย</string>
+    <string name="expandDetail">เลือกเป้าหมายที่คุณสนใจและทำให้สำเร็จไปกับเรา</string>
+    <string name="loseWeightGoal">ลดนํ้าหนัก</string>
+    <string name="muscleBuilding">เสริมสร้างกล้ามเนื้อ</string>
+
 
     <string-array name="type_exe">
         <item>Stretching</item>
@@ -42,7 +48,7 @@
 
     <!-- fragment_ParQ_form -->
     <string name="parQ_head">PAR-Q FORM</string>
-    <string name="parQ_meaning">  แบบประเมินความพร้อมก่อนออกกาลังกาย (Physical Activity Readiness Questionaire หรือ PAR - Q) เป็นแบบสอบถามเกี่ยวกับความพร้อมก่อนออกกลังกายการออกกาลังกายจาก Canadian Society for Exercise Physiology</string>
+    <string name="parQ_meaning">แบบประเมินความพร้อมก่อนออกกำลังกาย (Physical Activity Readiness Questionaire หรือ PAR - Q) เป็นแบบสอบถามเกี่ยวกับความพร้อมก่อนออกกลังกายการออกกาลังกายจาก Canadian Society for Exercise Physiology</string>
     <string-array name="parQ">
         <item>แพทย์ที่ตรวจรักษาเคยบอกหรือไม่ว่า ท่านมีความผิดปรกติของหัวใจ และควรออกกำลังกายภายใต้คำแนะนำของแพทย์เท่านั้น</item>
         <item>ท่านมีความรู้สึกเจ็บปวดหรือแน่นบริเวณหน้าอก ขณะที่ออกกำลังกายหรือไม่</item>
@@ -59,7 +65,7 @@
     <string name="annotation2">(2) ถ้าท่า่นตั้งครรภ์หรืออาจจะตั้งครรภ์ โปรดปรึกษาแพทย์ก่อนที่จะออกกำลังกาย</string>
     <string-array name="results">
         <item>ผลสรุปแบบประเมิน ท่านสามารถออกกำลังกายได้ โดยเริ่มต้นทำอย่างช้าๆและค่อยๆเพิ่มเวลาหรือความหนักขึ้นเพื่อความปลอดภัย</item>
-        <item>ผลสรุปแบบประเมิน ท่านควรปรึกษาแพทย์ก่่อนออกกำลังกาย เนื่องจากมีความเสี่ยง</item>
+        <item>ผลสรุปแบบประเมิน ท่านควรปรึกษาแพทย์ก่่อนออกกำลังกายเนื่องจากมีความเสี่ยง</item>
     </string-array>
 
     <!-- fragment_customExe_list -->

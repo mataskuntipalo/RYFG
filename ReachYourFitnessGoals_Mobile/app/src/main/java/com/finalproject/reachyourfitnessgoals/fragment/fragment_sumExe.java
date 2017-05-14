@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.finalproject.reachyourfitnessgoals.R;
 import com.finalproject.reachyourfitnessgoals.activity.MainActivity;
@@ -15,15 +16,18 @@ import com.finalproject.reachyourfitnessgoals.activity.MainActivity;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class fragment_sumExe extends Fragment {
+public class fragment_sumExe extends android.app.Fragment {
 
 
     public fragment_sumExe() {
         // Required empty public constructor
     }
 
-    public static fragment_sumExe newInstance() {
+    public static fragment_sumExe newInstance(String time) {
         fragment_sumExe fragment = new fragment_sumExe();
+        Bundle bundle = new Bundle();
+        bundle.putString("time",time);
+        fragment.setArguments(bundle);
         return fragment;
     }
 
@@ -34,6 +38,8 @@ public class fragment_sumExe extends Fragment {
          View rootview = inflater.inflate(R.layout.fragment_sum_exe, container, false);
 
         Button button = (Button) rootview.findViewById(R.id.done_Button_sumExe);
+        TextView textView =(TextView)rootview.findViewById(R.id.time_TextView_sumExe);
+        textView.setText("เวลาที่ใช้ " + getArguments().getString("time") + " นาที");
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override

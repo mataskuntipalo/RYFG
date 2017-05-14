@@ -103,7 +103,7 @@ public class fragment_ParQ_form extends Fragment implements BlockingStep {
     @Override
     public VerificationError verifyStep() {
         if(groupRadio.getCheckedRadioButtonId() == -1){
-            VerificationError error = new VerificationError("error");
+            VerificationError error = new VerificationError("โปรดเลือกคำตอบ");
             Toast.makeText(this.getContext(), error.getErrorMessage(), Toast.LENGTH_SHORT).show();
             return error;
         }else {
@@ -123,7 +123,6 @@ public class fragment_ParQ_form extends Fragment implements BlockingStep {
 
     @Override
     public void onNextClicked(StepperLayout.OnNextClickedCallback callback) {
-        Toast.makeText(this.getContext(), "complete", Toast.LENGTH_SHORT).show();
             ansManager.saveAnswer(ans, (int) getArguments().getInt("step"));
             callback.goToNextStep();
     }

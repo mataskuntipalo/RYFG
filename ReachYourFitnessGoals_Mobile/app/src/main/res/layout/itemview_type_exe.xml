@@ -7,13 +7,15 @@
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:background="@color/colorBlack"
-        android:layout_marginBottom="10dp">
+        android:layout_marginBottom="10dp"
+        android:gravity="center">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/big_text_20"
+            android:textSize="34sp"
             android:textColor="@color/colorWhite"
+            android:gravity="center"
             android:id="@+id/typeName_text_itemView_typeExe"/>
     </LinearLayout>
 

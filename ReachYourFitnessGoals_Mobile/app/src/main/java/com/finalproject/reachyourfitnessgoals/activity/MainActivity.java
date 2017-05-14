@@ -193,17 +193,11 @@ public class MainActivity extends AppCompatActivity {
             public HeaderDesign getHeaderDesign(int page) {
                 switch (page) {
                     case 0:
-                        return HeaderDesign.fromColorResAndUrl(
-                                R.color.colorBlack,
-                                "http://cdn1.tnwcdn.com/wp-content/blogs.dir/1/files/2014/06/wallpaper_51.jpg");
+                        return HeaderDesign.fromColorAndDrawable(getResources().getColor(R.color.colorBlack),getResources().getDrawable(R.drawable.background_main1));
                     case 1:
-                        return HeaderDesign.fromColorResAndUrl(
-                                R.color.colorBlack,
-                                "https://fs01.androidpit.info/a/63/0e/android-l-wallpapers-630ea6-h900.jpg");
+                        return HeaderDesign.fromColorAndDrawable(getResources().getColor(R.color.colorBlack),getResources().getDrawable(R.drawable.background_main2));
                     case 2:
-                        return HeaderDesign.fromColorResAndUrl(
-                                R.color.colorBlack,
-                                "http://www.droid-life.com/wp-content/uploads/2014/10/lollipop-wallpapers10.jpg");
+                        return HeaderDesign.fromColorAndDrawable(getResources().getColor(R.color.colorBlack),getResources().getDrawable(R.drawable.background_main3));
                 }
 
                 //execute others actions if needed (ex : modify your header logo)
@@ -212,7 +206,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Toast.makeText(this,getSupportFragmentManager().getBackStackEntryCount()+"", Toast.LENGTH_SHORT).show();
     }
 
     private void downloadVDO() {
@@ -277,7 +270,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         if(getSupportFragmentManager().getBackStackEntryCount() == 1){
-            Toast.makeText(this, "Back", Toast.LENGTH_SHORT).show();
             ((GlobalData)getApplication()).resetData();
         }
         super.onBackPressed();

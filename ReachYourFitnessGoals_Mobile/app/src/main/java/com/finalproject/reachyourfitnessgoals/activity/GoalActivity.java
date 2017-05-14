@@ -1,6 +1,7 @@
 package com.finalproject.reachyourfitnessgoals.activity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -18,6 +19,8 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 import java.util.TimeZone;
+
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class GoalActivity extends Activity {
 
@@ -121,5 +124,10 @@ public class GoalActivity extends Activity {
         Log.i("dateEnd",goalData.getDay_date_end()+"");
         Log.i("dateEnd",goalData.getMonth_date_end()+"");
         Log.i("dateEnd",goalData.getYear_date_end()+"");
+    }
+
+    @Override // ต้องใส่อันนี้ถึงจะเปลี่ยนฟ้อน
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
 }

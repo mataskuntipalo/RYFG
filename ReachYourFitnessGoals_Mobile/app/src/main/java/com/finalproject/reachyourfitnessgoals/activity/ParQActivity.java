@@ -1,6 +1,7 @@
 package com.finalproject.reachyourfitnessgoals.activity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
@@ -8,6 +9,8 @@ import com.finalproject.reachyourfitnessgoals.R;
 import com.finalproject.reachyourfitnessgoals.adapter.ParQStepperAdapter;
 import com.finalproject.reachyourfitnessgoals.interfaces.AnswerParQDataManager;
 import com.stepstone.stepper.StepperLayout;
+
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class ParQActivity extends AppCompatActivity implements AnswerParQDataManager {
 
@@ -39,5 +42,10 @@ public class ParQActivity extends AppCompatActivity implements AnswerParQDataMan
     @Override
     public void onProceed() {
         mStepperLayout.proceed();
+    }
+
+    @Override // ต้องใส่อันนี้ถึงจะเปลี่ยนฟ้อน
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
 }

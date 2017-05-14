@@ -68,7 +68,7 @@
             android:text="น้ำหนักปัจจุบัน"
             android:textColor="@color/colorBlack"
             android:layout_marginRight="10dp"
-            android:textSize="@dimen/big_text_20"/>
+            android:textSize="@dimen/big_text_24"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -76,14 +76,14 @@
             android:text="65"
             android:textColor="@color/colorBlack"
             android:layout_marginRight="10dp"
-            android:textSize="22sp" />
+            android:textSize="26sp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="กิโลกรัม"
             android:textColor="@color/colorBlack"
-            android:textSize="@dimen/big_text_20"
+            android:textSize="@dimen/big_text_24"
             />
     </LinearLayout>
 
@@ -100,7 +100,7 @@
                 android:layout_marginRight="10dp"
                 android:text="แคลอรี่คงเหลือ"
                 android:textColor="@color/colorWhite"
-                android:textSize="@dimen/big_text_20" />
+                android:textSize="@dimen/big_text_24" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -108,14 +108,14 @@
                 android:layout_marginRight="10dp"
                 android:text="1800"
                 android:textColor="@color/colorWhite"
-                android:textSize="22sp" />
+                android:textSize="26sp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="แคลอรี่"
                 android:textColor="@color/colorWhite"
-                android:textSize="@dimen/big_text_20" />
+                android:textSize="@dimen/big_text_24" />
         </LinearLayout>
 
 

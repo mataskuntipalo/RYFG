@@ -16,7 +16,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/big_text_20"
+            android:textSize="@dimen/big_text_24"
             android:id="@+id/typeName_TextView_exe_sum"/>
 
         <TextView
@@ -24,14 +24,14 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:id="@+id/calorie_TextView_exe_sum"
-            android:textSize="@dimen/big_text_20"
+            android:textSize="@dimen/big_text_24"
             android:text="0"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
-            android:textSize="@dimen/big_text_20"
+            android:textSize="@dimen/big_text_24"
             android:text="/"/>
 
         <TextView
@@ -39,7 +39,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:id="@+id/maxCalorie_TextView_exe_sum"
-            android:textSize="@dimen/big_text_20"
+            android:textSize="@dimen/big_text_24"
             android:text="0"/>
     </LinearLayout>
 

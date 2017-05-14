@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:behavior_peekHeight="20dp"
+    app:behavior_peekHeight="25dp"
     app:behavior_hideable="false"
     app:layout_behavior="@string/bottom_sheet_behavior"
     android:id="@+id/layout_bottomSheet"
@@ -16,19 +16,22 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="20dp"
+        android:layout_height="30dp"
         android:orientation="horizontal"
         >
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:layout_marginLeft="10dp"
             android:text="@string/totalCalorie"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
+            android:textSize="20sp"
             android:id="@+id/calorie_TextView_bottomSheet"
             android:text="0"/>
 
@@ -36,12 +39,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
+            android:textSize="20sp"
             android:text="/"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
+            android:textSize="20sp"
             android:id="@+id/maxCalorie_TextView_bottomSheet"
             android:text="0"/>
     </LinearLayout>

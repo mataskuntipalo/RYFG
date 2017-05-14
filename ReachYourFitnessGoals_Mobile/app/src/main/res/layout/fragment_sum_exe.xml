@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/colorWhite"
     tools:context="com.finalproject.reachyourfitnessgoals.fragment.fragment_sumExe">
 
     <!-- TODO: Update blank fragment layout -->
@@ -22,6 +23,7 @@
         android:textColor="@color/colorBlack"
         android:text="เวลาที่ใช้ 19.05 นาที"
         android:gravity="center"
+        android:id="@+id/time_TextView_sumExe"
         android:layout_margin="10dp"/>
 
     <Button
