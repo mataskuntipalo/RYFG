@@ -17,6 +17,8 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.finalproject.reachyourfitnessgoals.R;
 import com.finalproject.reachyourfitnessgoals.activity.ExerciseActivity;
@@ -57,8 +59,10 @@ public class fragment_calendar extends Fragment {
     private RelativeLayout layout;
     private Button setExeButton;
     private Button exeButton;
-    NestedScrollView nestedScrollView;
-    LinearLayout layoutExe;
+    private NestedScrollView nestedScrollView;
+    private LinearLayout layoutExe;
+    private LinearLayout layoutManageProgram;
+    private TextView noExeText;
 
 
     public fragment_calendar() {
@@ -77,7 +81,9 @@ public class fragment_calendar extends Fragment {
         // Inflate the layout for this fragment
         View rootview = inflater.inflate(R.layout.fragment_calendar, container, false);
 
-        layoutExe =(LinearLayout)rootview.findViewById(R.id.detailExe_LinearLayout_calendar);
+        layoutManageProgram =(LinearLayout)rootview.findViewById(R.id.manageProgram_RelativeLayout_home);
+        layoutExe =(LinearLayout)rootview.findViewById(R.id.expandListExe_LinearLayout_calendar);
+        noExeText = (TextView)rootview.findViewById(R.id.noExe_TextView_calendar);
 
         nestedScrollView = (NestedScrollView)rootview.findViewById(R.id.scrollView_calendar);
         MaterialViewPagerHelper.registerScrollView(getActivity(), nestedScrollView);
@@ -137,6 +143,8 @@ public class fragment_calendar extends Fragment {
     }
 
     private void checkExeInDay(CalendarDay date){
+        layoutManageProgram.setVisibility(View.VISIBLE);
+        noExeText.setVisibility(View.GONE);
         ExerciseData exerciseData = handleTableExercise.getDetailExercise(date);
         Log.i("exerciseData",exerciseData+"");
         if(exerciseData != null){
@@ -152,22 +160,21 @@ public class fragment_calendar extends Fragment {
                 fragmentManager
                         .beginTransaction()
 //                        .setCustomAnimations(R.anim.slide_up,R.anim.slide_down,R.anim.slide_up,R.anim.slide_down)
-                        .replace(R.id.detailExe_LinearLayout_calendar, detail, "fragment_detailExe_inCalendar")
+                        .replace(R.id.expandListExe_LinearLayout_calendar, detail, "fragment_detailExe_inCalendar")
                         .commit();
 
             }
-
+            addGlobalDate(date);
         }else{
-
+            Toast.makeText(getContext(), "null", Toast.LENGTH_SHORT).show();
+            layoutManageProgram.setVisibility(View.GONE);
+            noExeText.setVisibility(View.VISIBLE);
         }
-        addGlobalDate(date);
 
     }
 
     private void addGlobalDate(CalendarDay date){
-
         ((GlobalData) getActivity().getApplication()).setDateData(new DateData(date.getDay(),date.getMonth(),date.getYear()));
-
     }
 
     private View.OnClickListener setExe = new View.OnClickListener(){

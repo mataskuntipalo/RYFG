@@ -36,6 +36,15 @@
         android:orientation="vertical"
         android:id="@+id/layout_fragment_calendar">
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ไม่มีการออกกำลังกายในวันนี้"
+            android:textSize="30sp"
+            android:gravity="center"
+            android:id="@+id/noExe_TextView_calendar"
+            android:visibility="gone"/>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -69,7 +78,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:id="@+id/detailExe_LinearLayout_calendar">
+                    android:id="@+id/expandListExe_LinearLayout_calendar">
                 </LinearLayout>
 
                 <Button
@@ -80,6 +89,8 @@
                     android:textColor="@color/colorBlack"
                     android:gravity="center"
                     android:id="@+id/setExeOfDay_button_calendar"/>
+
+
             </RelativeLayout>
             </LinearLayout>
 
@@ -88,14 +99,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:textSize="@dimen/topic_text"
-                    android:text="@string/selectExerciseOfDay_text"
-                    android:textColor="@color/colorBlack"/>
 
                 <RelativeLayout
                     android:layout_width="wrap_content"
@@ -106,7 +109,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/default_text"
-                        android:text="ออกกำลังกาย"
+                        android:text="เริ่มออกกำลังกาย"
                         android:textColor="@color/colorBlack"
                         android:id="@+id/Exe_button_calendar"/>
                 </RelativeLayout>

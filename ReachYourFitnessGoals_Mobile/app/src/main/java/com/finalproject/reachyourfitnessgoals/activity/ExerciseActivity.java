@@ -40,7 +40,7 @@ public class ExerciseActivity extends YouTubeBaseActivity implements YouTubePlay
     int countExe;
     TextView exeName;
     String[] nameArray;
-    String timeString;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,11 +60,11 @@ public class ExerciseActivity extends YouTubeBaseActivity implements YouTubePlay
         countExe = 0;
         lastPause = 0;
 
-
         start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                player.play();
+//                player.play();
+                chronometer.setBase(SystemClock.elapsedRealtime());
                 chronometer.start();
                 v.setVisibility(View.GONE);
                 doneButton.setVisibility(View.VISIBLE);
@@ -98,32 +98,24 @@ public class ExerciseActivity extends YouTubeBaseActivity implements YouTubePlay
         @Override
         public void onClick(View v) {
             if(countExe == 0){
-                player.loadVideo(VIDEO_JUMP);
+                //player.loadVideo(VIDEO_JUMP);
                 exeName.setText(nameArray[1]);
                 countExe++;
             }else if(countExe == 1){
-                player.loadVideo(VIDEO_BICYCLE);
+                //player.loadVideo(VIDEO_BICYCLE);
                 exeName.setText(nameArray[2]);
                 countExe++;
             }else {
                 chronometer.stop();
-                setTimeToString();
                 RelativeLayout layout = (RelativeLayout)findViewById(R.id.exeSummary_exe);
                 layout.setVisibility(View.VISIBLE);
-                fragment_sumExe a = fragment_sumExe.newInstance(timeString);
+                fragment_sumExe a = fragment_sumExe.newInstance((String) chronometer.getText());
                 getFragmentManager().beginTransaction().replace(R.id.exeSummary_exe, a).commit();
             }
         }
     };
 
-    public void setTimeToString(){
-        long timeElapsed = SystemClock.elapsedRealtime() - chronometer.getBase();
-        int hours = (int) (timeElapsed / 3600000);
-        int minutes = (int) (timeElapsed - hours * 3600000) / 60000;
-        int seconds = (int) (timeElapsed - hours * 3600000 - minutes * 60000) / 1000;
-        timeString = minutes + " : " + seconds;
-        Toast.makeText(this, timeString, Toast.LENGTH_SHORT).show();
-    }
+
 
     @Override
     public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
