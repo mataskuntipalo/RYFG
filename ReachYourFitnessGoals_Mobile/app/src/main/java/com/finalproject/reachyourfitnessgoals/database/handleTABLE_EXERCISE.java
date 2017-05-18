@@ -47,7 +47,7 @@ public class handleTABLE_EXERCISE {
         values.put(COLUMN_CALORIE_IN_DAY, 0);
         values.put(COLUMN_CALORIE_TOTAL, data.getCalorieTotal());
         values.put(COLUMN_NOTE, "Not add note");
-        values.put(COLUMN_TIME, 0.0);
+        values.put(COLUMN_TIME, "-");
 
         writeSQLite.insert(TABLE_EXERCISE, null, values);
     }
@@ -81,7 +81,7 @@ public class handleTABLE_EXERCISE {
             return null;
         }else{
             cursor.moveToFirst();
-            return new ExerciseData(cursor.getString(0),cursor.getInt(1),cursor.getString(2),cursor.getFloat(3));
+            return new ExerciseData(cursor.getString(0),cursor.getInt(1),cursor.getString(2),cursor.getString(3));
         }
     }
 
@@ -103,6 +103,20 @@ public class handleTABLE_EXERCISE {
         }
     }
 
+    public int getCalorieInDay(DateData date){
+        Cursor cursor = readSQLite.rawQuery("SELECT " + COLUMN_CALORIE_IN_DAY  + " FROM " + TABLE_EXERCISE
+                + " WHERE " + COLUMN_DAY + "=" + date.getDay() + " AND "
+                + COLUMN_MONTH + "=" + date.getMonth() + " AND "
+                + COLUMN_YEAR + "=" + date.getYear(), null);
+        Log.i("cursor",cursor.getCount()+"");
+        if(cursor.getCount() == 0){
+            return -1;
+        }else{
+            cursor.moveToFirst();
+            return cursor.getInt(0);
+        }
+    }
+
     public void addExeInDay(String vdo_id , int calorie , DateData data){
         ContentValues args = new ContentValues();
         args.put(COLUMN_VDO_ID, vdo_id);
@@ -117,6 +131,15 @@ public class handleTABLE_EXERCISE {
 //                + " WHERE " + COLUMN_DAY + "=" + data.getDay()
 //                + " AND " + COLUMN_MONTH + "=" + data.getMonth()
 //                + " AND " + COLUMN_YEAR + "=" + data.getYear() + ";");
+    }
+
+    public void updateTimeAndCalorie(String time,int calorie, DateData data){
+        ContentValues args = new ContentValues();
+        args.put(COLUMN_TIME, time);
+        args.put(COLUMN_CALORIE_IN_DAY, calorie);
+        writeSQLite.update(TABLE_EXERCISE, args, COLUMN_DAY + "=" + data.getDay()
+                + " AND " + COLUMN_MONTH + "=" + data.getMonth()
+                + " AND " + COLUMN_YEAR + "=" + data.getYear() , null);
     }
 
     public void delete(){

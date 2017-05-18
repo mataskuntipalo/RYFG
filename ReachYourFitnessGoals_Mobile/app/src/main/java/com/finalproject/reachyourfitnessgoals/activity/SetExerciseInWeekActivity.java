@@ -337,7 +337,7 @@ public class SetExerciseInWeekActivity extends AppCompatActivity implements Vert
 
     private void setDateCheckWeekly(){
         long midnightTimeNextMonday = (AlarmManager.INTERVAL_DAY * (getNextMonday()-1))+(AlarmManager.INTERVAL_DAY - calendar.getTimeToMidnight());
-        Intent intent = new Intent(this, MyReceiver.class);
+        Intent intent = new Intent("com.finalproject.reachyourfitnessgoals.activity");
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this.getApplicationContext(),0,intent,PendingIntent.FLAG_UPDATE_CURRENT);
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
         alarmManager.set(AlarmManager.RTC_WAKEUP,System.currentTimeMillis()+midnightTimeNextMonday,pendingIntent);
@@ -345,6 +345,7 @@ public class SetExerciseInWeekActivity extends AppCompatActivity implements Vert
         Log.i("timeINTERVALDAY",""+AlarmManager.INTERVAL_DAY);
         Log.i("timeINTERVALDAY",""+System.currentTimeMillis());
         Log.i("time",""+calendar.getTimeToMidnight());
+
     }
 
     private int getNextMonday(){

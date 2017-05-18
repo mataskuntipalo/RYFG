@@ -41,7 +41,6 @@ public class ExerciseActivity extends YouTubeBaseActivity implements YouTubePlay
     TextView exeName;
     String[] nameArray;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -107,6 +106,7 @@ public class ExerciseActivity extends YouTubeBaseActivity implements YouTubePlay
                 countExe++;
             }else {
                 chronometer.stop();
+                Toast.makeText(ExerciseActivity.this, "chronometer.getText():" + chronometer.getText(), Toast.LENGTH_SHORT).show();
                 RelativeLayout layout = (RelativeLayout)findViewById(R.id.exeSummary_exe);
                 layout.setVisibility(View.VISIBLE);
                 fragment_sumExe a = fragment_sumExe.newInstance((String) chronometer.getText());
@@ -115,7 +115,14 @@ public class ExerciseActivity extends YouTubeBaseActivity implements YouTubePlay
         }
     };
 
-
+//    public void setTimeToString(){
+//        long timeElapsed = SystemClock.elapsedRealtime() - chronometer.getBase();
+//        int hours = (int) (timeElapsed / 3600000);
+//        int minutes = (int) (timeElapsed - hours * 3600000) / 60000;
+//        int seconds = (int) (timeElapsed - hours * 3600000 - minutes * 60000) / 1000;
+//        timeString = minutes + " : " + seconds;
+//        Toast.makeText(this, timeString, Toast.LENGTH_SHORT).show();
+//    }
 
     @Override
     public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {

@@ -2,20 +2,27 @@ package com.finalproject.reachyourfitnessgoals.fragment;
 
 
 import android.app.Activity;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.PointF;
+import android.net.Uri;
 import android.os.Bundle;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.NestedScrollView;
+import android.support.v7.app.NotificationCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.widget.Button;
@@ -23,6 +30,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DecodeFormat;
@@ -38,6 +46,8 @@ import com.hookedonplay.decoviewlib.charts.SeriesItem;
 import com.hookedonplay.decoviewlib.events.DecoEvent;
 
 import java.util.Calendar;
+
+import static android.content.Context.NOTIFICATION_SERVICE;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -67,6 +77,13 @@ public class fragment_home extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootview = inflater.inflate(R.layout.fragment_home, container, false);
+
+
+
+
+
+        Button notiBtn = (Button)rootview.findViewById(R.id.notification_Button_home);
+        notiBtn.setOnClickListener(showNotification);
 
         //Init value
         nestedScrollView = (NestedScrollView)rootview.findViewById(R.id.scrollView_home);
@@ -149,12 +166,12 @@ public class fragment_home extends Fragment {
         });
 
         return rootview;
+
     }
 
 
     private void checkSetExeWeekly(){
-        Log.i("check","1" + " " + shared.getBoolean(getResources().getString(R.string.sharedBoolSetExe), false));
-
+        Toast.makeText(getActivity(), shared.getBoolean(getResources().getString(R.string.sharedBoolSetExe), false)+"", Toast.LENGTH_SHORT).show();
         if(shared.getBoolean(getResources().getString(R.string.sharedBoolSetExe), false) == false){
             displayDay.setVisibility(View.INVISIBLE);
             setExe.setVisibility(View.VISIBLE);
@@ -213,6 +230,30 @@ public class fragment_home extends Fragment {
                 "dayOfWork_" + i, "id",getContext().getPackageName());
         return (LinearLayout) displayDay.findViewById(id);
     }
+
+    View.OnClickListener showNotification = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent(Intent.ACTION_VIEW,
+                    Uri.parse("http://devahoy.com/posts/android-notification/"));
+            PendingIntent pendingIntent = PendingIntent.getActivity(getActivity(), 0, intent, 0);
+
+            Notification notification =
+                    new NotificationCompat.Builder(getContext())
+                            .setSmallIcon(R.mipmap.ic_launcher)
+                            .setContentTitle("DevAhoy News")
+                            .setContentText("สวัสดีครับ ยินดีต้อนรับเข้าสู่บทความ Android Notification :)")
+                            .setAutoCancel(true)
+                            .setContentIntent(pendingIntent)
+                            .setPriority(Notification.PRIORITY_HIGH)
+                            .setDefaults(Notification.DEFAULT_ALL)
+                            .build();
+
+            NotificationManager notificationManager =
+                    (NotificationManager) getContext().getSystemService(NOTIFICATION_SERVICE);
+            notificationManager.notify(1000, notification);
+        }
+    };
 
 
 }

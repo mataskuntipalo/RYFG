@@ -50,7 +50,7 @@ public class DBHelper extends SQLiteOpenHelper {
             "calorie_in_day INTEGER, " +
             "calorie_total INTEGER, " +
             "note TEXT, " +
-            "time REAL);";
+            "time TEXT);";
 
 
     public DBHelper(Context context) {
@@ -59,15 +59,15 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(TABLE_PERSONAL);
-        db.execSQL(TABLE_PROGRAM);
+        db.execSQL(TABLE_PERSONAL + "encoding = \"UTF-8\"");
+        db.execSQL(TABLE_PROGRAM + "encoding = \"UTF-8\"");
         db.execSQL("INSERT INTO PROGRAM (typeGoal, weigh_goal, kg_per_week, year_date_begin, month_date_begin, " +
                 "day_date_begin, " +
                 "year_date_end, " +
                 "month_date_end, " +
                 "day_date_end) VALUES (0, 5, 1540, 2017, 4, 29, 2016, 9, 29);");
-        db.execSQL(TABLE_VDO);
-        db.execSQL(TABLE_EXERCISE);
+        db.execSQL(TABLE_VDO + "encoding = \"UTF-8\"");
+        db.execSQL(TABLE_EXERCISE + "encoding = \"UTF-8\"");
     }
 
     @Override

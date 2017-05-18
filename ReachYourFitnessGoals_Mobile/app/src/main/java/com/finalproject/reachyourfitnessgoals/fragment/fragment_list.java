@@ -69,7 +69,7 @@ public class fragment_list extends Fragment {
         recyclerViewAdapter = new RecyclerViewAdapter(getActivity(), ListType.TYPE_SHOW_ALL);
         recyclerView.addItemDecoration(new MaterialViewPagerHeaderDecorator());
         recyclerView.setAdapter(recyclerViewAdapter);
-        recyclerView.addItemDecoration(new StickyRecyclerHeadersDecoration(recyclerViewAdapter));
+        //recyclerView.addItemDecoration(new StickyRecyclerHeadersDecoration(recyclerViewAdapter));
 
 
 

@@ -10,10 +10,10 @@ import org.parceler.ParcelConstructor;
 public class ExerciseData {
     int calorie;
     String vdo_id,note;
-    float time;
+    String time;
 
     @ParcelConstructor
-    public ExerciseData(String vdo_id, int calorie, String note, float time) {
+    public ExerciseData(String vdo_id, int calorie, String note, String time) {
         this.vdo_id = vdo_id;
         this.calorie = calorie;
         this.note = note;
@@ -49,11 +49,11 @@ public class ExerciseData {
         this.note = note;
     }
 
-    public float getTime() {
+    public String getTime() {
         return time;
     }
 
-    public void setTime(float time) {
+    public void setTime(String time) {
         this.time = time;
     }
 }

@@ -61,8 +61,10 @@ public class fragment_calendar extends Fragment {
     private Button exeButton;
     private NestedScrollView nestedScrollView;
     private LinearLayout layoutExe;
-    private LinearLayout layoutManageProgram;
+    private LinearLayout layoutDetail;
     private TextView noExeText;
+    private TextView calorieText;
+    private TextView timeText;
 
 
     public fragment_calendar() {
@@ -81,14 +83,17 @@ public class fragment_calendar extends Fragment {
         // Inflate the layout for this fragment
         View rootview = inflater.inflate(R.layout.fragment_calendar, container, false);
 
-        layoutManageProgram =(LinearLayout)rootview.findViewById(R.id.manageProgram_RelativeLayout_home);
+        layoutDetail =(LinearLayout)rootview.findViewById(R.id.detail_LinearLayout_calendar);
         layoutExe =(LinearLayout)rootview.findViewById(R.id.expandListExe_LinearLayout_calendar);
         noExeText = (TextView)rootview.findViewById(R.id.noExe_TextView_calendar);
+        calorieText = (TextView)rootview.findViewById(R.id.calorie_TextView_calendar);
+        timeText = (TextView) rootview.findViewById(R.id.time_TextView_calendar);
+
+        handleTableProgram = new handleTABLE_PROGRAM(getActivity());
+        handleTableExercise = new handleTABLE_EXERCISE(getActivity());
 
         nestedScrollView = (NestedScrollView)rootview.findViewById(R.id.scrollView_calendar);
         MaterialViewPagerHelper.registerScrollView(getActivity(), nestedScrollView);
-        handleTableProgram = new handleTABLE_PROGRAM(getActivity());
-        handleTableExercise = new handleTABLE_EXERCISE(getActivity());
         //goalData = handleTableProgram.getDateToCalendar();
         MCV = (MaterialCalendarView) rootview.findViewById(R.id.datePicker_DatePicker_calendar);
         layout = (RelativeLayout)  rootview.findViewById(R.id.layoutCalendar_RelativeLayout_calendar);
@@ -143,7 +148,7 @@ public class fragment_calendar extends Fragment {
     }
 
     private void checkExeInDay(CalendarDay date){
-        layoutManageProgram.setVisibility(View.VISIBLE);
+        layoutDetail.setVisibility(View.VISIBLE);
         noExeText.setVisibility(View.GONE);
         ExerciseData exerciseData = handleTableExercise.getDetailExercise(date);
         Log.i("exerciseData",exerciseData+"");
@@ -152,6 +157,8 @@ public class fragment_calendar extends Fragment {
                 setExeButton.setVisibility(View.VISIBLE);
                 setExeButton.setOnClickListener(setExe);
                 layoutExe.setVisibility(View.GONE);
+                timeText.setText(exerciseData.getTime());
+                calorieText.setText(exerciseData.getCalorie()+"");
             }else {
                 setExeButton.setVisibility(View.GONE);
                 layoutExe.setVisibility(View.VISIBLE);
@@ -163,11 +170,12 @@ public class fragment_calendar extends Fragment {
                         .replace(R.id.expandListExe_LinearLayout_calendar, detail, "fragment_detailExe_inCalendar")
                         .commit();
 
+                timeText.setText(exerciseData.getTime());
+                calorieText.setText(exerciseData.getCalorie()+"");
             }
             addGlobalDate(date);
         }else{
-            Toast.makeText(getContext(), "null", Toast.LENGTH_SHORT).show();
-            layoutManageProgram.setVisibility(View.GONE);
+            layoutDetail.setVisibility(View.GONE);
             noExeText.setVisibility(View.VISIBLE);
         }
 

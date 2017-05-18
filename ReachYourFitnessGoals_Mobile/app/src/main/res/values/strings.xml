@@ -26,6 +26,7 @@
     <!-- fragment_calendar -->
     <string name="selectExerciseOfDay_text">ท่าออกกำลังกายประจำวัน</string>
     <string name="selectExerciseOfDay_buttonText">เลือกท่าออกกำลังกายประจำวัน</string>
+    <string name="note_text">ความรู้สึก</string>
 
     <!-- dialog_setExercise_inDay -->
     <string name="customSelect">เลือกท่าเอง</string>

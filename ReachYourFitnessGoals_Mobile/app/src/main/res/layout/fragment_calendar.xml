@@ -30,12 +30,6 @@
 
         </RelativeLayout>
 
-        <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:id="@+id/layout_fragment_calendar">
-
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -46,54 +40,10 @@
             android:visibility="gone"/>
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/default_padding"
-            android:layout_margin="@dimen/activity_horizontal_margin"
-            android:orientation="vertical"
-            android:id="@+id/manageProgram_RelativeLayout_home"
-            android:background="@drawable/shadow_layout">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:id="@+id/detailLayout_LinearLayout_calendar">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:textSize="@dimen/topic_text"
-                android:text="@string/selectExerciseOfDay_text"
-                android:textColor="@color/colorBlack"/>
-
-
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:id="@+id/expandListExe_LinearLayout_calendar">
-                </LinearLayout>
-
-                <Button
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/default_text"
-                    android:text="@string/selectExerciseOfDay_buttonText"
-                    android:textColor="@color/colorBlack"
-                    android:gravity="center"
-                    android:id="@+id/setExeOfDay_button_calendar"/>
-
-
-            </RelativeLayout>
-            </LinearLayout>
-
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/detail_LinearLayout_calendar">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -116,9 +66,189 @@
 
             </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/default_padding"
+            android:layout_margin="@dimen/activity_horizontal_margin"
+            android:orientation="vertical"
+            android:background="@drawable/shadow_layout">
+
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/selectExerciseOfDay_text"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/topic_text" />
+
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:id="@+id/expandListExe_LinearLayout_calendar">
+                    </LinearLayout>
+
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/default_text"
+                        android:text="@string/selectExerciseOfDay_buttonText"
+                        android:textColor="@color/colorBlack"
+                        android:gravity="center"
+                        android:id="@+id/setExeOfDay_button_calendar"/>
+                </RelativeLayout>
+
         </LinearLayout>
 
-    </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/default_padding"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
+            android:orientation="horizontal"
+            android:id="@+id/manageProgram_RelativeLayout_home"
+            android:background="@drawable/shadow_layout">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.4"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/fire_element_48"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="5dp"
+                        android:textSize="32sp"
+                        android:textColor="@color/colorBlack"
+                        android:text="0"
+                        android:id="@+id/calorie_TextView_calendar"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="24sp"
+                        android:text="แคลอรี่"/>
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="จำนวนแคลอรี่ที่เผาผลาญทั้งหมด"
+                    android:textSize="24sp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.2"
+                android:gravity="center">
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorBlack" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.4"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/time_48"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="5dp"
+                        android:textSize="32sp"
+                        android:textColor="@color/colorBlack"
+                        android:text="-"
+                        android:id="@+id/time_TextView_calendar"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="24sp"
+                        android:text="นาที"/>
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="เวลาที่ออกกำลังกายทั้งหมด"
+                    android:textSize="24sp"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/default_padding"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:orientation="vertical"
+            android:id="@+id/manageProgram_RelativeLayout_home"
+            android:background="@drawable/shadow_layout">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:text="@string/note_text"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/topic_text" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="-"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/default_text" />
+
+        </LinearLayout>
+
+        </LinearLayout>
     </LinearLayout>
 
 </android.support.v4.widget.NestedScrollView >
