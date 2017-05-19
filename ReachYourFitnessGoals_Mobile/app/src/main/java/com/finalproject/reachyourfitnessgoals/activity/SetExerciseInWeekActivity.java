@@ -325,6 +325,7 @@ public class SetExerciseInWeekActivity extends AppCompatActivity implements Vert
             if(selectDayLayout.getTag().toString().equals("true")){
                 editor.putBoolean(getResources().getString(R.string.sharedBoolDayHighLight)+ i , true);
                 addToDataBase(dateList.get(i-1));
+                setAlarmNotification(dateList.get(i-1),i);
                 data.add(dateList.get(i-1));
             }else{
                 editor.putBoolean(getResources().getString(R.string.sharedBoolDayHighLight)+ i , false);
@@ -338,13 +339,33 @@ public class SetExerciseInWeekActivity extends AppCompatActivity implements Vert
     private void setDateCheckWeekly(){
         long midnightTimeNextMonday = (AlarmManager.INTERVAL_DAY * (getNextMonday()-1))+(AlarmManager.INTERVAL_DAY - calendar.getTimeToMidnight());
         Intent intent = new Intent("com.finalproject.reachyourfitnessgoals.activity");
+        intent.putExtra("keyDay",0);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this.getApplicationContext(),0,intent,PendingIntent.FLAG_UPDATE_CURRENT);
+
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
         alarmManager.set(AlarmManager.RTC_WAKEUP,System.currentTimeMillis()+midnightTimeNextMonday,pendingIntent);
 
-        Log.i("timeINTERVALDAY",""+AlarmManager.INTERVAL_DAY);
-        Log.i("timeINTERVALDAY",""+System.currentTimeMillis());
-        Log.i("time",""+calendar.getTimeToMidnight());
+
+//        Log.i("timeINTERVALDAY",""+AlarmManager.INTERVAL_DAY);
+//        Log.i("timeINTERVALDAY",""+System.currentTimeMillis());
+//        Log.i("time",""+calendar.getTimeToMidnight());
+
+    }
+
+    private void setAlarmNotification(DateData data,int key){
+        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+        Intent intent = new Intent("com.finalproject.reachyourfitnessgoals.activity");
+        intent.putExtra("keyDay",key);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this.getApplicationContext(),key,intent,PendingIntent.FLAG_CANCEL_CURRENT);
+
+        Calendar alarmTime = Calendar.getInstance();
+        alarmTime.set(Calendar.DATE, data.getDay());
+        alarmTime.set(Calendar.MONTH, data.getMonth());
+        alarmTime.set(Calendar.YEAR, data.getYear());
+        alarmTime.set(Calendar.HOUR_OF_DAY, 17);
+        alarmTime.set(Calendar.MINUTE, 00);
+        alarmTime.set(Calendar.SECOND, 0);
+        alarmManager.set(AlarmManager.RTC_WAKEUP,alarmTime.getTimeInMillis(),pendingIntent);
 
     }
 

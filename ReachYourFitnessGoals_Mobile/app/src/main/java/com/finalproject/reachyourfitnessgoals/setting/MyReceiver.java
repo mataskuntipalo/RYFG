@@ -26,30 +26,61 @@ public class MyReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        Log.i("receiveHello","in");
-        shared = context.getSharedPreferences(context.getString(R.string.sharedPreferencesName), Context.MODE_PRIVATE);
-        editor = shared.edit();
-        editor.putBoolean(context.getString(R.string.sharedBoolSetExe), false);
-        editor.commit();
 
 
-        Intent intent1 = new Intent(Intent.ACTION_VIEW,
-                Uri.parse("http://devahoy.com/posts/android-notification/"));
-        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent1, 0);
+        if(intent.getExtras().getInt("keyDay") == 0){
+            shared = context.getSharedPreferences(context.getString(R.string.sharedPreferencesName), Context.MODE_PRIVATE);
+            editor = shared.edit();
+            editor.putBoolean(context.getString(R.string.sharedBoolSetExe), false);
+            editor.commit();
 
-        Notification notification =
-                new NotificationCompat.Builder(context)
-                        .setSmallIcon(R.mipmap.ic_launcher)
-                        .setContentTitle("สัปดาห์ใหม่เริ่มต้นขึ้นแล้ว")
-                        .setContentText("มาออกกำลังกายกันเถอะ")
-                        .setAutoCancel(true)
-                        .setContentIntent(pendingIntent)
-                        .setPriority(Notification.PRIORITY_HIGH)
-                        .setDefaults(Notification.DEFAULT_ALL)
-                        .build();
+            Intent intent1 = new Intent(Intent.ACTION_VIEW,
+                    Uri.parse("http://devahoy.com/posts/android-notification/"));
+            PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent1, 0);
 
-        NotificationManager notificationManager =
-                (NotificationManager) context.getSystemService(NOTIFICATION_SERVICE);
-        notificationManager.notify(1000, notification);
+            Notification notification =
+                    new NotificationCompat.Builder(context)
+                            .setSmallIcon(R.mipmap.ic_launcher)
+                            .setContentTitle("สัปดาห์ใหม่เริ่มต้นขึ้นแล้ว")
+                            .setContentText("มาออกกำลังกายกันเถอะ")
+                            .setAutoCancel(true)
+                            .setContentIntent(pendingIntent)
+                            .setPriority(Notification.PRIORITY_HIGH)
+                            .setDefaults(Notification.DEFAULT_ALL)
+                            .build();
+
+            NotificationManager notificationManager =
+                    (NotificationManager) context.getSystemService(NOTIFICATION_SERVICE);
+            notificationManager.notify(intent.getExtras().getInt("keyDay"), notification);
+
+        }else{
+
+
+            Intent intent1 = new Intent(Intent.ACTION_VIEW,
+                    Uri.parse("http://devahoy.com/posts/android-notification/"));
+            PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent1, 0);
+
+            Notification notification =
+                    new NotificationCompat.Builder(context)
+                            .setSmallIcon(R.mipmap.ic_launcher)
+                            .setContentTitle("วันนี้เรามีนัดกันนะ")
+                            .setContentText("มาออกกำลังกายกันเถอะ")
+                            .setAutoCancel(true)
+                            .setContentIntent(pendingIntent)
+                            .setPriority(Notification.PRIORITY_HIGH)
+                            .setDefaults(Notification.DEFAULT_ALL)
+                            .build();
+
+            NotificationManager notificationManager =
+                    (NotificationManager) context.getSystemService(NOTIFICATION_SERVICE);
+            notificationManager.notify(intent.getExtras().getInt("keyDay"), notification);
+
+        }
+
+
+
+
+
+
     }
 }
