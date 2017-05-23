@@ -2,7 +2,11 @@ package com.finalproject.reachyourfitnessgoals.fragment;
 
 
 import android.app.DownloadManager;
+import android.content.Context;
+import android.graphics.Canvas;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,7 +16,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -35,6 +41,9 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import in.srain.cube.views.ptr.PtrDefaultHandler;
+import in.srain.cube.views.ptr.PtrFrameLayout;
+import in.srain.cube.views.ptr.PtrHandler;
 
 
 /**
@@ -44,6 +53,8 @@ public class fragment_list extends Fragment {
 
     private RecyclerView recyclerView;
     private RecyclerViewAdapter recyclerViewAdapter;
+    private PtrFrameLayout ptrFrame;
+
 
     public static fragment_list newInstance() {
         fragment_list fragment = new fragment_list();
@@ -62,34 +73,44 @@ public class fragment_list extends Fragment {
         // Inflate the layout for this fragment
         View rootview = inflater.inflate(R.layout.fragment_list, container, false);
 
-
+        ptrFrame = (PtrFrameLayout)rootview.findViewById(R.id.store_house_ptr_frame);
 
         recyclerView = (RecyclerView)rootview.findViewById(R.id.recyclerView_showAll);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerViewAdapter = new RecyclerViewAdapter(getActivity(), ListType.TYPE_SHOW_ALL);
         recyclerView.addItemDecoration(new MaterialViewPagerHeaderDecorator());
         recyclerView.setAdapter(recyclerViewAdapter);
-        //recyclerView.addItemDecoration(new StickyRecyclerHeadersDecoration(recyclerViewAdapter));
+        recyclerView.addItemDecoration(new StickyRecyclerHeadersDecoration(recyclerViewAdapter));
+
+        ptrFrame.setPtrHandler(new PtrHandler() {
+            @Override
+            public void onRefreshBegin(PtrFrameLayout frame) {
+                frame.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        ptrFrame.refreshComplete();
+                    }
+                }, 1800);
+
+            }
+
+
+            @Override
+            public boolean checkCanDoRefresh(PtrFrameLayout frame, View content, View header) {
+                return PtrDefaultHandler.checkContentCanBePulledDown(frame, content, header);
+            }
+
+
+        });
 
 
 
-//        CustomListVDO_Adapter adapter = new CustomListVDO_Adapter(getActivity(), list, resId);
-//        ListView listView = (ListView)rootview.findViewById(R.id.listview);
-//        listView.setAdapter(adapter);
-//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-//                fragment_VDO vdo = fragment_VDO.newInstance();
-//                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-//                fragmentManager
-//                        .beginTransaction()
-////                        .setCustomAnimations(R.anim.slide_up,R.anim.slide_down,R.anim.slide_up,R.anim.slide_down)
-//                        .replace(R.id.activity_main, vdo, "fragment_list")
-//                        .addToBackStack("fragment_list")
-//                        .commit();
-//
-//            }
-//        });
+
+
+
+
         return rootview;
     }
+
 
 }

@@ -151,7 +151,7 @@ public class fragment_customExe_list extends Fragment{
         confirmButton = (Button)rootview.findViewById(R.id.confirm_Button_bottomSheet);
         recyclerViewBottomSheet = (RecyclerView)rootview.findViewById(R.id.recyclerView_bottomSheet);
         recyclerViewBottomSheet.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerViewAdapterBottomSheet = new RecyclerViewAdapter_userSelect(userSelectDataArrayList);
+        recyclerViewAdapterBottomSheet = new RecyclerViewAdapter_userSelect(userSelectDataArrayList,getContext());
         recyclerViewBottomSheet.setAdapter(recyclerViewAdapterBottomSheet);
     }
 

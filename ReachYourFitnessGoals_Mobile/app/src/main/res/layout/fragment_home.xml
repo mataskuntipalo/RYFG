@@ -10,7 +10,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-
         <include layout="@layout/material_view_pager_placeholder"/>
 
     <RelativeLayout
@@ -47,7 +46,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="240dp"
                 android:id="@+id/bg_ImageView_home"
-
                 android:layout_marginBottom="-100dp"
                 />
         </RelativeLayout>
@@ -118,75 +116,84 @@
                 android:textSize="@dimen/big_text_24" />
         </LinearLayout>
 
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/activity_horizontal_margin"
             android:orientation="vertical"
-            android:padding="14dp"
-            android:id="@+id/manageProgram_RelativeLayout_home"
-            android:background="@drawable/shadow_layout">
+            android:background="@color/colorDefault_Background">
 
-            <TextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:textSize="@dimen/topic_text"
-                android:text="การออกกำลังกายประจำสัปดาห์"
-                android:textColor="@color/colorBlack"/>
-
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center">
-
-                <include layout="@layout/day_of_workout_layout"
-                    android:id="@+id/displayDay_include_home"
-                    android:visibility="gone"
-                    />
+                android:layout_margin="@dimen/activity_horizontal_margin"
+                android:orientation="vertical"
+                android:padding="14dp"
+                android:id="@+id/manageProgram_RelativeLayout_home"
+                android:background="@drawable/shadow_layout">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    style="@style/dayOfWorkText"
-                    android:textColor="@color/colorRed"
-                    android:layout_centerHorizontal="true"
-                    android:text="@string/cancelSetExeText"
-                    android:id="@+id/cancelSetExe_Text_home"
-                    android:visibility="gone"
-                    android:alpha="1"/>
+                    android:layout_gravity="center"
+                    android:textSize="@dimen/topic_text"
+                    android:text="การออกกำลังกายประจำสัปดาห์"
+                    android:textColor="@color/colorBlack"/>
 
-                <Button
+                <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/default_text"
-                    android:text="เพิ่มวันออกกำลังกายประจำสัปดาห์"
-                    android:padding="10dp"
-                    android:id="@+id/setExd_button_home"
-                    android:background="@color/colorBlack"
-                    android:textColor="@color/colorWhite"/>
+                    android:layout_gravity="center">
 
-            </RelativeLayout>
+                    <include layout="@layout/day_of_workout_layout"
+                        android:id="@+id/displayDay_include_home"
+                        android:visibility="gone"
+                        />
 
-    </LinearLayout>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/default_text"
-            android:text="Reset"
-            android:layout_gravity="center"
-            android:id="@+id/reset_button_home" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/dayOfWorkText"
+                        android:textColor="@color/colorRed"
+                        android:layout_centerHorizontal="true"
+                        android:text="@string/cancelSetExeText"
+                        android:id="@+id/cancelSetExe_Text_home"
+                        android:visibility="gone"
+                        android:alpha="1"/>
 
-        <Button
-            android:id="@+id/notification_Button_home"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="Show Notification"
-            android:layout_gravity="center"
-            android:padding="32dp"
-            android:onClick="showNotification"/>
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/default_text"
+                        android:text="เพิ่มวันออกกำลังกายประจำสัปดาห์"
+                        android:padding="10dp"
+                        android:id="@+id/setExd_button_home"
+                        android:background="@color/colorBlack"
+                        android:textColor="@color/colorWhite"/>
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/default_text"
+                android:text="Reset"
+                android:layout_gravity="center"
+                android:id="@+id/reset_button_home" />
+
+            <Button
+                android:id="@+id/notification_Button_home"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:layout_centerInParent="true"
+                android:text="Show Notification"
+                android:layout_gravity="center"
+                android:onClick="showNotification"/>
+
+        </LinearLayout>
+
     </LinearLayout>
 
 </android.support.v4.widget.NestedScrollView>

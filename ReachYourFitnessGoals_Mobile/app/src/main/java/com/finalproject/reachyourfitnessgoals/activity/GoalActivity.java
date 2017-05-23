@@ -2,7 +2,10 @@ package com.finalproject.reachyourfitnessgoals.activity;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -22,7 +25,7 @@ import java.util.TimeZone;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
-public class GoalActivity extends Activity {
+public class GoalActivity extends AppCompatActivity {
 
     RadioGroup groupRadio;
     TextView confirm;
@@ -34,6 +37,8 @@ public class GoalActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_goal);
+
+
 
         handleTableProgram = new handleTABLE_PROGRAM(this);
         goalData = new GoalData();
@@ -61,6 +66,9 @@ public class GoalActivity extends Activity {
                 calDurationOfProgramExe(goalData);
                 calDateOfProgram();
                 //handleTableProgram.addProgram(goalData);
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
             }
         });
     }
@@ -77,7 +85,7 @@ public class GoalActivity extends Activity {
                 Log.i("test","5");
                 break;
             case R.id.seven_RadioButton_goal:
-                goalData.setKgPerWeek(6160);
+                goalData.setKgPerWeek(3850);
                 Log.i("test","7");
                 break;
         }

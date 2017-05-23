@@ -8,6 +8,12 @@
     tools:context="com.finalproject.reachyourfitnessgoals.activity.MainActivity"
     >
 
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/ignored_view">
+    </FrameLayout>
+
 
     <com.github.florent37.materialviewpager.MaterialViewPager
         android:id="@+id/materialViewPager_main"
@@ -26,9 +32,9 @@
         app:viewpager_transparentToolbar="true"
         app:viewpager_animatedHeaderImage="true"
         app:viewpager_disableToolbar="false"
-        app:viewpager_hideToolbarAndTitle="false"
+        app:viewpager_hideToolbarAndTitle="true"
+        app:viewpager_pagerTitleStrip="@layout/tab_layout"
         />
-
 
 
 

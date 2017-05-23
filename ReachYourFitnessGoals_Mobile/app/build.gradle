@@ -3,6 +3,7 @@ apply plugin: 'com.android.application'
 
 repositories {
     maven { url "https://jitpack.io" }
+    mavenCentral()
 }
 
 android {
@@ -42,6 +43,11 @@ dependencies {
     // StickyListHeaders
     // MaterialViewPager pack
     // Expandable recycleView
+    // Parceler
+    // Horizontal stepper
+    // vlc lib
+    // Side menu (residemenu)
+    // pullrefresh
     compile('com.h6ah4i.android.widget.advrecyclerview:advrecyclerview:0.10.5@aar') {
         transitive = true
     }
@@ -70,6 +76,8 @@ dependencies {
     compile 'org.parceler:parceler-api:1.1.6'
     compile 'com.stepstone.stepper:material-stepper:3.2.0'
     compile 'de.mrmaffen:vlc-android-sdk:2.0.6'
+    compile 'com.specyci:residemenu:1.6+'
+    compile 'in.srain.cube:ultra-ptr:1.0.11'
     testCompile 'junit:junit:4.12'
     annotationProcessor 'org.parceler:parceler:1.1.6'
 }

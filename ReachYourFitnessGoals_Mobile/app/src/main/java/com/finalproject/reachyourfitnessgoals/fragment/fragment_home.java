@@ -79,9 +79,6 @@ public class fragment_home extends Fragment {
         View rootview = inflater.inflate(R.layout.fragment_home, container, false);
 
 
-
-
-
         Button notiBtn = (Button)rootview.findViewById(R.id.notification_Button_home);
         notiBtn.setOnClickListener(showNotification);
 
@@ -93,13 +90,14 @@ public class fragment_home extends Fragment {
         setExe = (Button)rootview.findViewById(R.id.setExd_button_home);
         displayDay = (LinearLayout) rootview.findViewById(R.id.displayDay_include_home);
         cancelSetExe = (TextView)  rootview.findViewById(R.id.cancelSetExe_Text_home);
-        bgPic = (ImageView)rootview.findViewById(R.id.bg_ImageView_home);
-        Glide.with(this).load(R.drawable.background_home).into(bgPic);
+        //bgPic = (ImageView)rootview.findViewById(R.id.bg_ImageView_home);
+        //Glide.with(this).load("http://192.168.1.35/ryfg/image/1.jpg").into(bgPic);
+
         // Make layoutTotalSelectDay to invisible
         LinearLayout layout = (LinearLayout) displayDay.findViewById(R.id.layoutTotalSelectDay_LinearLayout_dayOfWork);
         layout.setVisibility(View.INVISIBLE);
 
-        Log.i("test",shared.getBoolean(getResources().getString(R.string.sharedBoolSetExe), false)+"");
+
         // Begin circle process
         DecoView arcView = (DecoView)rootview.findViewById(R.id.dynamicArcView);
 
@@ -231,18 +229,19 @@ public class fragment_home extends Fragment {
         return (LinearLayout) displayDay.findViewById(id);
     }
 
+    // test Notification
     View.OnClickListener showNotification = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             Intent intent = new Intent(Intent.ACTION_VIEW,
-                    Uri.parse("http://devahoy.com/posts/android-notification/"));
+                    Uri.parse("https://www.google.co.th"));
             PendingIntent pendingIntent = PendingIntent.getActivity(getActivity(), 0, intent, 0);
 
             Notification notification =
                     new NotificationCompat.Builder(getContext())
                             .setSmallIcon(R.mipmap.ic_launcher)
-                            .setContentTitle("DevAhoy News")
-                            .setContentText("สวัสดีครับ ยินดีต้อนรับเข้าสู่บทความ Android Notification :)")
+                            .setContentTitle("วันนี้เรามีนัดกันนะ")
+                            .setContentText("มาออกกำลังกายกันเถอะ")
                             .setAutoCancel(true)
                             .setContentIntent(pendingIntent)
                             .setPriority(Notification.PRIORITY_HIGH)

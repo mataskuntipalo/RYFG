@@ -8,10 +8,7 @@ public class vdoData {
     String vdo_id,name,type,position,duration;
     int calorie;
     boolean isHead;
-
-
-
-
+    String img;
 
     public vdoData(String name, String type, String position, String duration, int calorie) {
         this.name = name;
@@ -85,5 +82,13 @@ public class vdoData {
 
     public void setHead(boolean head) {
         isHead = head;
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
     }
 }

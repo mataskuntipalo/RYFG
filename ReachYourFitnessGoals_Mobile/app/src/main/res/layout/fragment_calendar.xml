@@ -18,6 +18,7 @@
             android:id="@+id/layoutCalendar_RelativeLayout_calendar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/colorDefault_Background"
             android:padding="25dp">
 
             <com.prolificinteractive.materialcalendarview.MaterialCalendarView
@@ -37,12 +38,15 @@
             android:textSize="30sp"
             android:gravity="center"
             android:id="@+id/noExe_TextView_calendar"
+            android:padding="@dimen/activity_horizontal_margin"
+            android:background="@color/colorDefault_Background"
             android:visibility="gone"/>
 
         <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:background="@color/colorDefault_Background"
         android:id="@+id/detail_LinearLayout_calendar">
 
             <LinearLayout
@@ -85,18 +89,6 @@
                     android:textSize="@dimen/topic_text" />
 
 
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:id="@+id/expandListExe_LinearLayout_calendar">
-                    </LinearLayout>
-
                     <Button
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -105,7 +97,15 @@
                         android:textColor="@color/colorBlack"
                         android:gravity="center"
                         android:id="@+id/setExeOfDay_button_calendar"/>
-                </RelativeLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone"
+                android:id="@+id/expandListExe_LinearLayout_calendar">
+            </LinearLayout>
 
         </LinearLayout>
 

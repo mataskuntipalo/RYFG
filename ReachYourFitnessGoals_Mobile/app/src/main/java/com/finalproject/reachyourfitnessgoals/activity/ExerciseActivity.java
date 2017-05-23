@@ -7,6 +7,7 @@ import android.os.SystemClock;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Chronometer;
@@ -16,13 +17,19 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.finalproject.reachyourfitnessgoals.R;
+import com.finalproject.reachyourfitnessgoals.database.handleTABLE_EXERCISE;
+import com.finalproject.reachyourfitnessgoals.database.handleTABLE_VDO;
 import com.finalproject.reachyourfitnessgoals.fragment.fragment_customExe_list;
 import com.finalproject.reachyourfitnessgoals.fragment.fragment_signUp;
 import com.finalproject.reachyourfitnessgoals.fragment.fragment_sumExe;
+import com.finalproject.reachyourfitnessgoals.models.GlobalData;
+import com.finalproject.reachyourfitnessgoals.models.vdoData;
 import com.google.android.youtube.player.YouTubeBaseActivity;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerView;
+
+import java.util.ArrayList;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
@@ -40,6 +47,7 @@ public class ExerciseActivity extends YouTubeBaseActivity implements YouTubePlay
     int countExe;
     TextView exeName;
     String[] nameArray;
+    ArrayList<vdoData> vdoDataList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +58,9 @@ public class ExerciseActivity extends YouTubeBaseActivity implements YouTubePlay
 
         YouTubePlayerView playerView = (YouTubePlayerView)findViewById(R.id.video_view);
         playerView.initialize(API_KEY,this);
+
+        vdoDataList = new ArrayList<>();
+        setVdoInDay();
 
         chronometer = (Chronometer)findViewById(R.id.Chronometer);
         Button start = (Button) findViewById(R.id.start);
@@ -62,9 +73,11 @@ public class ExerciseActivity extends YouTubeBaseActivity implements YouTubePlay
         start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                player.play();
+                player.play();
                 chronometer.setBase(SystemClock.elapsedRealtime());
                 chronometer.start();
+                exeName.setText(vdoDataList.get(countExe).getName());
+                countExe++;
                 v.setVisibility(View.GONE);
                 doneButton.setVisibility(View.VISIBLE);
                 stop.setVisibility(View.VISIBLE);
@@ -87,30 +100,35 @@ public class ExerciseActivity extends YouTubeBaseActivity implements YouTubePlay
                     chronometer.stop();
                     player.pause();
                 }
-                //chronometer.setBase(SystemClock.elapsedRealtime());
             }
         });
+    }
+
+    private void setVdoInDay(){
+        String allVdoID = new handleTABLE_EXERCISE(this).getVdoInDay(((GlobalData)this.getApplication()).getDateData());
+        String[] splitVdoID = allVdoID.split(" ");
+        handleTABLE_VDO handleTABLE_vdo = new handleTABLE_VDO(this);
+        for(int i = 0 ; i < splitVdoID.length ; i++){
+            vdoDataList.add(handleTABLE_vdo.getVdoFromID(splitVdoID[i]));
+        }
     }
 
     private View.OnClickListener finishExe = new View.OnClickListener(){
 
         @Override
         public void onClick(View v) {
-            if(countExe == 0){
-                //player.loadVideo(VIDEO_JUMP);
-                exeName.setText(nameArray[1]);
-                countExe++;
-            }else if(countExe == 1){
-                //player.loadVideo(VIDEO_BICYCLE);
-                exeName.setText(nameArray[2]);
-                countExe++;
-            }else {
+            if(countExe == vdoDataList.size()){
                 chronometer.stop();
-                Toast.makeText(ExerciseActivity.this, "chronometer.getText():" + chronometer.getText(), Toast.LENGTH_SHORT).show();
                 RelativeLayout layout = (RelativeLayout)findViewById(R.id.exeSummary_exe);
                 layout.setVisibility(View.VISIBLE);
-                fragment_sumExe a = fragment_sumExe.newInstance((String) chronometer.getText());
-                getFragmentManager().beginTransaction().replace(R.id.exeSummary_exe, a).commit();
+                fragment_sumExe sumExe = fragment_sumExe.newInstance((String) chronometer.getText());
+                getFragmentManager().beginTransaction().replace(R.id.exeSummary_exe, sumExe).commit();
+            }else {
+                player.loadVideo(VIDEO_JUMP);
+                exeName.setText(vdoDataList.get(countExe).getName());
+                Log.i("countExe",vdoDataList.size()+"");
+                countExe++;
+
             }
         }
     };

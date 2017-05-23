@@ -4,6 +4,8 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:name=".models.GlobalData"
@@ -19,16 +21,17 @@
         <activity
             android:name=".activity.LoginActivity"
             android:theme="@style/AppTheme.NoActionBar.AccentBlack">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
         <activity
             android:name=".activity.MainActivity"
-            android:theme="@style/AppTheme.NoActionBar" >
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
+            android:theme="@style/AppTheme.NoActionBar.AccentBlack" >
 
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
         </activity>
 
         <activity
@@ -48,7 +51,8 @@
         >
         <activity android:name=".activity.CustomSetExerciseInDayActivity" />
         <activity android:name=".activity.ExerciseActivity" />
-        <activity android:name=".activity.ParQActivity" />
+        <activity android:name=".activity.ParQActivity"
+            android:theme="@style/AppTheme.NoActionBar.AccentBlack"/>
         <activity android:name=".activity.VideoVLCActivity"></activity>
     </application>
 

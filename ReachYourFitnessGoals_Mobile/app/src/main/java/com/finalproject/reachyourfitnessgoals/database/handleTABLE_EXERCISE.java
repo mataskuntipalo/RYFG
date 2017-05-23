@@ -85,6 +85,20 @@ public class handleTABLE_EXERCISE {
         }
     }
 
+    public String getVdoInDay(DateData date){
+        Cursor cursor = readSQLite.rawQuery("SELECT " + COLUMN_VDO_ID + " FROM " + TABLE_EXERCISE
+                + " WHERE " + COLUMN_DAY + "=" + date.getDay() + " AND "
+                + COLUMN_MONTH + "=" + date.getMonth() + " AND "
+                + COLUMN_YEAR + "=" + date.getYear(), null);
+        Log.i("cursor",cursor.getCount()+"");
+        if(cursor.getCount() == 0){
+            return null;
+        }else{
+            cursor.moveToFirst();
+            return cursor.getString(0);
+        }
+    }
+
     public int getTotalCalorieInDay(DateData date){
         Cursor cursor = readSQLite.rawQuery("SELECT " + COLUMN_CALORIE_TOTAL  + " FROM " + TABLE_EXERCISE
                 + " WHERE " + COLUMN_DAY + "=" + date.getDay() + " AND "

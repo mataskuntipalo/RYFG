@@ -3,6 +3,7 @@ package com.finalproject.reachyourfitnessgoals.fragment;
 
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -61,6 +62,7 @@ public class fragment_results_parQ extends Fragment {
                 if(check()){
                     Intent intent = new Intent(getActivity(), GoalActivity.class);
                     startActivity(intent);
+                    getActivity().onBackPressed();
                 }else {
                     Toast.makeText(getActivity(), "โปรดยอมรับ", Toast.LENGTH_SHORT).show();
                 }

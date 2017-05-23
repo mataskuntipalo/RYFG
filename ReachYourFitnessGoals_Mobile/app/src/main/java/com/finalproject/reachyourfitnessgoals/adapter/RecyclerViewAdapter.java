@@ -2,6 +2,7 @@ package com.finalproject.reachyourfitnessgoals.adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.os.Environment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -9,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.bumptech.glide.Glide;
 import com.finalproject.reachyourfitnessgoals.BuildConfig;
 import com.finalproject.reachyourfitnessgoals.R;
 import com.finalproject.reachyourfitnessgoals.ViewHolder.customExeViewHolder;
@@ -23,8 +25,10 @@ import com.finalproject.reachyourfitnessgoals.models.userSelectData;
 import com.finalproject.reachyourfitnessgoals.models.vdoData;
 import com.finalproject.reachyourfitnessgoals.models.ListType;
 import com.finalproject.reachyourfitnessgoals.setting.SetUpCalorieAndExe;
+import com.google.android.youtube.player.internal.m;
 import com.timehop.stickyheadersrecyclerview.StickyRecyclerHeadersAdapter;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -59,6 +63,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         Log.i("typeExe",type);
         this.vdoDataArrayList = new handleTABLE_VDO(mContext).getCustomVdoExercise(type);
         this.type = ListType.TYPE_CUSTOM_EXERCISE;
+        context = mContext;
     }
 
 
@@ -108,7 +113,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
         if (holder instanceof showAllExeViewHolder) {
             showAllExeViewHolder showAllExeViewHolder = (showAllExeViewHolder) holder;
-            setupShowAllExe(showAllExeViewHolder,vdoDataArrayList.get(position),position);
+            setupShowAllExe(showAllExeViewHolder,vdoDataArrayList.get(position));
 
         }else if(holder instanceof customExeViewHolder){
             customExeViewHolder customExeViewHolder = (customExeViewHolder) holder;
@@ -179,8 +184,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         int numRandom;
         sumCalorieInType = 0;
         while (sumCalorieInType<maxCalorie){
-           // Log.d("RecyclerViewAdapter", "tempRandom:" + sumCalorieRandom);
-
             numRandom = r.nextInt(data.size());
             //data.get(numRandom).getCalorie();
             sumCalorieInType = sumCalorieInType + 5;
@@ -197,23 +200,24 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     }
 
 
-    private void setupShowAllExe (showAllExeViewHolder showAllExeViewHolder , vdoData vdoData,int position){
-        Log.i("dataVDO",position+"");
-        showAllExeViewHolder.exePic_all.setBackgroundResource(R.drawable.pic);
+    private void setupShowAllExe (showAllExeViewHolder showAllExeViewHolder , vdoData vdoData){
+        File mFile = new File(Environment.getExternalStorageDirectory()+ File.separator  + "Android" + File.separator + "data" + File.separator + "com.finalproject.reachyourfitnessgoals" + File.separator + "image" + File.separator + vdoData.getName() + ".jpg");
+        Glide.with(activity).load(mFile).into(showAllExeViewHolder.exePic_all);
+        //showAllExeViewHolder.exePic_all.setBackgroundResource(R.drawable.pic);
         showAllExeViewHolder.exeName_all.setText(vdoData.getName());
         //showAllExeViewHolder.exeName_all.setText("ss");
     }
 
     private void setupCustomExe (customExeViewHolder customExeViewHolder , vdoData vdoData){
         //customExeViewHolder.exePic_custom.setBackground(Drawable.createFromPath(vdoData.getName()));
-        customExeViewHolder.exePic_custom.setBackgroundResource(R.drawable.pic);
+        File mFile = new File(Environment.getExternalStorageDirectory()+ File.separator  + "Android" + File.separator + "data" + File.separator + "com.finalproject.reachyourfitnessgoals" + File.separator + "image" + File.separator + vdoData.getName() + ".jpg");
+        Glide.with(context).load(mFile).into(customExeViewHolder.exePic_custom);
         customExeViewHolder.exeName_custom.setText(vdoData.getName());
-        Log.d("RecyclerViewAdapter", vdoData.getName());
     }
 
     private void setupRandomExe (randomExeViewHolder randomExeViewHolder , vdoData vdoData,int position){
-        //customExeViewHolder.exePic_custom.setBackground(Drawable.createFromPath(vdoData.getName()));
-        randomExeViewHolder.exePic_all.setBackgroundResource(R.drawable.pic);
+        File mFile = new File(Environment.getExternalStorageDirectory()+ File.separator  + "Android" + File.separator + "data" + File.separator + "com.finalproject.reachyourfitnessgoals" + File.separator + "image" + File.separator + vdoData.getName() + ".jpg");
+        Glide.with(activity).load(mFile).into(randomExeViewHolder.exePic_all);
         randomExeViewHolder.exeName_all.setText(vdoData.getName());
         randomExeViewHolder.exeNumber_all.setText(position+"");
 

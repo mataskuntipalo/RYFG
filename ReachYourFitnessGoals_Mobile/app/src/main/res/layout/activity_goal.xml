@@ -5,22 +5,33 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/colorBlack"
     tools:context="com.finalproject.reachyourfitnessgoals.activity.GoalActivity">
 
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/appIntroDefaultPaddingTop"
+        android:gravity="center">
 
         <TextView
+            style="@style/text_default"
+            android:textColor="@color/colorWhite"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="นํ้าหนักที่ต้องการลด"/>
+            android:text="นํ้าหนักที่ต้องการลด (กิโลกรัม)"/>
 
         <EditText
-            android:layout_width="100dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="numberDecimal"
+            android:backgroundTint="@color/colorWhite"
+            android:textSize="@dimen/topic_text"
+            android:textColor="@color/colorWhite"
+            android:gravity="center"
+            android:maxLength="2"
             android:id="@+id/weightGoal_EditText_goal"/>
 
     </LinearLayout>
@@ -29,36 +40,43 @@
     <RadioGroup
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:padding="@dimen/activity_horizontal_margin"
         android:id="@+id/group_RadioButton_goal">
 
         <RadioButton
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="0.2"
+            android:text="1540 แคลอรี่ / สัปดาห์"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/default_text"
             android:checked="true"
             android:id="@+id/two_RadioButton_goal"/>
 
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="0.5"
+            android:text="3850 แคลอรี / สัปดาห์"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/default_text"
             android:id="@+id/five_RadioButton_goal"/>
 
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="0.8"
+            android:text="3850 แคลอรี / สัปดาห์"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/default_text"
             android:id="@+id/seven_RadioButton_goal"/>
 
     </RadioGroup>
 
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right"
+        style="@style/text_header"
+        android:padding="@dimen/activity_horizontal_margin"
+        android:gravity="right"
         android:text="เสร็จสิ้น"
-        android:textSize="22sp"
+        android:textSize="@dimen/big_text_24"
         android:id="@+id/confirm_TextView_goal"/>
 
 </LinearLayout>

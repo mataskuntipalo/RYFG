@@ -43,6 +43,7 @@ public class fragment_selectGoal extends Fragment {
                         .beginTransaction()
 //                        .setCustomAnimations(R.anim.slide_up,R.anim.slide_down,R.anim.slide_up,R.anim.slide_down)
                         .replace(R.id.activity_login, intro_parQ, "fragment_intro_parQ")
+                        .addToBackStack("fragment_intro_parQ")
                         .commit();
             }
         });
