@@ -9,6 +9,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -45,6 +46,8 @@ import in.srain.cube.views.ptr.PtrDefaultHandler;
 import in.srain.cube.views.ptr.PtrFrameLayout;
 import in.srain.cube.views.ptr.PtrHandler;
 
+import static android.support.v7.recyclerview.R.attr.layoutManager;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -54,6 +57,8 @@ public class fragment_list extends Fragment {
     private RecyclerView recyclerView;
     private RecyclerViewAdapter recyclerViewAdapter;
     private PtrFrameLayout ptrFrame;
+    private LinearLayoutManager linearLayoutManager;
+
 
 
     public static fragment_list newInstance() {
@@ -76,11 +81,14 @@ public class fragment_list extends Fragment {
         ptrFrame = (PtrFrameLayout)rootview.findViewById(R.id.store_house_ptr_frame);
 
         recyclerView = (RecyclerView)rootview.findViewById(R.id.recyclerView_showAll);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        linearLayoutManager = new LinearLayoutManager(getActivity());
+        recyclerView.setLayoutManager(linearLayoutManager);
         recyclerViewAdapter = new RecyclerViewAdapter(getActivity(), ListType.TYPE_SHOW_ALL);
         recyclerView.addItemDecoration(new MaterialViewPagerHeaderDecorator());
         recyclerView.setAdapter(recyclerViewAdapter);
         recyclerView.addItemDecoration(new StickyRecyclerHeadersDecoration(recyclerViewAdapter));
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(), linearLayoutManager.getOrientation());
+        recyclerView.addItemDecoration(dividerItemDecoration);
 
         ptrFrame.setPtrHandler(new PtrHandler() {
             @Override

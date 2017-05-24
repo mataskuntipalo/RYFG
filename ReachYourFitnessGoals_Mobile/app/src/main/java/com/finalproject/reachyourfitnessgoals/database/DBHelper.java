@@ -50,7 +50,8 @@ public class DBHelper extends SQLiteOpenHelper {
             "calorie_in_day INTEGER, " +
             "calorie_total INTEGER, " +
             "note TEXT, " +
-            "time TEXT);";
+            "time TEXT, " +
+            "check_state_workout INTEGER DEFAULT 0);";
 
 
     public DBHelper(Context context) {

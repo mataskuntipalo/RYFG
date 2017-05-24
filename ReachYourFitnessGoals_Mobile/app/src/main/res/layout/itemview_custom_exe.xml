@@ -8,8 +8,7 @@
         android:id="@+id/pic_customExe"
         android:layout_width="match_parent"
         android:layout_height="150dp"
-        android:scaleType="fitXY"
-        android:background="@drawable/ic_logo"/>
+        android:scaleType="fitXY" />
 
     <FrameLayout
         android:id="@+id/item_image_content"

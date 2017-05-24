@@ -73,7 +73,7 @@ public class ExerciseActivity extends YouTubeBaseActivity implements YouTubePlay
         start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                player.play();
+                //player.play();
                 chronometer.setBase(SystemClock.elapsedRealtime());
                 chronometer.start();
                 exeName.setText(vdoDataList.get(countExe).getName());
@@ -124,7 +124,7 @@ public class ExerciseActivity extends YouTubeBaseActivity implements YouTubePlay
                 fragment_sumExe sumExe = fragment_sumExe.newInstance((String) chronometer.getText());
                 getFragmentManager().beginTransaction().replace(R.id.exeSummary_exe, sumExe).commit();
             }else {
-                player.loadVideo(VIDEO_JUMP);
+                //player.loadVideo(VIDEO_JUMP);
                 exeName.setText(vdoDataList.get(countExe).getName());
                 Log.i("countExe",vdoDataList.size()+"");
                 countExe++;

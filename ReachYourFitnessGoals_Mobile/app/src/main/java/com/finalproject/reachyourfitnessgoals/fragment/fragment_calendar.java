@@ -9,6 +9,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,6 +43,7 @@ import org.parceler.Parcels;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashSet;
 
 
@@ -98,14 +100,8 @@ public class fragment_calendar extends Fragment {
         MCV = (MaterialCalendarView) rootview.findViewById(R.id.datePicker_DatePicker_calendar);
         layout = (RelativeLayout)  rootview.findViewById(R.id.layoutCalendar_RelativeLayout_calendar);
         setExeButton = (Button) rootview.findViewById(R.id.setExeOfDay_button_calendar);
-        exeButton = (Button) rootview.findViewById(R.id.Exe_button_calendar);
-        exeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), ExerciseActivity.class);
-                startActivity(intent);
-            }
-        });
+        exeButton = (Button) rootview.findViewById(R.id.startWorkout_button_calendar);
+
 //        MCV.state().edit()
 //                .setFirstDayOfWeek(Calendar.MONDAY)
 //                .setMinimumDate(CalendarDay.from(goalData.getYear_date_begin(), goalData.getMonth_date_begin(), goalData.getDay_date_begin()))
@@ -151,7 +147,6 @@ public class fragment_calendar extends Fragment {
         layoutDetail.setVisibility(View.VISIBLE);
         noExeText.setVisibility(View.GONE);
         ExerciseData exerciseData = handleTableExercise.getDetailExercise(date);
-        Log.i("exerciseData",exerciseData+"");
         if(exerciseData != null){
             if(exerciseData.getVdo_id().equals("ยังไม่ได้เลือกท่าออกกำลังกาย")){
                 setExeButton.setVisibility(View.VISIBLE);
@@ -159,6 +154,7 @@ public class fragment_calendar extends Fragment {
                 layoutExe.setVisibility(View.GONE);
                 timeText.setText(exerciseData.getTime());
                 calorieText.setText(exerciseData.getCalorie()+"");
+                exeButton.setVisibility(View.GONE);
             }else {
                 setExeButton.setVisibility(View.GONE);
                 layoutExe.setVisibility(View.VISIBLE);
@@ -172,6 +168,18 @@ public class fragment_calendar extends Fragment {
 
                 timeText.setText(exerciseData.getTime());
                 calorieText.setText(exerciseData.getCalorie()+"");
+                if(DateUtils.isToday(date.getDate().getTime()) && exerciseData.getCheckState() == ExerciseData.WORKOUT_NOT_FINISH){
+                    exeButton.setVisibility(View.VISIBLE);
+                    exeButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent = new Intent(getActivity(), ExerciseActivity.class);
+                            startActivity(intent);
+                        }
+                    });
+                }else {
+                    exeButton.setVisibility(View.GONE);
+                }
             }
             addGlobalDate(date);
         }else{
@@ -180,6 +188,8 @@ public class fragment_calendar extends Fragment {
         }
 
     }
+
+
 
     private void addGlobalDate(CalendarDay date){
         ((GlobalData) getActivity().getApplication()).setDateData(new DateData(date.getDay(),date.getMonth(),date.getYear()));

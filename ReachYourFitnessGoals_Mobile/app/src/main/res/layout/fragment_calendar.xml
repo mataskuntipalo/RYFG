@@ -49,26 +49,17 @@
         android:background="@color/colorDefault_Background"
         android:id="@+id/detail_LinearLayout_calendar">
 
-            <LinearLayout
-                android:layout_width="match_parent"
+            <Button
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:textSize="@dimen/default_text"
+                android:text="เริ่มออกกำลังกาย"
+                android:textColor="@color/colorBlack"
+                android:layout_gravity="center"
+                android:visibility="gone"
+                android:id="@+id/startWorkout_button_calendar"/>
 
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center">
 
-                    <Button
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="@dimen/default_text"
-                        android:text="เริ่มออกกำลังกาย"
-                        android:textColor="@color/colorBlack"
-                        android:id="@+id/Exe_button_calendar"/>
-                </RelativeLayout>
-
-            </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"

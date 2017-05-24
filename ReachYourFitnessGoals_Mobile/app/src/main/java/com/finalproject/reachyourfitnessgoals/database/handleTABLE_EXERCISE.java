@@ -8,6 +8,7 @@ import android.util.Log;
 
 import com.finalproject.reachyourfitnessgoals.models.DateData;
 import com.finalproject.reachyourfitnessgoals.models.ExeInWeekData;
+import com.finalproject.reachyourfitnessgoals.models.ExeType;
 import com.finalproject.reachyourfitnessgoals.models.ExerciseData;
 import com.finalproject.reachyourfitnessgoals.models.GoalData;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
@@ -31,6 +32,7 @@ public class handleTABLE_EXERCISE {
     public static final String COLUMN_CALORIE_TOTAL= "calorie_total";
     public static final String COLUMN_NOTE = "note";
     public static final String COLUMN_TIME = "time";
+    public static final String COLUMN_CHECK = "check_state_workout";
 
     public handleTABLE_EXERCISE(Context context) {
         objDBHelper = new DBHelper(context);
@@ -72,7 +74,7 @@ public class handleTABLE_EXERCISE {
     }
 
     public ExerciseData getDetailExercise(CalendarDay date){
-        Cursor cursor = readSQLite.rawQuery("SELECT " + COLUMN_VDO_ID + "," + COLUMN_CALORIE_IN_DAY+ "," + COLUMN_NOTE + "," + COLUMN_TIME + " FROM " + TABLE_EXERCISE
+        Cursor cursor = readSQLite.rawQuery("SELECT " + COLUMN_VDO_ID + "," + COLUMN_CALORIE_IN_DAY+ "," + COLUMN_NOTE + "," + COLUMN_TIME + "," + COLUMN_CHECK + " FROM " + TABLE_EXERCISE
                 + " WHERE " + COLUMN_DAY + "=" + date.getDay() + " AND "
                 + COLUMN_MONTH + "=" + date.getMonth() + " AND "
                 + COLUMN_YEAR + "=" + date.getYear(), null);
@@ -81,7 +83,7 @@ public class handleTABLE_EXERCISE {
             return null;
         }else{
             cursor.moveToFirst();
-            return new ExerciseData(cursor.getString(0),cursor.getInt(1),cursor.getString(2),cursor.getString(3));
+            return new ExerciseData(cursor.getString(0),cursor.getInt(1),cursor.getString(2),cursor.getString(3),cursor.getInt(4));
         }
     }
 
@@ -151,6 +153,7 @@ public class handleTABLE_EXERCISE {
         ContentValues args = new ContentValues();
         args.put(COLUMN_TIME, time);
         args.put(COLUMN_CALORIE_IN_DAY, calorie);
+        args.put(COLUMN_CHECK, ExerciseData.WORKOUT_FINISH);
         writeSQLite.update(TABLE_EXERCISE, args, COLUMN_DAY + "=" + data.getDay()
                 + " AND " + COLUMN_MONTH + "=" + data.getMonth()
                 + " AND " + COLUMN_YEAR + "=" + data.getYear() , null);
