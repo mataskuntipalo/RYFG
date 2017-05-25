@@ -43,6 +43,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     private Activity activity;
     private SetUpCalorieAndExe setUpCalorieAndExe;
     OnItemClickListener mItemClickListener;
+    OnItemClickListenerShowAll mItemClickListenerShowAll;
     private int sumCalorieInType;
     public static int sumCalorieInDay;
 
@@ -73,8 +74,15 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, final int viewType) {
         if(type == ListType.TYPE_SHOW_ALL){
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.itemview_show_all, parent, false);
-            Log.i("inShowAll","inShowAll");
-            return new showAllExeViewHolder(view);
+            showAllExeViewHolder showAllExeViewHolder = new showAllExeViewHolder(view, new showAllExeViewHolder.showAllExeViewHolderClicks() {
+                @Override
+                public void select(View caller) {
+                    if (mItemClickListenerShowAll != null) {
+                        mItemClickListenerShowAll.onItemClickShowVDO(caller.getTag(R.id.name)+"");
+                    }
+                }
+            });
+            return showAllExeViewHolder;
         }else if(type == ListType.TYPE_CUSTOM_EXERCISE){
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.itemview_custom_exe, parent, false);
             customExeViewHolder customExeViewHolder = new customExeViewHolder(view, new customExeViewHolder.customViewHolderClicks() {
@@ -113,6 +121,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
         if (holder instanceof showAllExeViewHolder) {
             showAllExeViewHolder showAllExeViewHolder = (showAllExeViewHolder) holder;
+            showAllExeViewHolder.itemView.setTag(R.id.name,vdoDataArrayList.get(position).getName());
             setupShowAllExe(showAllExeViewHolder,vdoDataArrayList.get(position));
 
         }else if(holder instanceof customExeViewHolder){
@@ -228,8 +237,16 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         public void onItemLongClick();
     }
 
+    public interface OnItemClickListenerShowAll{
+        public void onItemClickShowVDO(String name);
+    }
+
     public void SetOnItemClickListener(final OnItemClickListener mItemClickListener) {
         this.mItemClickListener = mItemClickListener;
+    }
+
+    public void SetOnItemClickListener(final OnItemClickListenerShowAll mItemClickListener) {
+        this.mItemClickListenerShowAll = mItemClickListener;
     }
 
 }

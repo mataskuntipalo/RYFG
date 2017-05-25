@@ -1,6 +1,7 @@
 package com.finalproject.reachyourfitnessgoals.fragment;
 
 
+import android.app.Dialog;
 import android.app.DownloadManager;
 import android.content.Context;
 import android.graphics.Canvas;
@@ -16,7 +17,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -29,10 +32,15 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.finalproject.reachyourfitnessgoals.R;
+import com.finalproject.reachyourfitnessgoals.activity.ExerciseActivity;
 import com.finalproject.reachyourfitnessgoals.adapter.RecyclerViewAdapter;
 import com.finalproject.reachyourfitnessgoals.models.ListType;
 import com.finalproject.reachyourfitnessgoals.models.vdoData;
 import com.github.florent37.materialviewpager.header.MaterialViewPagerHeaderDecorator;
+import com.google.android.youtube.player.YouTubeInitializationResult;
+import com.google.android.youtube.player.YouTubePlayer;
+import com.google.android.youtube.player.YouTubePlayerFragment;
+import com.google.android.youtube.player.YouTubePlayerSupportFragment;
 import com.google.gson.Gson;
 import com.timehop.stickyheadersrecyclerview.StickyRecyclerHeadersDecoration;
 
@@ -52,7 +60,7 @@ import static android.support.v7.recyclerview.R.attr.layoutManager;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class fragment_list extends Fragment {
+public class fragment_list extends Fragment{
 
     private RecyclerView recyclerView;
     private RecyclerViewAdapter recyclerViewAdapter;
@@ -89,6 +97,21 @@ public class fragment_list extends Fragment {
         recyclerView.addItemDecoration(new StickyRecyclerHeadersDecoration(recyclerViewAdapter));
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(), linearLayoutManager.getOrientation());
         recyclerView.addItemDecoration(dividerItemDecoration);
+        recyclerViewAdapter.SetOnItemClickListener(new RecyclerViewAdapter.OnItemClickListenerShowAll() {
+            @Override
+            public void onItemClickShowVDO(String name) {
+                fragment_dialog_showVDO dialogFragment = fragment_dialog_showVDO.newInstance();
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                fragmentManager
+                        .beginTransaction()
+//                        .setCustomAnimations(R.anim.slide_up,R.anim.slide_down,R.anim.slide_up,R.anim.slide_down)
+                        .replace(R.id.activity_main, dialogFragment, "fragment_results_parQ")
+                        .addToBackStack("fragment_results_parQ")
+                        .commit();
+
+                //dialogFragment.show(fm, "Sample Fragment");
+            }
+        });
 
         ptrFrame.setPtrHandler(new PtrHandler() {
             @Override
@@ -119,6 +142,7 @@ public class fragment_list extends Fragment {
 
         return rootview;
     }
+
 
 
 }

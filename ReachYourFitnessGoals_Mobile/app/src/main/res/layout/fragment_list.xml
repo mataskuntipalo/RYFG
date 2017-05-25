@@ -31,4 +31,11 @@
 
     </in.srain.cube.views.ptr.PtrClassicFrameLayout>
 
+    <FrameLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/youtube_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </FrameLayout>
+
 </RelativeLayout>
