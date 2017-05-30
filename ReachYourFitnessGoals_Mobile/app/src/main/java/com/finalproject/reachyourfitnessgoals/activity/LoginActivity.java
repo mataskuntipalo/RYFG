@@ -12,16 +12,28 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.finalproject.reachyourfitnessgoals.R;
 import com.finalproject.reachyourfitnessgoals.fragment.fragment_home;
 import com.finalproject.reachyourfitnessgoals.fragment.fragment_intro_slideEnd;
 import com.finalproject.reachyourfitnessgoals.fragment.fragment_list;
 import com.finalproject.reachyourfitnessgoals.fragment.fragment_signUp;
+import com.finalproject.reachyourfitnessgoals.models.UrlServer;
+import com.finalproject.reachyourfitnessgoals.setting.JsonSingleton;
 
+
+import java.util.HashMap;
+import java.util.Map;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
@@ -34,6 +46,7 @@ public class LoginActivity extends AppCompatActivity {
     ProgressBar progress;
     TextView forgot;
     TextView signUp;
+    EditText email , pass ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +55,8 @@ public class LoginActivity extends AppCompatActivity {
 
 
         //showIntro();
+        email = (EditText)findViewById(R.id.editEmail_EditText_logIn);
+        pass = (EditText)findViewById(R.id.editPass_EditText_logIn);
         signUp = (TextView)findViewById(R.id.signUp_text);
         forgot = (TextView)findViewById(R.id.forgetPass);
         progress = ( ProgressBar ) this.findViewById ( R.id.login_progress );
@@ -66,8 +81,9 @@ public class LoginActivity extends AppCompatActivity {
         buttonAbout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                startActivity(intent);
+                userLogin();
+//                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+//                startActivity(intent);
             }
         });
 
@@ -102,6 +118,37 @@ public class LoginActivity extends AppCompatActivity {
             }
         }, 2000);
 
+    }
+
+    private void userLogin() {
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, UrlServer.LOGIN,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        if(response.trim().equals("success")){
+                            Toast.makeText(LoginActivity.this,"LoginComplete",Toast.LENGTH_LONG).show();
+                        }else{
+                            Toast.makeText(LoginActivity.this,response,Toast.LENGTH_LONG).show();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(LoginActivity.this,error.toString(),Toast.LENGTH_LONG ).show();
+                    }
+                }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> map = new HashMap<String,String>();
+                map.put("username",email.getText().toString().trim());
+                map.put("password",pass.getText().toString().trim());
+                return map;
+            }
+        };
+
+        JsonSingleton.getInstance(this).addToRequestQueue(stringRequest);
     }
 
 //    private void showIntro(){

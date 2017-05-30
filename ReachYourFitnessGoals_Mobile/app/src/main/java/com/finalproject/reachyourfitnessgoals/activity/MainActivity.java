@@ -50,6 +50,7 @@ import com.finalproject.reachyourfitnessgoals.fragment.fragment_home;
 import com.finalproject.reachyourfitnessgoals.fragment.fragment_list;
 import com.finalproject.reachyourfitnessgoals.models.GlobalData;
 import com.finalproject.reachyourfitnessgoals.models.vdoData;
+import com.finalproject.reachyourfitnessgoals.setting.JsonSingleton;
 import com.github.florent37.materialviewpager.MaterialViewPager;
 import com.github.florent37.materialviewpager.header.HeaderDesign;
 import com.special.ResideMenu.ResideMenu;
@@ -208,7 +209,6 @@ public class MainActivity extends AppCompatActivity {
 
     private void downloadVDO(final Context context) {
         String url = "http://192.168.1.35/ryfg/getJSON.php";
-
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
 
             @Override
@@ -261,8 +261,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-        requestQueue.add(jsonArrayRequest);
+        JsonSingleton.getInstance(this).addToRequestQueue(jsonArrayRequest);
     }
 
 

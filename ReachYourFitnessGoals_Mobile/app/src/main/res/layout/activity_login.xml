@@ -107,7 +107,7 @@
             android:textSize="@dimen/default_text"
             android:layout_toRightOf="@+id/iconUser"
             android:textColor="@color/colorBlack"
-            android:id="@+id/editEmail"/>
+            android:id="@+id/editEmail_EditText_logIn"/>
 
     </RelativeLayout>
 
@@ -142,7 +142,7 @@
             android:inputType="textPassword"
             android:layout_toRightOf="@+id/iconPass"
             android:textColor="@color/colorBlack"
-            android:id="@+id/editPass"/>
+            android:id="@+id/editPass_EditText_logIn"/>
     </RelativeLayout>
 
     <Button

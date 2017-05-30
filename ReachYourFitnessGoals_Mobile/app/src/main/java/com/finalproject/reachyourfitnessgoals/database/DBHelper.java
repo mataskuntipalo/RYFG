@@ -16,12 +16,11 @@ public class DBHelper extends SQLiteOpenHelper {
             "f_name TEXT NOT NULL, " +
             "l_name TEXT NOT NULL, " +
             "age INTEGER NOT NULL, " +
-            "gender TEXT NOT NULL, " +
+            "gender INTEGER NOT NULL, " +
             "birthday TEXT NOT NULL, " +
-            "weight INTEGER NOT NULL, " +
-            "height  INTEGER NOT NULL, " +
-            "pressure_min  INTEGER, " +
-            "pressure_max INTEGER);";
+            "weight REAL NOT NULL, " +
+            "height  REAL NOT NULL);";
+
 
     private static final String TABLE_PROGRAM = "CREATE TABLE PROGRAM (program_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
             "typeGoal INTEGER NOT NULL, " +

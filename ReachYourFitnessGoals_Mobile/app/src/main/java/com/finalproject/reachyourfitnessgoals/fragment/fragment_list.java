@@ -135,11 +135,6 @@ public class fragment_list extends Fragment{
         });
 
 
-
-
-
-
-
         return rootview;
     }
 
