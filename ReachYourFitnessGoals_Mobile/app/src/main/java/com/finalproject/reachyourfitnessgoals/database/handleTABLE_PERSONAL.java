@@ -20,7 +20,6 @@ public class handleTABLE_PERSONAL {
     public static final String COLUMN_L_NAME = "l_name";
     public static final String COLUMN_AGE = "age";
     public static final String COLUMN_GENDER = "gender";
-    public static final String COLUMN_BIRTHDAY = "birthday";
     public static final String COLUMN_WEIGHT= "weight";
     public static final String COLUMN_HEIGHT = "height";
 
@@ -37,10 +36,13 @@ public class handleTABLE_PERSONAL {
         values.put(COLUMN_L_NAME, data.getL_Name());
         values.put(COLUMN_AGE , data.getAge());
         values.put(COLUMN_GENDER,data.getGender());
-        values.put(COLUMN_BIRTHDAY, data.getBirthday());
         values.put(COLUMN_WEIGHT, data.getWeight());
         values.put(COLUMN_HEIGHT, data.getHeight());
 
         writeSQLite.insert(TABLE_PERSONAL, null, values);
+    }
+
+    public void delete(){
+        writeSQLite.execSQL("delete from "+ TABLE_PERSONAL);
     }
 }

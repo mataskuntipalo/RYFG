@@ -15,6 +15,8 @@
     <string name="sharedBoolFirstTimeOfWeek">checkFirstTimeOfWeek</string>
     <string name="sharedBoolDayHighLight">day</string>
     <string name="sharedBoolSetExe">checkSetExe</string>
+    <string name="sharedBoolLogIn">checkLogIn</string>
+    <string name="sharedIntMemberId">memberId</string>
 
     <!-- SetExerciseInWeekActivity -->
     <string name="steps_titles1">เลือกจำนวนวัน</string>
@@ -74,5 +76,11 @@
 
     <string name="textUnderLine"><u>เข้าสู่ระบบที่นี่</u></string>
 
+    <string-array name="json_key">
+        <item>vdo</item>
+        <item>personal</item>
+        <item>program</item>
+        <item>exercise</item>
+    </string-array>
 
 </resources>

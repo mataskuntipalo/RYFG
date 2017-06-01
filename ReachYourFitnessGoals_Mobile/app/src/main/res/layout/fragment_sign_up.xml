@@ -21,7 +21,6 @@
                 android:id="@+id/content1_signUP"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/email_text_signUP"
                 android:layout_marginBottom="@dimen/bottom_margin"
                 android:background="@drawable/shadow_layout"
                 android:padding="10dp">
@@ -43,7 +42,6 @@
                 android:id="@+id/content2_signUP"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/pass_text_signUP"
                 android:layout_marginBottom="@dimen/bottom_margin"
                 android:background="@drawable/shadow_layout"
                 android:padding="10dp">
@@ -57,7 +55,8 @@
                     android:background="@color/colorWhite"
                     android:hint="รหัสผ่าน"
                     android:inputType="textPassword"
-                    android:textSize="@dimen/default_text" />
+                    android:textSize="@dimen/default_text"
+                    />
             </RelativeLayout>
 
             <LinearLayout
@@ -83,9 +82,7 @@
                     android:background="@color/colorWhite"
                     android:hint="ชื่อ"
                     android:textSize="@dimen/default_text"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true" />
+                    />
             </RelativeLayout>
 
 
@@ -159,15 +156,19 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/bottom_margin"
                 android:background="@drawable/shadow_layout"
+                android:gravity="center"
                 android:padding="10dp">
 
-
-                <TextView
-                    android:id="@+id/birthDay_Text_signUP"
-                    android:layout_width="wrap_content"
+                <EditText
+                    android:id="@+id/editAge_EditText_signUP"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:text="วันเกิด"
+                    android:singleLine="true"
+                    android:textColor="@color/colorBlack"
+                    android:background="@color/colorWhite"
+                    android:hint="อายุ"
+                    android:inputType="number"
+                    android:maxLength="2"
                     android:textSize="@dimen/default_text" />
             </RelativeLayout>
 

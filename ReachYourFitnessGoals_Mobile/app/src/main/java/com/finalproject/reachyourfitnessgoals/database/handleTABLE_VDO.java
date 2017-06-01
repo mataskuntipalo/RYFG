@@ -92,4 +92,8 @@ public class handleTABLE_VDO {
         }
     }
 
+    public void delete(){
+        writeSQLite.execSQL("delete from "+ TABLE_VDO);
+    }
+
 }

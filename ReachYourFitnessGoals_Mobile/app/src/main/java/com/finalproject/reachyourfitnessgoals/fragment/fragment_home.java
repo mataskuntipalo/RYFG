@@ -39,12 +39,15 @@ import com.finalproject.reachyourfitnessgoals.activity.LoginActivity;
 import com.finalproject.reachyourfitnessgoals.activity.MainActivity;
 import com.finalproject.reachyourfitnessgoals.activity.SetExerciseInWeekActivity;
 import com.finalproject.reachyourfitnessgoals.database.handleTABLE_EXERCISE;
+import com.finalproject.reachyourfitnessgoals.models.DateData;
 import com.finalproject.reachyourfitnessgoals.setting.handleCalendar;
 import com.github.florent37.materialviewpager.MaterialViewPagerHelper;
+import com.google.gson.Gson;
 import com.hookedonplay.decoviewlib.DecoView;
 import com.hookedonplay.decoviewlib.charts.SeriesItem;
 import com.hookedonplay.decoviewlib.events.DecoEvent;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 import static android.content.Context.NOTIFICATION_SERVICE;
@@ -78,9 +81,10 @@ public class fragment_home extends Fragment {
         // Inflate the layout for this fragment
         View rootview = inflater.inflate(R.layout.fragment_home, container, false);
 
-
+        //testJson(rootview);
         Button notiBtn = (Button)rootview.findViewById(R.id.notification_Button_home);
         notiBtn.setOnClickListener(showNotification);
+
 
         //Init value
         nestedScrollView = (NestedScrollView)rootview.findViewById(R.id.scrollView_home);
@@ -165,6 +169,14 @@ public class fragment_home extends Fragment {
 
         return rootview;
 
+    }
+
+    private void testJson(View rootview) {
+        ArrayList<DateData> datas = new handleTABLE_EXERCISE(getContext()).getDateExerciseToCalendar();
+        Gson gson = new Gson();
+        String jsonString = gson.toJson(datas);
+        TextView view = (TextView) rootview.findViewById(R.id.testJson);
+        view.setText(jsonString);
     }
 
 

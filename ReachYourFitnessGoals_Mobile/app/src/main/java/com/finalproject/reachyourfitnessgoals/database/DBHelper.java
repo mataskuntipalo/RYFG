@@ -12,27 +12,25 @@ public class DBHelper extends SQLiteOpenHelper {
 
     private static final String DB_NAME = "ReachYourFitnessGoals";
     private static final int DB_VERSION = 1;
-    private static final String TABLE_PERSONAL = "CREATE TABLE PERSONAL (user_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+    private static final String TABLE_PERSONAL = "CREATE TABLE PERSONAL (personal_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
             "f_name TEXT NOT NULL, " +
             "l_name TEXT NOT NULL, " +
             "age INTEGER NOT NULL, " +
             "gender INTEGER NOT NULL, " +
-            "birthday TEXT NOT NULL, " +
             "weight REAL NOT NULL, " +
             "height  REAL NOT NULL);";
 
 
     private static final String TABLE_PROGRAM = "CREATE TABLE PROGRAM (program_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
             "typeGoal INTEGER NOT NULL, " +
-            "weigh_goal INTEGER , " +
-            "total_duration INTEGER , " +
-            "kg_per_week INTEGER, " +
+            "weightGoal INTEGER , " +
+            "totalDuration INTEGER , " +
+            "kgPerWeek INTEGER, " +
             "year_date_begin INTEGER NOT NULL, " +
             "month_date_begin INTEGER NOT NULL, " +
             "day_date_begin INTEGER NOT NULL, " +
-            "year_date_end INTEGER NOT NULL, " +
-            "month_date_end INTEGER NOT NULL, " +
-            "day_date_end INTEGER NOT NULL);";
+            "status INTEGER NOT NULL, " +
+            "programName TEXT);";
 
     private static final String TABLE_VDO = "CREATE TABLE VDO (vdo_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
             "name TEXT NOT NULL, " +
@@ -46,8 +44,8 @@ public class DBHelper extends SQLiteOpenHelper {
             "month INTEGER NOT NULL, " +
             "year INTEGER NOT NULL, " +
             "vdo_id TEXT, " +
-            "calorie_in_day INTEGER, " +
-            "calorie_total INTEGER, " +
+            "calorieInDay INTEGER, " +
+            "calorieTotal INTEGER, " +
             "note TEXT, " +
             "time TEXT, " +
             "check_state_workout INTEGER DEFAULT 0);";
@@ -61,11 +59,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(TABLE_PERSONAL + "encoding = \"UTF-8\"");
         db.execSQL(TABLE_PROGRAM + "encoding = \"UTF-8\"");
-        db.execSQL("INSERT INTO PROGRAM (typeGoal, weigh_goal, kg_per_week, year_date_begin, month_date_begin, " +
-                "day_date_begin, " +
-                "year_date_end, " +
-                "month_date_end, " +
-                "day_date_end) VALUES (0, 5, 1540, 2017, 4, 29, 2016, 9, 29);");
+
         db.execSQL(TABLE_VDO + "encoding = \"UTF-8\"");
         db.execSQL(TABLE_EXERCISE + "encoding = \"UTF-8\"");
     }

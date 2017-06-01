@@ -7,15 +7,24 @@ import java.sql.Date;
  */
 
 public class GoalData {
+    int typeGoal;
     int kgPerWeek;
     int totalDuration;
     float weightGoal;
     int day_date_begin;
     int month_date_begin;
     int year_date_begin;
-    int day_date_end;
-    int month_date_end;
-    int year_date_end;
+    int status;
+    String programName;
+
+
+    public int getTypeGoal() {
+        return typeGoal;
+    }
+
+    public void setTypeGoal(int typeGoal) {
+        this.typeGoal = typeGoal;
+    }
 
     public int getDay_date_begin() {
         return day_date_begin;
@@ -41,30 +50,6 @@ public class GoalData {
         this.year_date_begin = year_date_begin;
     }
 
-    public int getDay_date_end() {
-        return day_date_end;
-    }
-
-    public void setDay_date_end(int day_date_end) {
-        this.day_date_end = day_date_end;
-    }
-
-    public int getMonth_date_end() {
-        return month_date_end;
-    }
-
-    public void setMonth_date_end(int month_date_end) {
-        this.month_date_end = month_date_end;
-    }
-
-    public int getYear_date_end() {
-        return year_date_end;
-    }
-
-    public void setYear_date_end(int year_date_end) {
-        this.year_date_end = year_date_end;
-    }
-
     public float getWeightGoal() {
         return weightGoal;
     }
@@ -81,8 +66,6 @@ public class GoalData {
         this.totalDuration = totalDuration;
     }
 
-
-
     public int getKgPerWeek() {
         return kgPerWeek;
     }
@@ -91,8 +74,19 @@ public class GoalData {
         this.kgPerWeek = kgPerWeek;
     }
 
+    public int getStatus() {
+        return status;
+    }
 
+    public void setStatus(int status) {
+        this.status = status;
+    }
 
+    public String getProgramName() {
+        return programName;
+    }
 
-
+    public void setProgramName(String programName) {
+        this.programName = programName;
+    }
 }

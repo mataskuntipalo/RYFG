@@ -38,6 +38,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.animation.GlideAnimation;
@@ -46,9 +47,11 @@ import com.finalproject.reachyourfitnessgoals.R;
 import com.finalproject.reachyourfitnessgoals.adapter.PagerAdapter;
 import com.finalproject.reachyourfitnessgoals.database.handleTABLE_VDO;
 import com.finalproject.reachyourfitnessgoals.fragment.fragment_calendar;
+import com.finalproject.reachyourfitnessgoals.fragment.fragment_connect_server;
 import com.finalproject.reachyourfitnessgoals.fragment.fragment_home;
 import com.finalproject.reachyourfitnessgoals.fragment.fragment_list;
 import com.finalproject.reachyourfitnessgoals.models.GlobalData;
+import com.finalproject.reachyourfitnessgoals.models.UrlServer;
 import com.finalproject.reachyourfitnessgoals.models.vdoData;
 import com.finalproject.reachyourfitnessgoals.setting.JsonSingleton;
 import com.github.florent37.materialviewpager.MaterialViewPager;
@@ -75,16 +78,17 @@ import static android.R.attr.id;
 import static com.github.florent37.materialviewpager.R.attr.viewpager_hideToolbarAndTitle;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
     private MaterialViewPager mViewPager;
     private ResideMenu resideMenu;
     SharedPreferences shared;
     SharedPreferences.Editor editor;
-    handleTABLE_VDO handleTABLE_vdo;
     FrameLayout ignored_view;
     public final int PAGE_NUM = 3;
-
+    private CustomizableResideMenuItem itemHome;
+    private CustomizableResideMenuItem itemProfile;
+    private CustomizableResideMenuItem itemLogOut;
 
 
 
@@ -98,29 +102,9 @@ public class MainActivity extends AppCompatActivity {
 
         shared = this.getSharedPreferences(getResources().getString(R.string.sharedPreferencesName), Context.MODE_PRIVATE);
         editor = shared.edit();
-        handleTABLE_vdo = new handleTABLE_VDO(this);
 
-        if(shared.getBoolean("firstTimeUsed", false) == false){
-            downloadVDO(this);
-        }
+        setUpMenuSideBar();
 
-        resideMenu = new ResideMenu(this);
-        resideMenu.setBackground(R.drawable.background_sidemenu);
-        resideMenu.attachToActivity(this);
-        ignored_view = (FrameLayout) findViewById(R.id.ignored_view);
-
-        String titles[] = { "Home", "Profile"};
-        int icon[] = { R.drawable.ic_username, R.drawable.ic_username};
-
-        for (int i = 0; i < titles.length; i++){
-            //item.setOnClickListener(this);
-            CustomizableResideMenuItem item = new CustomizableResideMenuItem(this, icon[i], titles[i]);
-            item.setTypeface();
-            resideMenu.addMenuItem(item,  ResideMenu.DIRECTION_LEFT); // or  ResideMenu.DIRECTION_RIGHT
-        }
-
-
-        resideMenu.setSwipeDirectionDisable(ResideMenu.DIRECTION_RIGHT);
 
         mViewPager = (MaterialViewPager) findViewById(R.id.materialViewPager_main);
 
@@ -170,6 +154,48 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    private void setUpMenuSideBar(){
+        resideMenu = new ResideMenu(this);
+        resideMenu.setBackground(R.drawable.background_sidemenu);
+        resideMenu.attachToActivity(this);
+        ignored_view = (FrameLayout) findViewById(R.id.ignored_view);
+
+        itemHome     = new CustomizableResideMenuItem(this, R.drawable.ic_username,     "Home");
+        itemProfile  = new CustomizableResideMenuItem(this, R.drawable.ic_username,  "Profile");
+        itemLogOut = new CustomizableResideMenuItem(this, R.drawable.ic_username, "Calendar");
+
+        itemHome.setOnClickListener(this);
+        itemHome.setOnClickListener(this);
+        itemLogOut.setOnClickListener(this);
+
+        itemHome.setTypeface();
+        itemHome.setTypeface();
+        itemLogOut.setTypeface();
+
+        resideMenu.addMenuItem(itemHome, ResideMenu.DIRECTION_LEFT);
+        resideMenu.addMenuItem(itemProfile, ResideMenu.DIRECTION_LEFT);
+        resideMenu.addMenuItem(itemLogOut, ResideMenu.DIRECTION_RIGHT);
+
+        resideMenu.setSwipeDirectionDisable(ResideMenu.DIRECTION_RIGHT);
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v == itemLogOut){
+            goToLoadData();
+        }
+    }
+
+    private void goToLoadData(){
+        fragment_connect_server resultParQ = fragment_connect_server.newInstance(UrlServer.UPLOAD);
+        FragmentManager fragmentManager = this.getSupportFragmentManager();
+        fragmentManager
+                .beginTransaction()
+//                        .setCustomAnimations(R.anim.slide_up,R.anim.slide_down,R.anim.slide_up,R.anim.slide_down)
+                .replace(R.id.activity_main, resultParQ, "fragment_results_parQ")
+                .commit();
+    }
+
     FragmentStatePagerAdapter StatePagerAdapter = new FragmentStatePagerAdapter(getSupportFragmentManager()) {
         @Override
         public int getCount() {
@@ -207,62 +233,6 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
-    private void downloadVDO(final Context context) {
-        String url = "http://192.168.1.35/ryfg/getJSON.php";
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
-
-            @Override
-            public void onResponse(JSONArray response) {
-                try {
-                    ArrayList<vdoData> dataArrayList = new ArrayList<>();
-                    Log.i("download",response.length()+"");
-                    for(int i = 0; i < response.length(); i++){
-                        final JSONObject jsonObject = response.getJSONObject(i);
-                        dataArrayList.add(new vdoData(jsonObject.getString("name"),jsonObject.getString("type"),jsonObject.getString("position"),jsonObject.getString("duration"),jsonObject.getInt("calorie")));
-                        final String nameExe = jsonObject.getString("name");
-                        Glide
-                                .with(context)
-                                .load("http://192.168.1.35/ryfg/image/" + nameExe + ".jpg")
-                                .asBitmap()
-                                .toBytes(Bitmap.CompressFormat.JPEG, 80)
-                                .into(new SimpleTarget<byte[]>() {
-                                    @Override public void onResourceReady(final byte[] resource, GlideAnimation<? super byte[]> glideAnimation) {
-                                                File sdcard = Environment.getExternalStorageDirectory();
-                                                File file = new File(sdcard + File.separator  + "Android" + File.separator + "data" + File.separator + getPackageName() + File.separator + "image" + File.separator + nameExe+ ".jpg");
-                                                File dir = file.getParentFile();
-                                                try {
-                                                    if (!dir.mkdirs() && (!dir.exists() || !dir.isDirectory())) {
-                                                        throw new IOException("Cannot ensure parent directory for file " + file);
-                                                    }
-                                                    BufferedOutputStream s = new BufferedOutputStream(new FileOutputStream(file));
-                                                    s.write(resource);
-                                                    s.flush();
-                                                    s.close();
-                                                } catch (IOException e) {
-                                                    e.printStackTrace();
-                                                }
-                                            }
-                                    }
-                                );
-                    }
-                    handleTABLE_vdo.addVdoExercise(dataArrayList);
-                    editor.putBoolean("firstTimeUsed", true);
-                    editor.commit();
-                    Log.i("download","downloadFinish");
-                }catch (JSONException e) {
-                    e.printStackTrace();
-                    Log.i("download",e.getMessage());
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-//                Log.i("download",error.getMessage());
-            }
-        });
-
-        JsonSingleton.getInstance(this).addToRequestQueue(jsonArrayRequest);
-    }
 
 
     @Override // ต้องใส่อันนี้ถึงจะเปลี่ยนฟ้อน
@@ -280,7 +250,6 @@ public class MainActivity extends AppCompatActivity {
         }
         super.onBackPressed();
     }
-
 
 
     public class CustomizableResideMenuItem extends ResideMenuItem {
@@ -315,6 +284,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
         }
+
 
     }
 

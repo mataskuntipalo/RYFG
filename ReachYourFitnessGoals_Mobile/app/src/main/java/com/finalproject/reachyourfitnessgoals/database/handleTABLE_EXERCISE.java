@@ -10,7 +10,9 @@ import com.finalproject.reachyourfitnessgoals.models.DateData;
 import com.finalproject.reachyourfitnessgoals.models.ExeInWeekData;
 import com.finalproject.reachyourfitnessgoals.models.ExeType;
 import com.finalproject.reachyourfitnessgoals.models.ExerciseData;
+import com.finalproject.reachyourfitnessgoals.models.ExerciseFromServerData;
 import com.finalproject.reachyourfitnessgoals.models.GoalData;
+import com.finalproject.reachyourfitnessgoals.models.vdoData;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 
 import java.util.ArrayList;
@@ -28,8 +30,8 @@ public class handleTABLE_EXERCISE {
     public static final String COLUMN_MONTH = "month";
     public static final String COLUMN_YEAR = "year";
     public static final String COLUMN_VDO_ID = "vdo_id";
-    public static final String COLUMN_CALORIE_IN_DAY = "calorie_in_day";
-    public static final String COLUMN_CALORIE_TOTAL= "calorie_total";
+    public static final String COLUMN_CALORIE_IN_DAY = "calorieInDay";
+    public static final String COLUMN_CALORIE_TOTAL= "calorieTotal";
     public static final String COLUMN_NOTE = "note";
     public static final String COLUMN_TIME = "time";
     public static final String COLUMN_CHECK = "check_state_workout";
@@ -50,8 +52,25 @@ public class handleTABLE_EXERCISE {
         values.put(COLUMN_CALORIE_TOTAL, data.getCalorieTotal());
         values.put(COLUMN_NOTE, "Not add note");
         values.put(COLUMN_TIME, "-");
-
+        values.put(COLUMN_CHECK, 0);
         writeSQLite.insert(TABLE_EXERCISE, null, values);
+    }
+
+    public void addExerciseList(ArrayList<ExerciseFromServerData> serverDatas){
+        ContentValues values = new ContentValues();
+        for (ExerciseFromServerData data: serverDatas) {
+            values.put(COLUMN_DAY, data.getDay());
+            values.put(COLUMN_MONTH, data.getMonth());
+            values.put(COLUMN_YEAR, data.getYear());
+            values.put(COLUMN_VDO_ID, data.getVdo_id());
+            values.put(COLUMN_CALORIE_IN_DAY, data.getCalorieInDay());
+            values.put(COLUMN_CALORIE_TOTAL, data.getCalorieTotal());
+            values.put(COLUMN_NOTE, data.getNote());
+            values.put(COLUMN_TIME, data.getTime());
+            values.put(COLUMN_CHECK, data.getCheck_state_workout());
+
+            writeSQLite.insert(TABLE_EXERCISE, null, values);
+        }
     }
 
     public ArrayList<DateData> getDateExerciseToCalendar(){

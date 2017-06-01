@@ -125,13 +125,7 @@ public class GoalActivity extends AppCompatActivity {
         int month_end = thaiTime.get(Calendar.MONTH)+1;
         int day_end = thaiTime.get(Calendar.DAY_OF_MONTH);
 
-        goalData.setYear_date_end(year_end);
-        goalData.setMonth_date_end(month_end);
-        goalData.setDay_date_end(day_end);
 
-        Log.i("dateEnd",goalData.getDay_date_end()+"");
-        Log.i("dateEnd",goalData.getMonth_date_end()+"");
-        Log.i("dateEnd",goalData.getYear_date_end()+"");
     }
 
     @Override // ต้องใส่อันนี้ถึงจะเปลี่ยนฟ้อน

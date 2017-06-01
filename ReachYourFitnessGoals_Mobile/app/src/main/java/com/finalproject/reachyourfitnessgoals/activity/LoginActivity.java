@@ -1,5 +1,6 @@
 package com.finalproject.reachyourfitnessgoals.activity;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -24,6 +25,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.finalproject.reachyourfitnessgoals.R;
+import com.finalproject.reachyourfitnessgoals.fragment.fragment_connect_server;
 import com.finalproject.reachyourfitnessgoals.fragment.fragment_home;
 import com.finalproject.reachyourfitnessgoals.fragment.fragment_intro_slideEnd;
 import com.finalproject.reachyourfitnessgoals.fragment.fragment_list;
@@ -40,6 +42,9 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class LoginActivity extends AppCompatActivity {
 
+    SharedPreferences shared;
+    SharedPreferences.Editor editor;
+
     RelativeLayout content1;
     RelativeLayout content2;
     Button buttonAbout;
@@ -47,12 +52,19 @@ public class LoginActivity extends AppCompatActivity {
     TextView forgot;
     TextView signUp;
     EditText email , pass ;
+    boolean result;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        shared = this.getSharedPreferences(getResources().getString(R.string.sharedPreferencesName), Context.MODE_PRIVATE);
+        editor = shared.edit();
+
+//        if(shared.getBoolean(getResources().getString(R.string.sharedBoolLogIn), false) == true){
+//            goToMain();
+//        }
 
         //showIntro();
         email = (EditText)findViewById(R.id.editEmail_EditText_logIn);
@@ -78,14 +90,7 @@ public class LoginActivity extends AppCompatActivity {
         transaction.commit();
 
 
-        buttonAbout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                userLogin();
-//                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-//                startActivity(intent);
-            }
-        });
+        buttonAbout.setOnClickListener(userLogin);
 
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,7 +104,21 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+    private void goToMain(){
+        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+    }
 
+    private void goToLoadData(){
+        fragment_connect_server resultParQ = fragment_connect_server.newInstance(UrlServer.DOWNLOAD);
+        FragmentManager fragmentManager = this.getSupportFragmentManager();
+        fragmentManager
+                .beginTransaction()
+//                        .setCustomAnimations(R.anim.slide_up,R.anim.slide_down,R.anim.slide_up,R.anim.slide_down)
+                .replace(R.id.activity_login, resultParQ, "fragment_results_parQ")
+                .commit();
+    }
 
 
     private void showView() {
@@ -120,36 +139,42 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    private void userLogin() {
-
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, UrlServer.LOGIN,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        if(response.trim().equals("success")){
-                            Toast.makeText(LoginActivity.this,"LoginComplete",Toast.LENGTH_LONG).show();
-                        }else{
-                            Toast.makeText(LoginActivity.this,response,Toast.LENGTH_LONG).show();
+    private View.OnClickListener userLogin = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, UrlServer.LOGIN,
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            if(response.trim().equals("failure")){
+                                Toast.makeText(LoginActivity.this,"email not correct",Toast.LENGTH_LONG).show();
+                            }else{
+                                editor.putBoolean(getResources().getString(R.string.sharedBoolLogIn), true);
+                                editor.putString(getResources().getString(R.string.sharedIntMemberId), response.trim());
+                                editor.commit();
+                                goToLoadData();
+                            }
                         }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(LoginActivity.this,error.toString(),Toast.LENGTH_LONG ).show();
-                    }
-                }){
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String,String> map = new HashMap<String,String>();
-                map.put("username",email.getText().toString().trim());
-                map.put("password",pass.getText().toString().trim());
-                return map;
-            }
-        };
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Toast.makeText(LoginActivity.this,error.toString(),Toast.LENGTH_LONG ).show();
+                        }
+                    }){
+                @Override
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    Map<String,String> map = new HashMap<String,String>();
+                    map.put("username",email.getText().toString().trim());
+                    map.put("password",pass.getText().toString().trim());
+                    return map;
+                }
+            };
+            JsonSingleton.getInstance(getBaseContext()).addToRequestQueue(stringRequest);
+        }
+    };
 
-        JsonSingleton.getInstance(this).addToRequestQueue(stringRequest);
-    }
+
 
 //    private void showIntro(){
 //        //  Declare a new thread to do a preference check

@@ -10,4 +10,5 @@ public class ListType {
         public static final int TYPE_RANDOM_EXERCISE = 2;
         public static final int TYPE_DETAIL_EXERCISE = 3;
         public static final int TYPE_EXPAND_EXERCISE = 4;
+
 }

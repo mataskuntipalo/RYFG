@@ -113,7 +113,7 @@ public class fragment_calendar extends Fragment {
         // Month begin 0 = january
         MCV.state().edit()
                 .setFirstDayOfWeek(Calendar.MONDAY)
-                .setMinimumDate(CalendarDay.from(2017, 3, 1))
+                .setMinimumDate(CalendarDay.from(2017, 1, 1))
                 .setMaximumDate(CalendarDay.from(2017, 11, 31))
                 .setCalendarDisplayMode(CalendarMode.MONTHS)
                 .commit();
@@ -169,6 +169,7 @@ public class fragment_calendar extends Fragment {
                 timeText.setText(exerciseData.getTime());
                 calorieText.setText(exerciseData.getCalorie()+"");
                 if(DateUtils.isToday(date.getDate().getTime()) && exerciseData.getCheckState() == ExerciseData.WORKOUT_NOT_FINISH){
+                    Log.i("exerciseData",exerciseData.getCheckState()+"");
                     exeButton.setVisibility(View.VISIBLE);
                     exeButton.setOnClickListener(new View.OnClickListener() {
                         @Override
