@@ -2,9 +2,12 @@ package com.finalproject.reachyourfitnessgoals.database;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
+import com.finalproject.reachyourfitnessgoals.models.DateData;
 import com.finalproject.reachyourfitnessgoals.models.PersonalData;
 
 /**
@@ -40,6 +43,22 @@ public class handleTABLE_PERSONAL {
         values.put(COLUMN_HEIGHT, data.getHeight());
 
         writeSQLite.insert(TABLE_PERSONAL, null, values);
+    }
+
+    public PersonalData getPersonal(){
+        Cursor cursor = readSQLite.rawQuery("SELECT * FROM " + TABLE_PERSONAL ,null);
+        if (cursor != null) {
+            cursor.moveToFirst();
+            Log.i("personal",cursor.getString(1));
+            Log.i("personal",cursor.getString(2));
+            Log.i("personal",cursor.getInt(3)+"");
+            Log.i("personal",cursor.getInt(4)+"");
+            Log.i("personal",cursor.getDouble(5)+"");
+            Log.i("personal",cursor.getDouble(6)+"");
+            return new PersonalData(cursor.getString(1),cursor.getString(2),cursor.getInt(3),cursor.getInt(4),cursor.getDouble(5),cursor.getDouble(6));
+        }else {
+            return null;
+        }
     }
 
     public void delete(){

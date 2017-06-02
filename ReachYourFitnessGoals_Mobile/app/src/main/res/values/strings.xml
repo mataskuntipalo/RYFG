@@ -16,7 +16,7 @@
     <string name="sharedBoolDayHighLight">day</string>
     <string name="sharedBoolSetExe">checkSetExe</string>
     <string name="sharedBoolLogIn">checkLogIn</string>
-    <string name="sharedIntMemberId">memberId</string>
+    <string name="sharedStringMemberId">memberId</string>
 
     <!-- SetExerciseInWeekActivity -->
     <string name="steps_titles1">เลือกจำนวนวัน</string>

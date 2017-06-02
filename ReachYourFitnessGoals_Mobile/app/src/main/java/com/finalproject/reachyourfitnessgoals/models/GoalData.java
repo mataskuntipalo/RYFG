@@ -9,12 +9,13 @@ import java.sql.Date;
 public class GoalData {
     int typeGoal;
     int kgPerWeek;
-    int totalDuration;
+    int totalCalorie;
     float weightGoal;
     int day_date_begin;
     int month_date_begin;
     int year_date_begin;
     int status;
+    int percentFat;
     String programName;
 
 
@@ -58,12 +59,12 @@ public class GoalData {
         this.weightGoal = weightGoal;
     }
 
-    public int getTotalDuration() {
-        return totalDuration;
+    public int getTotalCalorie() {
+        return totalCalorie;
     }
 
-    public void setTotalDuration(int totalDuration) {
-        this.totalDuration = totalDuration;
+    public void setTotalCalorie(int totalCalorie) {
+        this.totalCalorie = totalCalorie;
     }
 
     public int getKgPerWeek() {
@@ -80,6 +81,14 @@ public class GoalData {
 
     public void setStatus(int status) {
         this.status = status;
+    }
+
+    public int getPercentFat() {
+        return percentFat;
+    }
+
+    public void setPercentFat(int percentFat) {
+        this.percentFat = percentFat;
     }
 
     public String getProgramName() {

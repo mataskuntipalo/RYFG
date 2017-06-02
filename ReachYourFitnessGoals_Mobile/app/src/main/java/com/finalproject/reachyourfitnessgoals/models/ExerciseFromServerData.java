@@ -5,8 +5,23 @@ package com.finalproject.reachyourfitnessgoals.models;
  */
 
 public class ExerciseFromServerData {
-    int day,month,year,calorieInDay,calorieTotal,check_state_workout;
-    String vdo_id,note,time;
+    int day,month,year;
+    String vdo_id;
+    int calorieInDay,calorieTotal;
+    String note,time;
+    int check_state_workout;
+
+    public ExerciseFromServerData(int day, int month, int year, String vdo_id, int calorieInDay, int calorieTotal, String note, String time, int check_state_workout) {
+        this.day = day;
+        this.month = month;
+        this.year = year;
+        this.vdo_id = vdo_id;
+        this.calorieInDay = calorieInDay;
+        this.calorieTotal = calorieTotal;
+        this.note = note;
+        this.time = time;
+        this.check_state_workout = check_state_workout;
+    }
 
     public int getDay() {
         return day;

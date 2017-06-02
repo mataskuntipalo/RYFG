@@ -104,8 +104,6 @@ public class fragment_signUp extends Fragment {
             public void onClick(View view) {
                 setUpData();
                 setDataToServer();
-                editor.putBoolean(getResources().getString(R.string.sharedBoolLogIn), true);
-                editor.commit();
                 fragment_selectGoal selectGoal = fragment_selectGoal.newInstance();
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 fragmentManager
@@ -151,10 +149,13 @@ public class fragment_signUp extends Fragment {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, UrlServer.SINGUP,new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                if(response.trim().equals("success")){
-                    new handleTABLE_PERSONAL(getContext()).addPersonal(personalData);
-                }else{
+                if(response.trim().equals("Could not register")){
                     Toast.makeText(getActivity(),response,Toast.LENGTH_LONG).show();
+                }else{
+                    new handleTABLE_PERSONAL(getContext()).addPersonal(personalData);
+                    editor.putBoolean(getResources().getString(R.string.sharedBoolLogIn), true);
+                    editor.putString(getResources().getString(R.string.sharedStringMemberId),response.trim());
+                    editor.commit();
                 }
             }
         },

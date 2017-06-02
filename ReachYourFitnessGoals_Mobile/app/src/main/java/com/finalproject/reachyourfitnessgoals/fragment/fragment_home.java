@@ -39,7 +39,10 @@ import com.finalproject.reachyourfitnessgoals.activity.LoginActivity;
 import com.finalproject.reachyourfitnessgoals.activity.MainActivity;
 import com.finalproject.reachyourfitnessgoals.activity.SetExerciseInWeekActivity;
 import com.finalproject.reachyourfitnessgoals.database.handleTABLE_EXERCISE;
+import com.finalproject.reachyourfitnessgoals.database.handleTABLE_PROGRAM;
 import com.finalproject.reachyourfitnessgoals.models.DateData;
+import com.finalproject.reachyourfitnessgoals.models.GlobalData;
+import com.finalproject.reachyourfitnessgoals.models.GoalData;
 import com.finalproject.reachyourfitnessgoals.setting.handleCalendar;
 import com.github.florent37.materialviewpager.MaterialViewPagerHelper;
 import com.google.gson.Gson;
@@ -63,7 +66,9 @@ public class fragment_home extends Fragment {
     LinearLayout displayDay;
     TextView cancelSetExe;
     NestedScrollView nestedScrollView;
+    int currentProgramType;
     ImageView bgPic;
+    GoalData programData;
 
     public fragment_home() {
         // Required empty public constructor
@@ -80,6 +85,9 @@ public class fragment_home extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootview = inflater.inflate(R.layout.fragment_home, container, false);
+
+        currentProgramType = ((GlobalData)getActivity().getApplication()).getCurrentProgramType();
+        programData = new handleTABLE_PROGRAM(getContext()).getCurrentProgramDate();
 
         //testJson(rootview);
         Button notiBtn = (Button)rootview.findViewById(R.id.notification_Button_home);
@@ -112,11 +120,15 @@ public class fragment_home extends Fragment {
                 .setLineWidth(32f)
                 .build());
 
-        //Create data series track
-        final SeriesItem seriesItem1 = new SeriesItem.Builder(Color.argb(255, 0, 0, 0))
-                .setRange(0, 25, 0)
-                .setLineWidth(32f)
-                .build();
+
+            //Create data series track
+        final SeriesItem  seriesItem1 = new SeriesItem.Builder(Color.argb(255, 0, 0, 0))
+                    .setRange(0,100,0)
+                    .setLineWidth(32f)
+                    .build();
+
+
+
 
         final int series1Index = arcView.addSeries(seriesItem1);
 
@@ -126,8 +138,11 @@ public class fragment_home extends Fragment {
                 .setDuration(2000)
                 .build());
 
-        arcView.addEvent(new DecoEvent.Builder(25).setIndex(series1Index).setDelay(4000).build());
+        if(currentProgramType == 0) {
+            arcView.addEvent(new DecoEvent.Builder(25).setIndex(series1Index).setDelay(4000).build());
+        }else{
 
+        }
 
         final Animation in = new AlphaAnimation(0.0f, 1.0f);
         in.setDuration(3000);
@@ -169,6 +184,10 @@ public class fragment_home extends Fragment {
 
         return rootview;
 
+    }
+
+    private int calPercentWeight(){
+        programData.getTotalCalorie();
     }
 
     private void testJson(View rootview) {

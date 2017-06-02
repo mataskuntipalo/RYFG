@@ -383,7 +383,7 @@ public class SetExerciseInWeekActivity extends AppCompatActivity implements Vert
     private void addToDataBase(DateData data){
         ExeInWeekData exeInWeekData = new ExeInWeekData(data.getDay(),data.getMonth(),data.getYear());
         handleTABLE_PROGRAM handleTABLEProgram = new handleTABLE_PROGRAM(this);
-        exeInWeekData.setCalorieTotal(handleTABLEProgram.getProgramDate().getKgPerWeek()/workoutOfWeekData.getWorkoutPerWeek());
+        exeInWeekData.setCalorieTotal(handleTABLEProgram.getCurrentProgramDate().getKgPerWeek()/workoutOfWeekData.getWorkoutPerWeek());
         handleTableExercise.addExercise(exeInWeekData);
     }
 

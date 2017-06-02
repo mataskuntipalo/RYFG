@@ -162,19 +162,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         itemHome     = new CustomizableResideMenuItem(this, R.drawable.ic_username,     "Home");
         itemProfile  = new CustomizableResideMenuItem(this, R.drawable.ic_username,  "Profile");
-        itemLogOut = new CustomizableResideMenuItem(this, R.drawable.ic_username, "Calendar");
+        itemLogOut = new CustomizableResideMenuItem(this, R.drawable.ic_username, "LogOut");
 
-        itemHome.setOnClickListener(this);
-        itemHome.setOnClickListener(this);
+
         itemLogOut.setOnClickListener(this);
 
-        itemHome.setTypeface();
-        itemHome.setTypeface();
+
+        itemProfile.setTypeface();
         itemLogOut.setTypeface();
 
         resideMenu.addMenuItem(itemHome, ResideMenu.DIRECTION_LEFT);
         resideMenu.addMenuItem(itemProfile, ResideMenu.DIRECTION_LEFT);
-        resideMenu.addMenuItem(itemLogOut, ResideMenu.DIRECTION_RIGHT);
+        resideMenu.addMenuItem(itemLogOut, ResideMenu.DIRECTION_LEFT);
 
         resideMenu.setSwipeDirectionDisable(ResideMenu.DIRECTION_RIGHT);
     }

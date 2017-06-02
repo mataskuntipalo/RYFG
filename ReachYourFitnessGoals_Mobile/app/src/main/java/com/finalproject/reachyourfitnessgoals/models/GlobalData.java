@@ -3,6 +3,7 @@ package com.finalproject.reachyourfitnessgoals.models;
 import android.app.Application;
 
 import com.finalproject.reachyourfitnessgoals.R;
+import com.finalproject.reachyourfitnessgoals.database.handleTABLE_PROGRAM;
 import com.finalproject.reachyourfitnessgoals.models.DateData;
 
 import java.util.ArrayList;
@@ -18,10 +19,13 @@ public class GlobalData extends Application {
     private DateData dateData;
     private ArrayList<ExeForGlobalData> exeForGlobalData;
     private String[] type = {"Stretching","Warm Up","Strength","Cardio","Cool Down"};
+    private int currentProgramType;
 
     @Override
     public void onCreate() {
         super.onCreate();
+
+        currentProgramType = new handleTABLE_PROGRAM(this).getCurrentProgramDate().getTypeGoal();
 
         //init Font
         CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
@@ -53,6 +57,10 @@ public class GlobalData extends Application {
 
     public ArrayList<ExeForGlobalData> getExeForGlobalData() {
         return exeForGlobalData;
+    }
+
+    public int getCurrentProgramType() {
+        return currentProgramType;
     }
 
     public void addExeForGlobalData(ExeForGlobalData exeForGlobalData) {

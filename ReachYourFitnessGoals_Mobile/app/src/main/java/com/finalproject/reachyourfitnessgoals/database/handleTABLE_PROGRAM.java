@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.finalproject.reachyourfitnessgoals.models.ExerciseFromServerData;
 import com.finalproject.reachyourfitnessgoals.models.GoalData;
 import com.finalproject.reachyourfitnessgoals.models.vdoData;
 
@@ -21,7 +22,7 @@ public class handleTABLE_PROGRAM {
         public static final String TABLE_PROGRAM = "PROGRAM";
         public static final String COLUMN_TYPE_GOAL = "typeGoal";
         public static final String COLUMN_WEIGHT_GOAL = "weightGoal";
-        public static final String COLUMN_TOTAL_DURATION = "totalDuration";
+        public static final String COLUMN_TOTAL_CALORIE = "totalCalorie";
         public static final String COLUMN_KG_PER_WEEK = "kgPerWeek";
 
 
@@ -30,6 +31,7 @@ public class handleTABLE_PROGRAM {
         public static final String COLUMN_DAY_BEGIN = "day_date_begin";
 
         public static final String COLUMN_STATUS = "status";
+        public static final String COLUMN_PERCENT_FAT = "percentFat";
         public static final String COLUMN_PROGRAM_NAME = "programName";
 
         public handleTABLE_PROGRAM(Context context) {
@@ -43,7 +45,7 @@ public class handleTABLE_PROGRAM {
             ContentValues values = new ContentValues();
             values.put(COLUMN_TYPE_GOAL, 0);
             values.put(COLUMN_WEIGHT_GOAL, data.getWeightGoal());
-            values.put(COLUMN_TOTAL_DURATION, data.getTotalDuration());
+            values.put(COLUMN_TOTAL_CALORIE, data.getTotalCalorie());
             values.put(COLUMN_KG_PER_WEEK, data.getKgPerWeek());
 
 
@@ -52,6 +54,7 @@ public class handleTABLE_PROGRAM {
             values.put(COLUMN_DAY_BEGIN, data.getDay_date_begin());
 
             values.put(COLUMN_STATUS, data.getStatus());
+            values.put(COLUMN_PERCENT_FAT, data.getPercentFat());
             values.put(COLUMN_PROGRAM_NAME, data.getProgramName());
 
             writeSQLite.insert(TABLE_PROGRAM, null, values);
@@ -62,7 +65,7 @@ public class handleTABLE_PROGRAM {
         for (GoalData data: goalDatas) {
             values.put(COLUMN_TYPE_GOAL, data.getTypeGoal());
             values.put(COLUMN_WEIGHT_GOAL, data.getWeightGoal());
-            values.put(COLUMN_TOTAL_DURATION, data.getTotalDuration());
+            values.put(COLUMN_TOTAL_CALORIE, data.getTotalCalorie());
             values.put(COLUMN_KG_PER_WEEK, data.getKgPerWeek());
 
             values.put(COLUMN_YEAR_BEGIN, data.getYear_date_begin());
@@ -77,21 +80,51 @@ public class handleTABLE_PROGRAM {
     }
 
 
-        public GoalData getProgramDate(){
+        public GoalData getCurrentProgramDate(){
             GoalData data = new GoalData();
-            Cursor cursor = readSQLite.rawQuery("SELECT * FROM " + TABLE_PROGRAM ,null);
-            cursor.moveToLast();
+            Cursor cursor = readSQLite.rawQuery("SELECT * FROM " + TABLE_PROGRAM + " WHERE " + COLUMN_STATUS + "= 1",null);
+            cursor.moveToFirst();
 
+            data.setTypeGoal(cursor.getInt(1));
             data.setWeightGoal(cursor.getFloat(2));
-            data.setTotalDuration(cursor.getInt(3));
+            data.setTotalCalorie(cursor.getInt(3));
             data.setKgPerWeek(cursor.getInt(4));
             data.setYear_date_begin(cursor.getInt(5));
             data.setMonth_date_begin(cursor.getInt(6));
             data.setYear_date_begin(cursor.getInt(7));
             data.setStatus(cursor.getInt(8));
-            data.setProgramName(cursor.getString(9));
+            data.setPercentFat(cursor.getInt(9));
+            data.setProgramName(cursor.getString(10));
             return data;
         }
+
+    public ArrayList<GoalData> getProgramDateList(){
+        ArrayList<GoalData> dataArrayList = new ArrayList<>();
+        Cursor cursor = readSQLite.rawQuery("SELECT * FROM " + TABLE_PROGRAM ,null);
+
+        if (cursor != null) {
+            cursor.moveToFirst();
+            while(!cursor.isAfterLast()) {
+                GoalData data = new GoalData();
+                data.setTypeGoal(cursor.getInt(1));
+                data.setWeightGoal(cursor.getFloat(2));
+                data.setTotalCalorie(cursor.getInt(3));
+                data.setKgPerWeek(cursor.getInt(4));
+                data.setYear_date_begin(cursor.getInt(5));
+                data.setMonth_date_begin(cursor.getInt(6));
+                data.setYear_date_begin(cursor.getInt(7));
+                data.setStatus(cursor.getInt(8));
+                data.setPercentFat(cursor.getInt(9));
+                data.setProgramName(cursor.getString(10));
+                dataArrayList.add(data);
+
+                cursor.moveToNext();
+            }
+            return dataArrayList;
+        }else {
+            return null;
+        }
+    }
 
     public void delete(){
         writeSQLite.execSQL("delete from "+ TABLE_PROGRAM);

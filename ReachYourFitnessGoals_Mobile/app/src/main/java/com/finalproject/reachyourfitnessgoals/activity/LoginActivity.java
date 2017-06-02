@@ -142,6 +142,7 @@ public class LoginActivity extends AppCompatActivity {
     private View.OnClickListener userLogin = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+            goToMain();
             StringRequest stringRequest = new StringRequest(Request.Method.POST, UrlServer.LOGIN,
                     new Response.Listener<String>() {
                         @Override
@@ -150,7 +151,7 @@ public class LoginActivity extends AppCompatActivity {
                                 Toast.makeText(LoginActivity.this,"email not correct",Toast.LENGTH_LONG).show();
                             }else{
                                 editor.putBoolean(getResources().getString(R.string.sharedBoolLogIn), true);
-                                editor.putString(getResources().getString(R.string.sharedIntMemberId), response.trim());
+                                editor.putString(getResources().getString(R.string.sharedStringMemberId), response.trim());
                                 editor.commit();
                                 goToLoadData();
                             }

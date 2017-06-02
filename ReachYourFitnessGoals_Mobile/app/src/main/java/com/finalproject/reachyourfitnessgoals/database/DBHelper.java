@@ -24,12 +24,13 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String TABLE_PROGRAM = "CREATE TABLE PROGRAM (program_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
             "typeGoal INTEGER NOT NULL, " +
             "weightGoal INTEGER , " +
-            "totalDuration INTEGER , " +
+            "totalCalorie INTEGER DEFAULT 0 , " +
             "kgPerWeek INTEGER, " +
             "year_date_begin INTEGER NOT NULL, " +
             "month_date_begin INTEGER NOT NULL, " +
             "day_date_begin INTEGER NOT NULL, " +
             "status INTEGER NOT NULL, " +
+            "percentFat INTEGER, " +
             "programName TEXT);";
 
     private static final String TABLE_VDO = "CREATE TABLE VDO (vdo_id INTEGER PRIMARY KEY AUTOINCREMENT, " +

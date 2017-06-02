@@ -73,12 +73,29 @@ public class handleTABLE_EXERCISE {
         }
     }
 
+    public ArrayList<ExerciseFromServerData> getExerciseData(){
+        ArrayList<ExerciseFromServerData> datas = new ArrayList<>();
+        Cursor cursor = readSQLite.rawQuery("SELECT * FROM " + TABLE_EXERCISE ,null);
+
+        if (cursor != null) {
+            cursor.moveToFirst();
+            while(!cursor.isAfterLast()) {
+                datas.add(new ExerciseFromServerData(cursor.getInt(1),cursor.getInt(2),cursor.getInt(3),cursor.getString(4)
+                ,cursor.getInt(5),cursor.getInt(6),cursor.getString(7),cursor.getString(8),cursor.getInt(9)));
+
+                cursor.moveToNext();
+            }
+            return datas;
+        }else {
+            return null;
+        }
+    }
+
     public ArrayList<DateData> getDateExerciseToCalendar(){
         ArrayList<DateData> dateDataArrayList = new ArrayList<>();
         Cursor cursor = readSQLite.rawQuery("SELECT * FROM " + TABLE_EXERCISE ,null);
 
         if (cursor != null) {
-            Log.i("cursor","cursor!=null");
             cursor.moveToFirst();
             while(!cursor.isAfterLast()) {
                 DateData data = new DateData(cursor.getInt(1),cursor.getInt(2),cursor.getInt(3));

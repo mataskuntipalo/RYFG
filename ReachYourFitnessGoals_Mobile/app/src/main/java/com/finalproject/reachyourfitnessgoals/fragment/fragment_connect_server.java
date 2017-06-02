@@ -16,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -50,6 +51,7 @@ import com.google.gson.JsonObject;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -76,6 +78,7 @@ public class fragment_connect_server extends Fragment {
     handleTABLE_PERSONAL tablePersonal;
     handleTABLE_PROGRAM tableProgram;
     handleTABLE_EXERCISE tableExercise;
+    TextView textView;
 
 
     public fragment_connect_server() {
@@ -99,9 +102,11 @@ public class fragment_connect_server extends Fragment {
         // Inflate the layout for this fragment
         View rootview = inflater.inflate(R.layout.fragment_connect_server, container, false);
 
+        textView = (TextView) rootview.findViewById(R.id.jsonText);
+
         shared = getActivity().getSharedPreferences(getResources().getString(R.string.sharedPreferencesName), Context.MODE_PRIVATE);
         editor = shared.edit();
-        member_id = shared.getString(getResources().getString(R.string.sharedIntMemberId),"0");
+        member_id = shared.getString(getResources().getString(R.string.sharedStringMemberId),"0");
 
 
         tableVdo = new handleTABLE_VDO(getContext());
@@ -198,6 +203,36 @@ public class fragment_connect_server extends Fragment {
     }
 
     private void upload() {
+        Gson gson = new Gson();
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("member_id",shared.getString(getResources().getString(R.string.sharedStringMemberId),"0"));
+        params.put("personal",gson.toJson(tablePersonal.getPersonal()));
+        params.put("program",gson.toJson(tableProgram.getProgramDateList()));
+        params.put("exercise",gson.toJson(tableExercise.getExerciseData()));
+        Log.i("personal",gson.toJson(tablePersonal.getPersonal()));
+        textView.setText(gson.toJson(tablePersonal.getPersonal()));
+        JsonObjectRequest jsonObjectRequestUpload = new JsonObjectRequest(Request.Method.POST,UrlServer.SENDJSON,new JSONObject(params),new Response.Listener<JSONObject>(){
+            @Override
+            public void onResponse(JSONObject response) {
+                Log.i("uploadComplete",response.toString());
+                goToLogin();
+            }
+        }, new Response.ErrorListener(){
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+        JsonSingleton.getInstance(getContext()).addToRequestQueue(jsonObjectRequestUpload);
+        //clearData();
+    }
+
+    private void goToLogin(){
+        Intent intent = new Intent(getActivity(),LoginActivity.class);
+        startActivity(intent);
+    }
+
+    private void clearData() {
         tableVdo.delete();
         tablePersonal.delete();
         tableProgram.delete();
