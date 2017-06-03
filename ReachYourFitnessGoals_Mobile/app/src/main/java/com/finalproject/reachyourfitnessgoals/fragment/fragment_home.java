@@ -86,8 +86,9 @@ public class fragment_home extends Fragment {
         // Inflate the layout for this fragment
         View rootview = inflater.inflate(R.layout.fragment_home, container, false);
 
-        currentProgramType = ((GlobalData)getActivity().getApplication()).getCurrentProgramType();
+
         programData = new handleTABLE_PROGRAM(getContext()).getCurrentProgramDate();
+        currentProgramType = programData.getTypeGoal();
 
         //testJson(rootview);
         Button notiBtn = (Button)rootview.findViewById(R.id.notification_Button_home);
@@ -138,10 +139,11 @@ public class fragment_home extends Fragment {
                 .setDuration(2000)
                 .build());
 
-        if(currentProgramType == 0) {
-            arcView.addEvent(new DecoEvent.Builder(25).setIndex(series1Index).setDelay(4000).build());
-        }else{
 
+        if(currentProgramType == 0) {
+            arcView.addEvent(new DecoEvent.Builder(calPercentWeight()).setIndex(series1Index).setDelay(4000).build());
+        }else{
+            arcView.addEvent(new DecoEvent.Builder(programData.getPercentFat()).setIndex(series1Index).setDelay(4000).build());
         }
 
         final Animation in = new AlphaAnimation(0.0f, 1.0f);
@@ -187,7 +189,14 @@ public class fragment_home extends Fragment {
     }
 
     private int calPercentWeight(){
-        programData.getTotalCalorie();
+        double temp = (programData.getTotalCalorie()/(programData.getWeightGoal()*7700));
+        int percent = (int) (temp*100);
+        Log.i("percent1",programData.getTotalCalorie()+"");
+        Log.i("percent1",programData.getWeightGoal()+"");
+        Log.i("percent1",(programData.getWeightGoal()*7700)+"");
+        Log.i("percent1",(programData.getTotalCalorie()/(programData.getWeightGoal()*7700))+"");
+        Log.i("percent1",percent+"");
+        return percent;
     }
 
     private void testJson(View rootview) {

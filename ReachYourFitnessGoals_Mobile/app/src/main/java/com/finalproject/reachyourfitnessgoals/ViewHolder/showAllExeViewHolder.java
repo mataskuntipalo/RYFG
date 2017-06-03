@@ -15,6 +15,7 @@ public class showAllExeViewHolder extends RecyclerView.ViewHolder implements Vie
 
     public ImageView exePic_all;
     public TextView exeName_all;
+    public TextView exeNumber_all;
     public showAllExeViewHolderClicks  mListener;
 
     public showAllExeViewHolder(View itemView,showAllExeViewHolderClicks listener) {
@@ -22,6 +23,7 @@ public class showAllExeViewHolder extends RecyclerView.ViewHolder implements Vie
         mListener = listener;
         exePic_all = (ImageView) itemView.findViewById(R.id.pic_showAll);
         exeName_all = (TextView) itemView.findViewById(R.id.name_text_showAll);
+        exeNumber_all = (TextView) itemView.findViewById(R.id.number_text_showAll);
         itemView.setOnClickListener(this);
     }
 

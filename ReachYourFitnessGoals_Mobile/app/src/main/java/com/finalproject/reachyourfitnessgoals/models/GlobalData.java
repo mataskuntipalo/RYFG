@@ -18,14 +18,14 @@ public class GlobalData extends Application {
 
     private DateData dateData;
     private ArrayList<ExeForGlobalData> exeForGlobalData;
-    private String[] type = {"Stretching","Warm Up","Strength","Cardio","Cool Down"};
-    private int currentProgramType;
+    public String[] type = {"Stretching","Warm Up","Strength","Cardio","Cool Down"};
+
 
     @Override
     public void onCreate() {
         super.onCreate();
 
-        currentProgramType = new handleTABLE_PROGRAM(this).getCurrentProgramDate().getTypeGoal();
+
 
         //init Font
         CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
@@ -59,9 +59,7 @@ public class GlobalData extends Application {
         return exeForGlobalData;
     }
 
-    public int getCurrentProgramType() {
-        return currentProgramType;
-    }
+
 
     public void addExeForGlobalData(ExeForGlobalData exeForGlobalData) {
         this.exeForGlobalData.add(exeForGlobalData);

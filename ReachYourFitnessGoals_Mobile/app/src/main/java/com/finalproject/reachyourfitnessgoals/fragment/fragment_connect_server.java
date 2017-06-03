@@ -9,6 +9,7 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.Gravity;
@@ -24,6 +25,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.RequestFuture;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
@@ -60,6 +62,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
 
 import static com.github.jorgecastillo.library.R.dimen.strokeWidth;
 
@@ -79,6 +82,7 @@ public class fragment_connect_server extends Fragment {
     handleTABLE_PROGRAM tableProgram;
     handleTABLE_EXERCISE tableExercise;
     TextView textView;
+    ProgressDialog progressDialog;
 
 
     public fragment_connect_server() {
@@ -101,6 +105,10 @@ public class fragment_connect_server extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootview = inflater.inflate(R.layout.fragment_connect_server, container, false);
+
+        progressDialog = new ProgressDialog(getContext());
+        progressDialog.setMessage("Loading...");
+        progressDialog.show();
 
         textView = (TextView) rootview.findViewById(R.id.jsonText);
 
@@ -128,10 +136,6 @@ public class fragment_connect_server extends Fragment {
         Map<String, String> params = new HashMap<String, String>();
         params.put("member_id", member_id);
         json_key = getResources().getStringArray(R.array.json_key);
-
-        final ProgressDialog progressDialog = new ProgressDialog(getContext());
-        progressDialog.setMessage("Loading...");
-        progressDialog.show();
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, UrlServer.GETJSON, new JSONObject(params),
                 new Response.Listener<JSONObject>() {
                     @Override
@@ -150,7 +154,7 @@ public class fragment_connect_server extends Fragment {
                                         final String nameExe = jsonArray.getJSONObject(j).getString("name");
                                         Glide
                                                 .with(getContext())
-                                                .load("http://192.168.1.35/ryfg/image/" + nameExe + ".jpg")
+                                                .load("http://172.25.84.26/ryfg/image/" + nameExe + ".jpg")
                                                 .asBitmap()
                                                 .toBytes(Bitmap.CompressFormat.JPEG, 80)
                                                 .into(new SimpleTarget<byte[]>() {
@@ -189,8 +193,7 @@ public class fragment_connect_server extends Fragment {
                         tablePersonal.addPersonal(personalData);
                         tableProgram.addProgramList(goalDataArrayList);
                         tableExercise.addExerciseList(exerciseFromServerDatas);
-                        progressDialog.dismiss();
-                        goToMain();
+                        showView();
                     }
                 },
                 new Response.ErrorListener() {
@@ -202,6 +205,29 @@ public class fragment_connect_server extends Fragment {
         JsonSingleton.getInstance(getContext()).addToRequestQueue(jsonObjectRequest);
     }
 
+    private void showView() {
+        int typeGoal = getTypeGoal();
+        Handler handler = new Handler();
+        while (typeGoal == -1){
+            final int finalTypeGoal = typeGoal;
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    Log.i("typeGal", finalTypeGoal +"");
+                    // Hide your View after 3 seconds
+                }
+            }, 1000);
+            typeGoal = getTypeGoal();
+        }
+        progressDialog.dismiss();
+        goToMain();
+    }
+
+    private int getTypeGoal(){
+        GoalData goalData = new handleTABLE_PROGRAM(getContext()).getCurrentProgramDate();
+        return goalData.getTypeGoal();
+    }
+
     private void upload() {
         Gson gson = new Gson();
         Map<String, String> params = new HashMap<String, String>();
@@ -209,22 +235,32 @@ public class fragment_connect_server extends Fragment {
         params.put("personal",gson.toJson(tablePersonal.getPersonal()));
         params.put("program",gson.toJson(tableProgram.getProgramDateList()));
         params.put("exercise",gson.toJson(tableExercise.getExerciseData()));
-        Log.i("personal",gson.toJson(tablePersonal.getPersonal()));
-        textView.setText(gson.toJson(tablePersonal.getPersonal()));
+        Log.i("personal",new JSONObject(params).toString());
+        Log.i("personal",tableExercise.getExerciseData().size()+"");
+        textView.setText(new JSONObject(params).toString());
+
         JsonObjectRequest jsonObjectRequestUpload = new JsonObjectRequest(Request.Method.POST,UrlServer.SENDJSON,new JSONObject(params),new Response.Listener<JSONObject>(){
             @Override
             public void onResponse(JSONObject response) {
-                Log.i("uploadComplete",response.toString());
-                goToLogin();
+                try {
+                    if(response.getString("complete").equals("uploadComplete")){
+                        Log.i("uploadComplete",response.toString());
+                        goToLogin();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         }, new Response.ErrorListener(){
             @Override
             public void onErrorResponse(VolleyError error) {
-
+                Toast.makeText(getActivity(),error.toString(),Toast.LENGTH_LONG ).show();
             }
         });
         JsonSingleton.getInstance(getContext()).addToRequestQueue(jsonObjectRequestUpload);
-        //clearData();
+        editor.putBoolean(getResources().getString(R.string.sharedBoolLogIn), false);
+        editor.commit();
+        clearData();
     }
 
     private void goToLogin(){

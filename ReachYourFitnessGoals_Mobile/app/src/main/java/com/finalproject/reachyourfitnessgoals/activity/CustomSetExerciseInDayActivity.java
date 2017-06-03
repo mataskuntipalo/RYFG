@@ -1,6 +1,8 @@
 package com.finalproject.reachyourfitnessgoals.activity;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -144,6 +146,11 @@ public class CustomSetExerciseInDayActivity extends AppCompatActivity {
                     ((GlobalData)getApplication()).resetData();
                 }
             });
+            Intent intent = new Intent();
+            setResult(Activity.RESULT_OK, intent);
+            finish();
+        }else {
+            confirmButton.setVisibility(View.GONE);
         }
     }
 

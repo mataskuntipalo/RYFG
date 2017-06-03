@@ -62,9 +62,9 @@ public class GoalActivity extends AppCompatActivity {
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                goalData.setWeightGoal(Float.parseFloat(weightGoal.getText().toString()));
-                calDurationOfProgramExe(goalData);
-                calDateOfProgram();
+                //goalData.setWeightGoal(Float.parseFloat(weightGoal.getText().toString()));
+                //calDurationOfProgramExe(goalData);
+                //calDateOfProgram();
                 //handleTableProgram.addProgram(goalData);
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -96,11 +96,9 @@ public class GoalActivity extends AppCompatActivity {
         float temp = data.getWeightGoal()*7700;
         temp = temp / data.getKgPerWeek();
         if(temp % 1 == 0){
-            goalData.setTotalDuration((int)temp);
-            Log.i("temp",goalData.getTotalDuration()+"");
+            //goalData.setTotalDuration((int)temp);
         }else{
-            goalData.setTotalDuration((int)temp+1);
-            Log.i("temp2",goalData.getTotalDuration()+"");
+            //goalData.setTotalDuration((int)temp+1);
         }
 
     }
@@ -119,8 +117,8 @@ public class GoalActivity extends AppCompatActivity {
         Log.i("dateBegin",goalData.getMonth_date_begin()+"");
         Log.i("dateBegin",goalData.getYear_date_begin()+"");
 
-        int tempDateEnd = goalData.getTotalDuration() * 7;
-        thaiTime.add(Calendar.DATE,tempDateEnd);
+//        int tempDateEnd = goalData.getTotalDuration() * 7;
+//        thaiTime.add(Calendar.DATE,tempDateEnd);
         int year_end = thaiTime.get(Calendar.YEAR);
         int month_end = thaiTime.get(Calendar.MONTH)+1;
         int day_end = thaiTime.get(Calendar.DAY_OF_MONTH);

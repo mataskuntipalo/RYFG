@@ -48,8 +48,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     public static int sumCalorieInDay;
 
 
+
     public RecyclerViewAdapter(Activity activity, int type) {
-        Log.i("typeExe",type+"");
         this.vdoDataArrayList = new handleTABLE_VDO(activity).getVdoExercise();
         this.activity = activity;
         this.type = type;
@@ -61,7 +61,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
 
     public RecyclerViewAdapter(Context mContext , String type) {
-        Log.i("typeExe",type);
         this.vdoDataArrayList = new handleTABLE_VDO(mContext).getCustomVdoExercise(type);
         this.type = ListType.TYPE_CUSTOM_EXERCISE;
         context = mContext;
@@ -104,7 +103,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             });
             return customExeViewHolder;
         }else if(type == ListType.TYPE_RANDOM_EXERCISE){
-            if(this.vdoDataArrayList.get(viewType).isHead()){
+            if(viewType == 1){
                 View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.header_listview_row, parent, false);
                 return new headerExeViewHolder(view);
             }else {
@@ -127,7 +126,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         }else if(holder instanceof customExeViewHolder){
             customExeViewHolder customExeViewHolder = (customExeViewHolder) holder;
             customExeViewHolder.itemView.setTag(R.id.name,vdoDataArrayList.get(position).getName());
-            customExeViewHolder.itemView.setTag(R.id.calorie,"5");
+            customExeViewHolder.itemView.setTag(R.id.calorie,vdoDataArrayList.get(position).getCalorie()+"");
             customExeViewHolder.itemView.setTag(R.id.vdo_id,vdoDataArrayList.get(position).getVdo_id());
             setupCustomExe(customExeViewHolder, vdoDataArrayList.get(position));
 
@@ -167,7 +166,11 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     @Override
     public int getItemViewType(int position) {
-        return position;
+        if(this.vdoDataArrayList.get(position).isHead()){
+            return 1;
+        }else {
+            return 0;
+        }
     }
 
     public void randomExe(){
@@ -177,7 +180,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             int maxCalorieEachStep = setUpCalorieAndExe.getMaxCalorieForEachStep(ExeType.TYPE[i],i);
 
             // add Head in vdoDataArrayList
-            vdoData vdoData = new vdoData("",((GlobalData) activity.getApplication()).getExeForGlobalData().get(i).getType(),"","",0);
+            vdoData vdoData = new vdoData("",((GlobalData) activity.getApplication()).type[i],"","",0);
             vdoData.setHead(true);
             // end add Head
 
@@ -194,10 +197,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         sumCalorieInType = 0;
         while (sumCalorieInType<maxCalorie){
             numRandom = r.nextInt(data.size());
-            //data.get(numRandom).getCalorie();
-            sumCalorieInType = sumCalorieInType + 5;
-            list.add(new userSelectData(data.get(numRandom).getName(),5,data.get(numRandom).getVdo_id()));
-            Log.i("nameList",data.get(numRandom).getName());
+            sumCalorieInType = sumCalorieInType + data.get(numRandom).getCalorie();
+            list.add(new userSelectData(data.get(numRandom).getName(),data.get(numRandom).getCalorie(),data.get(numRandom).getVdo_id()));
+            data.get(numRandom).setHead(false);
             this.vdoDataArrayList.add(data.get(numRandom));
         }
         sumCalorieInDay = sumCalorieInDay + sumCalorieInType;
@@ -212,9 +214,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     private void setupShowAllExe (showAllExeViewHolder showAllExeViewHolder , vdoData vdoData){
         File mFile = new File(Environment.getExternalStorageDirectory()+ File.separator  + "Android" + File.separator + "data" + File.separator + "com.finalproject.reachyourfitnessgoals" + File.separator + "image" + File.separator + vdoData.getName() + ".jpg");
         Glide.with(activity).load(mFile).into(showAllExeViewHolder.exePic_all);
-        //showAllExeViewHolder.exePic_all.setBackgroundResource(R.drawable.pic);
         showAllExeViewHolder.exeName_all.setText(vdoData.getName());
-        //showAllExeViewHolder.exeName_all.setText("ss");
+        showAllExeViewHolder.exeNumber_all.setText(vdoData.getCalorie()+"");
     }
 
     private void setupCustomExe (customExeViewHolder customExeViewHolder , vdoData vdoData){
@@ -228,9 +229,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         File mFile = new File(Environment.getExternalStorageDirectory()+ File.separator  + "Android" + File.separator + "data" + File.separator + "com.finalproject.reachyourfitnessgoals" + File.separator + "image" + File.separator + vdoData.getName() + ".jpg");
         Glide.with(activity).load(mFile).into(randomExeViewHolder.exePic_all);
         randomExeViewHolder.exeName_all.setText(vdoData.getName());
-        randomExeViewHolder.exeNumber_all.setText(position+"");
+        randomExeViewHolder.exeNumber_all.setText(vdoData.getCalorie()+"");
 
     }
+
 
     public interface OnItemClickListener {
         public void onItemClick(View view , String name,String calorie,String  vdo_id);

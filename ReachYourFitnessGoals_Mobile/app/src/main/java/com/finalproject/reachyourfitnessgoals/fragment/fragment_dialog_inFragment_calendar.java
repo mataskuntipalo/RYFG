@@ -1,11 +1,13 @@
 package com.finalproject.reachyourfitnessgoals.fragment;
 
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -60,5 +62,16 @@ public class fragment_dialog_inFragment_calendar extends DialogFragment {
         return rootview;
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == Activity.RESULT_OK && requestCode == 12345 && data != null) {
+
+
+        }else {
+
+        }
+    }
 
 }

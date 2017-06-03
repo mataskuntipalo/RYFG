@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.finalproject.reachyourfitnessgoals.models.ExerciseFromServerData;
 import com.finalproject.reachyourfitnessgoals.models.GoalData;
@@ -82,20 +83,25 @@ public class handleTABLE_PROGRAM {
 
         public GoalData getCurrentProgramDate(){
             GoalData data = new GoalData();
-            Cursor cursor = readSQLite.rawQuery("SELECT * FROM " + TABLE_PROGRAM + " WHERE " + COLUMN_STATUS + "= 1",null);
+            Cursor cursor = readSQLite.rawQuery("SELECT * FROM " + TABLE_PROGRAM + " WHERE " + COLUMN_STATUS + "=" + 1,null);
             cursor.moveToFirst();
 
-            data.setTypeGoal(cursor.getInt(1));
-            data.setWeightGoal(cursor.getFloat(2));
-            data.setTotalCalorie(cursor.getInt(3));
-            data.setKgPerWeek(cursor.getInt(4));
-            data.setYear_date_begin(cursor.getInt(5));
-            data.setMonth_date_begin(cursor.getInt(6));
-            data.setYear_date_begin(cursor.getInt(7));
-            data.setStatus(cursor.getInt(8));
-            data.setPercentFat(cursor.getInt(9));
-            data.setProgramName(cursor.getString(10));
-            return data;
+            if(cursor.getCount()>0){
+                data.setTypeGoal(cursor.getInt(1));
+                data.setWeightGoal(cursor.getFloat(2));
+                data.setTotalCalorie(cursor.getInt(3));
+                data.setKgPerWeek(cursor.getInt(4));
+                data.setYear_date_begin(cursor.getInt(5));
+                data.setMonth_date_begin(cursor.getInt(6));
+                data.setYear_date_begin(cursor.getInt(7));
+                data.setStatus(cursor.getInt(8));
+                data.setPercentFat(cursor.getInt(9));
+                data.setProgramName(cursor.getString(10));
+                return data;
+            }else {
+                data.setTypeGoal(-1);
+                return data;
+            }
         }
 
     public ArrayList<GoalData> getProgramDateList(){

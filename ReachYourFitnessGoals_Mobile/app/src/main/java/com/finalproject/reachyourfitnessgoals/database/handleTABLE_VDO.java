@@ -40,7 +40,7 @@ public class handleTABLE_VDO {
             values.put(COLUMN_TYPE, data.getType());
             values.put(COLUMN_POSITION , data.getPosition());
             values.put(COLUMN_DURATION , data.getDuration());
-            values.put(COLUMN_CALORIE, data.getPosition());
+            values.put(COLUMN_CALORIE, data.getCalorie());
             writeSQLite.insert(TABLE_VDO, null, values);
         }
 
@@ -53,7 +53,8 @@ public class handleTABLE_VDO {
         if (cursor != null) {
             cursor.moveToFirst();
             while(!cursor.isAfterLast()) {
-                vdoDataArrayListt.add(new vdoData(cursor.getInt(0),cursor.getString(1),cursor.getString(2),cursor.getString(3),cursor.getString(4),cursor.getInt(4)));
+                Log.i("caloreiAll",cursor.getInt(5)+"");
+                vdoDataArrayListt.add(new vdoData(cursor.getInt(0),cursor.getString(1),cursor.getString(2),cursor.getString(3),cursor.getString(4),cursor.getInt(5)));
 
                 cursor.moveToNext();
             }
@@ -70,7 +71,7 @@ public class handleTABLE_VDO {
         if (cursor != null) {
             cursor.moveToFirst();
             while(!cursor.isAfterLast()) {
-                vdoDataArrayListt.add(new vdoData(cursor.getInt(0),cursor.getString(1),cursor.getString(2),cursor.getString(3),cursor.getString(4),cursor.getInt(4)));
+                vdoDataArrayListt.add(new vdoData(cursor.getInt(0),cursor.getString(1),cursor.getString(2),cursor.getString(3),cursor.getString(4),cursor.getInt(5)));
 
                 cursor.moveToNext();
             }
@@ -86,7 +87,7 @@ public class handleTABLE_VDO {
         if (cursor.getCount() > 0) {
             cursor.moveToFirst();
             Log.i("cursorVDO",cursor.getString(1));
-            return new vdoData(cursor.getInt(0),cursor.getString(1),cursor.getString(2),cursor.getString(3),cursor.getString(4),cursor.getInt(4));
+            return new vdoData(cursor.getInt(0),cursor.getString(1),cursor.getString(2),cursor.getString(3),cursor.getString(4),cursor.getInt(5));
         }else {
             return null;
         }

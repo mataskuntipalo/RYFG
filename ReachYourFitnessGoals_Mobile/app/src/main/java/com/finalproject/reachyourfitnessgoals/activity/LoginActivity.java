@@ -62,9 +62,9 @@ public class LoginActivity extends AppCompatActivity {
         shared = this.getSharedPreferences(getResources().getString(R.string.sharedPreferencesName), Context.MODE_PRIVATE);
         editor = shared.edit();
 
-//        if(shared.getBoolean(getResources().getString(R.string.sharedBoolLogIn), false) == true){
-//            goToMain();
-//        }
+        if(shared.getBoolean(getResources().getString(R.string.sharedBoolLogIn), false) == true){
+            goToMain();
+        }
 
         //showIntro();
         email = (EditText)findViewById(R.id.editEmail_EditText_logIn);
@@ -142,7 +142,6 @@ public class LoginActivity extends AppCompatActivity {
     private View.OnClickListener userLogin = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            goToMain();
             StringRequest stringRequest = new StringRequest(Request.Method.POST, UrlServer.LOGIN,
                     new Response.Listener<String>() {
                         @Override

@@ -224,7 +224,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 case 0:
                     return "หน้าหลัก";
                 case 1:
-                    return "การออกกำลังกาย";
+                    return "ออกกำลังกาย";
                 case 2:
                     return "ท่าออกกำลังกาย";
             }

@@ -1,6 +1,7 @@
 package com.finalproject.reachyourfitnessgoals.adapter;
 
 import android.app.Activity;
+import android.os.Environment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.finalproject.reachyourfitnessgoals.R;
 import com.finalproject.reachyourfitnessgoals.database.handleTABLE_VDO;
 import com.finalproject.reachyourfitnessgoals.models.DetailExeListData;
@@ -19,6 +21,7 @@ import com.finalproject.reachyourfitnessgoals.setting.SetUpCalorieAndExe;
 import com.h6ah4i.android.widget.advrecyclerview.utils.AbstractExpandableItemAdapter;
 import com.h6ah4i.android.widget.advrecyclerview.utils.AbstractExpandableItemViewHolder;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,7 +44,7 @@ public class RecyclerViewAdapter_exeSummary extends AbstractExpandableItemAdapte
         TextView calorie_textView;
         TextView maxCalorie_textView;
 
-        ImageView pic;
+        ImageView pic_imageView_child;
         TextView name_textView_child;
         TextView calorie_textView_child;
 
@@ -51,6 +54,7 @@ public class RecyclerViewAdapter_exeSummary extends AbstractExpandableItemAdapte
             calorie_textView = (TextView) itemView.findViewById(R.id.calorie_TextView_exe_sum);
             maxCalorie_textView = (TextView) itemView.findViewById(R.id.maxCalorie_TextView_exe_sum);
 
+            pic_imageView_child = (ImageView) itemView.findViewById(R.id.pic_ImageView_child_exe_sum);
             name_textView_child = (TextView) itemView.findViewById(R.id.name_TextView_child_exe_sum);
             calorie_textView_child = (TextView) itemView.findViewById(R.id.calorie_TextView_child_exe_sum);
         }
@@ -149,9 +153,13 @@ public class RecyclerViewAdapter_exeSummary extends AbstractExpandableItemAdapte
         @Override
         public void onBindChildViewHolder(MyChildViewHolder holder, int groupPosition, int childPosition, int viewType) {
             if(type == ListType.TYPE_EXPAND_EXERCISE){
+                File mFile = new File(Environment.getExternalStorageDirectory()+ File.separator  + "Android" + File.separator + "data" + File.separator + "com.finalproject.reachyourfitnessgoals" + File.separator + "image" + File.separator + ((GlobalData) mActivity.getApplication()).getExeForGlobalData().get(groupPosition).getUserSelectDatas().get(childPosition).getName() + ".jpg");
+                Glide.with(mActivity).load(mFile).into(holder.pic_imageView_child);
                 holder.name_textView_child.setText(((GlobalData) mActivity.getApplication()).getExeForGlobalData().get(groupPosition).getUserSelectDatas().get(childPosition).getName());
-                holder.calorie_textView_child.setText(((GlobalData) mActivity.getApplication()).getExeForGlobalData().get(groupPosition).getUserSelectDatas().get(childPosition).getName());
+                holder.calorie_textView_child.setText(((GlobalData) mActivity.getApplication()).getExeForGlobalData().get(groupPosition).getUserSelectDatas().get(childPosition).getCalories());
             }else {
+                File mFile = new File(Environment.getExternalStorageDirectory()+ File.separator  + "Android" + File.separator + "data" + File.separator + "com.finalproject.reachyourfitnessgoals" + File.separator + "image" + File.separator + detailExeListData.get(groupPosition).getVdoDataArrayList().get(childPosition).getName() + ".jpg");
+                Glide.with(mActivity).load(mFile).into(holder.pic_imageView_child);
                 holder.name_textView_child.setText(detailExeListData.get(groupPosition).getVdoDataArrayList().get(childPosition).getName());
             }
 
