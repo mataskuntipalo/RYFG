@@ -174,8 +174,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="สมัครสมาชิก"
-                android:textSize="16dp"
+                android:text="@string/textUnderLineSignUp"
+                android:textSize="18dp"
                 android:textColor="@color/colorWhite"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="10dp"
@@ -188,8 +188,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="ลืมรหัสผ่าน?"
-                android:textSize="16dp"
+                android:text="@string/textUnderLineForgetPass"
+                android:textSize="18dp"
                 android:textColor="@color/colorWhite"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="10dp"

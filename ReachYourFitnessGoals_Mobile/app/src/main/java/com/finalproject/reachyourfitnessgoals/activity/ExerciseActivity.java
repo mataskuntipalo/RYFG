@@ -117,19 +117,27 @@ public class ExerciseActivity extends YouTubeBaseActivity implements YouTubePlay
 
         @Override
         public void onClick(View v) {
-            if(countExe == vdoDataList.size()){
-                chronometer.stop();
-                RelativeLayout layout = (RelativeLayout)findViewById(R.id.exeSummary_exe);
-                layout.setVisibility(View.VISIBLE);
-                fragment_sumExe sumExe = fragment_sumExe.newInstance((String) chronometer.getText());
-                getFragmentManager().beginTransaction().replace(R.id.exeSummary_exe, sumExe).commit();
-            }else {
-                //player.loadVideo(VIDEO_JUMP);
-                exeName.setText(vdoDataList.get(countExe).getName());
-                Log.i("countExe",vdoDataList.size()+"");
-                countExe++;
 
-            }
+            //for test
+            RelativeLayout layout = (RelativeLayout)findViewById(R.id.exeSummary_exe);
+            layout.setVisibility(View.VISIBLE);
+            fragment_sumExe sumExe = fragment_sumExe.newInstance((String) chronometer.getText());
+            getFragmentManager().beginTransaction().replace(R.id.exeSummary_exe, sumExe).commit();
+
+//            // use it
+//            if(countExe == vdoDataList.size()){
+//                chronometer.stop();
+//                RelativeLayout layout = (RelativeLayout)findViewById(R.id.exeSummary_exe);
+//                layout.setVisibility(View.VISIBLE);
+//                fragment_sumExe sumExe = fragment_sumExe.newInstance((String) chronometer.getText());
+//                getFragmentManager().beginTransaction().replace(R.id.exeSummary_exe, sumExe).commit();
+//            }else {
+//                //player.loadVideo(VIDEO_JUMP);
+//                exeName.setText(vdoDataList.get(countExe).getName());
+//                Log.i("countExe",vdoDataList.size()+"");
+//                countExe++;
+//
+//            }
         }
     };
 

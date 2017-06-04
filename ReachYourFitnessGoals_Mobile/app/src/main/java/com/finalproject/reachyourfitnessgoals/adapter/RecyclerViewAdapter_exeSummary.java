@@ -156,11 +156,12 @@ public class RecyclerViewAdapter_exeSummary extends AbstractExpandableItemAdapte
                 File mFile = new File(Environment.getExternalStorageDirectory()+ File.separator  + "Android" + File.separator + "data" + File.separator + "com.finalproject.reachyourfitnessgoals" + File.separator + "image" + File.separator + ((GlobalData) mActivity.getApplication()).getExeForGlobalData().get(groupPosition).getUserSelectDatas().get(childPosition).getName() + ".jpg");
                 Glide.with(mActivity).load(mFile).into(holder.pic_imageView_child);
                 holder.name_textView_child.setText(((GlobalData) mActivity.getApplication()).getExeForGlobalData().get(groupPosition).getUserSelectDatas().get(childPosition).getName());
-                holder.calorie_textView_child.setText(((GlobalData) mActivity.getApplication()).getExeForGlobalData().get(groupPosition).getUserSelectDatas().get(childPosition).getCalories());
+                holder.calorie_textView_child.setText(((GlobalData) mActivity.getApplication()).getExeForGlobalData().get(groupPosition).getUserSelectDatas().get(childPosition).getCalories()+"");
             }else {
                 File mFile = new File(Environment.getExternalStorageDirectory()+ File.separator  + "Android" + File.separator + "data" + File.separator + "com.finalproject.reachyourfitnessgoals" + File.separator + "image" + File.separator + detailExeListData.get(groupPosition).getVdoDataArrayList().get(childPosition).getName() + ".jpg");
                 Glide.with(mActivity).load(mFile).into(holder.pic_imageView_child);
                 holder.name_textView_child.setText(detailExeListData.get(groupPosition).getVdoDataArrayList().get(childPosition).getName());
+                holder.calorie_textView_child.setText(detailExeListData.get(groupPosition).getVdoDataArrayList().get(childPosition).getCalorie());
             }
 
         }

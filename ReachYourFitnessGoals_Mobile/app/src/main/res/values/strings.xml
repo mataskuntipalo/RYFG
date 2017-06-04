@@ -74,7 +74,10 @@
     <!-- fragment_customExe_list -->
     <string name="totalCalorie">จำนวนแคลอรี่ทั้งหมด</string>
 
+    <string name="textUnderLineSignUp"><u>สมัครสมาชิก</u></string>
     <string name="textUnderLine"><u>เข้าสู่ระบบที่นี่</u></string>
+    <string name="textUnderLineForgetPass"><u>ลืมรหัสผ่าน?</u></string>
+
 
     <string-array name="json_key">
         <item>vdo</item>
