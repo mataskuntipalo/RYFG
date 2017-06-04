@@ -111,12 +111,12 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void goToLoadData(){
-        fragment_connect_server resultParQ = fragment_connect_server.newInstance(UrlServer.DOWNLOAD);
+        fragment_connect_server connect_server = fragment_connect_server.newInstance(UrlServer.DOWNLOAD);
         FragmentManager fragmentManager = this.getSupportFragmentManager();
         fragmentManager
                 .beginTransaction()
 //                        .setCustomAnimations(R.anim.slide_up,R.anim.slide_down,R.anim.slide_up,R.anim.slide_down)
-                .replace(R.id.activity_login, resultParQ, "fragment_results_parQ")
+                .replace(R.id.activity_login, connect_server, "fragment_connect_server")
                 .commit();
     }
 
@@ -159,7 +159,7 @@ public class LoginActivity extends AppCompatActivity {
                     new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            Toast.makeText(LoginActivity.this,error.toString(),Toast.LENGTH_LONG ).show();
+                            Toast.makeText(LoginActivity.this,"โปรดเชื่อมต่ออินเตอร์เน็ต",Toast.LENGTH_LONG ).show();
                         }
                     }){
                 @Override

@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import com.finalproject.reachyourfitnessgoals.models.ExeType;
 import com.finalproject.reachyourfitnessgoals.models.ExerciseFromServerData;
 import com.finalproject.reachyourfitnessgoals.models.GoalData;
 import com.finalproject.reachyourfitnessgoals.models.vdoData;
@@ -42,21 +43,21 @@ public class handleTABLE_PROGRAM {
         }
 
 
-        public void addProgram(GoalData data){
+        public void addProgramBlank(){
             ContentValues values = new ContentValues();
-            values.put(COLUMN_TYPE_GOAL, 0);
-            values.put(COLUMN_WEIGHT_GOAL, data.getWeightGoal());
-            values.put(COLUMN_TOTAL_CALORIE, data.getTotalCalorie());
-            values.put(COLUMN_KG_PER_WEEK, data.getKgPerWeek());
+            values.put(COLUMN_TYPE_GOAL, ExeType.TYPE_PROGRAM_BLANK);
+            values.put(COLUMN_WEIGHT_GOAL, 0);
+            values.put(COLUMN_TOTAL_CALORIE, 0);
+            values.put(COLUMN_KG_PER_WEEK, 0);
 
 
-            values.put(COLUMN_YEAR_BEGIN , data.getYear_date_begin());
-            values.put(COLUMN_MONTH_BEGIN, data.getMonth_date_begin());
-            values.put(COLUMN_DAY_BEGIN, data.getDay_date_begin());
+            values.put(COLUMN_YEAR_BEGIN , 0);
+            values.put(COLUMN_MONTH_BEGIN, 0);
+            values.put(COLUMN_DAY_BEGIN, 0);
 
-            values.put(COLUMN_STATUS, data.getStatus());
-            values.put(COLUMN_PERCENT_FAT, data.getPercentFat());
-            values.put(COLUMN_PROGRAM_NAME, data.getProgramName());
+            values.put(COLUMN_STATUS, 1);
+            values.put(COLUMN_PERCENT_FAT, 0);
+            values.put(COLUMN_PROGRAM_NAME, "");
 
             writeSQLite.insert(TABLE_PROGRAM, null, values);
         }

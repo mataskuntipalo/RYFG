@@ -11,4 +11,8 @@ public class ExeType {
     public static final String TYPE_WARMUP = "Warm Up/Cardio";
     public static final String TYPE_CARDIO = "Warm Up/Cardio";
     public static final String[] TYPE = {TYPE_STRETCHING , TYPE_WARMUP , TYPE_STRENGTH , TYPE_CARDIO, TYPE_COOlDOWN };
+
+    public static final int TYPE_PROGRAM_WEIGHT = 0;
+    public static final int TYPE_PROGRAM_MUSCLE = 1;
+    public static final int TYPE_PROGRAM_BLANK = 3;
 }

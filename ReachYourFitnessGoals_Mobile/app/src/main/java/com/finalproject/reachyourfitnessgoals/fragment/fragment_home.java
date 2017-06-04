@@ -41,6 +41,7 @@ import com.finalproject.reachyourfitnessgoals.activity.SetExerciseInWeekActivity
 import com.finalproject.reachyourfitnessgoals.database.handleTABLE_EXERCISE;
 import com.finalproject.reachyourfitnessgoals.database.handleTABLE_PROGRAM;
 import com.finalproject.reachyourfitnessgoals.models.DateData;
+import com.finalproject.reachyourfitnessgoals.models.ExeType;
 import com.finalproject.reachyourfitnessgoals.models.GlobalData;
 import com.finalproject.reachyourfitnessgoals.models.GoalData;
 import com.finalproject.reachyourfitnessgoals.setting.handleCalendar;
@@ -140,7 +141,7 @@ public class fragment_home extends Fragment {
                 .build());
 
 
-        if(currentProgramType == 0) {
+        if(currentProgramType == ExeType.TYPE_PROGRAM_WEIGHT) {
             arcView.addEvent(new DecoEvent.Builder(calPercentWeight()).setIndex(series1Index).setDelay(4000).build());
         }else{
             arcView.addEvent(new DecoEvent.Builder(programData.getPercentFat()).setIndex(series1Index).setDelay(4000).build());

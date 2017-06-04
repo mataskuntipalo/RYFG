@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -37,6 +38,7 @@ import com.finalproject.reachyourfitnessgoals.database.handleTABLE_EXERCISE;
 import com.finalproject.reachyourfitnessgoals.database.handleTABLE_PERSONAL;
 import com.finalproject.reachyourfitnessgoals.database.handleTABLE_PROGRAM;
 import com.finalproject.reachyourfitnessgoals.database.handleTABLE_VDO;
+import com.finalproject.reachyourfitnessgoals.models.ExeType;
 import com.finalproject.reachyourfitnessgoals.models.ExerciseFromServerData;
 import com.finalproject.reachyourfitnessgoals.models.GoalData;
 import com.finalproject.reachyourfitnessgoals.models.ListType;
@@ -123,7 +125,17 @@ public class fragment_connect_server extends Fragment {
         tableExercise = new handleTABLE_EXERCISE(getContext());
 
         if(getArguments().getInt("state") == UrlServer.DOWNLOAD){
-            download();
+            if (tableProgram.getCurrentProgramDate().getTypeGoal() == ExeType.TYPE_PROGRAM_BLANK){
+                fragment_selectGoal selectGoal = fragment_selectGoal.newInstance();
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                fragmentManager
+                        .beginTransaction()
+////                        .setCustomAnimations(R.anim.slide_up,R.anim.slide_down,R.anim.slide_up,R.anim.slide_down)
+                        .replace(R.id.activity_login, selectGoal, "fragment_intro_parQ")
+                        .commit();
+            }else {
+                download();
+            }
         }else{
             upload();
         }

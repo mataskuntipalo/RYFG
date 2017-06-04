@@ -48,8 +48,8 @@
             android:lineSpacingMultiplier="20"
             android:textColor="@color/colorBlack"
             android:background="@color/colorWhite"
-            android:inputType="text"
-            android:text="kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk"
+            android:inputType="textMultiLine"
+            android:text="kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk"
             android:textSize="@dimen/default_text" />
     </RelativeLayout>
 

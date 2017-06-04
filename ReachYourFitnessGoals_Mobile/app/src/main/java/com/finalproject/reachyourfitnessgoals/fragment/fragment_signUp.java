@@ -34,6 +34,8 @@ import com.finalproject.reachyourfitnessgoals.R;
 import com.finalproject.reachyourfitnessgoals.activity.LoginActivity;
 import com.finalproject.reachyourfitnessgoals.activity.ParQActivity;
 import com.finalproject.reachyourfitnessgoals.database.handleTABLE_PERSONAL;
+import com.finalproject.reachyourfitnessgoals.database.handleTABLE_PROGRAM;
+import com.finalproject.reachyourfitnessgoals.models.GoalData;
 import com.finalproject.reachyourfitnessgoals.models.PersonalData;
 import com.finalproject.reachyourfitnessgoals.models.UrlServer;
 import com.finalproject.reachyourfitnessgoals.setting.JsonSingleton;
@@ -143,6 +145,7 @@ public class fragment_signUp extends Fragment {
                 Integer.parseInt(strAge),
                 Double.parseDouble(strWeight),
                 Double.parseDouble(strHeight));
+        new handleTABLE_PROGRAM(getContext()).addProgramBlank();
     }
 
     private void setDataToServer(){
