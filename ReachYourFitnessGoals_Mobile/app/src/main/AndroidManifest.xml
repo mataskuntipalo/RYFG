@@ -27,13 +27,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".activity.MainActivity"
-            android:theme="@style/AppTheme.NoActionBar.AccentBlack" >
-
-        </activity>
-
+            android:theme="@style/AppTheme.NoActionBar.AccentBlack"></activity>
         <activity
             android:name=".activity.IntroActivity"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -51,8 +47,10 @@
         >
         <activity android:name=".activity.CustomSetExerciseInDayActivity" />
         <activity android:name=".activity.ExerciseActivity" />
-        <activity android:name=".activity.ParQActivity"
-            android:theme="@style/AppTheme.NoActionBar.AccentBlack"/>
+        <activity
+            android:name=".activity.ParQActivity"
+            android:theme="@style/AppTheme.NoActionBar.AccentBlack" />
+        <activity android:name=".activity.Goal2Activity"></activity>
     </application>
 
 </manifest>

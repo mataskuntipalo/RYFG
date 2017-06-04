@@ -8,79 +8,204 @@
     tools:context="com.finalproject.reachyourfitnessgoals.fragment.fragment_signUp">
 
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+        <RelativeLayout
+            android:id="@+id/content1_signUP"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/bottom_margin"
+            android:background="@drawable/shadow_layout"
+            android:padding="10dp">
+
+            <EditText
+                android:id="@+id/editEmail_EditText_signUP"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:textColor="@color/colorBlack"
+                android:background="@color/colorWhite"
+                android:hint="อีเมล์"
+                android:inputType="textEmailAddress"
+                android:textSize="@dimen/default_text" />
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/content2_signUP"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/bottom_margin"
+            android:background="@drawable/shadow_layout"
+            android:padding="10dp">
+
+            <EditText
+                android:id="@+id/editPass_EditText_signUP"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:textColor="@color/colorBlack"
+                android:background="@color/colorWhite"
+                android:hint="รหัสผ่าน"
+                android:inputType="textPassword"
+                android:textSize="@dimen/default_text"
+                />
+        </RelativeLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="horizontal"
+            android:layout_marginBottom="@dimen/bottom_margin">
 
+        <RelativeLayout
+            android:id="@+id/content3_signUP"
+            android:layout_width="0dp"
+            android:layout_weight="0.4"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shadow_layout"
+            android:padding="10dp">
 
-            <RelativeLayout
-                android:id="@+id/content1_signUP"
+            <EditText
+                android:id="@+id/editName_EditText_signUP"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/bottom_margin"
-                android:background="@drawable/shadow_layout"
-                android:padding="10dp">
-
-                <EditText
-                    android:id="@+id/editEmail_EditText_signUP"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:singleLine="true"
-                    android:textColor="@color/colorBlack"
-                    android:background="@color/colorWhite"
-                    android:hint="อีเมล์"
-                    android:inputType="textEmailAddress"
-                    android:textSize="@dimen/default_text" />
-            </RelativeLayout>
+                android:singleLine="true"
+                android:textColor="@color/colorBlack"
+                android:background="@color/colorWhite"
+                android:hint="ชื่อ"
+                android:textSize="@dimen/default_text"
+                />
+        </RelativeLayout>
 
 
-            <RelativeLayout
-                android:id="@+id/content2_signUP"
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_weight="0.025"
+            android:layout_height="wrap_content">
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/content4_signUP"
+            android:layout_width="0dp"
+            android:layout_weight="0.4"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shadow_layout"
+            android:padding="10dp">
+
+            <EditText
+                android:id="@+id/editSurname_EditText_signUP"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/bottom_margin"
-                android:background="@drawable/shadow_layout"
-                android:padding="10dp">
+                android:singleLine="true"
+                android:textColor="@color/colorBlack"
+                android:background="@color/colorWhite"
+                android:hint="นามสกุล"
+                android:textSize="@dimen/default_text" />
+        </RelativeLayout>
 
-                <EditText
-                    android:id="@+id/editPass_EditText_signUP"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:singleLine="true"
-                    android:textColor="@color/colorBlack"
-                    android:background="@color/colorWhite"
-                    android:hint="รหัสผ่าน"
-                    android:inputType="textPassword"
-                    android:textSize="@dimen/default_text"
-                    />
-            </RelativeLayout>
+        </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="@dimen/bottom_margin"
+            android:id="@+id/group_RadioButton_signUp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="0.2"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="@dimen/bottom_margin">
+                android:textSize="22sp"
+                android:gravity="center"
+                android:text="เพศ"/>
 
-            <RelativeLayout
-                android:id="@+id/content3_signUP"
+            <RadioButton
                 android:layout_width="0dp"
                 android:layout_weight="0.4"
                 android:layout_height="wrap_content"
+                android:text="ชาย"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/default_text"
+                android:checked="true"
+                android:id="@+id/man_RadioButton_signUp"/>
+
+            <RadioButton
+                android:layout_width="0dp"
+                android:layout_weight="0.4"
+                android:layout_height="wrap_content"
+                android:text="หญิง"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/default_text"
+                android:id="@+id/women_RadioButton_signUp"/>
+
+        </RadioGroup>
+
+
+        <RelativeLayout
+            android:id="@+id/content5_signUP"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/bottom_margin"
+            android:background="@drawable/shadow_layout"
+            android:gravity="center"
+            android:padding="10dp">
+
+            <EditText
+                android:id="@+id/editAge_EditText_signUP"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:textColor="@color/colorBlack"
+                android:background="@color/colorWhite"
+                android:hint="อายุ"
+                android:inputType="number"
+                android:maxLength="2"
+                android:textSize="@dimen/default_text" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/content6_signUP"
+                android:layout_width="0dp"
+                android:layout_weight="0.4"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/pass_text_signUP"
+                android:layout_marginBottom="@dimen/bottom_margin"
                 android:background="@drawable/shadow_layout"
+                android:orientation="horizontal"
+                android:gravity="center"
                 android:padding="10dp">
 
                 <EditText
-                    android:id="@+id/editName_EditText_signUP"
-                    android:layout_width="match_parent"
+                    android:id="@+id/editWeight_EditText_signUP"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.6"
                     android:layout_height="wrap_content"
                     android:singleLine="true"
                     android:textColor="@color/colorBlack"
                     android:background="@color/colorWhite"
-                    android:hint="ชื่อ"
-                    android:textSize="@dimen/default_text"
-                    />
-            </RelativeLayout>
+                    android:hint="นํ้าหนัก"
+                    android:inputType="numberDecimal"
+                    android:maxLength="3"
+                    android:textSize="@dimen/default_text" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="0.2"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/editHeight_EditText_signUP"
+                    android:text="กก."/>
+            </LinearLayout>
 
 
             <RelativeLayout
@@ -89,173 +214,63 @@
                 android:layout_height="wrap_content">
             </RelativeLayout>
 
-            <RelativeLayout
-                android:id="@+id/content4_signUP"
+            <LinearLayout
+                android:id="@+id/content7_signUP"
                 android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/surName_text_signUP"
+                android:layout_marginBottom="@dimen/bottom_margin"
                 android:layout_weight="0.4"
-                android:layout_height="wrap_content"
                 android:background="@drawable/shadow_layout"
-                android:padding="10dp">
-
-                <EditText
-                    android:id="@+id/editSurname_EditText_signUP"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:singleLine="true"
-                    android:textColor="@color/colorBlack"
-                    android:background="@color/colorWhite"
-                    android:hint="นามสกุล"
-                    android:textSize="@dimen/default_text" />
-            </RelativeLayout>
-
-            </LinearLayout>
-
-            <RadioGroup
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginBottom="@dimen/bottom_margin"
-                android:id="@+id/group_RadioButton_signUp">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="0.2"
-                    android:layout_height="wrap_content"
-                    android:textSize="22sp"
-                    android:gravity="center"
-                    android:text="เพศ"/>
-
-                <RadioButton
-                    android:layout_width="0dp"
-                    android:layout_weight="0.4"
-                    android:layout_height="wrap_content"
-                    android:text="ชาย"
-                    android:textColor="@color/colorBlack"
-                    android:textSize="@dimen/default_text"
-                    android:checked="true"
-                    android:id="@+id/man_RadioButton_signUp"/>
-
-                <RadioButton
-                    android:layout_width="0dp"
-                    android:layout_weight="0.4"
-                    android:layout_height="wrap_content"
-                    android:text="หญิง"
-                    android:textColor="@color/colorBlack"
-                    android:textSize="@dimen/default_text"
-                    android:id="@+id/women_RadioButton_signUp"/>
-
-            </RadioGroup>
-
-
-            <RelativeLayout
-                android:id="@+id/content5_signUP"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/bottom_margin"
-                android:background="@drawable/shadow_layout"
                 android:gravity="center"
                 android:padding="10dp">
 
                 <EditText
-                    android:id="@+id/editAge_EditText_signUP"
-                    android:layout_width="match_parent"
+                    android:id="@+id/editHeight_EditText_signUP"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="0.8"
+                    android:background="@color/colorWhite"
+                    android:hint="ส่วนสูง"
+                    android:inputType="number"
+                    android:maxLength="3"
                     android:singleLine="true"
                     android:textColor="@color/colorBlack"
-                    android:background="@color/colorWhite"
-                    android:hint="อายุ"
-                    android:inputType="number"
-                    android:maxLength="2"
                     android:textSize="@dimen/default_text" />
-            </RelativeLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <LinearLayout
-                    android:id="@+id/content6_signUP"
-                    android:layout_width="0dp"
-                    android:layout_weight="0.4"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/pass_text_signUP"
-                    android:layout_marginBottom="@dimen/bottom_margin"
-                    android:background="@drawable/shadow_layout"
-                    android:orientation="horizontal"
-                    android:gravity="center"
-                    android:padding="10dp">
-
-                    <EditText
-                        android:id="@+id/editWeight_EditText_signUP"
-                        android:layout_width="0dp"
-                        android:layout_weight="0.6"
-                        android:layout_height="wrap_content"
-                        android:singleLine="true"
-                        android:textColor="@color/colorBlack"
-                        android:background="@color/colorWhite"
-                        android:hint="นํ้าหนัก"
-                        android:inputType="numberDecimal"
-                        android:maxLength="3"
-                        android:textSize="@dimen/default_text" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_weight="0.2"
-                        android:layout_height="wrap_content"
-                        android:layout_toRightOf="@+id/editHeight_EditText_signUP"
-                        android:text="กก."/>
-                </LinearLayout>
-
-
-                <RelativeLayout
-                    android:layout_width="0dp"
-                    android:layout_weight="0.025"
-                    android:layout_height="wrap_content">
-                </RelativeLayout>
-
-                <LinearLayout
-                    android:id="@+id/content7_signUP"
+                <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/surName_text_signUP"
-                    android:layout_marginBottom="@dimen/bottom_margin"
-                    android:layout_weight="0.4"
-                    android:background="@drawable/shadow_layout"
-                    android:orientation="horizontal"
-                    android:gravity="center"
-                    android:padding="10dp">
-
-                    <EditText
-                        android:id="@+id/editHeight_EditText_signUP"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.8"
-                        android:background="@color/colorWhite"
-                        android:hint="ส่วนสูง"
-                        android:inputType="number"
-                        android:maxLength="3"
-                        android:singleLine="true"
-                        android:textColor="@color/colorBlack"
-                        android:textSize="@dimen/default_text" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_toRightOf="@+id/editHeight_EditText_signUP"
-                        android:layout_weight="0.2"
-                        android:text="ซ.ม." />
-                </LinearLayout>
-
+                    android:layout_toRightOf="@+id/editHeight_EditText_signUP"
+                    android:layout_weight="0.2"
+                    android:text="ซ.ม." />
             </LinearLayout>
 
-            <Button
-                android:id="@+id/confirm_Button_signUP"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:text="ยืนยัน" />
-
         </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorBlack"
+            android:textSize="20sp"
+            android:text="กิจกรรมการออกกำลังกาย" />
+
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/shadow_layout"
+            android:paddingLeft="10dp"
+            android:layout_marginBottom="@dimen/bottom_margin"/>
+
+        <Button
+            android:id="@+id/confirm_Button_signUP"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="ยืนยัน" />
+
+    </LinearLayout>
 
 </LinearLayout>

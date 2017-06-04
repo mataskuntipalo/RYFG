@@ -125,17 +125,7 @@ public class fragment_connect_server extends Fragment {
         tableExercise = new handleTABLE_EXERCISE(getContext());
 
         if(getArguments().getInt("state") == UrlServer.DOWNLOAD){
-            if (tableProgram.getCurrentProgramDate().getTypeGoal() == ExeType.TYPE_PROGRAM_BLANK){
-                fragment_selectGoal selectGoal = fragment_selectGoal.newInstance();
-                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                fragmentManager
-                        .beginTransaction()
-////                        .setCustomAnimations(R.anim.slide_up,R.anim.slide_down,R.anim.slide_up,R.anim.slide_down)
-                        .replace(R.id.activity_login, selectGoal, "fragment_intro_parQ")
-                        .commit();
-            }else {
-                download();
-            }
+            download();
         }else{
             upload();
         }
@@ -202,8 +192,8 @@ public class fragment_connect_server extends Fragment {
                             e.printStackTrace();
                         }
                         tableVdo.addVdoExercise(vdoDataArrayList);
-                        tablePersonal.addPersonal(personalData);
                         tableProgram.addProgramList(goalDataArrayList);
+                        tablePersonal.addPersonal(personalData);
                         tableExercise.addExerciseList(exerciseFromServerDatas);
                         showView();
                     }
@@ -211,7 +201,7 @@ public class fragment_connect_server extends Fragment {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Log.d("fragment_connect_server", error.toString());
+                        Toast.makeText(getActivity(),"โปรดเชื่อมต่ออินเตอร์",Toast.LENGTH_LONG ).show();
                     }
                 });
         JsonSingleton.getInstance(getContext()).addToRequestQueue(jsonObjectRequest);
@@ -247,8 +237,6 @@ public class fragment_connect_server extends Fragment {
         params.put("personal",gson.toJson(tablePersonal.getPersonal()));
         params.put("program",gson.toJson(tableProgram.getProgramDateList()));
         params.put("exercise",gson.toJson(tableExercise.getExerciseData()));
-        Log.i("personal",new JSONObject(params).toString());
-        Log.i("personal",tableExercise.getExerciseData().size()+"");
         textView.setText(new JSONObject(params).toString());
 
         JsonObjectRequest jsonObjectRequestUpload = new JsonObjectRequest(Request.Method.POST,UrlServer.SENDJSON,new JSONObject(params),new Response.Listener<JSONObject>(){
@@ -277,6 +265,7 @@ public class fragment_connect_server extends Fragment {
 
     private void goToLogin(){
         Intent intent = new Intent(getActivity(),LoginActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
 

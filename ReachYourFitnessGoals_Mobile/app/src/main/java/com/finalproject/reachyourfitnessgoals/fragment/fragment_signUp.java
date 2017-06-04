@@ -16,12 +16,15 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,6 +38,7 @@ import com.finalproject.reachyourfitnessgoals.activity.LoginActivity;
 import com.finalproject.reachyourfitnessgoals.activity.ParQActivity;
 import com.finalproject.reachyourfitnessgoals.database.handleTABLE_PERSONAL;
 import com.finalproject.reachyourfitnessgoals.database.handleTABLE_PROGRAM;
+import com.finalproject.reachyourfitnessgoals.models.GlobalData;
 import com.finalproject.reachyourfitnessgoals.models.GoalData;
 import com.finalproject.reachyourfitnessgoals.models.PersonalData;
 import com.finalproject.reachyourfitnessgoals.models.UrlServer;
@@ -57,9 +61,12 @@ public class fragment_signUp extends Fragment {
     SharedPreferences.Editor editor;
     private Button confirm;
     private EditText email , pass , f_name , l_name , age , weight , height;
-    private String strEmail , strPass , strFName , strLName , strAge , strWeight , strHeight , strGender , strBirthDay;
+    private String strEmail , strPass , strFName , strLName , strAge , strWeight , strHeight , strGender;
+    private double activity;
     private RadioGroup groupRadioGender;
+    private Spinner spinner;
     private PersonalData personalData;
+    private static final String[]paths = {"ไม่ได้ออกกำลังกายเลย", "ออกกำลังกายเล็กน้อย 1-3 วัน", "ออกกำลังกายเปานกลาง 3-5 วัน","ออกกำลังกายอย่างหนัก 6-7 วัน","ออกกำลังกายอย่างหนักทุกวันเช้าเย็น"};
     int gender;
 
     @Override
@@ -101,17 +108,52 @@ public class fragment_signUp extends Fragment {
             }
         });
 
+        spinner = (Spinner)rootview.findViewById(R.id.spinner);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), R.layout.spinner_item,paths);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                switch (position) {
+                    case 0:
+                        activity = 1.2;
+                        break;
+                    case 1:
+                        activity = 1.375;
+                        break;
+                    case 2:
+                        activity = 1.55;
+                        break;
+                    case 3:
+                        activity = 1.725;
+                        break;
+                    case 4:
+                        activity = 1.9;
+                        break;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                activity = 1.2;
+            }
+        });
+
+
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 setUpData();
-                setDataToServer();
-                fragment_selectGoal selectGoal = fragment_selectGoal.newInstance();
+                ((GlobalData)getActivity().getApplication()).setEmail(strEmail);
+                ((GlobalData)getActivity().getApplication()).setPass(strPass);
+                fragment_intro_parQ intro_parQ = fragment_intro_parQ.newInstance();
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 fragmentManager
                         .beginTransaction()
-////                        .setCustomAnimations(R.anim.slide_up,R.anim.slide_down,R.anim.slide_up,R.anim.slide_down)
-                        .replace(R.id.activity_login, selectGoal, "fragment_intro_parQ")
+//                        .setCustomAnimations(R.anim.slide_up,R.anim.slide_down,R.anim.slide_up,R.anim.slide_down)
+                        .replace(R.id.activity_login, intro_parQ, "fragment_intro_parQ")
+                        .addToBackStack("fragment_intro_parQ")
                         .commit();
             }
         });
@@ -144,8 +186,9 @@ public class fragment_signUp extends Fragment {
                 Integer.parseInt(strGender),
                 Integer.parseInt(strAge),
                 Double.parseDouble(strWeight),
-                Double.parseDouble(strHeight));
-        new handleTABLE_PROGRAM(getContext()).addProgramBlank();
+                Double.parseDouble(strHeight),
+                activity);
+        new handleTABLE_PERSONAL(getContext()).addPersonal(personalData);
     }
 
     private void setDataToServer(){
@@ -153,19 +196,23 @@ public class fragment_signUp extends Fragment {
             @Override
             public void onResponse(String response) {
                 if(response.trim().equals("Could not register")){
-                    Toast.makeText(getActivity(),response,Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(),"ไม่สามารถลงทะเบียนได้ โปรดลองใหม่อีกครั้ง",Toast.LENGTH_LONG).show();
                 }else{
-                    new handleTABLE_PERSONAL(getContext()).addPersonal(personalData);
-                    editor.putBoolean(getResources().getString(R.string.sharedBoolLogIn), true);
-                    editor.putString(getResources().getString(R.string.sharedStringMemberId),response.trim());
-                    editor.commit();
+
+                    fragment_selectGoal selectGoal = fragment_selectGoal.newInstance();
+                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                    fragmentManager
+                            .beginTransaction()
+////                        .setCustomAnimations(R.anim.slide_up,R.anim.slide_down,R.anim.slide_up,R.anim.slide_down)
+                            .replace(R.id.activity_login, selectGoal, "fragment_intro_parQ")
+                            .commit();
                 }
             }
         },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getActivity(),"error",Toast.LENGTH_LONG ).show();
+                        Toast.makeText(getActivity(),"โปรดเชื่อมต่ออินเตอร์เน็ต",Toast.LENGTH_LONG).show();
                     }
                 }){
             @Override

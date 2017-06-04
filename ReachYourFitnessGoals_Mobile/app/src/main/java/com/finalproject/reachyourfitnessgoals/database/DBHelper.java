@@ -18,7 +18,8 @@ public class DBHelper extends SQLiteOpenHelper {
             "age INTEGER NOT NULL, " +
             "gender INTEGER NOT NULL, " +
             "weight REAL NOT NULL, " +
-            "height  REAL NOT NULL);";
+            "height REAL NOT NULL, " +
+            "activity  REAL NOT NULL);";
 
 
     private static final String TABLE_PROGRAM = "CREATE TABLE PROGRAM (program_id INTEGER PRIMARY KEY AUTOINCREMENT, " +

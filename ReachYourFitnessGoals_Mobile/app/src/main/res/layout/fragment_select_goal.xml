@@ -51,7 +51,7 @@
         android:layout_height="200dp"
         android:layout_margin="@dimen/activity_horizontal_margin"
         android:gravity="center"
-        android:background="@color/red"
+        android:background="@color/colorRed"
         android:alpha="0.8">
 
         <Button
@@ -61,7 +61,8 @@
             android:textColor="@color/colorWhite"
             android:padding="20dp"
             android:textSize="22sp"
-            android:background="@color/colorฺฺBlueDark"/>
+            android:background="@color/colorฺฺBlueDark"
+            android:id="@+id/muscle_Button_selectGoal"/>
 
     </LinearLayout>
 

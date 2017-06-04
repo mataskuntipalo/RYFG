@@ -19,13 +19,16 @@ public class GlobalData extends Application {
     private DateData dateData;
     private ArrayList<ExeForGlobalData> exeForGlobalData;
     public String[] type = {"Stretching","Warm Up","Strength","Cardio","Cool Down"};
+    private String email;
+    private String pass;
 
 
     @Override
     public void onCreate() {
         super.onCreate();
 
-
+        email="";
+        pass="";
 
         //init Font
         CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
@@ -46,6 +49,22 @@ public class GlobalData extends Application {
         }
     }
 
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPass() {
+        return pass;
+    }
+
+    public void setPass(String pass) {
+        this.pass = pass;
+    }
 
     public DateData getDateData() {
         return dateData;

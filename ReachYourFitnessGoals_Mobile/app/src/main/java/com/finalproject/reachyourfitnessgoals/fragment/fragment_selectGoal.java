@@ -1,6 +1,7 @@
 package com.finalproject.reachyourfitnessgoals.fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -10,6 +11,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.finalproject.reachyourfitnessgoals.R;
+import com.finalproject.reachyourfitnessgoals.activity.Goal2Activity;
+import com.finalproject.reachyourfitnessgoals.activity.GoalActivity;
+import com.finalproject.reachyourfitnessgoals.activity.MainActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -17,6 +21,7 @@ import com.finalproject.reachyourfitnessgoals.R;
 public class fragment_selectGoal extends Fragment {
 
     Button loseWeightButton;
+    Button muscleButton;
 
     public fragment_selectGoal() {
         // Required empty public constructor
@@ -37,14 +42,17 @@ public class fragment_selectGoal extends Fragment {
         loseWeightButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                fragment_intro_parQ intro_parQ = fragment_intro_parQ.newInstance();
-                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                fragmentManager
-                        .beginTransaction()
-//                        .setCustomAnimations(R.anim.slide_up,R.anim.slide_down,R.anim.slide_up,R.anim.slide_down)
-                        .replace(R.id.activity_login, intro_parQ, "fragment_intro_parQ")
-                        .addToBackStack("fragment_intro_parQ")
-                        .commit();
+                Intent intent = new Intent(getActivity(), GoalActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        muscleButton =(Button)rootview.findViewById(R.id.muscle_Button_selectGoal);
+        muscleButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), Goal2Activity.class);
+                startActivity(intent);
             }
         });
 
