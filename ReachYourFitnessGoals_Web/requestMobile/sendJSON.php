@@ -2,12 +2,12 @@
 	header("content-type:text/javascript;charset=utf-8");  
 	require('connection.php');
 	
-	//if($_SERVER['REQUEST_METHOD']=='POST'){
+	if($_SERVER['REQUEST_METHOD']=='POST'){
 		
 	
 	$obj = json_decode(file_get_contents("php://input"));
-	//$member_id =  $obj->{'member_id'};
-	$member_id =3;
+	$member_id =  $obj->{'member_id'};
+	//$member_id =3;
 		
 	$sqlVDO = "SELECT * FROM vdo";
 	$objQueryVDO = mysqli_query($conn,$sqlVDO);
@@ -30,5 +30,5 @@
 
 	mysqli_close($conn);
 	echo json_encode($outp);
-	//}
+	}
 ?>
