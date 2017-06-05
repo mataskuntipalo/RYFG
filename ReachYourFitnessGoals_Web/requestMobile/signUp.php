@@ -11,9 +11,11 @@
 	$weight = $_POST['weight'];
 	$height = $_POST['height'];
 	
-	$sqlMember = "INSERT INTO member (username,password) VALUES ('$email','$pass')";
+	$md5Pass = md5($pass);
+	
+	$sqlMember = "INSERT INTO member (username,password) VALUES ('$email','$md5Pass')";
 	if(mysqli_query($conn,$sqlMember)){
-		$sqlMemberID = "SELECT member_id From member WHERE password = '$pass'";
+		$sqlMemberID = "SELECT member_id From member WHERE password = '$md5Pass'";
 		$result = mysqli_query($conn,$sqlMemberID);
 		$row=mysqli_fetch_array($result,MYSQLI_ASSOC);
 		$member_id = $row["member_id"];
