@@ -3,6 +3,7 @@ package com.finalproject.reachyourfitnessgoals.activity;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
@@ -28,24 +29,27 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 public class GoalActivity extends AppCompatActivity {
 
     RadioGroup groupRadio;
-    TextView confirm;
+    TextView confirm,duration;
     GoalData goalData;
     EditText weightGoal;
     private handleTABLE_PROGRAM handleTableProgram;
+    SharedPreferences shared;
+    SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_goal);
 
-
+        shared = this.getSharedPreferences(getResources().getString(R.string.sharedPreferencesName), Context.MODE_PRIVATE);
+        editor = shared.edit();
 
         handleTableProgram = new handleTABLE_PROGRAM(this);
         goalData = new GoalData();
         confirm = (TextView) findViewById(R.id.confirm_TextView_goal);
         groupRadio = (RadioGroup)findViewById(R.id.group_RadioButton_goal);
         weightGoal = (EditText)findViewById(R.id.weightGoal_EditText_goal);
-
+        duration = (TextView)findViewById(R.id.duration_TextView_goal);
 
 
         goalData.setKgPerWeek(1540);
@@ -66,6 +70,8 @@ public class GoalActivity extends AppCompatActivity {
                 //calDurationOfProgramExe(goalData);
                 //calDateOfProgram();
                 //handleTableProgram.addProgram(goalData);
+                editor.putBoolean(getResources().getString(R.string.sharedBoolLogIn), true);
+                editor.commit();
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
@@ -78,27 +84,30 @@ public class GoalActivity extends AppCompatActivity {
         switch (v.getId()){
             case R.id.two_RadioButton_goal:
                 goalData.setKgPerWeek(1540);
+                calDurationOfProgramExe();
                 Log.i("test","2");
                 break;
             case R.id.five_RadioButton_goal:
                 goalData.setKgPerWeek(3850);
+                calDurationOfProgramExe();
                 Log.i("test","5");
                 break;
             case R.id.seven_RadioButton_goal:
                 goalData.setKgPerWeek(3850);
+                calDurationOfProgramExe();
                 Log.i("test","7");
                 break;
         }
     }
 
 
-    public void calDurationOfProgramExe(GoalData data){
-        float temp = data.getWeightGoal()*7700;
-        temp = temp / data.getKgPerWeek();
+    public void calDurationOfProgramExe(){
+        double temp = Double.parseDouble(weightGoal.getText().toString().trim())*7700;
+        temp = temp / goalData.getKgPerWeek();
         if(temp % 1 == 0){
-            //goalData.setTotalDuration((int)temp);
+            duration.setText((int)temp+"");
         }else{
-            //goalData.setTotalDuration((int)temp+1);
+            duration.setText((int)temp+1+"");
         }
 
     }
@@ -119,9 +128,6 @@ public class GoalActivity extends AppCompatActivity {
 
 //        int tempDateEnd = goalData.getTotalDuration() * 7;
 //        thaiTime.add(Calendar.DATE,tempDateEnd);
-        int year_end = thaiTime.get(Calendar.YEAR);
-        int month_end = thaiTime.get(Calendar.MONTH)+1;
-        int day_end = thaiTime.get(Calendar.DAY_OF_MONTH);
 
 
     }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_goal2"
     android:layout_width="match_parent"
@@ -8,6 +8,31 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
     tools:context="com.finalproject.reachyourfitnessgoals.activity.Goal2Activity">
 
-</RelativeLayout>
+
+    <TextView
+        style="@style/text_header"
+        android:textColor="@color/colorBlack"
+        android:gravity="center"
+        android:text="เปอร์เซนไขมันของคุณ"/>
+
+        <TextView
+            style="@style/text_header"
+            android:id="@+id/percentFat_TextView_goal2"
+            android:textColor="@color/colorBlack"
+            android:gravity="center"
+            android:text="16"
+             />
+
+    <Button
+        android:id="@+id/confirm_Button_goal2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/step_confirm"
+        android:layout_gravity="center"
+        />
+
+
+</LinearLayout>
