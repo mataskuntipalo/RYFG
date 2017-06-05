@@ -26,6 +26,7 @@ import android.view.WindowManager;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -40,11 +41,14 @@ import com.finalproject.reachyourfitnessgoals.activity.LoginActivity;
 import com.finalproject.reachyourfitnessgoals.activity.MainActivity;
 import com.finalproject.reachyourfitnessgoals.activity.SetExerciseInWeekActivity;
 import com.finalproject.reachyourfitnessgoals.database.handleTABLE_EXERCISE;
+import com.finalproject.reachyourfitnessgoals.database.handleTABLE_PERSONAL;
 import com.finalproject.reachyourfitnessgoals.database.handleTABLE_PROGRAM;
 import com.finalproject.reachyourfitnessgoals.models.DateData;
 import com.finalproject.reachyourfitnessgoals.models.ExeType;
 import com.finalproject.reachyourfitnessgoals.models.GlobalData;
 import com.finalproject.reachyourfitnessgoals.models.GoalData;
+import com.finalproject.reachyourfitnessgoals.models.PersonalData;
+import com.finalproject.reachyourfitnessgoals.setting.CalculateShape;
 import com.finalproject.reachyourfitnessgoals.setting.handleCalendar;
 import com.github.florent37.materialviewpager.MaterialViewPagerHelper;
 import com.google.gson.Gson;
@@ -69,8 +73,13 @@ public class fragment_home extends Fragment {
     TextView cancelSetExe;
     NestedScrollView nestedScrollView;
     int currentProgramType;
-    ImageView bgPic;
     GoalData programData;
+    PersonalData personalData;
+    TextView weight,tdee,totalCalorie;
+
+    //for test
+    EditText calorie;
+    Button endProgram;
 
     public fragment_home() {
         // Required empty public constructor
@@ -92,9 +101,20 @@ public class fragment_home extends Fragment {
         programData = new handleTABLE_PROGRAM(getContext()).getCurrentProgramDate();
         currentProgramType = programData.getTypeGoal();
 
-        //testJson(rootview);
+        personalData = new handleTABLE_PERSONAL(getContext()).getPersonal();
+        //test noti
         Button notiBtn = (Button)rootview.findViewById(R.id.notification_Button_home);
         notiBtn.setOnClickListener(showNotification);
+
+        //test end program
+        calorie = (EditText)rootview.findViewById(R.id.testEnd);
+        endProgram = (Button)rootview.findViewById(R.id.testEnd_Button_home);
+        endProgram.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new handleTABLE_PROGRAM(getContext()).updateTotalCalorie(Integer.parseInt(calorie.getText().toString().trim()));
+            }
+        });
 
 
         //Init value
@@ -105,8 +125,14 @@ public class fragment_home extends Fragment {
         setExe = (Button)rootview.findViewById(R.id.setExd_button_home);
         displayDay = (LinearLayout) rootview.findViewById(R.id.displayDay_include_home);
         cancelSetExe = (TextView)  rootview.findViewById(R.id.cancelSetExe_Text_home);
-        //bgPic = (ImageView)rootview.findViewById(R.id.bg_ImageView_home);
-        //Glide.with(this).load("http://192.168.1.35/ryfg/image/1.jpg").into(bgPic);
+        weight = (TextView) rootview.findViewById(R.id.weight_TextView_home);
+        tdee = (TextView) rootview.findViewById(R.id.tdee_TextView_home);
+        totalCalorie = (TextView)rootview.findViewById(R.id.totalCalorie_TextView_home);
+
+
+        weight.setText(personalData.getWeight()+"");
+        totalCalorie.setText(programData.getTotalCalorie()+"");
+        tdee.setText(new CalculateShape(personalData).getTdee()+"");
 
         // Make layoutTotalSelectDay to invisible
         LinearLayout layout = (LinearLayout) displayDay.findViewById(R.id.layoutTotalSelectDay_LinearLayout_dayOfWork);
@@ -199,14 +225,6 @@ public class fragment_home extends Fragment {
         double temp = (programData.getTotalCalorie()/(programData.getWeightGoal()*7700));
         int percent = (int) (temp*100);
         return percent;
-    }
-
-    private void testJson(View rootview) {
-        ArrayList<DateData> datas = new handleTABLE_EXERCISE(getContext()).getDateExerciseToCalendar();
-        Gson gson = new Gson();
-        String jsonString = gson.toJson(datas);
-        TextView view = (TextView) rootview.findViewById(R.id.testJson);
-        view.setText(jsonString);
     }
 
 

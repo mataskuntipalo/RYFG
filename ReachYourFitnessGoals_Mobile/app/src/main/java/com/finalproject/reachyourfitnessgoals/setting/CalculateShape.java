@@ -30,10 +30,19 @@ public class CalculateShape {
         percentFat = calPercentFat();
     }
 
+    public CalculateShape(PersonalData data) {
+        personalData = data;
+        bmr = calBMR();
+        bmi = calBMI();
+        tdee = calTdee();
+        percentFat = calPercentFat();
+    }
+
     private double calBMR(){
         double bmr;
         if(personalData.getGender() == CalculateShape.MAN){
             bmr = 66+(13.7*personalData.getWeight())+(5*personalData.getHeight())-(6.8*personalData.getAge());
+            Log.i("tdee1",bmr+"");
         }else {
             bmr = 665+(9.6*personalData.getWeight())+(1.8*personalData.getHeight())-(4.7*personalData.getAge());
         }

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_horizontal_margin"
     android:id="@+id/scrollView_calendar"
     tools:context="com.finalproject.reachyourfitnessgoals.fragment.fragment_calendar">
 

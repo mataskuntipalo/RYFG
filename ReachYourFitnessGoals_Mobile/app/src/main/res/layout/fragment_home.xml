@@ -74,6 +74,7 @@
             android:text="65"
             android:textColor="@color/colorBlack"
             android:layout_marginRight="10dp"
+            android:id="@+id/weight_TextView_home"
             android:textSize="26sp" />
 
         <TextView
@@ -106,6 +107,7 @@
                 android:layout_marginRight="10dp"
                 android:text="1800"
                 android:textColor="@color/colorWhite"
+                android:id="@+id/totalCalorie_TextView_home"
                 android:textSize="26sp" />
 
             <TextView
@@ -121,7 +123,7 @@
             android:layout_height="50dp"
             android:background="@color/green_teal"
             android:gravity="center"
-            android:orientation="vertical">
+            android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -137,6 +139,7 @@
                 android:layout_marginRight="10dp"
                 android:text="1800"
                 android:textColor="@color/colorWhite"
+                android:id="@+id/tdee_TextView_home"
                 android:textSize="26sp" />
 
             <TextView
@@ -221,24 +224,29 @@
                 android:layout_centerInParent="true"
                 android:text="Show Notification"
                 android:layout_gravity="center"
+                android:layout_marginBottom="20dp"
                 android:onClick="showNotification"/>
 
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shadow_layout"
+                android:id="@+id/testEnd"
+                android:hint="จำนวนแคลอรี่"
+                android:inputType="number"
+                android:textColor="@color/colorBlack"
+                android:textSize="18sp"/>
+
             <Button
-                android:id="@+id/connect_Button_home"
+                android:id="@+id/testEnd_Button_home"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="18sp"
                 android:layout_centerInParent="true"
-                android:text="Show Load"
+                android:text="เพิ่มแคลอรี่"
                 android:layout_gravity="center"
+                android:layout_marginBottom="20dp"
                 android:onClick="showNotification"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/testJson"
-                android:textColor="@color/colorBlack"
-                android:textSize="18sp"/>
 
         </LinearLayout>
 
