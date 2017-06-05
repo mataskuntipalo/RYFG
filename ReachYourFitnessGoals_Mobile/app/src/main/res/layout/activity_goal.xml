@@ -21,6 +21,23 @@
             android:textColor="@color/colorWhite"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="ชื่อเป้าหมายของคุณ"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorWhite"
+            android:textSize="24sp"
+            android:textColor="@color/colorWhite"
+            android:gravity="center"
+            android:text="ลาก่อนความอ้วน"
+            android:id="@+id/programName_EditText_goal"/>
+
+        <TextView
+            style="@style/text_default"
+            android:textColor="@color/colorWhite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="นํ้าหนักที่ต้องการลด (กิโลกรัม)"/>
 
         <EditText
@@ -64,7 +81,7 @@
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="3850 แคลอรี / สัปดาห์"
+            android:text="5390 แคลอรี / สัปดาห์"
             android:textColor="@color/colorWhite"
             android:textSize="@dimen/default_text"
             android:id="@+id/seven_RadioButton_goal"/>

@@ -93,7 +93,7 @@ public class fragment_customExe_list extends Fragment{
                 if(tempCalorie >= tempMaxCalorie){
                     check();
                 }else {
-                    selectExe(name,vdo_id);
+                    selectExe(name,vdo_id,Integer.parseInt(calorie));
                     addCalorie(calorie);
                 }
             }
@@ -136,8 +136,8 @@ public class fragment_customExe_list extends Fragment{
         return rootview;
     }
 
-    private void selectExe(String name,String vdo_id) {
-        recyclerViewAdapterBottomSheet.addExe(name,vdo_id);
+    private void selectExe(String name,String vdo_id,int calorie) {
+        recyclerViewAdapterBottomSheet.addExe(name,vdo_id,calorie);
         //bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
     }
 
@@ -153,6 +153,14 @@ public class fragment_customExe_list extends Fragment{
         recyclerViewBottomSheet.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerViewAdapterBottomSheet = new RecyclerViewAdapter_userSelect(userSelectDataArrayList,getContext());
         recyclerViewBottomSheet.setAdapter(recyclerViewAdapterBottomSheet);
+        recyclerViewAdapterBottomSheet.SetOnItemDeleteListener(new RecyclerViewAdapter_userSelect.OnItemClickListener() {
+
+            @Override
+            public void onDeleteClick(int calorie, int position) {
+                deleteCalorie(calorie);
+                recyclerViewAdapterBottomSheet.DeleteExe(position);
+            }
+        });
     }
 
 
@@ -163,6 +171,11 @@ public class fragment_customExe_list extends Fragment{
         }else {
 
         }
+        this.calorieText.setText(tempCalorie+"");
+    }
+
+    private void deleteCalorie(int calorie){
+        tempCalorie = tempCalorie - calorie;
         this.calorieText.setText(tempCalorie+"");
     }
 

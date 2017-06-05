@@ -18,6 +18,11 @@ public class GoalData {
     int percentFat;
     String programName;
 
+    public GoalData() {
+        this.weightGoal = 0;
+        this.totalCalorie = 0;
+        this.percentFat = 0;
+    }
 
     public int getTypeGoal() {
         return typeGoal;

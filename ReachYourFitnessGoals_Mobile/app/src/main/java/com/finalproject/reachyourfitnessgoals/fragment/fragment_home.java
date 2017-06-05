@@ -192,11 +192,6 @@ public class fragment_home extends Fragment {
     private int calPercentWeight(){
         double temp = (programData.getTotalCalorie()/(programData.getWeightGoal()*7700));
         int percent = (int) (temp*100);
-        Log.i("percent1",programData.getTotalCalorie()+"");
-        Log.i("percent1",programData.getWeightGoal()+"");
-        Log.i("percent1",(programData.getWeightGoal()*7700)+"");
-        Log.i("percent1",(programData.getTotalCalorie()/(programData.getWeightGoal()*7700))+"");
-        Log.i("percent1",percent+"");
         return percent;
     }
 

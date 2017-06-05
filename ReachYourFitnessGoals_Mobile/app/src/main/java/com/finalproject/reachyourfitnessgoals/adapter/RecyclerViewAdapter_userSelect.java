@@ -25,6 +25,7 @@ public class RecyclerViewAdapter_userSelect extends RecyclerView.Adapter<Recycle
 
     private ArrayList<userSelectData> userSelectDataList;
     private Context mContext;
+    RecyclerViewAdapter_userSelect.OnItemClickListener mItemClickListener;
 
     public RecyclerViewAdapter_userSelect(ArrayList<userSelectData> userSelectDataList,Context context) {
         this.userSelectDataList = userSelectDataList;
@@ -34,15 +35,25 @@ public class RecyclerViewAdapter_userSelect extends RecyclerView.Adapter<Recycle
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.itemview_bottom_sheet, parent, false);
-        return new userSelectExeViewHolder(view);
+        userSelectExeViewHolder selectExeViewHolder = new userSelectExeViewHolder(view,new userSelectExeViewHolder.userSelectExeViewHolderClicks(){
+            @Override
+            public void delete(View caller) {
+                if (mItemClickListener != null) {
+                    mItemClickListener.onDeleteClick((Integer) caller.getTag(R.id.calorie), (Integer) caller.getTag(R.id.position));
+                }
+            }
+        });
+        return selectExeViewHolder;
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         userSelectExeViewHolder userSelectExeViewHolder = (userSelectExeViewHolder) holder;
         File mFile = new File(Environment.getExternalStorageDirectory()+ File.separator  + "Android" + File.separator + "data" + File.separator + "com.finalproject.reachyourfitnessgoals" + File.separator + "image" + File.separator + userSelectDataList.get(position).getName() + ".jpg");
         Glide.with(mContext).load(mFile).into(userSelectExeViewHolder.exePic_bottomSheet);
         userSelectExeViewHolder.exeName_bottomSheet.setText(userSelectDataList.get(position).getName());
+        userSelectExeViewHolder.exePic_bottomSheet.setTag(R.id.calorie,userSelectDataList.get(position).getCalories());
+        userSelectExeViewHolder.exePic_bottomSheet.setTag(R.id.position,position);
     }
 
     @Override
@@ -50,10 +61,22 @@ public class RecyclerViewAdapter_userSelect extends RecyclerView.Adapter<Recycle
         return userSelectDataList.size();
     }
 
-    public void addExe(String name , String vdo_id){
-        this.userSelectDataList.add(new userSelectData(name,5,vdo_id));
+    public void addExe(String name , String vdo_id,int calorie){
+        this.userSelectDataList.add(new userSelectData(name,calorie,vdo_id));
         notifyDataSetChanged();
     }
 
+    public void DeleteExe(int position){
+        this.userSelectDataList.remove(position);
+        notifyDataSetChanged();
+    }
+
+    public interface OnItemClickListener {
+        public void onDeleteClick(int calorie,int position);
+    }
+
+    public void SetOnItemDeleteListener(final OnItemClickListener mItemClickListener) {
+        this.mItemClickListener = mItemClickListener;
+    }
 
 }

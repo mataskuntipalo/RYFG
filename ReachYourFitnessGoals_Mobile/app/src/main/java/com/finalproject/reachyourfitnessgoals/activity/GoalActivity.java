@@ -13,9 +13,11 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.finalproject.reachyourfitnessgoals.R;
 import com.finalproject.reachyourfitnessgoals.database.handleTABLE_PROGRAM;
+import com.finalproject.reachyourfitnessgoals.models.ExeType;
 import com.finalproject.reachyourfitnessgoals.models.GoalData;
 
 import java.text.SimpleDateFormat;
@@ -31,7 +33,7 @@ public class GoalActivity extends AppCompatActivity {
     RadioGroup groupRadio;
     TextView confirm,duration;
     GoalData goalData;
-    EditText weightGoal;
+    EditText weightGoal,programName;
     private handleTABLE_PROGRAM handleTableProgram;
     SharedPreferences shared;
     SharedPreferences.Editor editor;
@@ -49,10 +51,11 @@ public class GoalActivity extends AppCompatActivity {
         confirm = (TextView) findViewById(R.id.confirm_TextView_goal);
         groupRadio = (RadioGroup)findViewById(R.id.group_RadioButton_goal);
         weightGoal = (EditText)findViewById(R.id.weightGoal_EditText_goal);
+        programName = (EditText)findViewById(R.id.programName_EditText_goal);
         duration = (TextView)findViewById(R.id.duration_TextView_goal);
 
 
-        goalData.setKgPerWeek(1540);
+        setUpData();
 
         groupRadio.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -68,15 +71,28 @@ public class GoalActivity extends AppCompatActivity {
             public void onClick(View view) {
                 //goalData.setWeightGoal(Float.parseFloat(weightGoal.getText().toString()));
                 //calDurationOfProgramExe(goalData);
-                //calDateOfProgram();
-                //handleTableProgram.addProgram(goalData);
-                editor.putBoolean(getResources().getString(R.string.sharedBoolLogIn), true);
-                editor.commit();
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(intent);
+                if(Double.parseDouble(weightGoal.getText().toString().trim()) <= 0){
+                    Toast.makeText(getApplicationContext(),"โปรดใส่เป้าหมายที่ต้องการ",Toast.LENGTH_LONG ).show();
+                }else {
+                    goalData.setWeightGoal((float) Double.parseDouble(weightGoal.getText().toString().trim()));
+                    goalData.setProgramName(programName.getText().toString().trim());
+                    handleTableProgram.addProgram(goalData);
+                    editor.putBoolean(getResources().getString(R.string.sharedBoolLogIn), true);
+                    editor.commit();
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
+                }
+
             }
         });
+    }
+
+    public void setUpData(){
+        goalData.setKgPerWeek(1540);
+        goalData.setTypeGoal(ExeType.TYPE_PROGRAM_WEIGHT);
+        calDateOfProgram();
+        goalData.setStatus(1);
     }
 
 
@@ -115,16 +131,13 @@ public class GoalActivity extends AppCompatActivity {
     public void calDateOfProgram(){
         Calendar thaiTime = new GregorianCalendar(TimeZone.getTimeZone("GMT+07:00"));
         int year_begin = thaiTime.get(Calendar.YEAR);
-        int month_begin = thaiTime.get(Calendar.MONTH)+1;
+        int month_begin = thaiTime.get(Calendar.MONTH);
         int day_begin = thaiTime.get(Calendar.DAY_OF_MONTH);
 
         goalData.setYear_date_begin(year_begin);
         goalData.setMonth_date_begin(month_begin);
         goalData.setDay_date_begin(day_begin);
 
-        Log.i("dateBegin",goalData.getDay_date_begin()+"");
-        Log.i("dateBegin",goalData.getMonth_date_begin()+"");
-        Log.i("dateBegin",goalData.getYear_date_begin()+"");
 
 //        int tempDateEnd = goalData.getTotalDuration() * 7;
 //        thaiTime.add(Calendar.DATE,tempDateEnd);
