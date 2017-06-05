@@ -144,6 +144,12 @@ public class handleTABLE_PROGRAM {
         writeSQLite.update(TABLE_PROGRAM, args, COLUMN_STATUS + "=" + 1, null);
     }
 
+    public void endProgram(){
+        ContentValues args = new ContentValues();
+        args.put(COLUMN_STATUS, 0);
+        writeSQLite.update(TABLE_PROGRAM, args, COLUMN_STATUS + "=" + 1, null);
+    }
+
     public void delete(){
         writeSQLite.execSQL("delete from "+ TABLE_PROGRAM);
     }

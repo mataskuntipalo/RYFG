@@ -160,6 +160,7 @@ public class ExerciseActivity extends YouTubeBaseActivity implements YouTubePlay
         player = youTubePlayer;
         if(!b){
             youTubePlayer.cueVideo(VIDEO_CAMEL);
+            youTubePlayer.setFullscreen(false);
         }
     }
 

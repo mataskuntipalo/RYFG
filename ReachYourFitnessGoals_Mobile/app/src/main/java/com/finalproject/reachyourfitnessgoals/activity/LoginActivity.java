@@ -194,7 +194,7 @@ public class LoginActivity extends AppCompatActivity {
 ////                if (isFirstStart) {
 //
 //        //  Launch app intro
-//        Intent i = new Intent(this, IntroActivity.class);
+//        Intent i = new Intent(this, EndProgramActivity.class);
 //        startActivity(i);
 //
 //                 /*   //  Make a new preferences editor

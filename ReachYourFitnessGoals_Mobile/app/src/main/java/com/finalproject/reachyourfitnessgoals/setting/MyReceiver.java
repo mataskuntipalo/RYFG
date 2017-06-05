@@ -34,17 +34,12 @@ public class MyReceiver extends BroadcastReceiver {
             editor.putBoolean(context.getString(R.string.sharedBoolSetExe), false);
             editor.commit();
 
-            Intent intent1 = new Intent(Intent.ACTION_VIEW,
-                    Uri.parse("http://devahoy.com/posts/android-notification/"));
-            PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent1, 0);
-
             Notification notification =
                     new NotificationCompat.Builder(context)
                             .setSmallIcon(R.mipmap.ic_launcher)
                             .setContentTitle("สัปดาห์ใหม่เริ่มต้นขึ้นแล้ว")
                             .setContentText("มาออกกำลังกายกันเถอะ")
                             .setAutoCancel(true)
-                            .setContentIntent(pendingIntent)
                             .setPriority(Notification.PRIORITY_HIGH)
                             .setDefaults(Notification.DEFAULT_ALL)
                             .build();
@@ -56,17 +51,12 @@ public class MyReceiver extends BroadcastReceiver {
         }else{
 
 
-            Intent intent1 = new Intent(Intent.ACTION_VIEW,
-                    Uri.parse("http://devahoy.com/posts/android-notification/"));
-            PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent1, 0);
-
             Notification notification =
                     new NotificationCompat.Builder(context)
                             .setSmallIcon(R.mipmap.ic_launcher)
                             .setContentTitle("วันนี้เรามีนัดกันนะ")
                             .setContentText("มาออกกำลังกายกันเถอะ")
                             .setAutoCancel(true)
-                            .setContentIntent(pendingIntent)
                             .setPriority(Notification.PRIORITY_HIGH)
                             .setDefaults(Notification.DEFAULT_ALL)
                             .build();

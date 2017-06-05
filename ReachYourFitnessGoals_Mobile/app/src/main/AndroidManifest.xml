@@ -50,7 +50,7 @@
             android:name=".activity.ParQActivity"
             android:theme="@style/AppTheme.NoActionBar.AccentBlack" />
         <activity android:name=".activity.Goal2Activity" />
-        <activity android:name=".activity.IntroActivity"
+        <activity android:name=".activity.EndProgramActivity"
             android:theme="@style/AppTheme.NoActionBar.AccentBlack">
 
         </activity>

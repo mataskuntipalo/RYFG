@@ -100,7 +100,7 @@ public class fragment_list extends Fragment{
         recyclerViewAdapter.SetOnItemClickListener(new RecyclerViewAdapter.OnItemClickListenerShowAll() {
             @Override
             public void onItemClickShowVDO(String name) {
-                fragment_dialog_showVDO dialogFragment = fragment_dialog_showVDO.newInstance();
+                fragment_dialog_showVDO dialogFragment = fragment_dialog_showVDO.newInstance(name);
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 fragmentManager
                         .beginTransaction()

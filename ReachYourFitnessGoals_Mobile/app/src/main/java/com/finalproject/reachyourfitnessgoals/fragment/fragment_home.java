@@ -35,6 +35,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DecodeFormat;
 import com.finalproject.reachyourfitnessgoals.R;
+import com.finalproject.reachyourfitnessgoals.activity.EndProgramActivity;
 import com.finalproject.reachyourfitnessgoals.activity.LoginActivity;
 import com.finalproject.reachyourfitnessgoals.activity.MainActivity;
 import com.finalproject.reachyourfitnessgoals.activity.SetExerciseInWeekActivity;
@@ -143,6 +144,11 @@ public class fragment_home extends Fragment {
 
         if(currentProgramType == ExeType.TYPE_PROGRAM_WEIGHT) {
             arcView.addEvent(new DecoEvent.Builder(calPercentWeight()).setIndex(series1Index).setDelay(4000).build());
+            if(programData.getTotalCalorie() >= programData.getWeightGoal()*7700){
+                    Intent intent = new Intent(getActivity(), EndProgramActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
+            }
         }else{
             arcView.addEvent(new DecoEvent.Builder(programData.getPercentFat()).setIndex(series1Index).setDelay(4000).build());
         }

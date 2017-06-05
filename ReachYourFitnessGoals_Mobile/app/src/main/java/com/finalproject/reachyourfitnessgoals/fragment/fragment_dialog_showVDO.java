@@ -27,9 +27,12 @@ public class fragment_dialog_showVDO extends DialogFragment implements YouTubePl
         // Required empty public constructor
     }
 
-    public static fragment_dialog_showVDO newInstance() {
+    public static fragment_dialog_showVDO newInstance(String name) {
         // Required empty public constructor
         fragment_dialog_showVDO fragment = new fragment_dialog_showVDO();
+        Bundle bundle = new Bundle();
+        bundle.putString("name", name);
+        fragment.setArguments(bundle);
         return fragment;
     }
 
@@ -40,6 +43,8 @@ public class fragment_dialog_showVDO extends DialogFragment implements YouTubePl
         // Inflate the layout for this fragment
         View rootview = inflater.inflate(R.layout.fragment_dialog_show_vdo, container, false);
 
+        name = (TextView)rootview.findViewById(R.id.nameExe_TextView_showVDO);
+        name.setText(getArguments().getString("name"));
         YouTubePlayerSupportFragment youtubePlayerFragment = (YouTubePlayerSupportFragment)
                 getActivity().getSupportFragmentManager().findFragmentById(R.id.youtube_fragment);
         if (youtubePlayerFragment == null) {
@@ -48,6 +53,7 @@ public class fragment_dialog_showVDO extends DialogFragment implements YouTubePl
         }
         youtubePlayerFragment.initialize(ExerciseActivity.API_KEY, this);
 
+
         return rootview;
     }
 
@@ -55,6 +61,7 @@ public class fragment_dialog_showVDO extends DialogFragment implements YouTubePl
     public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
         youTubePlayer.setPlayerStyle(YouTubePlayer.PlayerStyle.DEFAULT);
         youTubePlayer.loadVideo(ExerciseActivity.VIDEO_CAMEL);
+        youTubePlayer.setFullscreen(false);
     }
 
     @Override
