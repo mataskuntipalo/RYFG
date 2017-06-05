@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.finalproject.reachyourfitnessgoals.R;
 import com.finalproject.reachyourfitnessgoals.activity.ExerciseActivity;
@@ -20,6 +21,7 @@ import com.google.android.youtube.player.YouTubePlayerSupportFragment;
  */
 public class fragment_dialog_showVDO extends DialogFragment implements YouTubePlayer.OnInitializedListener {
 
+    TextView name;
 
     public fragment_dialog_showVDO() {
         // Required empty public constructor

@@ -1,11 +1,14 @@
 package com.finalproject.reachyourfitnessgoals.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Environment;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.finalproject.reachyourfitnessgoals.R;
@@ -25,7 +28,7 @@ public class RecyclerViewAdapter_userSelect extends RecyclerView.Adapter<Recycle
 
     private ArrayList<userSelectData> userSelectDataList;
     private Context mContext;
-    RecyclerViewAdapter_userSelect.OnItemClickListener mItemClickListener;
+    OnItemClickListener mItemClickListener;
 
     public RecyclerViewAdapter_userSelect(ArrayList<userSelectData> userSelectDataList,Context context) {
         this.userSelectDataList = userSelectDataList;
@@ -39,7 +42,8 @@ public class RecyclerViewAdapter_userSelect extends RecyclerView.Adapter<Recycle
             @Override
             public void delete(View caller) {
                 if (mItemClickListener != null) {
-                    mItemClickListener.onDeleteClick((Integer) caller.getTag(R.id.calorie), (Integer) caller.getTag(R.id.position));
+                    Log.i("inDelete",caller.getTag(R.id.position)+"");
+                    mItemClickListener.onDeleteClick(Integer.parseInt(caller.getTag(R.id.calorie).toString()), Integer.parseInt(caller.getTag(R.id.position).toString()));
                 }
             }
         });
@@ -52,8 +56,10 @@ public class RecyclerViewAdapter_userSelect extends RecyclerView.Adapter<Recycle
         File mFile = new File(Environment.getExternalStorageDirectory()+ File.separator  + "Android" + File.separator + "data" + File.separator + "com.finalproject.reachyourfitnessgoals" + File.separator + "image" + File.separator + userSelectDataList.get(position).getName() + ".jpg");
         Glide.with(mContext).load(mFile).into(userSelectExeViewHolder.exePic_bottomSheet);
         userSelectExeViewHolder.exeName_bottomSheet.setText(userSelectDataList.get(position).getName());
-        userSelectExeViewHolder.exePic_bottomSheet.setTag(R.id.calorie,userSelectDataList.get(position).getCalories());
-        userSelectExeViewHolder.exePic_bottomSheet.setTag(R.id.position,position);
+        userSelectExeViewHolder.exeCalorie_bottomSheet.setText(userSelectDataList.get(position).getCalories() + " แคลลอรี่");
+        userSelectExeViewHolder.exeDelete_bottomSheet.setTag(R.id.calorie,userSelectDataList.get(position).getCalories());
+        userSelectExeViewHolder.exeDelete_bottomSheet.setTag(R.id.position,position);
+
     }
 
     @Override

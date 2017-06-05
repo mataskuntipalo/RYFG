@@ -17,6 +17,7 @@ public class userSelectExeViewHolder extends RecyclerView.ViewHolder implements 
     public ImageView exePic_bottomSheet;
     public TextView exeName_bottomSheet;
     public TextView exeCalorie_bottomSheet;
+    public ImageView exeDelete_bottomSheet;
     public userSelectExeViewHolderClicks mListener;
 
     public userSelectExeViewHolder(View itemView,userSelectExeViewHolderClicks mListener) {
@@ -25,7 +26,8 @@ public class userSelectExeViewHolder extends RecyclerView.ViewHolder implements 
         exePic_bottomSheet = (ImageView) itemView.findViewById(R.id.pic_bottomSheet);
         exeName_bottomSheet = (TextView) itemView.findViewById(R.id.name_TextView_bottomSheet);
         exeCalorie_bottomSheet = (TextView) itemView.findViewById(R.id.calorie_TextView_bottomSheet);
-        exePic_bottomSheet.setOnClickListener(this);
+        exeDelete_bottomSheet = (ImageView)itemView.findViewById(R.id.deleteIcon_bottomSheet);
+        exeDelete_bottomSheet.setOnClickListener(this);
     }
 
     @Override

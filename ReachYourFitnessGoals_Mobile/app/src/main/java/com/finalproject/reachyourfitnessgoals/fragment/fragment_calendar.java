@@ -66,7 +66,7 @@ public class fragment_calendar extends Fragment {
     private LinearLayout layoutDetail;
     private TextView noExeText;
     private TextView calorieText;
-    private TextView timeText;
+    private TextView timeText,noteText;
 
 
     public fragment_calendar() {
@@ -90,6 +90,7 @@ public class fragment_calendar extends Fragment {
         noExeText = (TextView)rootview.findViewById(R.id.noExe_TextView_calendar);
         calorieText = (TextView)rootview.findViewById(R.id.calorie_TextView_calendar);
         timeText = (TextView) rootview.findViewById(R.id.time_TextView_calendar);
+        noteText = (TextView)rootview.findViewById(R.id.note_TextView_calendar);
 
         handleTableProgram = new handleTABLE_PROGRAM(getActivity());
         handleTableExercise = new handleTABLE_EXERCISE(getActivity());
@@ -153,6 +154,7 @@ public class fragment_calendar extends Fragment {
                 setExeButton.setOnClickListener(setExe);
                 layoutExe.setVisibility(View.GONE);
                 timeText.setText(exerciseData.getTime());
+                noteText.setText("-");
                 calorieText.setText(exerciseData.getCalorie()+"");
                 exeButton.setVisibility(View.GONE);
             }else {
@@ -167,9 +169,9 @@ public class fragment_calendar extends Fragment {
                         .commit();
 
                 timeText.setText(exerciseData.getTime());
+                noteText.setText(exerciseData.getNote());
                 calorieText.setText(exerciseData.getCalorie()+"");
                 if(DateUtils.isToday(date.getDate().getTime()) && exerciseData.getCheckState() == ExerciseData.WORKOUT_NOT_FINISH){
-                    Log.i("exerciseData",exerciseData.getCheckState()+"");
                     exeButton.setVisibility(View.VISIBLE);
                     exeButton.setOnClickListener(new View.OnClickListener() {
                         @Override

@@ -235,6 +235,7 @@
                 android:layout_height="wrap_content"
                 android:text="-"
                 android:textColor="@color/colorBlack"
+                android:id="@+id/note_TextView_calendar"
                 android:textSize="@dimen/default_text" />
 
         </LinearLayout>

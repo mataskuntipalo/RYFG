@@ -185,10 +185,11 @@ public class handleTABLE_EXERCISE {
 //                + " AND " + COLUMN_YEAR + "=" + data.getYear() + ";");
     }
 
-    public void updateTimeAndCalorie(String time,int calorie, DateData data){
+    public void updateTimeAndCalorie(String time,int calorie, DateData data,String note){
         ContentValues args = new ContentValues();
         args.put(COLUMN_TIME, time);
         args.put(COLUMN_CALORIE_IN_DAY, calorie);
+        args.put(COLUMN_NOTE, note);
         args.put(COLUMN_CHECK, ExerciseData.WORKOUT_FINISH);
         writeSQLite.update(TABLE_EXERCISE, args, COLUMN_DAY + "=" + data.getDay()
                 + " AND " + COLUMN_MONTH + "=" + data.getMonth()

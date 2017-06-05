@@ -21,18 +21,17 @@
         <activity
             android:name=".activity.LoginActivity"
             android:theme="@style/AppTheme.NoActionBar.AccentBlack">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
         <activity
             android:name=".activity.MainActivity"
-            android:theme="@style/AppTheme.NoActionBar.AccentBlack"></activity>
-        <activity
-            android:name=".activity.IntroActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar.AccentBlack" />
         <activity android:name=".activity.GoalActivity" />
         <activity android:name=".activity.SetExerciseInWeekActivity" />
 
@@ -50,7 +49,11 @@
         <activity
             android:name=".activity.ParQActivity"
             android:theme="@style/AppTheme.NoActionBar.AccentBlack" />
-        <activity android:name=".activity.Goal2Activity"></activity>
+        <activity android:name=".activity.Goal2Activity" />
+        <activity android:name=".activity.IntroActivity"
+            android:theme="@style/AppTheme.NoActionBar.AccentBlack">
+
+        </activity>
     </application>
 
 </manifest>

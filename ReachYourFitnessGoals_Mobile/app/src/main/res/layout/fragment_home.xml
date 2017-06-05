@@ -118,6 +118,37 @@
 
         <LinearLayout
             android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/green_teal"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:text="ควรรับประทานอาหาร"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/default_text" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:text="1800"
+                android:textColor="@color/colorWhite"
+                android:textSize="26sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="แคลอรี่"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/big_text_24" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:background="@color/colorDefault_Background">

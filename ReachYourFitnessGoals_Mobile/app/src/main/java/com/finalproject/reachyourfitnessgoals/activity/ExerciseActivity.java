@@ -45,7 +45,7 @@ public class ExerciseActivity extends YouTubeBaseActivity implements YouTubePlay
     long lastPause;
     ImageButton doneButton;
     int countExe;
-    TextView exeName;
+    TextView exeName,exeCalorie,exeDuration;
     String[] nameArray;
     ArrayList<vdoData> vdoDataList;
 
@@ -66,6 +66,8 @@ public class ExerciseActivity extends YouTubeBaseActivity implements YouTubePlay
         Button start = (Button) findViewById(R.id.start);
         final ImageButton stop = (ImageButton) findViewById(R.id.stop);
         exeName = (TextView)findViewById(R.id.exeName_TextView_exe);
+        exeCalorie = (TextView)findViewById(R.id.exeCalorie_TextView_exe);
+        exeDuration = (TextView)findViewById(R.id.exeDuration_TextView_exe);
 
         countExe = 0;
         lastPause = 0;
@@ -134,9 +136,10 @@ public class ExerciseActivity extends YouTubeBaseActivity implements YouTubePlay
 //            }else {
 //                //player.loadVideo(VIDEO_JUMP);
 //                exeName.setText(vdoDataList.get(countExe).getName());
+//                exeCalorie.setText("จำนวนแคลอรี่ : " + vdoDataList.get(countExe).getCalorie() + " แคลอรี่");
+//                exeDuration.setText("จำนวน : " + vdoDataList.get(countExe).getDuration());
 //                Log.i("countExe",vdoDataList.size()+"");
 //                countExe++;
-//
 //            }
         }
     };

@@ -98,6 +98,7 @@
             android:layout_weight="1"
             android:textSize="22sp"
             android:textColor="@color/colorBlack"
+            android:id="@+id/exeCalorie_TextView_exe"
             android:text="จำนวนแคลอรี่ : 5 แคลอรี่"/>
 
         <TextView
@@ -106,6 +107,7 @@
             android:layout_weight="1"
             android:textSize="22sp"
             android:textColor="@color/colorBlack"
+            android:id="@+id/exeDuration_TextView_exe"
             android:text="จำนวนครั้ง : 5 รอบ"/>
 
         <Button
@@ -116,7 +118,7 @@
             android:layout_gravity="center"/>
 
         <ImageButton
-            android:layout_width="50dp"
+            android:layout_width="200dp"
             android:layout_height="50dp"
             android:layout_gravity="center"
             android:id="@+id/done_ImageButton_exe"

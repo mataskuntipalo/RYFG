@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -49,6 +50,7 @@ public class fragment_customExe_list extends Fragment{
     private int tempCalorie;
     private int ExeForGlobalData_id;
     private SetUpCalorieAndExe setUpCalorieAndExe;
+    private LinearLayoutManager linearLayoutManager;
 
 
 
@@ -115,7 +117,8 @@ public class fragment_customExe_list extends Fragment{
                         Log.i("Bottom Sheet Behaviour", "STATE_DRAGGING");
                         break;
                     case BottomSheetBehavior.STATE_EXPANDED:
-                        Log.i("Bottom Sheet Behaviour", "STATE_EXPANDED");
+
+
                         break;
                     case BottomSheetBehavior.STATE_HIDDEN:
                         Log.i("Bottom Sheet Behaviour", "STATE_HIDDEN");
@@ -142,6 +145,7 @@ public class fragment_customExe_list extends Fragment{
     }
 
     private void initBottomSheet(View rootview){
+        linearLayoutManager = new LinearLayoutManager(getActivity());
         userSelectDataArrayList = new ArrayList<>();
         bottomSheetBehavior = BottomSheetBehavior.from(rootview.findViewById(R.id.layout_bottomSheet));
         calorieText = (TextView)rootview.findViewById(R.id.calorie_TextView_bottomSheet);
@@ -150,10 +154,12 @@ public class fragment_customExe_list extends Fragment{
         tempMaxCalorie = setUpCalorieAndExe.getMaxCalorieForEachStep(getArguments().getString(KEY_TYPE),getArguments().getInt(KEY_ID));
         confirmButton = (Button)rootview.findViewById(R.id.confirm_Button_bottomSheet);
         recyclerViewBottomSheet = (RecyclerView)rootview.findViewById(R.id.recyclerView_bottomSheet);
-        recyclerViewBottomSheet.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerViewBottomSheet.setLayoutManager(linearLayoutManager);
         recyclerViewAdapterBottomSheet = new RecyclerViewAdapter_userSelect(userSelectDataArrayList,getContext());
         recyclerViewBottomSheet.setAdapter(recyclerViewAdapterBottomSheet);
-        recyclerViewAdapterBottomSheet.SetOnItemDeleteListener(new RecyclerViewAdapter_userSelect.OnItemClickListener() {
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerViewBottomSheet.getContext(), linearLayoutManager.getOrientation());
+        recyclerViewBottomSheet.addItemDecoration(dividerItemDecoration);
+        recyclerViewAdapterBottomSheet.SetOnItemDeleteListener( new RecyclerViewAdapter_userSelect.OnItemClickListener() {
 
             @Override
             public void onDeleteClick(int calorie, int position) {
@@ -176,6 +182,11 @@ public class fragment_customExe_list extends Fragment{
 
     private void deleteCalorie(int calorie){
         tempCalorie = tempCalorie - calorie;
+        if(tempCalorie >= tempMaxCalorie){
+            check();
+        }else {
+            confirmButton.setVisibility(View.GONE);
+        }
         this.calorieText.setText(tempCalorie+"");
     }
 

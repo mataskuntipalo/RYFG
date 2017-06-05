@@ -105,8 +105,8 @@ public class fragment_list extends Fragment{
                 fragmentManager
                         .beginTransaction()
 //                        .setCustomAnimations(R.anim.slide_up,R.anim.slide_down,R.anim.slide_up,R.anim.slide_down)
-                        .replace(R.id.activity_main, dialogFragment, "fragment_results_parQ")
-                        .addToBackStack("fragment_results_parQ")
+                        .replace(R.id.activity_main, dialogFragment, "fragment_dialog_showVDO")
+                        .addToBackStack("fragment_dialog_showVDO")
                         .commit();
 
                 //dialogFragment.show(fm, "Sample Fragment");

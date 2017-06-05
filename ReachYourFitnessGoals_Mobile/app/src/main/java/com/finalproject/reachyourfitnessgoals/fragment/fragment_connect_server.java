@@ -233,7 +233,7 @@ public class fragment_connect_server extends Fragment {
     private void upload() {
         Gson gson = new Gson();
         Map<String, String> params = new HashMap<String, String>();
-        params.put("member_id",shared.getString(getResources().getString(R.string.sharedStringMemberId),"0"));
+        params.put("member_id",member_id);
         params.put("personal",gson.toJson(tablePersonal.getPersonal()));
         params.put("program",gson.toJson(tableProgram.getProgramDateList()));
         params.put("exercise",gson.toJson(tableExercise.getExerciseData()));
@@ -259,6 +259,7 @@ public class fragment_connect_server extends Fragment {
         });
         JsonSingleton.getInstance(getContext()).addToRequestQueue(jsonObjectRequestUpload);
         editor.putBoolean(getResources().getString(R.string.sharedBoolLogIn), false);
+        editor.putBoolean(getResources().getString(R.string.sharedBoolSetExe), false);
         editor.commit();
         clearData();
     }

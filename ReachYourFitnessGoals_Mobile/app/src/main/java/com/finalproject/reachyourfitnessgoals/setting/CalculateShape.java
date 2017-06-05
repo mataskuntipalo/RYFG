@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.finalproject.reachyourfitnessgoals.database.handleTABLE_PERSONAL;
+import com.finalproject.reachyourfitnessgoals.models.GlobalData;
 import com.finalproject.reachyourfitnessgoals.models.PersonalData;
 
 /**
@@ -22,8 +23,7 @@ public class CalculateShape {
     private handleTABLE_PERSONAL tablePersonal;
 
     public CalculateShape(Context context) {
-        tablePersonal = new handleTABLE_PERSONAL(context);
-        personalData = tablePersonal.getPersonal();
+        personalData = ((GlobalData)context.getApplicationContext()).getPersonalData();
         bmr = calBMR();
         bmi = calBMI();
         tdee = calTdee();

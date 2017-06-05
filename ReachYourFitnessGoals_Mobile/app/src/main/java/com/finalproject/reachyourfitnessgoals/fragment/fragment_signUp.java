@@ -191,47 +191,4 @@ public class fragment_signUp extends Fragment {
         ((GlobalData)getActivity().getApplication()).setPersonalData(personalData);
     }
 
-    private void setDataToServer(){
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, UrlServer.SINGUP,new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                if(response.trim().equals("Could not register")){
-                    Toast.makeText(getActivity(),"ไม่สามารถลงทะเบียนได้ โปรดลองใหม่อีกครั้ง",Toast.LENGTH_LONG).show();
-                }else{
-                    fragment_selectGoal selectGoal = fragment_selectGoal.newInstance();
-                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                    fragmentManager
-                            .beginTransaction()
-////                        .setCustomAnimations(R.anim.slide_up,R.anim.slide_down,R.anim.slide_up,R.anim.slide_down)
-                            .replace(R.id.activity_login, selectGoal, "fragment_intro_parQ")
-                            .commit();
-                }
-            }
-        },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getActivity(),"โปรดเชื่อมต่ออินเตอร์เน็ต",Toast.LENGTH_LONG).show();
-                    }
-                }){
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String,String> map = new HashMap<String,String>();
-                map.put("email",strEmail);
-                map.put("pass",strPass);
-                map.put("f_name",strFName);
-                map.put("l_name",strLName);
-                map.put("gender",strGender);
-                map.put("age",strAge);
-                map.put("weight",strWeight);
-                map.put("height",strHeight);
-                return map;
-            }
-        };
-
-        JsonSingleton.getInstance(getContext()).addToRequestQueue(stringRequest);
-    }
-
-
-
 }

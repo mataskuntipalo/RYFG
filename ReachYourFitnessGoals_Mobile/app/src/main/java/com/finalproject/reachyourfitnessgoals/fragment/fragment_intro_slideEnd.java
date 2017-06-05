@@ -12,9 +12,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.finalproject.reachyourfitnessgoals.R;
-import com.finalproject.reachyourfitnessgoals.activity.IntroActivity;
 import com.finalproject.reachyourfitnessgoals.activity.LoginActivity;
-import com.finalproject.reachyourfitnessgoals.activity.MainActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -41,7 +39,11 @@ public class fragment_intro_slideEnd extends Fragment {
         logIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getActivity().onBackPressed();
+                Intent intent = new Intent(getActivity(), LoginActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                intent.putExtra("state",1);
+                startActivity(intent);
+
             }
         });
 

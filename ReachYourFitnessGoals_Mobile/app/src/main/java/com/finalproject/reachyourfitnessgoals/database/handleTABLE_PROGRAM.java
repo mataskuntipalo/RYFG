@@ -6,12 +6,16 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import com.finalproject.reachyourfitnessgoals.models.DateData;
 import com.finalproject.reachyourfitnessgoals.models.ExeType;
+import com.finalproject.reachyourfitnessgoals.models.ExerciseData;
 import com.finalproject.reachyourfitnessgoals.models.ExerciseFromServerData;
 import com.finalproject.reachyourfitnessgoals.models.GoalData;
 import com.finalproject.reachyourfitnessgoals.models.vdoData;
 
 import java.util.ArrayList;
+
+import static com.finalproject.reachyourfitnessgoals.database.handleTABLE_EXERCISE.COLUMN_TIME;
 
 /**
  * Created by Papang on 27/2/2560.
@@ -131,6 +135,13 @@ public class handleTABLE_PROGRAM {
         }else {
             return null;
         }
+    }
+
+    public void updateTotalCalorie(int calorie){
+        int temp = getCurrentProgramDate().getTotalCalorie()+calorie;
+        ContentValues args = new ContentValues();
+        args.put(COLUMN_TOTAL_CALORIE, temp);
+        writeSQLite.update(TABLE_PROGRAM, args, COLUMN_STATUS + "=" + 1, null);
     }
 
     public void delete(){

@@ -71,6 +71,7 @@ public class LoginActivity extends AppCompatActivity {
             goToMain();
         }
 
+
         //showIntro();
         email = (EditText)findViewById(R.id.editEmail_EditText_logIn);
         pass = (EditText)findViewById(R.id.editPass_EditText_logIn);
@@ -81,18 +82,16 @@ public class LoginActivity extends AppCompatActivity {
         content2 = (RelativeLayout)findViewById ( R.id.content2 );
         buttonAbout = (Button) findViewById(R.id.loginButton);
         showView();
-//        fragment_signUp myFragment = new fragment_signUp();
-//
-//        FragmentManager manager = getSupportFragmentManager();
-//        FragmentTransaction transaction = manager.beginTransaction();
-//        transaction.replace(R.id.layout_fragment, myFragment);
-//        transaction.commit();
 
-        fragment_intro_slideEnd intro = fragment_intro_slideEnd.newInstance();
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.activity_login, intro);
-        transaction.commit();
+        if(getIntent().getExtras() != null){
 
+        }else {
+            fragment_intro_slideEnd goToIntro = fragment_intro_slideEnd.newInstance();
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.activity_login, goToIntro);
+            transaction.addToBackStack("goToIntro");
+            transaction.commit();
+        }
 
         buttonAbout.setOnClickListener(userLogin);
 
@@ -216,12 +215,12 @@ public class LoginActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if(getSupportFragmentManager().getBackStackEntryCount() == 1){
+        if(getSupportFragmentManager().getBackStackEntryCount() == 2){
             AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this,R.style.LightDialogTheme);
             builder.setMessage("ต้องการยกเลิกการสมัครสมาชิก");
             builder.setPositiveButton("ใช่", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int id) {
-                    LoginActivity.this.onBackPressed();
+                    getSupportFragmentManager().popBackStack();
                 }
             });
             builder.setNegativeButton("ไม่ใช่", new DialogInterface.OnClickListener() {
