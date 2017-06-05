@@ -1,6 +1,7 @@
 package com.finalproject.reachyourfitnessgoals.setting;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.finalproject.reachyourfitnessgoals.database.handleTABLE_PERSONAL;
 import com.finalproject.reachyourfitnessgoals.models.PersonalData;
@@ -12,7 +13,7 @@ import com.finalproject.reachyourfitnessgoals.models.PersonalData;
 public class CalculateShape {
 
     public static final int MAN = 0;
-    public final int WOMEN = 1;
+    public static final int WOMEN = 1;
     private double bmr;
     private double bmi;
     private double tdee;
@@ -41,10 +42,11 @@ public class CalculateShape {
 
     private double calBMI(){
         double temp = personalData.getHeight()/100;
-        return Math.pow((personalData.getWeight()/temp),2);
+        return Double.parseDouble(String.format("%.2f", personalData.getWeight()/Math.pow(temp,2)));
     }
 
     private int calTdee(){
+        Log.i("tdee",(int) (bmr*personalData.getActivity())+"");
         return (int) (bmr*personalData.getActivity());
     }
 

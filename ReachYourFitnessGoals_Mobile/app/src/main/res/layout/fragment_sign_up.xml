@@ -166,6 +166,7 @@
                 android:hint="อายุ"
                 android:inputType="number"
                 android:maxLength="2"
+                android:text="20"
                 android:textSize="@dimen/default_text" />
         </RelativeLayout>
 
@@ -197,6 +198,7 @@
                     android:hint="นํ้าหนัก"
                     android:inputType="numberDecimal"
                     android:maxLength="3"
+                    android:text="65"
                     android:textSize="@dimen/default_text" />
 
                 <TextView
@@ -236,6 +238,7 @@
                     android:inputType="number"
                     android:maxLength="3"
                     android:singleLine="true"
+                    android:text="180"
                     android:textColor="@color/colorBlack"
                     android:textSize="@dimen/default_text" />
 

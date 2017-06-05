@@ -36,13 +36,12 @@
         android:gravity="center"
         android:text="เปอร์เซนไขมันของคุณ"/>
 
-        <TextView
-            style="@style/text_header"
-            android:id="@+id/percentFat_TextView_goal2"
-            android:textColor="@color/colorBlack"
-            android:gravity="center"
-            android:text="16"
-             />
+    <TextView
+        style="@style/text_header"
+        android:id="@+id/percentFat_TextView_goal2"
+        android:textColor="@color/colorBlack"
+        android:gravity="center"
+        android:text="16" />
 
     <RadioGroup
         android:layout_width="match_parent"

@@ -153,7 +153,6 @@ public class fragment_signUp extends Fragment {
                         .beginTransaction()
 //                        .setCustomAnimations(R.anim.slide_up,R.anim.slide_down,R.anim.slide_up,R.anim.slide_down)
                         .replace(R.id.activity_login, intro_parQ, "fragment_intro_parQ")
-                        .addToBackStack("fragment_intro_parQ")
                         .commit();
             }
         });
@@ -182,13 +181,14 @@ public class fragment_signUp extends Fragment {
         strAge = age.getText().toString().trim();
         strWeight = weight.getText().toString().trim();
         strHeight = height.getText().toString().trim();
+        Log.i("signUp",strGender);
         personalData = new PersonalData(strFName,strLName,
-                Integer.parseInt(strGender),
                 Integer.parseInt(strAge),
+                gender,
                 Double.parseDouble(strWeight),
                 Double.parseDouble(strHeight),
                 activity);
-        new handleTABLE_PERSONAL(getContext()).addPersonal(personalData);
+        ((GlobalData)getActivity().getApplication()).setPersonalData(personalData);
     }
 
     private void setDataToServer(){
@@ -198,7 +198,6 @@ public class fragment_signUp extends Fragment {
                 if(response.trim().equals("Could not register")){
                     Toast.makeText(getActivity(),"ไม่สามารถลงทะเบียนได้ โปรดลองใหม่อีกครั้ง",Toast.LENGTH_LONG).show();
                 }else{
-
                     fragment_selectGoal selectGoal = fragment_selectGoal.newInstance();
                     FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                     fragmentManager

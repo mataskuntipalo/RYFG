@@ -66,7 +66,6 @@ public class fragment_results_parQ extends Fragment {
                             .beginTransaction()
 //                        .setCustomAnimations(R.anim.slide_up,R.anim.slide_down,R.anim.slide_up,R.anim.slide_down)
                             .replace(R.id.activity_login, selectGoal, "fragment_iselectGoal")
-                            .addToBackStack("fragment_selectGoal")
                             .commit();
                 }else {
                     Toast.makeText(getActivity(), "โปรดยอมรับ", Toast.LENGTH_SHORT).show();

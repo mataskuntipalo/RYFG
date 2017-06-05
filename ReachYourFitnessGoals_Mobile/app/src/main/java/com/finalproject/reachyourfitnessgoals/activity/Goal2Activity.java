@@ -14,8 +14,10 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.finalproject.reachyourfitnessgoals.R;
+import com.finalproject.reachyourfitnessgoals.database.handleTABLE_PERSONAL;
 import com.finalproject.reachyourfitnessgoals.database.handleTABLE_PROGRAM;
 import com.finalproject.reachyourfitnessgoals.models.ExeType;
+import com.finalproject.reachyourfitnessgoals.models.GlobalData;
 import com.finalproject.reachyourfitnessgoals.models.GoalData;
 import com.finalproject.reachyourfitnessgoals.setting.CalculateShape;
 
@@ -77,6 +79,8 @@ public class Goal2Activity extends Activity {
                 startActivity(intent);
             }
         });
+
+        new handleTABLE_PERSONAL(this).addPersonal(((GlobalData)this.getApplication()).getPersonalData());
 
     }
 

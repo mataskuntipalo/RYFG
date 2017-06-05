@@ -21,6 +21,7 @@ public class GlobalData extends Application {
     public String[] type = {"Stretching","Warm Up","Strength","Cardio","Cool Down"};
     private String email;
     private String pass;
+    private PersonalData personalData;
 
 
     @Override
@@ -78,7 +79,13 @@ public class GlobalData extends Application {
         return exeForGlobalData;
     }
 
+    public PersonalData getPersonalData() {
+        return personalData;
+    }
 
+    public void setPersonalData(PersonalData personalData) {
+        this.personalData = personalData;
+    }
 
     public void addExeForGlobalData(ExeForGlobalData exeForGlobalData) {
         this.exeForGlobalData.add(exeForGlobalData);

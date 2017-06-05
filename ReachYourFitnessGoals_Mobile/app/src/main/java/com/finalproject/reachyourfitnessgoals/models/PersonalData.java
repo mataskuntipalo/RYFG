@@ -15,7 +15,7 @@ public class PersonalData {
 
     }
 
-    public PersonalData(String f_name, String l_name, int gender, int age, double weight, double height, double activity) {
+    public PersonalData(String f_name, String l_name, int age, int gender, double weight, double height, double activity) {
         this.f_name = f_name;
         this.l_name = l_name;
         this.gender = gender;

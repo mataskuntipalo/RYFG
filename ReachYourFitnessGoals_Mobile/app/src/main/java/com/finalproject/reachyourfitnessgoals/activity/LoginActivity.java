@@ -1,13 +1,16 @@
 package com.finalproject.reachyourfitnessgoals.activity;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -25,11 +28,13 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.finalproject.reachyourfitnessgoals.R;
+import com.finalproject.reachyourfitnessgoals.database.handleTABLE_PERSONAL;
 import com.finalproject.reachyourfitnessgoals.fragment.fragment_connect_server;
 import com.finalproject.reachyourfitnessgoals.fragment.fragment_home;
 import com.finalproject.reachyourfitnessgoals.fragment.fragment_intro_slideEnd;
 import com.finalproject.reachyourfitnessgoals.fragment.fragment_list;
 import com.finalproject.reachyourfitnessgoals.fragment.fragment_signUp;
+import com.finalproject.reachyourfitnessgoals.models.GlobalData;
 import com.finalproject.reachyourfitnessgoals.models.UrlServer;
 import com.finalproject.reachyourfitnessgoals.setting.JsonSingleton;
 
@@ -86,7 +91,6 @@ public class LoginActivity extends AppCompatActivity {
         fragment_intro_slideEnd intro = fragment_intro_slideEnd.newInstance();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.activity_login, intro);
-        transaction.addToBackStack("fragment_signUp");
         transaction.commit();
 
 
@@ -98,7 +102,6 @@ public class LoginActivity extends AppCompatActivity {
                 fragment_signUp signUp = new fragment_signUp();
                 FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
                 transaction.replace(R.id.activity_login, signUp);
-                transaction.addToBackStack("fragment_signUp");
                 transaction.commit();
             }
         });
@@ -210,6 +213,29 @@ public class LoginActivity extends AppCompatActivity {
 //        // Start the thread
 //        t.start();*/
 //    }
+
+    @Override
+    public void onBackPressed() {
+        if(getSupportFragmentManager().getBackStackEntryCount() == 1){
+            AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this,R.style.LightDialogTheme);
+            builder.setMessage("ต้องการยกเลิกการสมัครสมาชิก");
+            builder.setPositiveButton("ใช่", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    LoginActivity.this.onBackPressed();
+                }
+            });
+            builder.setNegativeButton("ไม่ใช่", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            });
+            builder.show();
+        }else {
+            super.onBackPressed();
+        }
+
+    }
 
 
 
